@@ -1,0 +1,125 @@
+[versions]
+# Android
+android-gradle-plugin = "8.13.0"
+
+# Kotlin
+kotlin = "2.2.21"
+kotlin-serialization = "1.9.0"
+kotlin-coroutines-test = "1.10.2"
+
+# AndroidX
+androidx-compose = "2025.10.01"
+androidx-compose-material3 = "1.4.0"
+androidx-lifecycle = "2.9.4"
+androidx-navigation = "2.9.5"
+androidx-navigation-hilt = "1.3.0"
+androidx-datastore = "1.1.7"
+androidx-paging = "3.3.6"
+androidx-espresso = "3.7.0"
+androidx-rules = "1.7.0"
+
+# Google
+google-hilt = "2.57.2"
+google-ksp = "2.2.20-2.0.3"
+google-crashlytics = "3.0.6"
+google-firebase-bom = "34.4.0"
+
+# Squareup
+squareup-retrofit = "3.0.0"
+squareup-kotlinx = "3.0.0"
+squareup-okhttp = "5.2.1"
+
+# Mock
+mockk = "1.14.6"
+
+# Dokka
+dokka = "2.1.0"
+
+# Detekt
+detekt = "2.0.0-alpha.1"
+
+[libraries]
+# Android
+android-gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "android-gradle-plugin" }
+
+# Kotlin
+kotlin-gradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlin-serialization" }
+kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlin-coroutines-test" }
+
+# AndroidX
+androidx-compose = { group = "androidx.compose", name = "compose-bom", version.ref = "androidx-compose" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+androidx-compose-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-preview-debug = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "androidx-compose-material3" }
+androidx-lifecycle-viewModel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
+androidx-navigation = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "androidx-navigation" }
+androidx-navigation-hilt = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidx-navigation-hilt" }
+androidx-datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidx-datastore" }
+androidx-paging = { group = "androidx.paging", name = "paging-compose", version.ref = "androidx-paging" }
+androidx-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-espresso" }
+androidx-rules = { group = "androidx.test", name = "rules", version.ref = "androidx-rules" }
+
+# Hilt
+google-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "google-hilt" }
+google-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "google-hilt" }
+google-hilt-test = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "google-hilt" }
+
+# Google
+google-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "google-firebase-bom" }
+google-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+google-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+
+# Squareup
+squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "squareup-retrofit" }
+squareup-retrofit-converter = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "squareup-kotlinx" }
+squareup-okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "squareup-okhttp" }
+
+# Mock
+mockk = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
+mockk-agent = { group = "io.mockk", name = "mockk-agent", version.ref = "mockk" }
+
+#Detekt
+detekt-gradle = { group = "dev.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
+detekt-ktlint = { group = "dev.detekt", name = "detekt-rules-ktlint-wrapper", version.ref = "detekt" }
+detekt-library = { group = "dev.detekt", name = "detekt-rules-libraries", version.ref = "detekt" }
+
+[plugins]
+# Android
+android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
+android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
+
+# Kotlin
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serializable = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+# Google
+google-ksp = { id = "com.google.devtools.ksp", version.ref = "google-ksp" }
+google-hilt = { id = "com.google.dagger.hilt.android", version.ref = "google-hilt" }
+google-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "google-crashlytics" }
+
+# Dokka
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+
+# Detekt
+detekt = { id = "dev.detekt", version.ref = "detekt" }
+
+# Feature dependencies
+app = { id = "app", version = "unspecified" }
+core-data = { id = "core.data", version = "unspecified" }
+core-presentation = { id = "core.presentation", version = "unspecified" }
+feature-data = { id = "feature.data", version = "unspecified" }
+feature-presentation = { id = "feature.presentation", version = "unspecified" }
+
+[bundles]
+test-unit = ["androidx-espresso", "kotlin-coroutines-test"]
+test-instrumented = [
+    "androidx-espresso",
+    "androidx-rules",
+    "kotlin-coroutines-test",
+    "google-hilt-test",
+    "mockk",
+    "mockk-agent"
+]
