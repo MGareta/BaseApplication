@@ -29,6 +29,7 @@ class CorePresentationPlugin : Plugin<Project> {
             val googleHiltPlugin = coreLibs.findPlugin("google-hilt").get().get()
             val detektPlugin = coreLibs.findPlugin("detekt").get().get()
 
+            val kotlinMetadataDependency = coreLibs.findLibrary("kotlin-metadata").get()
             val kotlinSerializationDependency = coreLibs.findLibrary("kotlin-serialization").get()
             val androidXComposeBomDependency = coreLibs.findLibrary("androidx-compose").get()
             val androidXComposeFoundationDependency = coreLibs.findLibrary("androidx-compose-foundation").get()
@@ -72,6 +73,7 @@ class CorePresentationPlugin : Plugin<Project> {
                 implementation(dependencyNotation = project(":core:data"))
 
                 // Kotlin
+                ksp(dependencyNotation = kotlinMetadataDependency)
                 implementation(dependencyNotation = kotlin("reflect"))
                 api(dependencyNotation = kotlinSerializationDependency)
 

@@ -26,6 +26,7 @@ class AppPlugin : Plugin<Project> {
             val googleHiltPlugin = coreLibs.findPlugin("google-hilt").get().get()
             val detektPlugin = coreLibs.findPlugin("detekt").get().get()
 
+            val kotlinMetadataDependency = coreLibs.findLibrary("kotlin-metadata").get()
             val hiltAndroidDependency = coreLibs.findLibrary("google-hilt-android").get()
             val hiltCompilerDependency = coreLibs.findLibrary("google-hilt-compiler").get()
             val detektKtlintDependency = coreLibs.findLibrary("detekt-ktlint").get()
@@ -74,6 +75,9 @@ class AppPlugin : Plugin<Project> {
             dependencies {
                 // Core
                 implementation(dependencyNotation = project(":core:presentation"))
+
+                // Kotlin
+                ksp(dependencyNotation = kotlinMetadataDependency)
 
                 // Hilt
                 implementation(dependencyNotation = hiltAndroidDependency)

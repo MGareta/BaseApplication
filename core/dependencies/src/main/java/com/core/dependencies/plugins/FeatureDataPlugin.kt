@@ -25,6 +25,7 @@ class FeatureDataPlugin : Plugin<Project> {
             val googleHiltPlugin = coreLibs.findPlugin("google-hilt").get().get()
             val detektPlugin = coreLibs.findPlugin("detekt").get().get()
 
+            val kotlinMetadataDependency = coreLibs.findLibrary("kotlin-metadata").get()
             val hiltAndroidDependency = coreLibs.findLibrary("google-hilt-android").get()
             val hiltCompilerDependency = coreLibs.findLibrary("google-hilt-compiler").get()
             val detektKtlintDependency = coreLibs.findLibrary("detekt-ktlint").get()
@@ -50,6 +51,9 @@ class FeatureDataPlugin : Plugin<Project> {
             dependencies {
                 // Core
                 api(dependencyNotation = project(":core:data"))
+
+                // Kotlin
+                ksp(dependencyNotation = kotlinMetadataDependency)
 
                 // Hilt
                 implementation(dependencyNotation = hiltAndroidDependency)

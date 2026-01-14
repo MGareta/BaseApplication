@@ -28,6 +28,7 @@ class CoreDataPlugin : Plugin<Project> {
             val dokkaPlugin = coreLibs.findPlugin("dokka").get().get()
             val detektPlugin = coreLibs.findPlugin("detekt").get().get()
 
+            val kotlinMetadataDependency = coreLibs.findLibrary("kotlin-metadata").get()
             val kotlinSerializationDependency = coreLibs.findLibrary("kotlin-serialization").get()
             val androidXDatastoreDependency = coreLibs.findLibrary("androidx-datastore").get()
             val hiltAndroidDependency = coreLibs.findLibrary("google-hilt-android").get()
@@ -64,6 +65,7 @@ class CoreDataPlugin : Plugin<Project> {
 
             dependencies {
                 // Kotlin
+                ksp(dependencyNotation = kotlinMetadataDependency)
                 api(dependencyNotation = kotlinSerializationDependency)
 
                 // Android
