@@ -39,6 +39,8 @@ class CorePresentationPlugin : Plugin<Project> {
             val androidXLifecycleViewModelDependency = coreLibs.findLibrary("androidx-lifecycle-viewModel").get()
             val androidXNavigationDependency = coreLibs.findLibrary("androidx-navigation").get()
             val androidXNavigationHiltDependency = coreLibs.findLibrary("androidx-navigation-hilt").get()
+            val androidXNavigation3RuntimeDependency = coreLibs.findLibrary("androidx-navigation3-runtime").get()
+            val androidXNavigation3UiDependency = coreLibs.findLibrary("androidx-navigation3-ui").get()
             val androidXPagingDependency = coreLibs.findLibrary("androidx-paging").get()
             val hiltAndroidDependency = coreLibs.findLibrary("google-hilt-android").get()
             val hiltCompilerDependency = coreLibs.findLibrary("google-hilt-compiler").get()
@@ -86,6 +88,8 @@ class CorePresentationPlugin : Plugin<Project> {
                 api(dependencyNotation = androidXLifecycleViewModelDependency)
                 api(dependencyNotation = androidXNavigationDependency)
                 api(dependencyNotation = androidXNavigationHiltDependency)
+                api(dependencyNotation = androidXNavigation3RuntimeDependency)
+                api(dependencyNotation = androidXNavigation3UiDependency)
                 api(dependencyNotation = androidXPagingDependency)
 
                 // Hilt
