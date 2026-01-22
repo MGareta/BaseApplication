@@ -7,6 +7,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation3.runtime.entryProvider
@@ -14,6 +15,7 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
 import com.core.data.session.manager.ISessionManager
+import com.core.data.session.model.SessionCommand
 import com.core.presentation.navigation3.factory.INavigationGraphFactory
 import com.core.presentation.navigation3.manager.INavigationGraphManager
 import com.core.presentation.navigation3.model.destination.INavigationDestination
@@ -21,6 +23,8 @@ import com.core.presentation.navigation3.model.entry.decorators.viewModel.rememb
 import com.core.presentation.navigation3.model.entry.scenes.BottomSheetSceneStrategy
 import com.core.presentation.ui.theme.Theme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -60,6 +64,19 @@ abstract class BaseActivity : ComponentActivity() {
             val dialogStrategy = remember { DialogSceneStrategy<INavigationDestination>() }
             val bottomSheetStrategy = remember { BottomSheetSceneStrategy<INavigationDestination>() }
 
+            LaunchedEffect(key1 = sessionManager) {
+                sessionManager
+                    .get()
+                    .commands
+                    .distinctUntilChanged()
+                    .collectLatest {
+                        when (it) {
+                            SessionCommand.Warning -> onSessionWarning()
+                            SessionCommand.TimeOut -> onSessionTimeout()
+                        }
+                    }
+            }
+
             Theme {
                 NavDisplay(
                     backStack = navigationGraphManager.get().backStack,
@@ -79,54 +96,7 @@ abstract class BaseActivity : ComponentActivity() {
                 )
             }
 
-//            val bottomSheetNavigator = remember { BottomSheetNavigator() }
-//            navController = rememberNavController(
-//                navigators = arrayOf(bottomSheetNavigator),
-//            )
-//
-//            val navBackStackEntry: NavBackStackEntry? by navController.currentBackStackEntryFlow
-//                .collectAsStateWithLifecycle(
-//                    null,
-//                )
-//
 //            Theme {
-//                LaunchedEffect(key1 = sessionManager) {
-//                    sessionManager
-//                        .get()
-//                        .commands
-//                        .distinctUntilChanged()
-//                        .collectLatest {
-//                            when (it) {
-//                                SessionCommand.Warning -> onSessionWarning()
-//                                SessionCommand.TimeOut -> onSessionTimeout()
-//                            }
-//                        }
-//                }
-//
-//                LaunchedEffect(key1 = navController) {
-//                    navigationDirections
-//                        .get()
-//                        .directions
-//                        .collectLatest { navigationEvent ->
-//                            when (navigationEvent) {
-//                                is NavigationIntent.Navigate -> navController.navigate(
-//                                    navigationEvent.destination,
-//                                    navigationEvent.builder,
-//                                )
-//
-//                                is NavigationIntent.NavigateUp -> navController.navigateUp()
-//                                is NavigationIntent.PopCurrentBackStack -> navController.popBackStack()
-//                                is NavigationIntent.PopBackStackUntil -> navController.popBackStack(
-//                                    navigationEvent.route,
-//                                    navigationEvent.inclusive,
-//                                    navigationEvent.saveState,
-//                                )
-//                            }
-//
-//                            Log.d("NavDirections", navigationEvent.toString())
-//                        }
-//                }
-//
 //                ContainerComponent(
 //                    modifier = Modifier
 //                        .fillMaxSize(),
@@ -151,26 +121,7 @@ abstract class BaseActivity : ComponentActivity() {
 //                        }
 //                    },
 //                ) {
-//                    Box(
-//                        modifier = Modifier
-//                            .fillMaxSize(),
-//                    ) {
-//                        NavHost(
-//                            modifier = Modifier
-//                                .fillMaxSize(),
-//                            navController = navController,
-//                            startDestination = graphFactory.get().getLauncherNavGraph()::class,
-//                        ) {
-//                            addGraphs(
-//                                navController = navController.asStable,
-//                                navigationGraphs = graphFactory.get().navigationGraphsWithDestinations,
-//                            )
-//                        }
 //
-//                        BottomSheetHost(
-//                            navigator = bottomSheetNavigator,
-//                        )
-//                    }
 //                }
 //            }
         }
