@@ -13,6 +13,28 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlin.collections.get
 
+/**
+ * The primary implementation of [INavigationGraphManager] and [INavigationGraphListener]
+ * responsible for managing the navigation lifecycle and graph-scoped state.
+ *
+ * This class orchestrates the application's navigation by maintaining a reactive [backStack]
+ * and ensuring that [ViewModelStore]s are created and destroyed in synchronization with
+ * the user's movement through different navigation graphs.
+ *
+ * ### Lifecycle Management:
+ * It utilizes a [snapshotFlow] to observe changes in the [backStack]. Whenever a destination
+ * is added or removed, [onBackStackChange] is triggered to perform automated cleanup of
+ * [ViewModelStore]s whose associated graphs are no longer active in the stack.
+ *
+ * ### Scoping:
+ * Supports multi-module navigation by using the [INavigationGraphFactory] to resolve
+ * destination-to-graph relationships, enabling seamless ViewModel sharing within
+ * logical feature flows.
+ *
+ * @property scope The [CoroutineScope] used to host the reactive backstack observation flow.
+ * @property navigationGraphFactory The factory used to resolve the launcher graph and
+ *   map destinations back to their parent graphs for scoping.
+ */
 class NavigationGraphManagerImpl(
     private val scope: CoroutineScope,
     private val navigationGraphFactory: INavigationGraphFactory

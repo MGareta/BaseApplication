@@ -6,6 +6,26 @@ import com.core.presentation.navigation3.model.entry.INavigationEntry
 import com.core.presentation.navigation3.model.graph.INavigationGraph
 import com.core.presentation.navigation3.model.destination.INavigationDestination
 
+/**
+ * A central registry and orchestrator for managing the application's navigation hierarchy.
+ *
+ * This interface defines the contract for aggregating modular navigation components
+ * (graphs and entries) and registering them with the Navigation3 runtime. It facilitates
+ * a decoupled architecture where feature modules can contribute their own navigation
+ * logic without direct dependencies on other features.
+ *
+ * ### Core Responsibilities:
+ * - **Aggregation:** Collects all [INavigationGraph]s and [INavigationEntry]s, typically
+ *   via dependency injection (Dagger/Hilt) multibindings.
+ * - **Bootstrapping:** Identifies the primary entry point of the application using
+ *   the [navigationGraphLauncher].
+ * - **Runtime Registration:** Configures the [EntryProviderScope] by mapping serializable
+ *   destinations to their respective ViewModels and UI rendering logic.
+ *
+ * @see INavigationGraph
+ * @see INavigationEntry
+ * @see INavigationDestination
+ */
 interface INavigationGraphFactory {
 
     /**

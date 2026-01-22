@@ -13,6 +13,25 @@ import com.core.presentation.navigation3.model.entry.type.INavigationEntryBottom
 import com.core.presentation.navigation3.model.entry.type.INavigationEntryDialog
 import com.core.presentation.navigation3.model.graph.type.INavigationGraphLauncher
 
+/**
+ * The concrete implementation of [INavigationGraphFactory] that orchestrates the discovery
+ * and registration of modular navigation components.
+ *
+ * This class serves as the engine for the navigation system, utilizing Hilt-injected maps
+ * of [graphs] and [destinations] to build a cohesive navigation structure. It bridges
+ * the gap between decentralized feature module declarations and the centralized
+ * [androidx.navigation3] runtime.
+ *
+ * ### Performance:
+ * It utilizes [lazy] initialization for [navigationGraphsWithDestinations] and
+ * [navigationGraphLauncher] to ensure that heavy join operations and validation checks
+ * are only performed once the navigation system is actually initialized at runtime.
+ *
+ * @property destinations A map of entries provided via Hilt multibindings, keyed by their
+ *   implementing class type.
+ * @property graphs A map of navigation graphs provided via Hilt multibindings, used
+ *   to group and manage associated entries.
+ */
 class NavigationGraphFactoryImpl(
     private val destinations: Map<Class<*>, @JvmSuppressWildcards Set<INavigationEntry<INavigationDestination, ViewModel>>>,
     private val graphs: Map<Class<*>, @JvmSuppressWildcards INavigationGraph>,

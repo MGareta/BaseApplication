@@ -5,6 +5,25 @@ import androidx.lifecycle.ViewModelStore
 import com.core.presentation.navigation3.model.destination.INavigationDestination
 import com.core.presentation.navigation3.model.graph.INavigationGraph
 
+/**
+ * A central coordinator responsible for managing the application's navigation state
+ * and lifecycle-aware storage.
+ *
+ * This interface acts as the primary API for feature modules to interact with the
+ * navigation system. It maintains the [backStack] and provides the necessary
+ * infrastructure for **Graph-scoped ViewModels**, ensuring that shared state is
+ * preserved or cleared according to the user's navigation flow.
+ *
+ * ### Key Responsibilities:
+ * - **State Management:** Maintains a reactive [backStack] of [INavigationDestination]s.
+ * - **Navigation Control:** Provides high-level commands for pushing ([goToDestination])
+ *   or popping ([goBack]) the stack.
+ * - **Scoped Storage:** Manages [ViewModelStore]s tied to the lifecycle of specific
+ *   [INavigationGraph]s, enabling data sharing across multiple related screens.
+ *
+ * @see com.core.presentation.navigation3.model.destination.INavigationDestination
+ * @see com.core.presentation.navigation3.model.graph.INavigationGraph
+ */
 interface INavigationGraphManager {
 
     /**
