@@ -1,5 +1,6 @@
 package com.core.presentation.base.activity
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -55,7 +56,7 @@ abstract class BaseActivity : ComponentActivity() {
     lateinit var sessionManager: dagger.Lazy<ISessionManager>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.light(
@@ -67,6 +68,10 @@ abstract class BaseActivity : ComponentActivity() {
                 darkScrim = android.graphics.Color.TRANSPARENT,
             ),
         )
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            window.isNavigationBarContrastEnforced = false
+        }
 
         super.onCreate(savedInstanceState)
 
