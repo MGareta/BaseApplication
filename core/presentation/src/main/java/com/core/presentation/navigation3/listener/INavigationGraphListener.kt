@@ -13,9 +13,9 @@ package com.core.presentation.navigation3.listener
  * to synchronize internal state, such as clearing graph-scoped `ViewModelStore`s,
  * when a navigation context is removed.
  *
- * @see INavigationGraphManager
+ * @see com.core.presentation.navigation3.manager.INavigationGraphManager
  */
-interface INavigationGraphListener {
+internal interface INavigationGraphListener {
 
     /**
      * Callback triggered when a navigation graph or screen is requested to be popped

@@ -90,7 +90,7 @@ internal class BottomSheetScene<T : Any>(
  * @param T The type of the key representing the navigation destination.
  */
 @OptIn(ExperimentalMaterial3Api::class)
-class BottomSheetSceneStrategy<T : Any> : SceneStrategy<T> {
+internal class BottomSheetSceneStrategy<T : Any> : SceneStrategy<T> {
 
     /**
      * Determines whether the current set of backstack entries should be rendered as a [BottomSheetScene].

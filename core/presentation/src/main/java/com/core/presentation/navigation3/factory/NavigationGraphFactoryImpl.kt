@@ -32,7 +32,7 @@ import com.core.presentation.navigation3.model.graph.type.INavigationGraphLaunch
  * @property graphs A map of navigation graphs provided via Hilt multibindings, used
  *   to group and manage associated entries.
  */
-class NavigationGraphFactoryImpl(
+internal class NavigationGraphFactoryImpl(
     private val destinations: Map<Class<*>, @JvmSuppressWildcards Set<INavigationEntry<INavigationDestination, ViewModel>>>,
     private val graphs: Map<Class<*>, @JvmSuppressWildcards INavigationGraph>,
 ) : INavigationGraphFactory {

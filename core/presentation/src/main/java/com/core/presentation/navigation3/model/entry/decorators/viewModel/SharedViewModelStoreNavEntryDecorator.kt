@@ -25,7 +25,7 @@ import com.core.presentation.navigation3.model.graph.INavigationGraph
  * @return A [SharedViewModelStoreNavEntryDecorator] configured to provide shared ViewModel scopes.
  */
 @Composable
-fun <T : Any> rememberSharedViewModelStoreNavEntryDecorator(
+internal fun <T : Any> rememberSharedViewModelStoreNavEntryDecorator(
     navigationGraphManager: INavigationGraphManager,
     graphs: Map<INavigationGraph, Set<INavigationEntry<INavigationDestination, ViewModel>>>
 ): SharedViewModelStoreNavEntryDecorator<T> {
@@ -61,7 +61,7 @@ fun <T : Any> rememberSharedViewModelStoreNavEntryDecorator(
  * @param navigationGraphManager The manager that provides and maintains graph-scoped stores.
  * @param graphs The registry containing the mapping of graphs to their respective entries.
  */
-class SharedViewModelStoreNavEntryDecorator<T : Any>(
+internal class SharedViewModelStoreNavEntryDecorator<T : Any>(
     navigationGraphManager: INavigationGraphManager,
     graphs: Map<INavigationGraph, Set<INavigationEntry<INavigationDestination, ViewModel>>>
 ) : NavEntryDecorator<T>(

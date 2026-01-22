@@ -35,7 +35,7 @@ import kotlin.collections.get
  * @property navigationGraphFactory The factory used to resolve the launcher graph and
  *   map destinations back to their parent graphs for scoping.
  */
-class NavigationGraphManagerImpl(
+internal class NavigationGraphManagerImpl(
     private val scope: CoroutineScope,
     private val navigationGraphFactory: INavigationGraphFactory
 ) : INavigationGraphManager, INavigationGraphListener {

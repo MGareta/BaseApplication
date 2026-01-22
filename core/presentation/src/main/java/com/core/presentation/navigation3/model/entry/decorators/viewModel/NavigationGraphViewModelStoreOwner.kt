@@ -17,6 +17,6 @@ import androidx.lifecycle.ViewModelStoreOwner
  *
  * @param store The [ViewModelStore] that will hold the ViewModels for the associated navigation graph.
  */
-class NavigationGraphViewModelStoreOwner(store: ViewModelStore) : ViewModelStoreOwner {
+internal class NavigationGraphViewModelStoreOwner(store: ViewModelStore) : ViewModelStoreOwner {
     override val viewModelStore: ViewModelStore = store
 }
