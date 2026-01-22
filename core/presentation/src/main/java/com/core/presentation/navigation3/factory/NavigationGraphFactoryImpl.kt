@@ -1,11 +1,16 @@
 package com.core.presentation.navigation3.factory
 
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.scene.DialogSceneStrategy
 import com.core.presentation.navigation3.model.entry.INavigationEntry
 import com.core.presentation.navigation3.model.graph.INavigationGraph
 import com.core.presentation.navigation3.model.destination.INavigationDestination
+import com.core.presentation.navigation3.model.entry.scenes.BottomSheetSceneStrategy
+import com.core.presentation.navigation3.model.entry.type.INavigationEntryBottomSheet
+import com.core.presentation.navigation3.model.entry.type.INavigationEntryDialog
 import com.core.presentation.navigation3.model.graph.type.INavigationGraphLauncher
 
 class NavigationGraphFactoryImpl(
@@ -88,21 +93,33 @@ class NavigationGraphFactoryImpl(
      *
      * ### Registration Process:
      * 1. **Destination Mapping:** Binds the [INavigationEntry.destination] class to the provider.
-     * 2. **Key Resolution:** Uses the qualified name of the destination class as the content key.
+     * 2. **Metadata Assignment:** Checks if the entry is a specialized type (e.g., [INavigationEntryBottomSheet]
+     *   or [INavigationEntryDialog]) and attaches the appropriate [BottomSheetSceneStrategy] or
+     *   [DialogSceneStrategy] metadata.
      * 3. **Lifecycle Management:** Automatically instantiates the associated [ViewModel] using the
-     *    Compose [viewModel] factory, ensuring the ViewModel is scoped correctly to the backstack entry.
+     *   Compose [viewModel] factory, ensuring the ViewModel is correctly scoped.
      * 4. **Composition:** Invokes the [INavigationEntry.Render] function to provide the Composable UI, passing
-     *    the typed destination parameters and the resolved ViewModel.
+     *   the typed destination parameters and the resolved ViewModel.
      *
      * @param scope The current navigation provider scope responsible for coordinating UI composition
      * based on the active backstack.
      */
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun register(scope: EntryProviderScope<INavigationDestination>) {
         navigationGraphsWithDestinations.values.flatten().forEach { entry ->
             scope.addEntryProvider(
                 clazz = entry.destination,
                 clazzContentKey = {
                     it::class.qualifiedName.toString()
+                },
+                metadata = when (entry) {
+                    is INavigationEntryBottomSheet -> BottomSheetSceneStrategy.bottomSheet(
+                        modalBottomSheetProperties = entry.modalBottomSheetProperties
+                    )
+                    is INavigationEntryDialog -> DialogSceneStrategy.dialog(
+                        dialogProperties = entry.dialogProperties
+                    )
+                    else -> emptyMap()
                 },
                 content = { destination ->
                     val viewModel = viewModel(
