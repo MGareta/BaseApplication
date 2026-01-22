@@ -1,10 +1,12 @@
 package com.demo.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.core.presentation.navigation3.manager.INavigationGraphManager
 import com.core.presentation.navigation3.model.entry.INavigationEntry
 import com.demo.presentation.model.DemoScreenNavDestination
+import com.demo.presentation.model.DemoScreenNavDestination2
 import com.demo.presentation.view.DemoScreen
 import com.demo.presentation.viewModel.DemoViewModel
 import dagger.Lazy
@@ -20,6 +22,14 @@ class DemoScreenNavGraphEntry @Inject constructor(
         viewModel: DemoViewModel
     ) {
         val state = viewModel.viewState.collectAsStateWithLifecycle().value
+
+        LaunchedEffect(Unit) {
+            navigator.get().goToDestination(
+                destination = DemoScreenNavDestination2(
+                    name = "Hola Marc"
+                )
+            )
+        }
 
         DemoScreen(
             state = state
