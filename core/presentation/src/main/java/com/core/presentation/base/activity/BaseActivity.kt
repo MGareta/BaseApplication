@@ -7,14 +7,18 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.runtime.remember
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
+import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
 import com.core.data.session.manager.ISessionManager
 import com.core.presentation.navigation3.factory.INavigationGraphFactory
 import com.core.presentation.navigation3.manager.INavigationGraphManager
+import com.core.presentation.navigation3.model.destination.INavigationDestination
 import com.core.presentation.navigation3.model.entry.decorators.viewModel.rememberSharedViewModelStoreNavEntryDecorator
+import com.core.presentation.navigation3.model.entry.scenes.BottomSheetSceneStrategy
 import com.core.presentation.ui.theme.Theme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -53,9 +57,13 @@ abstract class BaseActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+            val dialogStrategy = remember { DialogSceneStrategy<INavigationDestination>() }
+            val bottomSheetStrategy = remember { BottomSheetSceneStrategy<INavigationDestination>() }
+
             Theme {
                 NavDisplay(
                     backStack = navigationGraphManager.get().backStack,
+                    sceneStrategy = bottomSheetStrategy then dialogStrategy,
                     entryDecorators = listOf(
                         rememberSaveableStateHolderNavEntryDecorator(),
                         rememberSharedViewModelStoreNavEntryDecorator(
