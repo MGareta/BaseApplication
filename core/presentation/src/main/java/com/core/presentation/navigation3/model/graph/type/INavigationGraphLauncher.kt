@@ -17,6 +17,6 @@ import com.core.presentation.navigation3.model.graph.INavigationGraph
  *   initial state of the backstack.
  *
  * @see INavigationGraph
- * @see com.core.presentation.navigation3.manager.INavigationGraphFactory
+ * @see com.core.presentation.navigation3.factory.INavigationGraphFactory
  */
 abstract class INavigationGraphLauncher : INavigationGraph()
