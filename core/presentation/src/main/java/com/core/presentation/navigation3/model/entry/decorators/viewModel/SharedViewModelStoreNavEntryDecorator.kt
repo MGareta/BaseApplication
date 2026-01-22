@@ -12,6 +12,18 @@ import com.core.presentation.navigation3.model.destination.INavigationDestinatio
 import com.core.presentation.navigation3.model.entry.INavigationEntry
 import com.core.presentation.navigation3.model.graph.INavigationGraph
 
+/**
+ * Creates and remembers a [SharedViewModelStoreNavEntryDecorator] instance within the composition.
+ *
+ * This helper function leverages the [remember] block to ensure that the decorator is not
+ * re-instantiated across recompositions unless the underlying [graphs] registry changes.
+ *
+ * @param T The type of the navigation key/destination.
+ * @param navigationGraphManager The manager responsible for providing graph-scoped [androidx.lifecycle.ViewModelStore]s.
+ * @param graphs A mapping of [com.core.presentation.navigation3.model.graph.INavigationGraph]s
+ * to their respective entries, used to resolve which graph a destination belongs to.
+ * @return A [SharedViewModelStoreNavEntryDecorator] configured to provide shared ViewModel scopes.
+ */
 @Composable
 fun <T : Any> rememberSharedViewModelStoreNavEntryDecorator(
     navigationGraphManager: INavigationGraphManager,
@@ -27,6 +39,28 @@ fun <T : Any> rememberSharedViewModelStoreNavEntryDecorator(
     }
 }
 
+/**
+ * A [NavEntryDecorator] that enables ViewModel sharing across different screens
+ * within the same navigation graph.
+ *
+ * This decorator intercepts the rendering process of a navigation entry and determines
+ * if the destination belongs to a specific [INavigationGraph]. If a parent graph is
+ * identified, it provides a graph-scoped [androidx.lifecycle.ViewModelStore] via
+ * [LocalViewModelStoreOwner].
+ *
+ * ### Responsibilities:
+ * - **Graph Resolution:** Scans the [graphs] registry to find which graph contains the
+ *   destination matching the current [androidx.navigation3.runtime.NavEntry.contentKey].
+ * - **Scope Injection:** Uses [CompositionLocalProvider] to override the default
+ *   [LocalViewModelStoreOwner] with a [NavigationGraphViewModelStoreOwner], ensuring
+ *   ViewModels are shared among all siblings in that graph.
+ * - **Lifecycle Synchronization:** Forwards [onPop] events to the [navigationGraphManager]
+ *   to trigger automated cleanup of graph-scoped resources.
+ *
+ * @param T The type of the navigation key/destination.
+ * @param navigationGraphManager The manager that provides and maintains graph-scoped stores.
+ * @param graphs The registry containing the mapping of graphs to their respective entries.
+ */
 class SharedViewModelStoreNavEntryDecorator<T : Any>(
     navigationGraphManager: INavigationGraphManager,
     graphs: Map<INavigationGraph, Set<INavigationEntry<INavigationDestination, ViewModel>>>

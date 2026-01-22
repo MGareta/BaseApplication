@@ -13,6 +13,23 @@ class NavigationGraphFactoryImpl(
     private val graphs: Map<Class<*>, @JvmSuppressWildcards INavigationGraph>,
 ) : INavigationGraphFactory {
 
+    /**
+     * Lazily computes the mapping between [INavigationGraph] instances and their associated
+     * [INavigationEntry] sets.
+     *
+     * This property performs a join operation between the [graphs] registry and the
+     * [destinations] registry, matching them by their shared class key. It ensures that
+     * only complete pairs (where both a graph definition and at least one destination entry
+     * exist for the same class key) are included in the final map.
+     *
+     * ### Logic:
+     * 1. Merges keys from both [destinations] and [graphs] maps.
+     * 2. Iterates through the keys to find matches in both registries.
+     * 3. Filters out incomplete pairings where either the graph or the entry set is missing.
+     * 4. Returns a finalized [Map] used by [register] to populate the navigation scope.
+     *
+     * @return A consolidated map used to coordinate feature-specific navigation logic.
+     */
     override val navigationGraphsWithDestinations: Map<INavigationGraph, Set<INavigationEntry<INavigationDestination, ViewModel>>> by lazy {
         destinations.keys
             .plus(
@@ -29,6 +46,22 @@ class NavigationGraphFactoryImpl(
             }.toMap()
     }
 
+    /**
+     * Identifies and provides the application's starting navigation graph configuration.
+     *
+     * This property scans the registered [navigationGraphsWithDestinations] to find the
+     * specific graph marked as a [INavigationGraphLauncher]. This entry serves as the
+     * root or "home" flow of the application.
+     *
+     * ### Validation Rules:
+     * - **Must exist:** Throws an [IllegalStateException] if no graph implements [INavigationGraphLauncher].
+     * - **Must be unique:** Throws an [IllegalStateException] if multiple graphs implement [INavigationGraphLauncher],
+     *   ensuring a deterministic start point for the app.
+     *
+     * @return A [Map.Entry] containing the [INavigationGraph] launcher and its set of
+     * associated [INavigationEntry] destinations.
+     * @throws IllegalStateException if the launcher graph is missing or duplicated.
+     */
     override val navigationGraphLauncher: Map.Entry<INavigationGraph, Set<INavigationEntry<INavigationDestination, ViewModel>>> by lazy {
         val launcherGraphs =  navigationGraphsWithDestinations.entries.filter {
             it.key is INavigationGraphLauncher
@@ -46,6 +79,24 @@ class NavigationGraphFactoryImpl(
         launcherGraphs.first()
     }
 
+    /**
+     * Registers all collected navigation destinations into the [EntryProviderScope].
+     *
+     * This implementation iterates through the flattened set of [INavigationEntry] objects
+     * from all valid navigation graphs. For each entry, it calls [EntryProviderScope.addEntryProvider],
+     * which defines how the Navigation3 runtime should handle a specific [INavigationDestination].
+     *
+     * ### Registration Process:
+     * 1. **Destination Mapping:** Binds the [INavigationEntry.destination] class to the provider.
+     * 2. **Key Resolution:** Uses the qualified name of the destination class as the content key.
+     * 3. **Lifecycle Management:** Automatically instantiates the associated [ViewModel] using the
+     *    Compose [viewModel] factory, ensuring the ViewModel is scoped correctly to the backstack entry.
+     * 4. **Composition:** Invokes the [INavigationEntry.Render] function to provide the Composable UI, passing
+     *    the typed destination parameters and the resolved ViewModel.
+     *
+     * @param scope The current navigation provider scope responsible for coordinating UI composition
+     * based on the active backstack.
+     */
     override fun register(scope: EntryProviderScope<INavigationDestination>) {
         navigationGraphsWithDestinations.values.flatten().forEach { entry ->
             scope.addEntryProvider(

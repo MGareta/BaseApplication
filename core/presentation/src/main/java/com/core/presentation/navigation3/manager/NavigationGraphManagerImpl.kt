@@ -19,6 +19,19 @@ class NavigationGraphManagerImpl(
 ) : INavigationGraphManager, INavigationGraphListener {
     private val viewModelStores = mutableMapOf<String, ViewModelStore>()
 
+    /**
+     * Lazily initializes and maintains the reactive navigation backstack.
+     *
+     * This implementation sets up the initial state of the application by:
+     * 1. Resolving the entry point via [INavigationGraphFactory.navigationGraphLauncher].
+     * 2. Reflectively extracting the [objectInstance] of the start destination.
+     * 3. Creating a [SnapshotStateList] to enable Compose to observe navigation changes.
+     * 4. Launching a [snapshotFlow] within the provided [scope] to monitor backstack changes,
+     *    which triggers [onBackStackChange] for automated [ViewModelStore] lifecycle management.
+     *
+     * @throws IllegalStateException if the resolved start destination is not a Kotlin `object`.
+     * @return A thread-safe, observable list of [INavigationDestination] managed by the Compose Snapshot system.
+     */
     override val backStack: SnapshotStateList<INavigationDestination> by lazy {
         val launcherEntry = navigationGraphFactory.navigationGraphLauncher.value.first()
         val startDestination = checkNotNull(launcherEntry.destination.objectInstance) {
@@ -32,6 +45,21 @@ class NavigationGraphManagerImpl(
         }
     }
 
+    /**
+     * Retrieves an existing [ViewModelStore] or creates a new one for a given [INavigationGraph].
+     *
+     * This implementation uses the [INavigationGraph]'s qualified class name as a unique key
+     * to manage a internal map of stores. This allows multiple screens belonging to the same
+     * logical graph to share state by accessing the same [ViewModelStore].
+     *
+     * ### Lifecycle:
+     * The stores created here are automatically cleaned up in [onBackStackChange] when the
+     * associated graph is no longer represented by any destination in the [backStack].
+     *
+     * @param graph The navigation graph requesting a storage container for its ViewModels.
+     * @return A [ViewModelStore] instance scoped to the provided graph.
+     * @throws NullPointerException if the graph's qualified name cannot be resolved.
+     */
     override fun getViewModelStore(
         graph: INavigationGraph
     ): ViewModelStore {
@@ -42,18 +70,70 @@ class NavigationGraphManagerImpl(
         }
     }
 
+    /**
+     * Pushes a new [INavigationDestination] onto the top of the [backStack].
+     *
+     * This implementation appends the provided [destination] to the [SnapshotStateList],
+     * which triggers a recomposition in the Compose UI. Because of the [snapshotFlow]
+     * observer initialized in the [backStack] property, this call will also trigger
+     * [onBackStackChange] to ensure [ViewModelStore]s are correctly evaluated.
+     *
+     * @param destination The [INavigationDestination] instance to navigate to,
+     * typically containing the required navigation arguments for the new screen.
+     */
     override fun goToDestination(destination: INavigationDestination) {
         backStack.add(
             element = destination
         )
     }
 
+    /**
+     * Performs a back navigation by removing the last element from the [backStack].
+     *
+     * This implementation uses [removeLastOrNull] to safely decrease the stack size.
+     * If the stack is not empty, the removal triggers a state change in the
+     * [SnapshotStateList], causing the UI to recompose and show the previous destination.
+     *
+     * The [onBackStackChange] logic triggered by the [snapshotFlow] in [backStack]
+     * will automatically handle any necessary [ViewModelStore] cleanup if the
+     * removed destination was the last one associated with a specific graph.
+     */
     override fun goBack() {
         backStack.removeLastOrNull()
     }
 
+    /**
+     * Responds to a pop event by re-evaluating the navigation state.
+     *
+     * This implementation delegates the request to [onBackStackChange] to ensure that
+     * any [ViewModelStore] associated with graphs that are no longer present in the
+     * backstack are properly cleared and destroyed.
+     *
+     * This method is part of the [INavigationGraphListener] interface, allowing the
+     * manager to react to navigation events triggered from external sources.
+     */
     override fun onPop() = onBackStackChange()
 
+    /**
+     * Synchronizes the lifecycle of graph-scoped [ViewModelStore]s with the current state of the [backStack].
+     *
+     * This core maintenance function ensures that memory is managed efficiently by identifying which
+     * navigation graphs are currently "active" and destroying the storage for those that are no longer
+     * reachable.
+     *
+     * ### Process:
+     * 1. **Identify Active Graphs:** Iterates through every destination currently in the [backStack]
+     *    and cross-references them with the [INavigationGraphFactory] to determine which parent
+     *    graphs are represented.
+     * 2. **Compare Keys:** Compares the set of active graph IDs against the keys currently held
+     *    in the [viewModelStores] map.
+     * 3. **Cleanup:** For any graph ID found in storage but no longer present in the backstack:
+     *    - Calls [ViewModelStore.clear], which triggers `onCleared()` in all associated ViewModels.
+     *    - Removes the entry from the internal map to prevent memory leaks.
+     *
+     * This function is automatically invoked by the [snapshotFlow] whenever the [backStack]
+     * is modified (push/pop) or when an external [onPop] event occurs.
+     */
     private fun onBackStackChange() {
         val graphs = navigationGraphFactory.navigationGraphsWithDestinations
         val activeGraphIds = backStack
