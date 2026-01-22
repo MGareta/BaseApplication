@@ -8,8 +8,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 object Config {
     val android = AndroidConfig(
         minSdkVersion = 26,
-        targetSdkVersion = 35,
-        compileSdkVersion = 35,
+        targetSdkVersion = 36,
+        compileSdkVersion = 36,
         applicationId = "com.base.application",
         versionCode = 1,
         versionName = "1.0",
