@@ -1,301 +1,40 @@
 package com.core.presentation.ui.theme.typographies
 
-import androidx.compose.ui.text.PlatformTextStyle
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import com.core.presentation.R
+import androidx.compose.runtime.Immutable
+import com.core.presentation.ui.theme.dimensions.em.EmDimensions
 import com.core.presentation.ui.theme.dimensions.sp.SpDimensions
-import com.core.presentation.ui.theme.typographies.high.HighTypographies
-import com.core.presentation.ui.theme.typographies.low.LowTypographies
-import com.core.presentation.ui.theme.typographies.mid.MidTypographies
+import com.core.presentation.ui.theme.typographies.body.BodyTypographies
+import com.core.presentation.ui.theme.typographies.display.DisplayTypographies
+import com.core.presentation.ui.theme.typographies.label.LabelTypographies
+import com.core.presentation.ui.theme.typographies.title.TitleTypographies
 
-class Typographies(dimensions: SpDimensions) {
-    val high: HighTypographies = HighTypographies(
-        xs = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans_medium,
-                    weight = FontWeight.Medium,
-                ),
-            ),
-            fontWeight = FontWeight.Medium,
-            fontSize = dimensions.sp20,
-            lineHeight = dimensions.sp30,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        xsEmphasis = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans_semibold,
-                    weight = FontWeight.SemiBold,
-                ),
-            ),
-            fontWeight = FontWeight.SemiBold,
-            fontSize = dimensions.sp20,
-            lineHeight = dimensions.sp30,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        s = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans_medium,
-                    weight = FontWeight.Medium,
-                ),
-            ),
-            fontWeight = FontWeight.Medium,
-            fontSize = dimensions.sp24,
-            lineHeight = dimensions.sp32,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        sEmphasis = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans_semibold,
-                    weight = FontWeight.SemiBold,
-                ),
-            ),
-            fontWeight = FontWeight.SemiBold,
-            fontSize = dimensions.sp24,
-            lineHeight = dimensions.sp32,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        m = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans_medium,
-                    weight = FontWeight.Medium,
-                ),
-            ),
-            fontWeight = FontWeight.Medium,
-            fontSize = dimensions.sp28,
-            lineHeight = dimensions.sp36,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        mEmphasis = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans_semibold,
-                    weight = FontWeight.SemiBold,
-                ),
-            ),
-            fontWeight = FontWeight.SemiBold,
-            fontSize = dimensions.sp28,
-            lineHeight = dimensions.sp36,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        l = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans_medium,
-                    weight = FontWeight.Medium,
-                ),
-            ),
-            fontWeight = FontWeight.Medium,
-            fontSize = dimensions.sp32,
-            lineHeight = dimensions.sp40,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        lEmphasis = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans_semibold,
-                    weight = FontWeight.SemiBold,
-                ),
-            ),
-            fontWeight = FontWeight.SemiBold,
-            fontSize = dimensions.sp32,
-            lineHeight = dimensions.sp40,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
+@Immutable
+class Typographies(
+    spDimensions: SpDimensions,
+    emDimensions: EmDimensions,
+    contrastLevel: Float
+) {
+    val body = BodyTypographies(
+        contrastLevel = contrastLevel,
+        spDimensions = spDimensions,
+        emDimensions = emDimensions
     )
-    val low: LowTypographies = LowTypographies(
-        xs = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans,
-                    weight = FontWeight.Normal,
-                ),
-            ),
-            fontWeight = FontWeight.Normal,
-            fontSize = dimensions.sp12,
-            lineHeight = dimensions.sp16,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        s = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans,
-                    weight = FontWeight.Normal,
-                ),
-            ),
-            fontWeight = FontWeight.Normal,
-            fontSize = dimensions.sp14,
-            lineHeight = dimensions.sp18,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        m = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans,
-                    weight = FontWeight.Normal,
-                ),
-            ),
-            fontWeight = FontWeight.Normal,
-            fontSize = dimensions.sp16,
-            lineHeight = dimensions.sp22,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        l = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans,
-                    weight = FontWeight.Normal,
-                ),
-            ),
-            fontWeight = FontWeight.Normal,
-            fontSize = dimensions.sp18,
-            lineHeight = dimensions.sp24,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
+
+    val display = DisplayTypographies(
+        contrastLevel = contrastLevel,
+        spDimensions = spDimensions,
+        emDimensions = emDimensions
     )
-    val mid: MidTypographies = MidTypographies(
-        xs = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans,
-                    weight = FontWeight.Normal,
-                ),
-            ),
-            fontWeight = FontWeight.Normal,
-            fontSize = dimensions.sp12,
-            lineHeight = dimensions.sp16,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        xsEmphasis = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans_medium,
-                    weight = FontWeight.Medium,
-                ),
-            ),
-            fontWeight = FontWeight.Medium,
-            fontSize = dimensions.sp12,
-            lineHeight = dimensions.sp16,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        s = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans,
-                    weight = FontWeight.Normal,
-                ),
-            ),
-            fontWeight = FontWeight.Normal,
-            fontSize = dimensions.sp14,
-            lineHeight = dimensions.sp18,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        sEmphasis = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans_medium,
-                    weight = FontWeight.Medium,
-                ),
-            ),
-            fontWeight = FontWeight.Medium,
-            fontSize = dimensions.sp14,
-            lineHeight = dimensions.sp18,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        m = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans,
-                    weight = FontWeight.Normal,
-                ),
-            ),
-            fontWeight = FontWeight.Normal,
-            fontSize = dimensions.sp16,
-            lineHeight = dimensions.sp22,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        mEmphasis = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans_medium,
-                    weight = FontWeight.Medium,
-                ),
-            ),
-            fontWeight = FontWeight.Medium,
-            fontSize = dimensions.sp16,
-            lineHeight = dimensions.sp22,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        l = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans,
-                    weight = FontWeight.Normal,
-                ),
-            ),
-            fontWeight = FontWeight.Normal,
-            fontSize = dimensions.sp18,
-            lineHeight = dimensions.sp24,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
-        lEmphasis = TextStyle(
-            fontFamily = FontFamily(
-                Font(
-                    resId = R.font.work_sans_medium,
-                    weight = FontWeight.Medium,
-                ),
-            ),
-            fontWeight = FontWeight.Medium,
-            fontSize = dimensions.sp18,
-            lineHeight = dimensions.sp24,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false,
-            ),
-        ),
+
+    val label = LabelTypographies(
+        contrastLevel = contrastLevel,
+        spDimensions = spDimensions,
+        emDimensions = emDimensions
+    )
+
+    val title = TitleTypographies(
+        contrastLevel = contrastLevel,
+        spDimensions = spDimensions,
+        emDimensions = emDimensions
     )
 }
