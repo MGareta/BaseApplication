@@ -3,14 +3,14 @@ package com.core.presentation.ui.theme.colors.gray
 import androidx.compose.ui.graphics.Color
 
 data object GrayColors {
-    val gray10: Color = Color(0xFFF2F2F2)
-    val gray20: Color = Color(0xFFDEDEDE)
-    val gray30: Color = Color(0xFFC9C9C9)
-    val gray40: Color = Color(0xFFADADAD)
-    val gray50: Color = Color(0xFF919191)
-    val gray60: Color = Color(0xFF767676)
-    val gray70: Color = Color(0xFF595959)
-    val gray80: Color = Color(0xFF424242)
-    val gray90: Color = Color(0xFF313030)
-    val gray100: Color = Color(0xFF141414)
+    val gray10 = Color(0xFFF8F9FA)
+    val gray20 = Color(0xFFE9ECEF)
+    val gray30 = Color(0xFFDEE2E6)
+    val gray40 = Color(0xFFCED4DA)
+    val gray50 = Color(0xFFADB5BD)
+    val gray60 = Color(0xFF6C757D)
+    val gray70 = Color(0xFF495057)
+    val gray80 = Color(0xFF343A40)
+    val gray90 = Color(0xFF212529)
+    val gray100 = Color(0xFF121212)
 }
