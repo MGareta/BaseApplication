@@ -1,64 +1,69 @@
 package com.core.presentation.ui.theme.palette
 
 import androidx.compose.runtime.Immutable
-import com.core.presentation.ui.theme.palette.background.BackgroundPalette
-import com.core.presentation.ui.theme.palette.background.darkBackgroundPalette
-import com.core.presentation.ui.theme.palette.background.lightBackgroundPalette
-import com.core.presentation.ui.theme.palette.border.BorderPalette
-import com.core.presentation.ui.theme.palette.border.darkBorderPalette
-import com.core.presentation.ui.theme.palette.border.lightBorderPalette
-import com.core.presentation.ui.theme.palette.content.ContentPalette
-import com.core.presentation.ui.theme.palette.content.darkContentPalette
-import com.core.presentation.ui.theme.palette.content.lightContentPalette
-import com.core.presentation.ui.theme.palette.semantic.SemanticBackgroundPalette
-import com.core.presentation.ui.theme.palette.semantic.SemanticBorderPalette
-import com.core.presentation.ui.theme.palette.semantic.SemanticContentPalette
-import com.core.presentation.ui.theme.palette.semantic.darkSemanticBackgroundPalette
-import com.core.presentation.ui.theme.palette.semantic.darkSemanticBorderPalette
-import com.core.presentation.ui.theme.palette.semantic.darkSemanticContentPalette
-import com.core.presentation.ui.theme.palette.semantic.lightSemanticBackgroundPalette
-import com.core.presentation.ui.theme.palette.semantic.lightSemanticBorderPalette
-import com.core.presentation.ui.theme.palette.semantic.lightSemanticContentPalette
-
-open class ColorsPalette(
-    open val backgroundPalette: BackgroundPalette,
-    open val borderPalette: BorderPalette,
-    open val contentPalette: ContentPalette,
-    open val semanticBackgroundPalette: SemanticBackgroundPalette,
-    open val semanticBorderPalette: SemanticBorderPalette,
-    open val semanticContentPalette: SemanticContentPalette,
-)
+import com.core.presentation.ui.theme.palette.background.DarkBackgroundPalette
+import com.core.presentation.ui.theme.palette.background.LightBackgroundPalette
+import com.core.presentation.ui.theme.palette.background.base.BaseBackgroundPalette
+import com.core.presentation.ui.theme.palette.border.DarkBorderPalette
+import com.core.presentation.ui.theme.palette.border.LightBorderPalette
+import com.core.presentation.ui.theme.palette.border.base.BaseBorderPalette
+import com.core.presentation.ui.theme.palette.content.DarkContentPalette
+import com.core.presentation.ui.theme.palette.content.LightContentPalette
+import com.core.presentation.ui.theme.palette.content.base.BaseContentPalette
 
 @Immutable
-data class LightColorsPalette(
-    override val backgroundPalette: BackgroundPalette = lightBackgroundPalette,
-    override val borderPalette: BorderPalette = lightBorderPalette,
-    override val contentPalette: ContentPalette = lightContentPalette,
-    override val semanticBackgroundPalette: SemanticBackgroundPalette = lightSemanticBackgroundPalette,
-    override val semanticBorderPalette: SemanticBorderPalette = lightSemanticBorderPalette,
-    override val semanticContentPalette: SemanticContentPalette = lightSemanticContentPalette,
-) : ColorsPalette(
-    backgroundPalette,
-    borderPalette,
-    contentPalette,
-    semanticBackgroundPalette,
-    semanticBorderPalette,
-    semanticContentPalette,
-)
+interface ColorsPalette {
+    val backgroundPalette: BaseBackgroundPalette
+    val borderPalette: BaseBorderPalette
+    val contentPalette: BaseContentPalette
+}
 
 @Immutable
-data class DarkColorsPalette(
-    override val backgroundPalette: BackgroundPalette = darkBackgroundPalette,
-    override val borderPalette: BorderPalette = darkBorderPalette,
-    override val contentPalette: ContentPalette = darkContentPalette,
-    override val semanticBackgroundPalette: SemanticBackgroundPalette = darkSemanticBackgroundPalette,
-    override val semanticBorderPalette: SemanticBorderPalette = darkSemanticBorderPalette,
-    override val semanticContentPalette: SemanticContentPalette = darkSemanticContentPalette,
-) : ColorsPalette(
-    backgroundPalette,
-    borderPalette,
-    contentPalette,
-    semanticBackgroundPalette,
-    semanticBorderPalette,
-    semanticContentPalette,
-)
+sealed class LightsColorsPalette(
+    override val backgroundPalette: LightBackgroundPalette,
+    override val borderPalette: BaseBorderPalette,
+    override val contentPalette: BaseContentPalette
+) : ColorsPalette {
+    data object DefaultContrast : LightsColorsPalette(
+        backgroundPalette = LightBackgroundPalette.DefaultContrast,
+        borderPalette = LightBorderPalette.DefaultContrast,
+        contentPalette = LightContentPalette.DefaultContrast
+    )
+
+    data object MediumContrast : LightsColorsPalette(
+        backgroundPalette = LightBackgroundPalette.MediumContrast,
+        borderPalette = LightBorderPalette.MediumContrast,
+        contentPalette = LightContentPalette.MediumContrast
+    )
+
+    data object HighContrast : LightsColorsPalette(
+        backgroundPalette = LightBackgroundPalette.HighContrast,
+        borderPalette = LightBorderPalette.HighContrast,
+        contentPalette = LightContentPalette.HighContrast
+    )
+}
+
+@Immutable
+sealed class DarkColorsPalette(
+    override val backgroundPalette: DarkBackgroundPalette,
+    override val borderPalette: BaseBorderPalette,
+    override val contentPalette: BaseContentPalette
+) : ColorsPalette {
+    data object DefaultContrast : DarkColorsPalette(
+        backgroundPalette = DarkBackgroundPalette.DefaultContrast,
+        borderPalette = DarkBorderPalette.DefaultContrast,
+        contentPalette = DarkContentPalette.DefaultContrast
+    )
+
+    data object MediumContrast : DarkColorsPalette(
+        backgroundPalette = DarkBackgroundPalette.MediumContrast,
+        borderPalette = DarkBorderPalette.MediumContrast,
+        contentPalette = DarkContentPalette.MediumContrast
+    )
+
+    data object HighContrast : DarkColorsPalette(
+        backgroundPalette = DarkBackgroundPalette.HighContrast,
+        borderPalette = DarkBorderPalette.HighContrast,
+        contentPalette = DarkContentPalette.HighContrast
+    )
+}

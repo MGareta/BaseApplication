@@ -1,5 +1,6 @@
 package com.core.presentation.ui.theme.colors
 
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import com.core.presentation.ui.theme.colors.blue.BlueColors
 import com.core.presentation.ui.theme.colors.gray.GrayColors
@@ -9,6 +10,7 @@ import com.core.presentation.ui.theme.colors.red.RedColors
 import com.core.presentation.ui.theme.colors.turquoise.TurquoiseColors
 import com.core.presentation.ui.theme.colors.yellow.YellowColors
 
+@Immutable
 data class Colors(
     val blue: BlueColors = BlueColors,
     val gray: GrayColors = GrayColors,
