@@ -6,7 +6,11 @@ import androidx.compose.runtime.setValue
 import com.core.presentation.ui.components.form.utils.Transform
 import com.core.presentation.ui.components.form.validators.Validators
 
-abstract class BaseFieldState<T>(val initial: T?, val transform: Transform<T>?, val validators: List<Validators>) {
+abstract class BaseFieldState<T>(
+    val initial: T?,
+    val transform: Transform<T>?,
+    val validators: List<Validators>
+) {
     abstract var value: T?
         internal set
 
@@ -25,5 +29,9 @@ abstract class BaseFieldState<T>(val initial: T?, val transform: Transform<T>?, 
 
     abstract fun validate(): Boolean
 
-    open fun getData(): T? = if (transform == null || value == null) value else transform.transform(value!!)
+    open fun getData(): T? = if (transform == null || value == null) {
+        value
+    } else {
+        transform.transform(value!!)
+    }
 }

@@ -21,9 +21,9 @@ sealed interface Validators {
 
     class Required(var message: String) : Validators
 
-    class Custom(var message: String, var function: (value: Any) -> Boolean) : Validators
-
     class Regex(var regex: String, var message: String) : Validators
 
     class Equal(var reference: String, var message: String) : Validators
+
+    class Custom(var message: String, var function: (value: Any) -> Boolean) : Validators
 }

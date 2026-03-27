@@ -1,37 +1,225 @@
 package com.core.presentation.ui.components.form.fields.select.toggle
 
+import android.content.res.Configuration
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchColors
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.disabled
+import androidx.compose.ui.semantics.hideFromAccessibility
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.tooling.preview.Preview
+import com.core.presentation.ui.components.form.fields.select.toggle.model.rememberToggleStyle
+import com.core.presentation.ui.components.form.validators.Validators
+import com.core.presentation.ui.theme.LocalDimensions
 import com.core.presentation.ui.theme.LocalPalette
+import com.core.presentation.ui.theme.LocalTypographies
+import com.core.presentation.ui.theme.Theme
+import com.core.presentation.ui.utils.AccessibilityLabel
+import com.core.presentation.ui.utils.AccessibilityStateDescription
+import com.core.presentation.ui.utils.thenOnNotNull
 
 @Composable
-fun ToggleComponent(modifier: Modifier, state: ToggleState, enabled: Boolean = true) {
-    Switch(
-        modifier = modifier,
-        checked = state.getData() ?: false,
+fun ToggleComponent(
+    modifier: Modifier,
+    state: ToggleState,
+    text: String,
+    description: String,
+    accessibilityLabel: AccessibilityLabel,
+    accessibilityStateDescription: AccessibilityStateDescription,
+    enabled: Boolean
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+
+    val toggleStyle = rememberToggleStyle(
+        isSelected = state.getData() ?: false,
         enabled = enabled,
-        onCheckedChange = {
-            state.change(select = it)
-        },
-        colors = SwitchColors(
-            checkedThumbColor = LocalPalette.current.contentPalette.alwaysLight,
-            checkedTrackColor = LocalPalette.current.backgroundPalette.accent,
-            checkedBorderColor = LocalPalette.current.borderPalette.accent,
-            checkedIconColor = LocalPalette.current.contentPalette.alwaysLight,
-            uncheckedThumbColor = LocalPalette.current.contentPalette.accent,
-            uncheckedTrackColor = LocalPalette.current.contentPalette.alwaysLight,
-            uncheckedBorderColor = LocalPalette.current.borderPalette.accent,
-            uncheckedIconColor = LocalPalette.current.contentPalette.accent,
-            disabledCheckedThumbColor = LocalPalette.current.contentPalette.stateDisabled,
-            disabledCheckedTrackColor = LocalPalette.current.backgroundPalette.stateDisabled,
-            disabledCheckedBorderColor = LocalPalette.current.borderPalette.stateDisabled,
-            disabledCheckedIconColor = LocalPalette.current.contentPalette.stateDisabled,
-            disabledUncheckedThumbColor = LocalPalette.current.contentPalette.stateDisabled,
-            disabledUncheckedTrackColor = LocalPalette.current.backgroundPalette.stateDisabled,
-            disabledUncheckedBorderColor = LocalPalette.current.borderPalette.stateDisabled,
-            disabledUncheckedIconColor = LocalPalette.current.contentPalette.stateDisabled,
-        ),
+        interactionSource = interactionSource
     )
+
+    Row(
+        modifier = modifier
+            .background(
+                color = toggleStyle.background,
+                shape = RoundedCornerShape(
+                    size = LocalDimensions.current.dp.radius.radius4
+                )
+            )
+            .thenOnNotNull(
+                condition = toggleStyle.borderStroke,
+                block = {
+                    border(
+                        border = it,
+                        shape = RoundedCornerShape(
+                            size = LocalDimensions.current.dp.radius.radius4
+                        )
+                    )
+                }
+            )
+            .toggleable(
+                value = state.getData() ?: false,
+                interactionSource = interactionSource,
+                indication = null,
+                enabled = true,
+                role = Role.Switch,
+                onValueChange = {
+                    if (enabled) {
+                        state.change(select = it)
+                    }
+                }
+            )
+            .semantics(
+                mergeDescendants = true
+            ) {
+                val baseLabel = "$text. $description"
+                this.contentDescription = if (!enabled) {
+                    "$baseLabel. ${accessibilityLabel.disabled}"
+                } else {
+                    baseLabel
+                }
+
+                stateDescription = if (state.getData() == true) {
+                    accessibilityStateDescription.selected
+                } else {
+                    accessibilityStateDescription.notSelected
+                }
+
+                if (!enabled) {
+                    disabled()
+                }
+            },
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(
+            modifier = Modifier
+                .weight(
+                    weight = 1F,
+                    fill = false
+                )
+                .padding(
+                    end = LocalDimensions.current.dp.space.space16
+                )
+        ) {
+            Text(
+                modifier = Modifier
+                    .semantics {
+                        hideFromAccessibility()
+                    },
+                text = text,
+                color = LocalPalette.current.contentPalette.primary,
+                style = LocalTypographies.current.body.medium
+            )
+
+            Text(
+                modifier = Modifier
+                    .semantics {
+                        hideFromAccessibility()
+                    },
+                text = description,
+                color = LocalPalette.current.contentPalette.secondary,
+                style = LocalTypographies.current.body.small
+            )
+        }
+
+        Switch(
+            modifier = Modifier
+                .semantics {
+                    hideFromAccessibility()
+                },
+            checked = state.getData() ?: false,
+            onCheckedChange = null,
+            colors = SwitchDefaults.colors(
+                checkedThumbColor = toggleStyle.switchThumbColor,
+                checkedTrackColor = toggleStyle.switchTrackColor,
+                checkedBorderColor = toggleStyle.switchBorderColor,
+                checkedIconColor = toggleStyle.switchThumbColor,
+                uncheckedThumbColor = toggleStyle.switchThumbColor,
+                uncheckedTrackColor = toggleStyle.switchTrackColor,
+                uncheckedBorderColor = toggleStyle.switchBorderColor,
+                uncheckedIconColor = toggleStyle.switchThumbColor,
+                disabledCheckedThumbColor = Color.Unspecified,
+                disabledCheckedTrackColor = Color.Unspecified,
+                disabledCheckedBorderColor = Color.Unspecified,
+                disabledCheckedIconColor = Color.Unspecified,
+                disabledUncheckedThumbColor = Color.Unspecified,
+                disabledUncheckedTrackColor = Color.Unspecified,
+                disabledUncheckedBorderColor = Color.Unspecified,
+                disabledUncheckedIconColor = Color.Unspecified
+            ),
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun ToggleComponentLightPreview() {
+    Theme {
+        ToggleComponent(
+            modifier = Modifier
+                .safeContentPadding(),
+            state = ToggleState(
+                default = false,
+                validators = listOf(
+                    Validators.Required("Prueba")
+                )
+            ),
+            text = "This is a text",
+            description = "This is a description",
+            accessibilityLabel = AccessibilityLabel(
+                enabled = "This is a text. \n This is a description",
+                disabled = "Other mandatory"
+            ),
+            accessibilityStateDescription = AccessibilityStateDescription(
+                selected = "On",
+                notSelected = "Off"
+            ),
+            enabled = false
+        )
+    }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL)
+@Composable
+private fun ToggleComponentDarkPreview() {
+    Theme {
+        ToggleComponent(
+            modifier = Modifier
+                .safeContentPadding(),
+            state = ToggleState(
+                default = false,
+                validators = listOf(
+                    Validators.Required("Prueba")
+                )
+            ),
+            text = "This is a text",
+            description = "This is a description",
+            accessibilityLabel = AccessibilityLabel(
+                enabled = "This is a text. \n This is a description",
+                disabled = "Other mandatory"
+            ),
+            accessibilityStateDescription = AccessibilityStateDescription(
+                selected = "On",
+                notSelected = "Off"
+            ),
+            enabled = false
+        )
+    }
 }

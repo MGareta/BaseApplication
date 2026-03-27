@@ -15,8 +15,61 @@ fun Dp.dpToRoundPx() = with(LocalDensity.current) { this@dpToRoundPx.roundToPx()
 fun Float.pxToDp() = with(LocalDensity.current) { this@pxToDp.toDp() }
 
 @Composable
-fun Modifier.conditional(condition: Boolean, modifier: Modifier.() -> Modifier): Modifier = if (condition) {
-    then(modifier(Modifier))
+fun Modifier.thenOnTrue(
+    condition: Boolean,
+    block: @Composable Modifier.() -> Modifier
+) = thenInternal(condition, onTrue = block)
+
+@Composable
+fun Modifier.thenOnFalse(
+    condition: Boolean,
+    block: @Composable Modifier.() -> Modifier
+) = thenInternal(condition, onFalse = block)
+
+@Composable
+fun Modifier.then(
+    condition: Boolean,
+    onTrue: @Composable Modifier.() -> Modifier,
+    onFalse: @Composable Modifier.() -> Modifier
+) = thenInternal(condition, onTrue, onFalse)
+
+@Composable
+fun <T : Any> Modifier.thenOnNotNull(
+    condition: T?,
+    block: @Composable Modifier.(T) -> Modifier
+) = thenInternal(condition, onNotNull = block)
+
+@Composable
+fun <T : Any> Modifier.thenOnNull(
+    condition: T?,
+    block: @Composable Modifier.() -> Modifier
+) = thenInternal(condition, onNull = block)
+
+@Composable
+fun <T : Any> Modifier.then(
+    condition: T?,
+    onNotNull: @Composable Modifier.(T) -> Modifier,
+    onNull: @Composable Modifier.() -> Modifier
+) = thenInternal(condition, onNotNull, onNull)
+
+@Composable
+private fun Modifier.thenInternal(
+    condition: Boolean,
+    onTrue: (@Composable Modifier.() -> Modifier)? = null,
+    onFalse: (@Composable Modifier.() -> Modifier)? = null
+) = (if (condition) {
+    onTrue?.let { then(Modifier.it()) }
 } else {
-    this
-}
+    onFalse?.let { then(Modifier.it()) }
+}) ?: this
+
+@Composable
+private fun <T : Any> Modifier.thenInternal(
+    condition: T?,
+    onNotNull: (@Composable Modifier.(T) -> Modifier)? = null,
+    onNull: (@Composable Modifier.() -> Modifier)? = null
+) = (condition?.let {
+    onNotNull?.let { then(Modifier.it(condition))}
+} ?: run {
+    onNull?.let { then(Modifier.it()) }
+}) ?: this
