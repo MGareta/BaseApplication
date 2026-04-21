@@ -10,10 +10,29 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.draw.ShadowScope
 import androidx.compose.ui.graphics.Color
+import com.core.presentation.ui.components.button.hyperlink.model.HyperlinkButtonSizeType
+import com.core.presentation.ui.components.button.hyperlink.model.HyperlinkButtonType
 import com.core.presentation.ui.theme.LocalDimensions
 import com.core.presentation.ui.theme.LocalPalette
 
-data class CheckboxStyle(
+sealed interface CheckboxStyleType {
+    data class Text(
+        val text: String,
+        val description: String
+    ) : CheckboxStyleType
+
+    data class Hyperlink(
+        val text: String,
+        val hyperlinks: Map<String, HyperlinkButtonType>,
+        val hyperlinkButtonSizeType: HyperlinkButtonSizeType
+    ) : CheckboxStyleType
+
+    data class Custom(
+        val content: @Composable () -> Unit
+    ) : CheckboxStyleType
+}
+
+internal data class CheckboxStyle(
     val checkboxMarkColor: Color,
     val checkboxBackgroundColor: Color,
     val checkboxBorderColor: Color,
