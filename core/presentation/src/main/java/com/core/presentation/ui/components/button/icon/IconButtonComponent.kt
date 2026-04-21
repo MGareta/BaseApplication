@@ -16,15 +16,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.text
-import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.tooling.preview.Preview
 import com.core.presentation.ui.components.button.icon.model.IconButtonSizeType
 import com.core.presentation.ui.components.button.icon.model.IconButtonStyleType
 import com.core.presentation.ui.components.button.icon.model.rememberIconButtonSize
 import com.core.presentation.ui.components.button.icon.model.rememberIconButtonStyle
 import com.core.presentation.ui.theme.Theme
-import com.core.presentation.ui.utils.AccessibilityLabel
+import com.core.presentation.ui.utils.AccessibilityState
 
 @Composable
 fun IconButtonComponent(
@@ -33,7 +32,8 @@ fun IconButtonComponent(
     iconButtonSizeType: IconButtonSizeType,
     @DrawableRes icon: Int,
     enabled: Boolean,
-    accessibilityLabel: AccessibilityLabel,
+    accessibilityState: AccessibilityState.Click,
+    contentDescription: String?,
     onClick: () -> Unit,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -53,20 +53,13 @@ fun IconButtonComponent(
             .size(
                 size = iconButtonSize.size,
             )
-            .semantics {
-                when (enabled) {
-                    true -> {
-                        this.text = AnnotatedString(
-                            text = accessibilityLabel.enabled
-                        )
-                    }
-                    false -> {
-                        this.text = AnnotatedString(
-                            text = accessibilityLabel.disabled
-                        )
+            .semantics(
+                mergeDescendants = true
+            ) {
+                if (!enabled) {
+                    stateDescription = accessibilityState.disabledReason
 
-                        disabled()
-                    }
+                    disabled()
                 }
             },
         enabled = enabled,
@@ -91,7 +84,7 @@ fun IconButtonComponent(
             painter = painterResource(
                 id = icon,
             ),
-            contentDescription = null,
+            contentDescription = contentDescription,
         )
     }
 }
@@ -107,10 +100,10 @@ private fun IconButtonPrimaryLightPreview() {
             iconButtonSizeType = IconButtonSizeType.Large,
             icon = android.R.drawable.star_on,
             enabled = true,
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a test",
-                disabled = "The test is not completed"
+            accessibilityState = AccessibilityState.Click(
+                disabledReason = "The test is not completed"
             ),
+            contentDescription = "This is a test",
             onClick = {}
         )
     }
@@ -127,10 +120,10 @@ private fun IconButtonSecondaryLightPreview() {
             iconButtonSizeType = IconButtonSizeType.Small,
             icon = android.R.drawable.star_on,
             enabled = true,
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a test",
-                disabled = "The test is not completed"
+            accessibilityState = AccessibilityState.Click(
+                disabledReason = "The test is not completed"
             ),
+            contentDescription = "This is a test",
             onClick = {}
         )
     }
@@ -147,10 +140,10 @@ private fun IconButtonTertiaryLightPreview() {
             iconButtonSizeType = IconButtonSizeType.Medium,
             icon = android.R.drawable.star_on,
             enabled = true,
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a test",
-                disabled = "The test is not completed"
+            accessibilityState = AccessibilityState.Click(
+                disabledReason = "The test is not completed"
             ),
+            contentDescription = "This is a test",
             onClick = {}
         )
     }
@@ -167,10 +160,10 @@ private fun IconButtonPrimaryDarkPreview() {
             iconButtonSizeType = IconButtonSizeType.Large,
             icon = android.R.drawable.star_on,
             enabled = true,
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a test",
-                disabled = "The test is not completed"
+            accessibilityState = AccessibilityState.Click(
+                disabledReason = "The test is not completed"
             ),
+            contentDescription = "This is a test",
             onClick = {}
         )
     }
@@ -187,10 +180,10 @@ private fun IconButtonSecondaryDarkPreview() {
             iconButtonSizeType = IconButtonSizeType.Small,
             icon = android.R.drawable.star_on,
             enabled = true,
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a test",
-                disabled = "The test is not completed"
+            accessibilityState = AccessibilityState.Click(
+                disabledReason = "The test is not completed"
             ),
+            contentDescription = "This is a test",
             onClick = {}
         )
     }
@@ -207,10 +200,10 @@ private fun IconButtonTertiaryDarkPreview() {
             iconButtonSizeType = IconButtonSizeType.Medium,
             icon = android.R.drawable.star_on,
             enabled = true,
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a test",
-                disabled = "The test is not completed"
+            accessibilityState = AccessibilityState.Click(
+                disabledReason = "The test is not completed"
             ),
+            contentDescription = "This is a test",
             onClick = {}
         )
     }
