@@ -13,3 +13,15 @@ data class AccessibilityStateDescription(
     val selected: String,
     val notSelected: String
 )
+
+@Immutable
+sealed interface AccessibilityState {
+    data class Click(
+        val disabledReason: String
+    )
+
+    data class Select(
+        val selected: String,
+        val notSelected: String
+    ) : AccessibilityState
+}
