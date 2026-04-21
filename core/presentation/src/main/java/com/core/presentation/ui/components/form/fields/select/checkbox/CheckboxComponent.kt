@@ -38,8 +38,7 @@ import com.core.presentation.ui.theme.LocalDimensions
 import com.core.presentation.ui.theme.LocalPalette
 import com.core.presentation.ui.theme.LocalTypographies
 import com.core.presentation.ui.theme.Theme
-import com.core.presentation.ui.utils.AccessibilityLabel
-import com.core.presentation.ui.utils.AccessibilityStateDescription
+import com.core.presentation.ui.utils.AccessibilityState
 import com.core.presentation.ui.utils.thenOnNotNull
 import java.net.URL
 
@@ -48,8 +47,8 @@ fun CheckboxComponent(
     modifier: Modifier,
     state: CheckboxState,
     checkboxStyleType: CheckboxStyleType,
-    accessibilityLabel: AccessibilityLabel,
-    accessibilityStateDescription: AccessibilityStateDescription,
+    accessibilityStateSelect: AccessibilityState.Select,
+    accessibilityStateClick: AccessibilityState.Click,
     enabled: Boolean
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -96,17 +95,16 @@ fun CheckboxComponent(
             .semantics(
                 mergeDescendants = true
             ) {
-                val state = accessibilityStateDescription.selected
+                val state = accessibilityStateSelect.selected
                     .takeIf {
                         state.getData() == true
                     }
-                    ?: accessibilityStateDescription.notSelected
+                    ?: accessibilityStateSelect.notSelected
 
-                val label = accessibilityLabel.disabled
+                val label = accessibilityStateClick.disabledReason
                     .takeIf {
                         !enabled
                     }
-                    ?: accessibilityLabel.enabled
 
                 stateDescription = listOfNotNull(
                     state,
@@ -262,11 +260,10 @@ private fun CheckboxComponentLightPreview() {
                     text = "This is a text",
                     description = "This is a description",
                 ),
-                accessibilityLabel = AccessibilityLabel(
-                    enabled = "This is a text. \n This is a description",
-                    disabled = "Other mandatory"
+                accessibilityStateClick = AccessibilityState.Click(
+                    disabledReason = "Other mandatory"
                 ),
-                accessibilityStateDescription = AccessibilityStateDescription(
+                accessibilityStateSelect = AccessibilityState.Select(
                     selected = "On",
                     notSelected = "Off"
                 ),
@@ -289,11 +286,10 @@ private fun CheckboxComponentLightPreview() {
                         )
                     }
                 ),
-                accessibilityLabel = AccessibilityLabel(
-                    enabled = null,
-                    disabled = "Other mandatory"
+                accessibilityStateClick = AccessibilityState.Click(
+                    disabledReason = "Other mandatory"
                 ),
-                accessibilityStateDescription = AccessibilityStateDescription(
+                accessibilityStateSelect = AccessibilityState.Select(
                     selected = "On",
                     notSelected = "Off"
                 ),
@@ -327,11 +323,10 @@ private fun CheckboxComponentDarkPreview() {
                 },
                 hyperlinkButtonSizeType = HyperlinkButtonSizeType.Small,
             ),
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a text. \n This is a description",
-                disabled = "Other mandatory"
+            accessibilityStateClick = AccessibilityState.Click(
+                disabledReason = "Other mandatory"
             ),
-            accessibilityStateDescription = AccessibilityStateDescription(
+            accessibilityStateSelect = AccessibilityState.Select(
                 selected = "On",
                 notSelected = "Off"
             ),
