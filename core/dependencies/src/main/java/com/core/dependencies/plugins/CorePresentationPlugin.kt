@@ -42,6 +42,7 @@ class CorePresentationPlugin : Plugin<Project> {
             val androidXNavigation3RuntimeDependency = coreLibs.findLibrary("androidx-navigation3-runtime").get()
             val androidXNavigation3UiDependency = coreLibs.findLibrary("androidx-navigation3-ui").get()
             val androidXPagingDependency = coreLibs.findLibrary("androidx-paging").get()
+            val androidXBrowserDependency = coreLibs.findLibrary("androidx-browser").get()
             val hiltAndroidDependency = coreLibs.findLibrary("google-hilt-android").get()
             val hiltCompilerDependency = coreLibs.findLibrary("google-hilt-compiler").get()
             val detektKtlintDependency = coreLibs.findLibrary("detekt-ktlint").get()
@@ -91,6 +92,7 @@ class CorePresentationPlugin : Plugin<Project> {
                 api(dependencyNotation = androidXNavigation3RuntimeDependency)
                 api(dependencyNotation = androidXNavigation3UiDependency)
                 api(dependencyNotation = androidXPagingDependency)
+                api(dependencyNotation = androidXBrowserDependency)
 
                 // Hilt
                 implementation(dependencyNotation = hiltAndroidDependency)
