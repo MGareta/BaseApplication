@@ -1,6 +1,7 @@
 package com.core.presentation.ui.components.form.fields.select.checkbox
 
 import android.content.res.Configuration
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -14,17 +15,23 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.net.toUri
+import com.core.presentation.ui.components.button.hyperlink.HyperlinkButtonComponent
+import com.core.presentation.ui.components.button.hyperlink.model.HyperlinkButtonSizeType
+import com.core.presentation.ui.components.button.hyperlink.model.HyperlinkButtonType
+import com.core.presentation.ui.components.form.fields.select.checkbox.model.CheckboxStyleType
 import com.core.presentation.ui.components.form.fields.select.checkbox.model.rememberCheckboxStyle
 import com.core.presentation.ui.components.form.validators.Validators
 import com.core.presentation.ui.theme.LocalDimensions
@@ -34,13 +41,13 @@ import com.core.presentation.ui.theme.Theme
 import com.core.presentation.ui.utils.AccessibilityLabel
 import com.core.presentation.ui.utils.AccessibilityStateDescription
 import com.core.presentation.ui.utils.thenOnNotNull
+import java.net.URL
 
 @Composable
 fun CheckboxComponent(
     modifier: Modifier,
     state: CheckboxState,
-    text: String,
-    description: String,
+    checkboxStyleType: CheckboxStyleType,
     accessibilityLabel: AccessibilityLabel,
     accessibilityStateDescription: AccessibilityStateDescription,
     enabled: Boolean = true
@@ -80,25 +87,31 @@ fun CheckboxComponent(
                 role = Role.Checkbox,
                 onValueChange = {
                     if (enabled) {
-                        state.change(select = it)
+                        state.change(
+                            select = it
+                        )
                     }
                 }
             )
             .semantics(
                 mergeDescendants = true
             ) {
-                val baseLabel = "$text. $description"
-                this.contentDescription = if (!enabled) {
-                    "$baseLabel. ${accessibilityLabel.disabled}"
-                } else {
-                    baseLabel
-                }
+                val state = accessibilityStateDescription.selected
+                    .takeIf {
+                        state.getData() == true
+                    }
+                    ?: accessibilityStateDescription.notSelected
 
-                stateDescription = if (state.getData() == true) {
-                    accessibilityStateDescription.selected
-                } else {
-                    accessibilityStateDescription.notSelected
-                }
+                val label = accessibilityLabel.disabled
+                    .takeIf {
+                        !enabled
+                    }
+                    ?: accessibilityLabel.enabled
+
+                stateDescription = listOfNotNull(
+                    state,
+                    label
+                ).joinToString(". ")
 
                 if (!enabled) {
                     disabled()
@@ -107,7 +120,7 @@ fun CheckboxComponent(
         horizontalArrangement = Arrangement.spacedBy(
             space = LocalDimensions.current.dp.space.space16
         ),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.Top
     ) {
         Checkbox(
             modifier = Modifier
@@ -133,55 +146,161 @@ fun CheckboxComponent(
                     weight = 1F,
                     fill = false
                 )
+                .align(
+                    alignment = Alignment.CenterVertically
+                )
         ) {
-            Text(
-                modifier = Modifier
-                    .semantics {
-                        hideFromAccessibility()
-                    },
-                text = text,
-                color = LocalPalette.current.contentPalette.primary,
-                style = LocalTypographies.current.body.medium
-            )
+            when (checkboxStyleType) {
+                is CheckboxStyleType.Text -> CheckboxTextComponent(
+                    checkboxStyleText = checkboxStyleType
+                )
+                is CheckboxStyleType.Hyperlink -> CheckboxHyperlinkComponent(
+                    checkboxStyleHyperlink = checkboxStyleType,
+                    onAllLinksClicked = {
+                        state.change(
+                            select = true
+                        )
+                    }
+                )
+                is CheckboxStyleType.Custom -> CheckboxCustomComponent(
+                    checkboxStyleCustom = checkboxStyleType
+                )
+            }
 
-            Text(
-                modifier = Modifier
-                    .semantics {
-                        hideFromAccessibility()
-                    },
-                text = description,
-                color = LocalPalette.current.contentPalette.secondary,
-                style = LocalTypographies.current.body.small
-            )
         }
     }
+}
+
+@Composable
+private fun CheckboxTextComponent(
+    checkboxStyleText: CheckboxStyleType.Text
+) {
+    Text(
+        text = checkboxStyleText.text,
+        color = LocalPalette.current.contentPalette.primary,
+        style = LocalTypographies.current.body.medium
+    )
+
+    Text(
+        text = checkboxStyleText.description,
+        color = LocalPalette.current.contentPalette.secondary,
+        style = LocalTypographies.current.body.small
+    )
+}
+
+@Composable
+private fun CheckboxHyperlinkComponent(
+    checkboxStyleHyperlink: CheckboxStyleType.Hyperlink,
+    onAllLinksClicked: () -> Unit
+) {
+    val context = LocalContext.current
+
+    val clickedLinks = remember(
+        key1 = checkboxStyleHyperlink.hyperlinks
+    ) {
+        mutableStateMapOf<HyperlinkButtonType, Boolean>().apply {
+            checkboxStyleHyperlink
+                .hyperlinks
+                .values
+                .forEach {
+                    put(it, false)
+                }
+        }
+    }
+
+    HyperlinkButtonComponent(
+        modifier = Modifier,
+        text = checkboxStyleHyperlink.text,
+        hyperlinks = checkboxStyleHyperlink.hyperlinks,
+        hyperlinkButtonSizeType = checkboxStyleHyperlink.hyperlinkButtonSizeType,
+        onClick = {
+            clickedLinks[it] = true
+            if (clickedLinks.values.all { it }) {
+                onAllLinksClicked()
+            }
+
+            when (it) {
+                is HyperlinkButtonType.Action -> it.action()
+                is HyperlinkButtonType.Url -> {
+                    CustomTabsIntent
+                        .Builder()
+                        .setShowTitle(true)
+                        .build()
+                        .run {
+                            launchUrl(
+                                context,
+                                it.url.toString().toUri()
+                            )
+                        }
+                }
+            }
+        }
+    )
+}
+
+@Composable
+private fun CheckboxCustomComponent(
+    checkboxStyleCustom: CheckboxStyleType.Custom
+) {
+    checkboxStyleCustom.content()
 }
 
 @Preview
 @Composable
 private fun CheckboxComponentLightPreview() {
     Theme {
-        CheckboxComponent(
-            modifier = Modifier
-                .safeContentPadding(),
-            state = CheckboxState(
-                default = true,
-                validators = listOf(
-                    Validators.Required("Prueba")
-                )
-            ),
-            text = "This is a text",
-            description = "This is a description",
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a text. \n This is a description",
-                disabled = "Other mandatory"
-            ),
-            accessibilityStateDescription = AccessibilityStateDescription(
-                selected = "On",
-                notSelected = "Off"
-            ),
-            enabled = true
-        )
+        Column {
+            CheckboxComponent(
+                modifier = Modifier
+                    .safeContentPadding(),
+                state = CheckboxState(
+                    default = true,
+                    validators = listOf(
+                        Validators.Required("Prueba")
+                    )
+                ),
+                checkboxStyleType = CheckboxStyleType.Text(
+                    text = "This is a text",
+                    description = "This is a description",
+                ),
+                accessibilityLabel = AccessibilityLabel(
+                    enabled = "This is a text. \n This is a description",
+                    disabled = "Other mandatory"
+                ),
+                accessibilityStateDescription = AccessibilityStateDescription(
+                    selected = "On",
+                    notSelected = "Off"
+                ),
+                enabled = true
+            )
+
+            CheckboxComponent(
+                modifier = Modifier
+                    .safeContentPadding(),
+                state = CheckboxState(
+                    default = true,
+                    validators = listOf(
+                        Validators.Required("Prueba")
+                    )
+                ),
+                checkboxStyleType = CheckboxStyleType.Custom(
+                    content = {
+                        Text(
+                            text = "This is a custom text"
+                        )
+                    }
+                ),
+                accessibilityLabel = AccessibilityLabel(
+                    enabled = null,
+                    disabled = "Other mandatory"
+                ),
+                accessibilityStateDescription = AccessibilityStateDescription(
+                    selected = "On",
+                    notSelected = "Off"
+                ),
+                enabled = true
+            )
+        }
     }
 }
 
@@ -198,8 +317,17 @@ private fun CheckboxComponentDarkPreview() {
                     Validators.Required("Prueba")
                 )
             ),
-            text = "This is a text",
-            description = "This is a description",
+            checkboxStyleType = CheckboxStyleType.Hyperlink(
+                text = "Link and hyperLink text and another link",
+                hyperlinks = buildMap {
+                    this["Link"] = HyperlinkButtonType.Action {
+
+                    }
+                    this["text"] = HyperlinkButtonType.Url(url = URL("http://w.com"))
+                    this["another link"] = HyperlinkButtonType.Url(url = URL("http://w1.com"))
+                },
+                hyperlinkButtonSizeType = HyperlinkButtonSizeType.Small,
+            ),
             accessibilityLabel = AccessibilityLabel(
                 enabled = "This is a text. \n This is a description",
                 disabled = "Other mandatory"
@@ -208,7 +336,7 @@ private fun CheckboxComponentDarkPreview() {
                 selected = "On",
                 notSelected = "Off"
             ),
-            enabled = false
+            enabled = true
         )
     }
 }

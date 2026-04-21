@@ -4,7 +4,7 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 data class AccessibilityLabel(
-    val enabled: String,
+    val enabled: String?,
     val disabled: String
 )
 
