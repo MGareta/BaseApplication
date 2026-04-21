@@ -20,12 +20,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.tooling.preview.Preview
+import com.core.presentation.ui.components.form.fields.select.toggle.model.ToggleStyleType
 import com.core.presentation.ui.components.form.fields.select.toggle.model.rememberToggleStyle
 import com.core.presentation.ui.components.form.validators.Validators
 import com.core.presentation.ui.theme.LocalDimensions
@@ -40,8 +40,7 @@ import com.core.presentation.ui.utils.thenOnNotNull
 fun ToggleComponent(
     modifier: Modifier,
     state: ToggleState,
-    text: String,
-    description: String,
+    toggleStyleType: ToggleStyleType,
     accessibilityLabel: AccessibilityLabel,
     accessibilityStateDescription: AccessibilityStateDescription,
     enabled: Boolean
@@ -88,18 +87,22 @@ fun ToggleComponent(
             .semantics(
                 mergeDescendants = true
             ) {
-                val baseLabel = "$text. $description"
-                this.contentDescription = if (!enabled) {
-                    "$baseLabel. ${accessibilityLabel.disabled}"
-                } else {
-                    baseLabel
-                }
+                val state = accessibilityStateDescription.selected
+                    .takeIf {
+                        state.getData() == true
+                    }
+                    ?: accessibilityStateDescription.notSelected
 
-                stateDescription = if (state.getData() == true) {
-                    accessibilityStateDescription.selected
-                } else {
-                    accessibilityStateDescription.notSelected
-                }
+                val label = accessibilityLabel.disabled
+                    .takeIf {
+                        !enabled
+                    }
+                    ?: accessibilityLabel.enabled
+
+                stateDescription = listOfNotNull(
+                    state,
+                    label
+                ).joinToString(". ")
 
                 if (!enabled) {
                     disabled()
@@ -118,25 +121,14 @@ fun ToggleComponent(
                     end = LocalDimensions.current.dp.space.space16
                 )
         ) {
-            Text(
-                modifier = Modifier
-                    .semantics {
-                        hideFromAccessibility()
-                    },
-                text = text,
-                color = LocalPalette.current.contentPalette.primary,
-                style = LocalTypographies.current.body.medium
-            )
-
-            Text(
-                modifier = Modifier
-                    .semantics {
-                        hideFromAccessibility()
-                    },
-                text = description,
-                color = LocalPalette.current.contentPalette.secondary,
-                style = LocalTypographies.current.body.small
-            )
+            when (toggleStyleType) {
+                is ToggleStyleType.Text -> ToggleTextComponent(
+                    toggleStyleText = toggleStyleType
+                )
+                is ToggleStyleType.Custom -> ToggleCustomComponent(
+                    toggleStyleCustom = toggleStyleType
+                )
+            }
         }
 
         Switch(
@@ -168,31 +160,86 @@ fun ToggleComponent(
     }
 }
 
+@Composable
+private fun ToggleTextComponent(
+    toggleStyleText: ToggleStyleType.Text
+) {
+    Text(
+        text = toggleStyleText.text,
+        color = LocalPalette.current.contentPalette.primary,
+        style = LocalTypographies.current.body.medium
+    )
+
+    Text(
+        text = toggleStyleText.description,
+        color = LocalPalette.current.contentPalette.secondary,
+        style = LocalTypographies.current.body.small
+    )
+}
+
+@Composable
+private fun ToggleCustomComponent(
+    toggleStyleCustom: ToggleStyleType.Custom
+) {
+    toggleStyleCustom.content()
+}
+
 @Preview
 @Composable
 private fun ToggleComponentLightPreview() {
     Theme {
-        ToggleComponent(
-            modifier = Modifier
-                .safeContentPadding(),
-            state = ToggleState(
-                default = false,
-                validators = listOf(
-                    Validators.Required("Prueba")
-                )
-            ),
-            text = "This is a text",
-            description = "This is a description",
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a text. \n This is a description",
-                disabled = "Other mandatory"
-            ),
-            accessibilityStateDescription = AccessibilityStateDescription(
-                selected = "On",
-                notSelected = "Off"
-            ),
-            enabled = false
-        )
+        Column {
+            ToggleComponent(
+                modifier = Modifier
+                    .safeContentPadding(),
+                state = ToggleState(
+                    default = false,
+                    validators = listOf(
+                        Validators.Required("Prueba")
+                    )
+                ),
+                toggleStyleType = ToggleStyleType.Text(
+                    text = "This is a text",
+                    description = "This is a description",
+                ),
+                accessibilityLabel = AccessibilityLabel(
+                    enabled = "This is a text. \n This is a description",
+                    disabled = "Other mandatory"
+                ),
+                accessibilityStateDescription = AccessibilityStateDescription(
+                    selected = "On",
+                    notSelected = "Off"
+                ),
+                enabled = false
+            )
+
+            ToggleComponent(
+                modifier = Modifier
+                    .safeContentPadding(),
+                state = ToggleState(
+                    default = false,
+                    validators = listOf(
+                        Validators.Required("Prueba")
+                    )
+                ),
+                toggleStyleType = ToggleStyleType.Custom(
+                    content = {
+                        Text(
+                            text = "This is a custom text"
+                        )
+                    }
+                ),
+                accessibilityLabel = AccessibilityLabel(
+                    enabled = null,
+                    disabled = "Other mandatory"
+                ),
+                accessibilityStateDescription = AccessibilityStateDescription(
+                    selected = "On",
+                    notSelected = "Off"
+                ),
+                enabled = true
+            )
+        }
     }
 }
 
@@ -209,8 +256,10 @@ private fun ToggleComponentDarkPreview() {
                     Validators.Required("Prueba")
                 )
             ),
-            text = "This is a text",
-            description = "This is a description",
+            toggleStyleType = ToggleStyleType.Text(
+                text = "This is a text",
+                description = "This is a description",
+            ),
             accessibilityLabel = AccessibilityLabel(
                 enabled = "This is a text. \n This is a description",
                 disabled = "Other mandatory"
