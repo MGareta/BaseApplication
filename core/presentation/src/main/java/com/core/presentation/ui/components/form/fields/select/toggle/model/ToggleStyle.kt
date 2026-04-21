@@ -13,7 +13,18 @@ import androidx.compose.ui.graphics.Color
 import com.core.presentation.ui.theme.LocalDimensions
 import com.core.presentation.ui.theme.LocalPalette
 
-data class ToggleStyle(
+sealed interface ToggleStyleType {
+    data class Text(
+        val text: String,
+        val description: String
+    ) : ToggleStyleType
+
+    data class Custom(
+        val content: @Composable () -> Unit
+    ) : ToggleStyleType
+}
+
+internal data class ToggleStyle(
     val switchThumbColor: Color,
     val switchTrackColor: Color,
     val switchBorderColor: Color,
