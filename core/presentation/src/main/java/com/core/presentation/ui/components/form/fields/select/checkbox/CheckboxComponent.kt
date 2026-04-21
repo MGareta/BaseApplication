@@ -50,7 +50,7 @@ fun CheckboxComponent(
     checkboxStyleType: CheckboxStyleType,
     accessibilityLabel: AccessibilityLabel,
     accessibilityStateDescription: AccessibilityStateDescription,
-    enabled: Boolean = true
+    enabled: Boolean
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -166,7 +166,6 @@ fun CheckboxComponent(
                     checkboxStyleCustom = checkboxStyleType
                 )
             }
-
         }
     }
 }
