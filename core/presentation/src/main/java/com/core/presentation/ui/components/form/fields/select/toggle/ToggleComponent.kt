@@ -32,8 +32,7 @@ import com.core.presentation.ui.theme.LocalDimensions
 import com.core.presentation.ui.theme.LocalPalette
 import com.core.presentation.ui.theme.LocalTypographies
 import com.core.presentation.ui.theme.Theme
-import com.core.presentation.ui.utils.AccessibilityLabel
-import com.core.presentation.ui.utils.AccessibilityStateDescription
+import com.core.presentation.ui.utils.AccessibilityState
 import com.core.presentation.ui.utils.thenOnNotNull
 
 @Composable
@@ -41,8 +40,8 @@ fun ToggleComponent(
     modifier: Modifier,
     state: ToggleState,
     toggleStyleType: ToggleStyleType,
-    accessibilityLabel: AccessibilityLabel,
-    accessibilityStateDescription: AccessibilityStateDescription,
+    accessibilityStateSelect: AccessibilityState.Select,
+    accessibilityStateClick: AccessibilityState.Click,
     enabled: Boolean
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -87,17 +86,16 @@ fun ToggleComponent(
             .semantics(
                 mergeDescendants = true
             ) {
-                val state = accessibilityStateDescription.selected
+                val state = accessibilityStateSelect.selected
                     .takeIf {
                         state.getData() == true
                     }
-                    ?: accessibilityStateDescription.notSelected
+                    ?: accessibilityStateSelect.notSelected
 
-                val label = accessibilityLabel.disabled
+                val label = accessibilityStateClick.disabledReason
                     .takeIf {
                         !enabled
                     }
-                    ?: accessibilityLabel.enabled
 
                 stateDescription = listOfNotNull(
                     state,
@@ -202,11 +200,10 @@ private fun ToggleComponentLightPreview() {
                     text = "This is a text",
                     description = "This is a description",
                 ),
-                accessibilityLabel = AccessibilityLabel(
-                    enabled = "This is a text. \n This is a description",
-                    disabled = "Other mandatory"
+                accessibilityStateClick = AccessibilityState.Click(
+                    disabledReason = "Other mandatory"
                 ),
-                accessibilityStateDescription = AccessibilityStateDescription(
+                accessibilityStateSelect = AccessibilityState.Select(
                     selected = "On",
                     notSelected = "Off"
                 ),
@@ -229,11 +226,10 @@ private fun ToggleComponentLightPreview() {
                         )
                     }
                 ),
-                accessibilityLabel = AccessibilityLabel(
-                    enabled = null,
-                    disabled = "Other mandatory"
+                accessibilityStateClick = AccessibilityState.Click(
+                    disabledReason = "Other mandatory"
                 ),
-                accessibilityStateDescription = AccessibilityStateDescription(
+                accessibilityStateSelect = AccessibilityState.Select(
                     selected = "On",
                     notSelected = "Off"
                 ),
@@ -260,11 +256,10 @@ private fun ToggleComponentDarkPreview() {
                 text = "This is a text",
                 description = "This is a description",
             ),
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a text. \n This is a description",
-                disabled = "Other mandatory"
+            accessibilityStateClick = AccessibilityState.Click(
+                disabledReason = "Other mandatory"
             ),
-            accessibilityStateDescription = AccessibilityStateDescription(
+            accessibilityStateSelect = AccessibilityState.Select(
                 selected = "On",
                 notSelected = "Off"
             ),
