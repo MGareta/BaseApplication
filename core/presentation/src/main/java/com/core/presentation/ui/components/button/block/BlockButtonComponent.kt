@@ -20,10 +20,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.disabled
-import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.text
-import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,7 +30,7 @@ import com.core.presentation.ui.components.button.block.model.BlockButtonStyleTy
 import com.core.presentation.ui.components.button.block.model.rememberBlockButtonSize
 import com.core.presentation.ui.components.button.block.model.rememberBlockButtonStyle
 import com.core.presentation.ui.theme.Theme
-import com.core.presentation.ui.utils.AccessibilityLabel
+import com.core.presentation.ui.utils.AccessibilityState
 
 @Composable
 fun BlockButtonComponent(
@@ -43,7 +41,7 @@ fun BlockButtonComponent(
     @DrawableRes leadingIcon: Int?,
     @DrawableRes trailingIcon: Int?,
     enabled: Boolean,
-    accessibilityLabel: AccessibilityLabel,
+    accessibilityState: AccessibilityState.Click,
     onClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -70,20 +68,13 @@ fun BlockButtonComponent(
             .width(
                 intrinsicSize = IntrinsicSize.Min
             )
-            .semantics {
-                when (enabled) {
-                    true -> {
-                        this.text = AnnotatedString(
-                            text = accessibilityLabel.enabled
-                        )
-                    }
-                    false -> {
-                        this.text = AnnotatedString(
-                            text = accessibilityLabel.disabled
-                        )
+            .semantics(
+                mergeDescendants = true
+            ) {
+                if (!enabled) {
+                    stateDescription = accessibilityState.disabledReason
 
-                        disabled()
-                    }
+                    disabled()
                 }
             },
         enabled = true,
@@ -126,10 +117,7 @@ fun BlockButtonComponent(
                     )
                     .weight(
                         weight = 1F
-                    )
-                    .semantics {
-                        hideFromAccessibility()
-                    },
+                    ),
                 text = text,
                 textAlign = TextAlign.Center,
                 style = blockButtonSize.textStyle
@@ -169,9 +157,8 @@ private fun BlockButtonComponentPrimaryLightPreview() {
             leadingIcon = android.R.drawable.star_on,
             trailingIcon = android.R.drawable.star_on,
             enabled = true,
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a test",
-                disabled = "The test is not completed"
+            accessibilityState = AccessibilityState.Click(
+                disabledReason = "The test is not completed"
             ),
             onClick = {}
         )
@@ -191,9 +178,8 @@ private fun BlockButtonComponentSecondaryLightPreview() {
             leadingIcon = android.R.drawable.star_on,
             trailingIcon = android.R.drawable.star_on,
             enabled = true,
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a test",
-                disabled = "The test is not completed"
+            accessibilityState = AccessibilityState.Click(
+                disabledReason = "The test is not completed"
             ),
             onClick = {}
         )
@@ -213,9 +199,8 @@ private fun BlockButtonComponentTertiaryLightPreview() {
             leadingIcon = android.R.drawable.star_on,
             trailingIcon = android.R.drawable.star_on,
             enabled = true,
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a test",
-                disabled = "The test is not completed"
+            accessibilityState = AccessibilityState.Click(
+                disabledReason = "The test is not completed"
             ),
             onClick = {}
         )
@@ -235,9 +220,8 @@ private fun BlockButtonComponentPrimaryDarkPreview() {
             leadingIcon = android.R.drawable.star_on,
             trailingIcon = android.R.drawable.star_on,
             enabled = true,
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a test",
-                disabled = "The test is not completed"
+            accessibilityState = AccessibilityState.Click(
+                disabledReason = "The test is not completed"
             ),
             onClick = {}
         )
@@ -257,9 +241,8 @@ private fun BlockButtonComponentSecondaryDarkPreview() {
             leadingIcon = android.R.drawable.star_on,
             trailingIcon = android.R.drawable.star_on,
             enabled = true,
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a test",
-                disabled = "The test is not completed"
+            accessibilityState = AccessibilityState.Click(
+                disabledReason = "The test is not completed"
             ),
             onClick = {}
         )
@@ -279,9 +262,8 @@ private fun BlockButtonComponentTertiaryDarkPreview() {
             leadingIcon = android.R.drawable.star_on,
             trailingIcon = android.R.drawable.star_on,
             enabled = true,
-            accessibilityLabel = AccessibilityLabel(
-                enabled = "This is a test",
-                disabled = "The test is not completed"
+            accessibilityState = AccessibilityState.Click(
+                disabledReason = "The test is not completed"
             ),
             onClick = {}
         )
