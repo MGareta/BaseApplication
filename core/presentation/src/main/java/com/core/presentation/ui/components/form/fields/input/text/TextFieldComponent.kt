@@ -1,5 +1,6 @@
 package com.core.presentation.ui.components.form.fields.input.text
 
+import android.content.res.Configuration
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Column
@@ -43,7 +44,7 @@ import com.core.presentation.ui.utils.ignoreHorizontalParentPadding
 fun TextFieldComponent(
     modifier: Modifier,
     state: TextFieldState,
-    placeholder: String? = null,
+    placeholder: String,
     helpText: String? = null,
     successText: String? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
@@ -365,3 +366,89 @@ private fun TextFieldComponentLightPreview() {
         }
     }
 }
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL)
+@Composable
+private fun TextFieldComponentDarkPreview() {
+    val state = remember {
+        TextFieldState(
+            initial = null,
+            transform = {
+                it.trim()
+            },
+            validators = listOf(
+                Validators.Required("Required"),
+                Validators.Custom<String>(
+                    message = "Test input not valid",
+                    function = {
+                        false
+                    }
+                )
+            )
+        )
+    }
+
+    Theme {
+        Column(
+            modifier = Modifier
+                .safeContentPadding()
+        ) {
+            TextFieldComponent(
+                modifier = Modifier,
+                state = state,
+                placeholder = "Placeholder",
+                helpText = "Only accepts numbers",
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(
+                            id = android.R.drawable.star_on
+                        ),
+                        contentDescription = null
+                    )
+                },
+                trailingIcon = {
+                    Icon(
+                        painter = painterResource(
+                            id = android.R.drawable.star_on
+                        ),
+                        contentDescription = null
+                    )
+                },
+                prefix = {
+                    Text(
+                        text = "test",
+                        style = LocalTypographies.current.body.medium
+                    )
+                },
+                suffix = {
+                    Text(
+                        text = "test",
+                        style = LocalTypographies.current.body.medium
+                    )
+                },
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions {
+                    state.validate()
+                },
+                enabled = true
+            )
+
+            BlockButtonComponent(
+                modifier = Modifier,
+                blockButtonStyleType = BlockButtonStyleType.Primary,
+                blockButtonSizeType = BlockButtonSizeType.Small,
+                text = "Test",
+                leadingIcon = android.R.drawable.star_on,
+                trailingIcon = android.R.drawable.star_on,
+                enabled = true,
+                accessibilityState = AccessibilityState.Click(
+                    disabledReason = "The test is not completed"
+                ),
+                onClick = {}
+            )
+        }
+    }
+}
+
