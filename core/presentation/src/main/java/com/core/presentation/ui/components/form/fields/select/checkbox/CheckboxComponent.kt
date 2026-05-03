@@ -31,6 +31,7 @@ import androidx.core.net.toUri
 import com.core.presentation.ui.components.button.hyperlink.HyperlinkButtonComponent
 import com.core.presentation.ui.components.button.hyperlink.model.HyperlinkButtonSizeType
 import com.core.presentation.ui.components.button.hyperlink.model.HyperlinkButtonType
+import com.core.presentation.ui.components.form.fields.select.SelectFieldState
 import com.core.presentation.ui.components.form.fields.select.checkbox.model.CheckboxStyleType
 import com.core.presentation.ui.components.form.fields.select.checkbox.model.rememberCheckboxStyle
 import com.core.presentation.ui.components.form.validators.Validators
@@ -45,7 +46,7 @@ import java.net.URL
 @Composable
 fun CheckboxComponent(
     modifier: Modifier,
-    state: CheckboxState,
+    state: SelectFieldState,
     checkboxStyleType: CheckboxStyleType,
     accessibilityStateSelect: AccessibilityState.Select,
     accessibilityStateClick: AccessibilityState.Click,
@@ -87,7 +88,7 @@ fun CheckboxComponent(
                 onValueChange = {
                     if (enabled) {
                         state.change(
-                            select = it
+                            value = true
                         )
                     }
                 }
@@ -156,7 +157,7 @@ fun CheckboxComponent(
                     checkboxStyleHyperlink = checkboxStyleType,
                     onAllLinksClicked = {
                         state.change(
-                            select = true
+                            value = true
                         )
                     }
                 )
@@ -250,8 +251,8 @@ private fun CheckboxComponentLightPreview() {
             CheckboxComponent(
                 modifier = Modifier
                     .safeContentPadding(),
-                state = CheckboxState(
-                    default = true,
+                state = SelectFieldState(
+                    initial = true,
                     validators = listOf(
                         Validators.Required("Prueba")
                     )
@@ -273,8 +274,8 @@ private fun CheckboxComponentLightPreview() {
             CheckboxComponent(
                 modifier = Modifier
                     .safeContentPadding(),
-                state = CheckboxState(
-                    default = true,
+                state = SelectFieldState(
+                    initial = true,
                     validators = listOf(
                         Validators.Required("Prueba")
                     )
@@ -306,8 +307,8 @@ private fun CheckboxComponentDarkPreview() {
         CheckboxComponent(
             modifier = Modifier
                 .safeContentPadding(),
-            state = CheckboxState(
-                default = true,
+            state = SelectFieldState(
+                initial = true,
                 validators = listOf(
                     Validators.Required("Prueba")
                 )

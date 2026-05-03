@@ -6,24 +6,26 @@ import androidx.compose.runtime.setValue
 import com.core.presentation.ui.components.form.fields.BaseFieldState
 import com.core.presentation.ui.components.form.validators.Validators
 
-open class SelectFieldState(initial: Boolean = false, validators: List<Validators> = listOf()) :
-    BaseFieldState<Boolean>(
-        initial = initial,
-        validators = validators,
-        transform = null,
-    ) {
+class SelectFieldState(
+    initial: Boolean,
+    validators: List<Validators>
+) : BaseFieldState<Boolean>(
+    initial = initial,
+    validators = validators,
+    transform = null
+) {
     override var value: Boolean? by mutableStateOf(initial)
 
-    fun change(select: Boolean) {
+    override fun change(value: Boolean) {
         clearError()
-        this.value = select
+        this.value = value
     }
 
     override fun validate(): Boolean {
         val validations = validators.map {
             when (it) {
                 is Validators.Required -> validateRequired(it.message)
-                is Validators.Custom -> validateCustom(it.function, it.message)
+                is Validators.Custom<*> -> validateCustom(it)
                 else -> throw Exception(
                     "${it::class.simpleName} validator cannot be called on checkbox state. Did you mean Validators.Custom?",
                 )
@@ -38,9 +40,14 @@ open class SelectFieldState(initial: Boolean = false, validators: List<Validator
         return valid
     }
 
-    private fun validateCustom(function: (Boolean) -> Boolean, message: String): Boolean {
-        val valid = function(value ?: false)
-        if (!valid) setError(message)
+    private fun validateCustom(validator: Validators.Custom<*>): Boolean {
+        val valid = value?.let {
+            validator.validateGeneric(
+                value = it
+            )
+        } ?: false
+
+        if (!valid) setError(validator.message)
         return valid
     }
 }

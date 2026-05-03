@@ -25,6 +25,7 @@ import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.tooling.preview.Preview
+import com.core.presentation.ui.components.form.fields.select.SelectFieldState
 import com.core.presentation.ui.components.form.fields.select.toggle.model.ToggleStyleType
 import com.core.presentation.ui.components.form.fields.select.toggle.model.rememberToggleStyle
 import com.core.presentation.ui.components.form.validators.Validators
@@ -38,7 +39,7 @@ import com.core.presentation.ui.utils.thenOnNotNull
 @Composable
 fun ToggleComponent(
     modifier: Modifier,
-    state: ToggleState,
+    state: SelectFieldState,
     toggleStyleType: ToggleStyleType,
     accessibilityStateSelect: AccessibilityState.Select,
     accessibilityStateClick: AccessibilityState.Click,
@@ -79,7 +80,9 @@ fun ToggleComponent(
                 role = Role.Switch,
                 onValueChange = {
                     if (enabled) {
-                        state.change(select = it)
+                        state.change(
+                            value = it
+                        )
                     }
                 }
             )
@@ -190,8 +193,8 @@ private fun ToggleComponentLightPreview() {
             ToggleComponent(
                 modifier = Modifier
                     .safeContentPadding(),
-                state = ToggleState(
-                    default = false,
+                state = SelectFieldState(
+                    initial = false,
                     validators = listOf(
                         Validators.Required("Prueba")
                     )
@@ -213,8 +216,8 @@ private fun ToggleComponentLightPreview() {
             ToggleComponent(
                 modifier = Modifier
                     .safeContentPadding(),
-                state = ToggleState(
-                    default = false,
+                state = SelectFieldState(
+                    initial = false,
                     validators = listOf(
                         Validators.Required("Prueba")
                     )
@@ -246,8 +249,8 @@ private fun ToggleComponentDarkPreview() {
         ToggleComponent(
             modifier = Modifier
                 .safeContentPadding(),
-            state = ToggleState(
-                default = false,
+            state = SelectFieldState(
+                initial = false,
                 validators = listOf(
                     Validators.Required("Prueba")
                 )
