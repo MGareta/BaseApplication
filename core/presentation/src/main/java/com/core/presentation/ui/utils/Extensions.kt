@@ -2,8 +2,10 @@ package com.core.presentation.ui.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.offset
 
 @Composable
 fun Dp.dpToPx() = with(LocalDensity.current) { this@dpToPx.toPx() }
@@ -73,3 +75,24 @@ private fun <T : Any> Modifier.thenInternal(
 } ?: run {
     onNull?.let { then(Modifier.it()) }
 }) ?: this
+
+
+fun Modifier.ignoreHorizontalParentPadding(
+    horizontal: Dp
+) = this.layout { measurable, constraints ->
+    val placeable = measurable.measure(
+        constraints = constraints.offset(
+            horizontal = (-horizontal * 2).roundToPx()
+        )
+    )
+
+    layout(
+        width = placeable.width + (-horizontal * 2).roundToPx(),
+        height = placeable.height
+    ) {
+        placeable.place(
+            x = 0 + -horizontal.roundToPx(),
+            y = 0
+        )
+    }
+}
