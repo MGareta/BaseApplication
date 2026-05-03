@@ -14,7 +14,7 @@ abstract class BaseFieldState<T>(
     abstract var value: T?
         internal set
 
-    var errorMessage: String by mutableStateOf(value = "")
+    var errorMessage: String? by mutableStateOf(value = null)
 
     var hasError: Boolean by mutableStateOf(value = false)
 
@@ -25,7 +25,10 @@ abstract class BaseFieldState<T>(
 
     fun clearError() {
         hasError = false
+        errorMessage = null
     }
+
+    abstract fun change(value: T)
 
     abstract fun validate(): Boolean
 
