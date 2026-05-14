@@ -13,6 +13,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -25,6 +26,10 @@ import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.disabled
+import androidx.compose.ui.semantics.error
+import androidx.compose.ui.semantics.hideFromAccessibility
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -63,6 +68,12 @@ fun TextFieldComponent(
     }
 
     val isFocused = interactionSource.collectIsFocusedAsState().value
+    val isError = remember {
+        derivedStateOf {
+            return@derivedStateOf state.hasError
+                    && state.value?.isNotBlank() == true
+        }
+    }
 
     OutlinedTextField(
         modifier = modifier
@@ -85,20 +96,31 @@ fun TextFieldComponent(
                 } else {
                     event.key == Key.Tab
                 }
+            }
+            .semantics(
+                mergeDescendants = true
+            ) {
+                if (isError.value && state.errorMessage != null) {
+                    error(
+                        description = state.errorMessage!!
+                    )
+                }
+
+                if (!enabled) {
+                    disabled()
+                }
             },
         value = state.value ?: "",
         enabled = enabled,
         interactionSource = interactionSource,
-        isError = state.value?.isNotBlank() == true && !isFocused && state.hasError,
+        isError = isError.value && !isFocused,
         shape = RoundedCornerShape(
             size = LocalDimensions.current.dp.radius.radius4,
         ),
-        label = placeholder?.let {
-            {
-                PlaceholderComponent(
-                    placeholder = it,
-                )
-            }
+        label = {
+            PlaceholderComponent(
+                placeholder = placeholder
+            )
         },
         placeholder = null,
         leadingIcon = leadingIcon,
@@ -261,7 +283,10 @@ private fun ErrorComponent(
 ) {
     state.errorMessage?.let {
         Text(
-            modifier = modifier,
+            modifier = modifier
+                .semantics {
+                    hideFromAccessibility()
+                },
             text = it,
             color = LocalPalette.current.contentPalette.error,
             style = LocalTypographies.current.label.medium
@@ -293,7 +318,7 @@ private fun TextFieldComponentLightPreview() {
             },
             validators = listOf(
                 Validators.Required("Required"),
-                Validators.Custom<String>(
+                Validators.Custom(
                     message = "Test input not valid",
                     function = {
                         false
@@ -357,7 +382,7 @@ private fun TextFieldComponentLightPreview() {
                 text = "Test",
                 leadingIcon = android.R.drawable.star_on,
                 trailingIcon = android.R.drawable.star_on,
-                enabled = true,
+                enabled = state.validate(),
                 accessibilityState = AccessibilityState.Click(
                     disabledReason = "The test is not completed"
                 ),
@@ -378,7 +403,7 @@ private fun TextFieldComponentDarkPreview() {
             },
             validators = listOf(
                 Validators.Required("Required"),
-                Validators.Custom<String>(
+                Validators.Custom(
                     message = "Test input not valid",
                     function = {
                         false
