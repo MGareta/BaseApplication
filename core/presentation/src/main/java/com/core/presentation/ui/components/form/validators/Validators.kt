@@ -1,31 +1,31 @@
 package com.core.presentation.ui.components.form.validators
 
-sealed interface Validators {
-    class Required(var message: String) : Validators
+sealed interface Validators<T> {
+    class Required<T>(var message: String) : Validators<T>
 
-    class MinChars(var limit: Int, var message: String) : Validators
+    class MinSize<T>(var limit: Int, val message: (value: T) -> String) : Validators<T>
 
-    class MaxChars(var limit: Int, var message: String) : Validators
+    class MaxSize<T>(val limit: Int, val message: (value: T) -> String) : Validators<T>
 
-    class MinValue(var limit: Double, var message: String) : Validators
+    class MinValue<T>(var limit: Double, val message: (value: T) -> String) : Validators<T>
 
-    class MaxValue(var limit: Double, var message: String) : Validators
+    class MaxValue<T>(var limit: Double, val message: (value: T) -> String) : Validators<T>
 
-    class Equal(var reference: String, var message: String) : Validators
+    class Equal<T>(var reference: String, val message: (value: T) -> String) : Validators<T>
 
-    class Email(var message: String) : Validators
+    class Email<T>(var message: String) : Validators<T>
 
-    class Phone(var message: String) : Validators
+    class Phone<T>(var message: String) : Validators<T>
 
-    class Dni(var message: String) : Validators
+    class Dni<T>(var message: String) : Validators<T>
 
-    class Nie(var message: String) : Validators
+    class Nie<T>(var message: String) : Validators<T>
 
-    class Passport(var message: String) : Validators
+    class Passport<T>(var message: String) : Validators<T>
 
-    class Regex(var regex: String, var message: String) : Validators
+    class Regex<T>(var regex: String, var message: String) : Validators<T>
 
-    data class Custom<T: Any>(var message: String, var function: (value: T) -> Boolean) : Validators {
+    data class Custom<T: Any>(var message: String, var function: (value: T) -> Boolean) : Validators<T> {
         fun validateGeneric(value: Any?): Boolean {
             @Suppress("UNCHECKED_CAST")
             return (value as? T)?.let {

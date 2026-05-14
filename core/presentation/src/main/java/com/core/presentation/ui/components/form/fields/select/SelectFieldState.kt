@@ -8,7 +8,7 @@ import com.core.presentation.ui.components.form.validators.Validators
 
 class SelectFieldState(
     initial: Boolean,
-    validators: List<Validators>
+    validators: List<Validators<Boolean>>
 ) : BaseFieldState<Boolean>(
     initial = initial,
     validators = validators,

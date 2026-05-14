@@ -9,7 +9,7 @@ import com.core.presentation.ui.components.form.validators.Validators
 abstract class BaseFieldState<T>(
     val initial: T?,
     val transform: Transform<T>?,
-    val validators: List<Validators>
+    val validators: List<Validators<T>>
 ) {
     abstract var value: T?
         internal set

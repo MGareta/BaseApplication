@@ -13,7 +13,7 @@ import java.util.regex.Pattern
 class TextFieldState(
     initial: String?,
     transform: Transform<String>,
-    validators: List<Validators>
+    validators: List<Validators<String>>
 ) : BaseFieldState<String>(
     initial = initial,
     transform = transform,
@@ -30,8 +30,8 @@ class TextFieldState(
         validators.forEach {
             val result = when (it) {
                 is Validators.Required -> validateRequired(it.message)
-                is Validators.MinChars -> validateMinChars(it.limit, it.message)
-                is Validators.MaxChars -> validateMaxChars(it.limit, it.message)
+                is Validators.MinSize -> validateMinSize(it.limit, it.message)
+                is Validators.MaxSize -> validateMaxSize(it.limit, it.message)
                 is Validators.MinValue -> validateMinValue(it.limit, it.message)
                 is Validators.MaxValue -> validateMaxValue(it.limit, it.message)
                 is Validators.Equal -> validateEqual(it.reference, it.message)
@@ -58,33 +58,33 @@ class TextFieldState(
         return valid
     }
 
-    private fun validateMinChars(limit: Int, message: String): Boolean {
+    private fun validateMinSize(limit: Int, message: (String) -> String): Boolean {
         val valid = value != null && value!!.length >= limit
-        if (!valid) setError(message)
+        if (!valid) setError(message(value!!))
         return valid
     }
 
-    private fun validateMaxChars(limit: Int, message: String): Boolean {
+    private fun validateMaxSize(limit: Int, message: (String) -> String): Boolean {
         val valid = value != null && value!!.length <= limit
-        if (!valid) setError(message)
+        if (!valid) setError(message(value!!))
         return valid
     }
 
-    private fun validateMinValue(limit: Double, message: String): Boolean {
+    private fun validateMinValue(limit: Double, message: (String) -> String): Boolean {
         val valid = value != null && (value!!.isNumeric() && value!!.toDouble() >= limit)
-        if (!valid) setError(message)
+        if (!valid) setError(message(value!!))
         return valid
     }
 
-    private fun validateMaxValue(limit: Double, message: String): Boolean {
+    private fun validateMaxValue(limit: Double, message: (String) -> String): Boolean {
         val valid = value != null && (value!!.isNumeric() && value!!.toDouble() <= limit)
-        if (!valid) setError(message)
+        if (!valid) setError(message(value!!))
         return valid
     }
 
-    private fun validateEqual(original: String, message: String): Boolean {
+    private fun validateEqual(original: String, message: (String) -> String): Boolean {
         val valid = value != null && value == original
-        if (!valid) setError(message)
+        if (!valid) setError(message(value!!))
         return valid
     }
 
