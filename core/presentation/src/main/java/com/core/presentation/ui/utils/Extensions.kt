@@ -5,7 +5,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.offset
 
 @Composable
 fun Dp.dpToPx() = with(LocalDensity.current) { this@dpToPx.toPx() }
@@ -81,17 +80,17 @@ fun Modifier.ignoreHorizontalParentPadding(
     horizontal: Dp
 ) = this.layout { measurable, constraints ->
     val placeable = measurable.measure(
-        constraints = constraints.offset(
-            horizontal = (-horizontal * 2).roundToPx()
+        constraints = constraints.copy(
+            maxWidth = constraints.maxWidth + 2 * horizontal.roundToPx()
         )
     )
 
     layout(
-        width = placeable.width + (-horizontal * 2).roundToPx(),
+        width = placeable.width,
         height = placeable.height
     ) {
         placeable.place(
-            x = 0 + -horizontal.roundToPx(),
+            x = 0,
             y = 0
         )
     }
