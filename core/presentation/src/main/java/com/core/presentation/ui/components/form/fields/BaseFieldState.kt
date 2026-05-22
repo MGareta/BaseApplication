@@ -1,11 +1,13 @@
 package com.core.presentation.ui.components.form.fields
 
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.core.presentation.ui.components.form.utils.Transform
 import com.core.presentation.ui.components.form.validators.Validators
 
+@Stable
 abstract class BaseFieldState<T>(
     val initial: T?,
     val transform: Transform<T>?,

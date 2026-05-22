@@ -1,5 +1,6 @@
 package com.core.presentation.ui.components.form.fields.input
 
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -10,6 +11,7 @@ import com.core.presentation.ui.components.form.validators.Validators
 import java.util.Arrays
 import java.util.regex.Pattern
 
+@Stable
 class TextFieldState(
     initial: String?,
     transform: Transform<String>,
