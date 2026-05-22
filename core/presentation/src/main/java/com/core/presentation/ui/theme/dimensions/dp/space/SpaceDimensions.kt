@@ -4,6 +4,7 @@ import androidx.compose.ui.unit.dp
 
 data object SpaceDimensions {
     val space0 = 0.dp
+    val space2 = 2.dp
     val space4 = 4.dp
     val space8 = 8.dp
     val space12 = 12.dp
