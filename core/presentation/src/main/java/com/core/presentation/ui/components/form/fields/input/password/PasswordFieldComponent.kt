@@ -13,6 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,6 +35,7 @@ fun PasswordFieldComponent(
     modifier: Modifier,
     state: TextFieldState,
     placeholder: String,
+    helpText: String?,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     enabled: Boolean
@@ -48,6 +50,7 @@ fun PasswordFieldComponent(
         modifier = modifier,
         state = state,
         placeholder = placeholder,
+        helpText = helpText,
         trailingIcon = {
             IconButtonComponent(
                 modifier = Modifier,
@@ -80,7 +83,9 @@ fun PasswordFieldComponent(
         } else {
             PasswordVisualTransformation()
         },
-        keyboardOptions = keyboardOptions,
+        keyboardOptions = keyboardOptions.copy(
+            keyboardType = KeyboardType.Password
+        ),
         keyboardActions = keyboardActions,
         enabled = enabled
     )
@@ -117,6 +122,7 @@ private fun PasswordFieldComponentLightPreview() {
                 modifier = Modifier,
                 state = state,
                 placeholder = "Password",
+                helpText = null,
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Done
                 ),
@@ -173,6 +179,7 @@ private fun PasswordFieldComponentDarkPreview() {
                 modifier = Modifier,
                 state = state,
                 placeholder = "Password",
+                helpText = null,
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Done
                 ),
