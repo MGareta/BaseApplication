@@ -32,6 +32,7 @@ import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.core.presentation.ui.components.button.block.BlockButtonComponent
 import com.core.presentation.ui.components.button.block.model.BlockButtonSizeType
@@ -59,7 +60,9 @@ fun TextFieldComponent(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    enabled: Boolean
+    textAlign: TextAlign = TextAlign.Unspecified,
+    enabled: Boolean,
+    onValueChange: ((String) -> Unit)?= null
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -207,8 +210,11 @@ fun TextFieldComponent(
             disabledSuffixColor = LocalPalette.current.contentPalette.disabled,
             errorSuffixColor = LocalPalette.current.contentPalette.error
         ),
-        textStyle = LocalTypographies.current.body.medium,
-        onValueChange = {
+        textStyle = LocalTypographies.current.body.medium
+            .copy(
+                textAlign = textAlign
+            ),
+        onValueChange = onValueChange ?: {
             state.change(
                 value = it
             )
