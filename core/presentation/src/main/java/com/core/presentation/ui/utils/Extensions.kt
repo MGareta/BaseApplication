@@ -5,6 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
+import java.math.BigDecimal
+import java.math.BigInteger
 
 @Composable
 fun Dp.dpToPx() = with(LocalDensity.current) { this@dpToPx.toPx() }
@@ -75,7 +77,6 @@ private fun <T : Any> Modifier.thenInternal(
     onNull?.let { then(Modifier.it()) }
 }) ?: this
 
-
 fun Modifier.ignoreHorizontalParentPadding(
     horizontal: Dp
 ) = this.layout { measurable, constraints ->
@@ -94,4 +95,17 @@ fun Modifier.ignoreHorizontalParentPadding(
             y = 0
         )
     }
+}
+
+fun String.inputToAmount(
+    fractionDigits: Int
+): BigDecimal {
+    if (this.isEmpty()) {
+        return BigDecimal(0.0)
+    }
+
+    return BigDecimal(
+        BigInteger(this),
+        fractionDigits
+    )
 }
