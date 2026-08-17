@@ -12,4 +12,8 @@ sealed interface AccessibilityState {
         val selected: String,
         val notSelected: String
     ) : AccessibilityState
+
+    data class Description(
+        val description: String
+    )
 }
