@@ -8,4 +8,5 @@
     <string name="accessibility_multiselect_single_unselected">Select one item</string>
     <string name="accessibility_multiselect_limit_status">Selected %1$d of %2$d items</string>
     <string name="accessibility_multiselect_limit_reached">Maximum limit of %1$d items reached</string>
+    <string name="accessibility_step">Step %1$d of %2$d, progress bar</string>
 </resources>
