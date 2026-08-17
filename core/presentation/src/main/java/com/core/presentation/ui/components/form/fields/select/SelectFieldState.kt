@@ -1,11 +1,13 @@
 package com.core.presentation.ui.components.form.fields.select
 
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.core.presentation.ui.components.form.fields.BaseFieldState
 import com.core.presentation.ui.components.form.validators.Validators
 
+@Stable
 class SelectFieldState(
     initial: Boolean,
     validators: List<Validators<Boolean>>

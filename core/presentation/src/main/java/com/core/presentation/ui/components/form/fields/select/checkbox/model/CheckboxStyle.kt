@@ -6,6 +6,7 @@ import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.draw.ShadowScope
@@ -15,6 +16,7 @@ import com.core.presentation.ui.components.button.hyperlink.model.HyperlinkButto
 import com.core.presentation.ui.theme.LocalDimensions
 import com.core.presentation.ui.theme.LocalPalette
 
+@Stable
 sealed interface CheckboxStyleType {
     data class Text(
         val text: String,
@@ -32,6 +34,7 @@ sealed interface CheckboxStyleType {
     ) : CheckboxStyleType
 }
 
+@Stable
 internal data class CheckboxStyle(
     val checkboxMarkColor: Color,
     val checkboxBackgroundColor: Color,
