@@ -50,7 +50,8 @@ fun CheckboxComponent(
     checkboxStyleType: CheckboxStyleType,
     accessibilityStateSelect: AccessibilityState.Select,
     accessibilityStateClick: AccessibilityState.Click,
-    enabled: Boolean
+    enabled: Boolean,
+    onValueChange: ((Boolean) -> Unit)?= null
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -87,9 +88,11 @@ fun CheckboxComponent(
                 role = Role.Checkbox,
                 onValueChange = {
                     if (enabled) {
-                        state.change(
-                            value = true
-                        )
+                        onValueChange?.invoke(it) ?: {
+                            state.change(
+                                value = it
+                            )
+                        }
                     }
                 }
             )
