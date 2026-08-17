@@ -11,6 +11,7 @@ import androidx.compose.ui.semantics.CollectionInfo
 import androidx.compose.ui.semantics.CollectionItemInfo
 import androidx.compose.ui.semantics.collectionInfo
 import androidx.compose.ui.semantics.collectionItemInfo
+import androidx.compose.ui.semantics.selectableGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 
@@ -26,6 +27,8 @@ fun NonLazyGridComponent(
     Column(
         modifier = modifier
             .semantics {
+                selectableGroup()
+
                 collectionInfo = CollectionInfo(
                     rowCount = (itemCount + columns - 1) / columns,
                     columnCount = columns
@@ -55,15 +58,17 @@ fun NonLazyGridComponent(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .weight(1f)
+                            .weight(
+                                weight = 1F
+                            )
                             .semantics(
                                 mergeDescendants = true
                             ) {
                                 collectionItemInfo = CollectionItemInfo(
                                     rowIndex = rowId,
-                                    rowSpan = 0,
+                                    rowSpan = 1,
                                     columnIndex = columnId,
-                                    columnSpan = 0,
+                                    columnSpan = 1,
                                 )
                             },
                     ) {
