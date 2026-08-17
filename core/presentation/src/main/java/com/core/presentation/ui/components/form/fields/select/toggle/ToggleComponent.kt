@@ -43,7 +43,8 @@ fun ToggleComponent(
     toggleStyleType: ToggleStyleType,
     accessibilityStateSelect: AccessibilityState.Select,
     accessibilityStateClick: AccessibilityState.Click,
-    enabled: Boolean
+    enabled: Boolean,
+    onValueChange: ((Boolean) -> Unit)?= null
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -80,9 +81,11 @@ fun ToggleComponent(
                 role = Role.Switch,
                 onValueChange = {
                     if (enabled) {
-                        state.change(
-                            value = it
-                        )
+                        onValueChange?.invoke(it) ?: {
+                            state.change(
+                                value = it
+                            )
+                        }
                     }
                 }
             )
