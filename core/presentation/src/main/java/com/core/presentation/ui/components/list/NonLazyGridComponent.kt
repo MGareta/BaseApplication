@@ -7,6 +7,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.CollectionInfo
+import androidx.compose.ui.semantics.CollectionItemInfo
+import androidx.compose.ui.semantics.collectionInfo
+import androidx.compose.ui.semantics.collectionItemInfo
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 
 @Composable
@@ -19,7 +24,13 @@ fun NonLazyGridComponent(
     content: @Composable (Int) -> Unit,
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier
+            .semantics {
+                collectionInfo = CollectionInfo(
+                    rowCount = (itemCount + columns - 1) / columns,
+                    columnCount = columns
+                )
+            },
         verticalArrangement = Arrangement.spacedBy(
             space = verticalSpacing,
         ),
@@ -44,7 +55,17 @@ fun NonLazyGridComponent(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .weight(1f),
+                            .weight(1f)
+                            .semantics(
+                                mergeDescendants = true
+                            ) {
+                                collectionItemInfo = CollectionItemInfo(
+                                    rowIndex = rowId,
+                                    rowSpan = 0,
+                                    columnIndex = columnId,
+                                    columnSpan = 0,
+                                )
+                            },
                     ) {
                         if (index < itemCount) {
                             content(index)
