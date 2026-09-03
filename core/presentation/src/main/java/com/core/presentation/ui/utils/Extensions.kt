@@ -1,5 +1,6 @@
 package com.core.presentation.ui.utils
 
+import android.icu.text.DecimalFormatSymbols
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layout
@@ -7,6 +8,10 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import java.math.BigDecimal
 import java.math.BigInteger
+import java.math.RoundingMode
+import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.Locale
 
 @Composable
 fun Dp.dpToPx() = with(LocalDensity.current) { this@dpToPx.toPx() }
@@ -108,4 +113,48 @@ fun String.inputToAmount(
         BigInteger(this),
         fractionDigits
     )
+}
+
+internal fun Number?.splitByDecimalSeparator(
+    fractionDigits: Int?,
+    positivePrefix: String? = null,
+    locale: Locale = Locale.getDefault()
+): Pair<String, String?> {
+    val numberFormatter = NumberFormat.getInstance(locale).apply {
+        this.minimumFractionDigits = fractionDigits
+            ?: currency?.defaultFractionDigits ?: 2
+        this.maximumFractionDigits = fractionDigits
+            ?: currency?.defaultFractionDigits ?: 2
+        this.roundingMode = RoundingMode.DOWN
+    } as DecimalFormat
+
+    if (this == null) {
+        return Pair(
+            first = "-".repeat(
+                n = 3
+            ),
+            second = numberFormatter.decimalFormatSymbols.decimalSeparator
+                .plus(
+                    other = "-".repeat(
+                        n = numberFormatter.maximumFractionDigits
+                    )
+                )
+        )
+    }
+
+    val number = numberFormatter.apply {
+        this.positivePrefix = positivePrefix ?: ""
+    }.format(this.toDouble())
+
+    val decimalSeparator = DecimalFormatSymbols.getInstance(locale).decimalSeparator
+    val separator = number.indexOf(char = decimalSeparator)
+
+    if (separator < 0) {
+        return Pair(number, null)
+    }
+
+    val integerPart = number.substring(startIndex = 0, endIndex = separator)
+    val decimalPart = number.substring(startIndex = separator)
+
+    return Pair(integerPart, decimalPart)
 }
