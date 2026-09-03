@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="accessibility_close">Close</string>
     <string name="show_password">Show password</string>
     <string name="hide_password">Hide password</string>
     <string name="max_chars">%s of %s</string>
@@ -9,5 +10,5 @@
     <string name="accessibility_multiselect_limit_status">Selected %1$d of %2$d items</string>
     <string name="accessibility_multiselect_limit_reached">Maximum limit of %1$d items reached</string>
     <string name="accessibility_step">Step %1$d of %2$d, progress bar</string>
-    <string name="accessibility_close">Close</string>
+    <string name="accessibility_amount_empty">Amount not available</string>
 </resources>
