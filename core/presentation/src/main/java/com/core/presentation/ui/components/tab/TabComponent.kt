@@ -1,148 +1,183 @@
 package com.core.presentation.ui.components.tab
 
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.zIndex
-import com.core.presentation.ui.components.tab.model.Tab
+import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import com.core.presentation.ui.components.tab.model.TabStyleType
+import com.core.presentation.ui.components.tab.model.rememberTabStyle
 import com.core.presentation.ui.theme.LocalDimensions
 import com.core.presentation.ui.theme.LocalPalette
 import com.core.presentation.ui.theme.LocalTypographies
+import com.core.presentation.ui.theme.Theme
 
 @Composable
-fun <T> TabComponent(modifier: Modifier, tabs: List<Tab<T>>, selectedTab: Tab<T>, onTabSelected: (Tab<T>) -> Unit) {
-    val tabSelected = remember(selectedTab) {
-        val indexOfSelectedTab = try {
-            val index = tabs.indexOf(selectedTab)
-            index.takeIf { it >= 0 } ?: 0
-        } catch (exception: Exception) {
-            0
-        }
-
-        indexOfSelectedTab
+fun <TAB : Enum<TAB>> TabComponent(
+    modifier: Modifier,
+    tabs: Map<TAB, TabStyleType>,
+    currentTab: TAB,
+    content: @Composable (TAB) -> Unit
+) {
+    val tabsKeys = remember(
+        key1 = tabs
+    ) {
+        tabs.keys.toList()
     }
 
-    val tabHeight = LocalDimensions.current.dp.dp52
-    val tabIndicatorBorderRadius = LocalDimensions.current.dp.dp2
-    val tabSelectedColor = LocalPalette.current.backgroundPalette.accent
-    val tabSelectedContentColor = LocalPalette.current.contentPalette.alwaysLight
-    val tabUnselectedContentColor = LocalPalette.current.contentPalette.accent
+    var selectedTab by remember {
+        mutableIntStateOf(
+            value = tabs.keys.indexOf(
+                element = currentTab
+            )
+        )
+    }
 
     Column(
-        modifier = modifier,
+        modifier = modifier
+            .semantics {
+                isTraversalGroup = true
+            }
     ) {
-        BoxWithConstraints(
+        PrimaryTabRow(
             modifier = Modifier
                 .fillMaxWidth(),
-        ) {
-            val indicatorHeight = remember {
-                tabHeight
-            }
-
-            val indicatorWidth = remember {
-                (maxWidth / tabs.size)
-            }
-
-            val roundedCornerShape = remember(tabSelected) {
-                when (tabSelected) {
-                    0 -> RoundedCornerShape(
-                        topEnd = tabIndicatorBorderRadius,
-                    )
-
-                    tabs.size -> RoundedCornerShape(
-                        topStart = tabIndicatorBorderRadius,
-                    )
-
-                    else -> RoundedCornerShape(
-                        topStart = tabIndicatorBorderRadius,
-                        topEnd = tabIndicatorBorderRadius,
-                    )
-                }
-            }
-
-            TabRow(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(
-                        height = tabHeight,
-                    ),
-                selectedTabIndex = tabSelected,
-                containerColor = Color.Transparent,
-                contentColor = Color.Transparent,
-                indicator = {
+            selectedTabIndex = selectedTab,
+            contentColor = LocalPalette.current.contentPalette.primary,
+            containerColor = Color.Transparent,
+            indicator = {
+                if (selectedTab in tabsKeys.indices) {
                     TabRowDefaults.PrimaryIndicator(
-                        modifier = Modifier
-                            .zIndex(-1f)
-                            .tabIndicatorOffset(currentTabPosition = it[tabSelected]),
-                        width = indicatorWidth,
-                        height = indicatorHeight,
-                        color = tabSelectedColor,
-                        shape = roundedCornerShape,
+                        modifier = Modifier.tabIndicatorOffset(
+                            selectedTabIndex = selectedTab,
+                            matchContentSize = false
+                        ),
+                        color = LocalPalette.current.contentPalette.accent,
+                        width = Dp.Unspecified,
                     )
-                },
-                divider = {},
-            ) {
-                tabs.forEach { tab ->
-                    Tab(
-                        modifier = Modifier
-                            .height(
-                                height = tabHeight,
-                            ),
-                        text = {
+                }
+            }
+        ) {
+            tabsKeys.forEachIndexed { index, tab ->
+                val tabStyle = rememberTabStyle(
+                    tabStyleType = tabs.getValue(
+                        key = tab
+                    )
+                )
+
+                Tab(
+                    selected = index == selectedTab,
+                    text = {
+                        tabStyle.text?.let {
                             Text(
-                                text = tab.title.text,
-                                textAlign = TextAlign.Center,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis,
-                                color = if (tab == selectedTab) {
-                                    tabSelectedContentColor
+                                text = it,
+                                color = if (index == selectedTab) {
+                                    LocalPalette.current.contentPalette.accent
                                 } else {
-                                    tabUnselectedContentColor
+                                    LocalPalette.current.contentPalette.primary
                                 },
-                                style = LocalTypographies.current.mid.l,
+                                style = LocalTypographies.current.body.medium
                             )
-                        },
-                        icon = tab.title.icon?.let {
-                            {
-                                Icon(
-                                    painter = painterResource(id = it),
-                                    tint = if (tab == selectedTab) {
-                                        tabSelectedContentColor
-                                    } else {
-                                        tabUnselectedContentColor
-                                    },
-                                    contentDescription = tab.title.text,
-                                )
-                            }
-                        },
-                        selected = tab == selectedTab,
-                        selectedContentColor = tabSelectedContentColor,
-                        unselectedContentColor = tabUnselectedContentColor,
-                        onClick = {
-                            onTabSelected(tab)
-                        },
+                        }
+                    },
+                    icon = {
+                        tabStyle.icon?.let {
+                            Icon(
+                                modifier = Modifier
+                                    .size(
+                                        size = LocalDimensions.current.dp.target.target24
+                                    ),
+                                painter = painterResource(
+                                    id = it
+                                ),
+                                tint = if (index == selectedTab) {
+                                    LocalPalette.current.contentPalette.accent
+                                } else {
+                                    LocalPalette.current.contentPalette.primary
+                                },
+                                contentDescription = null
+                            )
+                        }
+                    },
+                    onClick = {
+                        selectedTab = index
+                    }
+                )
+            }
+        }
+
+        content(
+            tabs.keys.elementAt(
+                index = selectedTab
+            )
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun TabComponentPreview() {
+    Theme {
+        val tabs = remember {
+            PreviewTabs.entries.associateWith {
+                when (it) {
+                    PreviewTabs.TAB_1 -> TabStyleType.IconText(
+                        icon = android.R.drawable.star_on,
+                        text = "Tab 1"
+                    )
+
+                    PreviewTabs.TAB_2 -> TabStyleType.Icon(
+                        icon = android.R.drawable.star_on
+                    )
+
+                    PreviewTabs.TAB_3 -> TabStyleType.Text(
+                        text = "Tab 3"
                     )
                 }
             }
         }
 
-        with(tabs[tabSelected]) {
-            content(data)
-        }
+        TabComponent(
+            modifier = Modifier
+                .safeContentPadding(),
+            tabs = tabs,
+            currentTab = tabs.keys.first(),
+            content = {
+                when (it) {
+                    PreviewTabs.TAB_1 -> Text(
+                        text = "Tab 1"
+                    )
+                    PreviewTabs.TAB_2 -> Text(
+                        text = "Tab 2"
+                    )
+                    PreviewTabs.TAB_3 -> Text(
+                        text = "Tab 3"
+                    )
+                }
+            }
+        )
     }
+}
+
+
+private enum class PreviewTabs {
+    TAB_1,
+    TAB_2,
+    TAB_3
 }
