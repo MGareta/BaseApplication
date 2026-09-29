@@ -4,7 +4,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
-import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -44,7 +43,6 @@ internal fun rememberToggleStyle(
 ): ToggleStyle {
     val isHovered by interactionSource.collectIsHoveredAsState()
     val isFocused by interactionSource.collectIsFocusedAsState()
-    val isPressed by interactionSource.collectIsPressedAsState()
 
     val palette = LocalPalette.current
     val dimensions = LocalDimensions.current
@@ -54,7 +52,6 @@ internal fun rememberToggleStyle(
         enabled,
         isHovered,
         isFocused,
-        isPressed,
         palette,
         dimensions
     ) {
