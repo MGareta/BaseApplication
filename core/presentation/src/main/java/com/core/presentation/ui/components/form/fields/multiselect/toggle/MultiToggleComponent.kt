@@ -128,7 +128,7 @@ fun MultiToggleComponent(
                         ).also {
                             state.change(
                                 value = mutableListOf(selectableState)
-                                    .takeIf { i ->
+                                    .takeIf {
                                         result
                                     } ?: mutableListOf()
                             )
