@@ -14,6 +14,7 @@ import androidx.compose.ui.semantics.collectionItemInfo
 import androidx.compose.ui.semantics.selectableGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
+import com.core.presentation.ui.utils.thenOnTrue
 
 @Composable
 fun NonLazyGridComponent(
@@ -61,15 +62,17 @@ fun NonLazyGridComponent(
                             .weight(
                                 weight = 1F
                             )
-                            .semantics(
-                                mergeDescendants = true
+                            .thenOnTrue(
+                                condition = index < itemCount
                             ) {
-                                collectionItemInfo = CollectionItemInfo(
-                                    rowIndex = rowId,
-                                    rowSpan = 1,
-                                    columnIndex = columnId,
-                                    columnSpan = 1,
-                                )
+                                Modifier.semantics {
+                                    collectionItemInfo = CollectionItemInfo(
+                                        rowIndex = rowId,
+                                        rowSpan = 1,
+                                        columnIndex = columnId,
+                                        columnSpan = 1,
+                                    )
+                                }
                             },
                     ) {
                         if (index < itemCount) {
