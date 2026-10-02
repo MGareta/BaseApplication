@@ -1,5 +1,7 @@
 package com.core.presentation.ui.components.form.validators
 
+import java.util.Calendar
+
 sealed interface Validators<T> {
     class Required<T>(var message: String) : Validators<T>
 
@@ -10,6 +12,10 @@ sealed interface Validators<T> {
     class MinValue<T>(var limit: Double, val message: (value: T) -> String) : Validators<T>
 
     class MaxValue<T>(var limit: Double, val message: (value: T) -> String) : Validators<T>
+
+    class MinDate<T>(var limit: Calendar, val message: (value: T) -> String) : Validators<T>
+
+    class MaxDate<T>(var limit: Calendar, val message: (value: T) -> String) : Validators<T>
 
     class Equal<T>(var reference: String, val message: (value: T) -> String) : Validators<T>
 

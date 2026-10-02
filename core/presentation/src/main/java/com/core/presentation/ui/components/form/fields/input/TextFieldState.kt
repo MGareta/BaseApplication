@@ -44,6 +44,9 @@ class TextFieldState(
                 is Validators.Passport -> validatePassport(it.message)
                 is Validators.Regex -> validateRegex(it.regex, it.message)
                 is Validators.Custom<*> -> validateCustom(it)
+                else -> throw Exception(
+                    "${it::class.simpleName} validator cannot be called on date state. Did you mean Validators.Custom?",
+                )
             }
 
             if (!result) {
