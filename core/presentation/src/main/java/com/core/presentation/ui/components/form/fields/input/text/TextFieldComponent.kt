@@ -62,6 +62,7 @@ fun TextFieldComponent(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     textAlign: TextAlign = TextAlign.Unspecified,
     enabled: Boolean,
+    readOnly: Boolean = false,
     onValueChange: ((String) -> Unit)?= null
 ) {
     val focusManager = LocalFocusManager.current
@@ -115,6 +116,7 @@ fun TextFieldComponent(
             },
         value = state.value ?: "",
         enabled = enabled,
+        readOnly = readOnly,
         interactionSource = interactionSource,
         isError = isError.value && !isFocused,
         shape = RoundedCornerShape(
