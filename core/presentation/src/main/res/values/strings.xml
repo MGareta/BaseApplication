@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
     <string name="accessibility_close">Close</string>
     <string name="show_password">Show password</string>
     <string name="hide_password">Hide password</string>
@@ -11,4 +13,8 @@
     <string name="accessibility_multiselect_limit_reached">Maximum limit of %1$d items reached</string>
     <string name="accessibility_step">Step %1$d of %2$d, progress bar</string>
     <string name="accessibility_amount_empty">Amount not available</string>
+    <string name="accessibility_select_date">Select a date</string>
+    <string name="accessibility_select_ranges_dates">Select a range of date</string>
+    <string name="accessibility_from">From, %1$s</string>
+    <string name="accessibility_to">To, %1$s</string>
 </resources>
