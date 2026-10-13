@@ -41,13 +41,18 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.tooling.preview.Preview
 import com.core.presentation.navigation3.model.graph.type.INavigationGraphBottomNavBar
 import com.core.presentation.ui.components.bottomnavbar.scrollconnection.BottomNavBarScrollConnection
+import com.core.presentation.ui.components.bottomnavbar.scrollconnection.utils.rememberBottomNavBarScrollConnection
 import com.core.presentation.ui.theme.LocalDimensions
 import com.core.presentation.ui.theme.LocalPalette
 import com.core.presentation.ui.theme.LocalTypographies
+import com.core.presentation.ui.theme.Theme
 import com.core.presentation.ui.utils.BorderIndication
 import com.core.presentation.ui.utils.thenOnTrue
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun BottomNavBarComponent(
@@ -309,5 +314,49 @@ private fun BottomNavBarFabsComponent(
                 )
             }
 
+    }
+}
+
+@Preview
+@Composable
+private fun BottomNavBarComponentPreview() {
+    Theme {
+        val navGraphs = remember {
+            setOf(
+                object : INavigationGraphBottomNavBar {
+                    override val order: Int
+                        get() = 0
+                    override val icon: Int
+                        get() = android.R.drawable.star_on
+                    override val label: String
+                        get() = "Test"
+                    override val notificationCount: StateFlow<Int>
+                        get() = flowOf(0) as StateFlow<Int>
+                    override val isFab: Boolean
+                        get() = false
+                },
+                object : INavigationGraphBottomNavBar {
+                    override val order: Int
+                        get() = 1
+                    override val icon: Int
+                        get() = android.R.drawable.star_on
+                    override val label: String
+                        get() = "Test"
+                    override val notificationCount: StateFlow<Int>
+                        get() = flowOf(0) as StateFlow<Int>
+                    override val isFab: Boolean
+                        get() = true
+                }
+            )
+        }
+        
+        BottomNavBarComponent(
+            modifier = Modifier,
+            bottomNavGraphs = navGraphs,
+            selectedNavGraph = navGraphs.first(),
+            scrollConnection = rememberBottomNavBarScrollConnection(),
+            onTabSelected = {
+            }
+        )
     }
 }
