@@ -7,4 +7,5 @@ data object BorderDimensions {
     val border1 = 1.dp
     val border2 = 2.dp
     val border3 = 3.dp
+    val border8 = 8.dp
 }
