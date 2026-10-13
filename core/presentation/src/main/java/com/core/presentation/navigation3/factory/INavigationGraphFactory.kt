@@ -2,9 +2,10 @@ package com.core.presentation.navigation3.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.navigation3.runtime.EntryProviderScope
+import com.core.presentation.navigation3.model.destination.INavigationDestination
 import com.core.presentation.navigation3.model.entry.INavigationEntry
 import com.core.presentation.navigation3.model.graph.INavigationGraph
-import com.core.presentation.navigation3.model.destination.INavigationDestination
+import com.core.presentation.navigation3.model.graph.type.INavigationGraphBottomNavBar
 
 /**
  * A central registry and orchestrator for managing the application's navigation hierarchy.
@@ -66,6 +67,8 @@ interface INavigationGraphFactory {
      */
     val navigationGraphLauncher: Map.Entry<INavigationGraph, Set<INavigationEntry<INavigationDestination, ViewModel>>>
 
+    val navigationGraphBottomNavBar: Set<INavigationGraphBottomNavBar>
+
     /**
      * Registers all navigation graphs and their respective destinations into the provided
      * [EntryProviderScope].
@@ -81,4 +84,8 @@ interface INavigationGraphFactory {
     fun register(
         scope: EntryProviderScope<INavigationDestination>
     )
+
+    fun getNavigationGraphFromDestination(
+        destination: INavigationDestination
+    ): INavigationGraph
 }

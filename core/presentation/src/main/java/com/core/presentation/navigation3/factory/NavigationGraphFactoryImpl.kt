@@ -5,12 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.scene.DialogSceneStrategy
-import com.core.presentation.navigation3.model.entry.INavigationEntry
-import com.core.presentation.navigation3.model.graph.INavigationGraph
 import com.core.presentation.navigation3.model.destination.INavigationDestination
+import com.core.presentation.navigation3.model.entry.INavigationEntry
 import com.core.presentation.navigation3.model.entry.scenes.BottomSheetSceneStrategy
 import com.core.presentation.navigation3.model.entry.type.INavigationEntryBottomSheet
 import com.core.presentation.navigation3.model.entry.type.INavigationEntryDialog
+import com.core.presentation.navigation3.model.graph.INavigationGraph
+import com.core.presentation.navigation3.model.graph.type.INavigationGraphBottomNavBar
 import com.core.presentation.navigation3.model.graph.type.INavigationGraphLauncher
 
 /**
@@ -87,7 +88,7 @@ internal class NavigationGraphFactoryImpl(
      * @throws IllegalStateException if the launcher graph is missing or duplicated.
      */
     override val navigationGraphLauncher: Map.Entry<INavigationGraph, Set<INavigationEntry<INavigationDestination, ViewModel>>> by lazy {
-        val launcherGraphs =  navigationGraphsWithDestinations.entries.filter {
+        val launcherGraphs = navigationGraphsWithDestinations.entries.filter {
             it.key is INavigationGraphLauncher
         }
 
@@ -101,6 +102,12 @@ internal class NavigationGraphFactoryImpl(
         }
 
         launcherGraphs.first()
+    }
+
+    override val navigationGraphBottomNavBar: Set<INavigationGraphBottomNavBar> by lazy {
+        navigationGraphsWithDestinations.keys.filter {
+            it is INavigationGraphBottomNavBar
+        }.toSet() as Set<INavigationGraphBottomNavBar>
     }
 
     /**
@@ -152,5 +159,15 @@ internal class NavigationGraphFactoryImpl(
                 }
             )
         }
+    }
+
+    override fun getNavigationGraphFromDestination(
+        destination: INavigationDestination
+    ): INavigationGraph {
+        return navigationGraphsWithDestinations.entries.firstOrNull { (graph, entries) ->
+            entries.any { entry ->
+                entry.destination == destination::class
+            }
+        }?.key ?: throw IllegalArgumentException("Invalid destination")
     }
 }
