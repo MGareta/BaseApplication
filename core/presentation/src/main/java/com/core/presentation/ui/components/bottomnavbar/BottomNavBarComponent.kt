@@ -22,13 +22,14 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.innerShadow
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -43,14 +44,13 @@ import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import com.core.presentation.navigation3.model.graph.type.INavigationGraphBottomNavBar
+import com.core.presentation.ui.components.bottomnavbar.model.rememberBottomNavBarStyle
 import com.core.presentation.ui.components.bottomnavbar.scrollconnection.BottomNavBarScrollConnection
 import com.core.presentation.ui.components.bottomnavbar.scrollconnection.utils.rememberBottomNavBarScrollConnection
 import com.core.presentation.ui.theme.LocalDimensions
 import com.core.presentation.ui.theme.LocalPalette
 import com.core.presentation.ui.theme.LocalTypographies
 import com.core.presentation.ui.theme.Theme
-import com.core.presentation.ui.utils.BorderIndication
-import com.core.presentation.ui.utils.thenOnTrue
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flowOf
 
@@ -165,27 +165,21 @@ private fun BottomNavBarTabsComponent(
     ) {
         bottomNavGraphs
             .forEach {
+                val bottomNavBarStyle = rememberBottomNavBarStyle(
+                    isSelected = it == selectedNavGraph
+                )
+
                 Column(
                     modifier = Modifier
                         .weight(
                             weight = 1F
                         )
-                        .thenOnTrue(
-                            condition = it == selectedNavGraph,
-                            block = {
-                                Modifier
-                                    .background(
-                                        color = LocalPalette.current.backgroundPalette.accent,
-                                        shape = CircleShape
-                                    )
-                                    .innerShadow(
-                                        shape = CircleShape,
-                                        shadow = Shadow(
-                                            radius = LocalDimensions.current.dp.radius.radius8,
-                                            color = LocalPalette.current.backgroundPalette.base
-                                        )
-                                    )
-                            }
+                        .padding(
+                            all = LocalDimensions.current.dp.space.space4
+                        )
+                        .background(
+                            color = bottomNavBarStyle.backgroundColor,
+                            shape = CircleShape
                         )
                         .clip(
                             shape = CircleShape
@@ -195,11 +189,7 @@ private fun BottomNavBarTabsComponent(
                             interactionSource = remember {
                                 MutableInteractionSource()
                             },
-                            indication = BorderIndication(
-                                borderColor = LocalPalette.current.borderPalette.onAccent,
-                                strokeWidth = LocalDimensions.current.dp.border.border8,
-                                shape = CircleShape
-                            ),
+                            indication = bottomNavBarStyle.indication,
                             role = Role.Tab,
                             onClick = {
                                 onTabSelected(it)
@@ -207,9 +197,9 @@ private fun BottomNavBarTabsComponent(
                         )
                         .padding(
                             vertical = if (isInline) {
-                                LocalDimensions.current.dp.space.space4
+                                LocalDimensions.current.dp.space.space2
                             } else {
-                                LocalDimensions.current.dp.space.space8
+                                LocalDimensions.current.dp.space.space4
                             }
                         )
                         .semantics {
@@ -239,6 +229,7 @@ private fun BottomNavBarTabsComponent(
                                     hideFromAccessibility()
                                 },
                             text = it.label,
+                            color = bottomNavBarStyle.contentColor,
                             style = LocalTypographies.current.body.small
                         )
                     }
@@ -263,6 +254,10 @@ private fun BottomNavBarFabsComponent(
     ) {
         bottomNavGraphs
             .forEach {
+                val bottomNavBarStyle = rememberBottomNavBarStyle(
+                    isSelected = false
+                )
+
                 Icon(
                     modifier = Modifier
                         .fillMaxHeight()
@@ -274,16 +269,12 @@ private fun BottomNavBarFabsComponent(
                             shape = CircleShape
                         )
                         .background(
-                            color = LocalPalette.current.backgroundPalette.base,
+                            color = bottomNavBarStyle.backgroundColor,
                             shape = CircleShape
                         )
                         .clickable(
                             interactionSource = remember { MutableInteractionSource() },
-                            indication = BorderIndication(
-                                borderColor = LocalPalette.current.borderPalette.onAccent,
-                                strokeWidth = LocalDimensions.current.dp.border.border8,
-                                shape = CircleShape
-                            ),
+                            indication = bottomNavBarStyle.indication,
                             role = Role.Button,
                             onClick = {
                                 onTabSelected(it)
@@ -310,6 +301,7 @@ private fun BottomNavBarFabsComponent(
                     painter = painterResource(
                         id = it.icon
                     ),
+                    tint = bottomNavBarStyle.contentColor,
                     contentDescription = it.label
                 )
             }
@@ -337,6 +329,18 @@ private fun BottomNavBarComponentPreview() {
                 },
                 object : INavigationGraphBottomNavBar {
                     override val order: Int
+                        get() = 0
+                    override val icon: Int
+                        get() = android.R.drawable.star_on
+                    override val label: String
+                        get() = "Test"
+                    override val notificationCount: StateFlow<Int>
+                        get() = flowOf(0) as StateFlow<Int>
+                    override val isFab: Boolean
+                        get() = false
+                },
+                object : INavigationGraphBottomNavBar {
+                    override val order: Int
                         get() = 1
                     override val icon: Int
                         get() = android.R.drawable.star_on
@@ -349,13 +353,20 @@ private fun BottomNavBarComponentPreview() {
                 }
             )
         }
-        
+
+        var selectedNavGraph by remember {
+            mutableStateOf(
+                value = navGraphs.first()
+            )
+        }
+
         BottomNavBarComponent(
             modifier = Modifier,
             bottomNavGraphs = navGraphs,
-            selectedNavGraph = navGraphs.first(),
+            selectedNavGraph = selectedNavGraph,
             scrollConnection = rememberBottomNavBarScrollConnection(),
             onTabSelected = {
+                selectedNavGraph = it
             }
         )
     }
