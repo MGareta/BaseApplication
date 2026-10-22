@@ -2,6 +2,7 @@
 <resources>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="accessibility_Back">Back</string>
     <string name="accessibility_close">Close</string>
     <string name="show_password">Show password</string>
     <string name="hide_password">Hide password</string>
