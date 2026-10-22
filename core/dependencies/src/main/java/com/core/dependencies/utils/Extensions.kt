@@ -1,6 +1,8 @@
 package com.core.dependencies.utils
 
-import com.android.build.gradle.TestedExtension
+import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.dsl.CommonExtension
+import com.android.build.api.dsl.LibraryExtension
 import com.core.dependencies.config.Config
 import dev.detekt.gradle.Detekt
 import dev.detekt.gradle.extensions.DetektExtension
@@ -10,20 +12,42 @@ import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.invoke
 import org.gradle.kotlin.dsl.withType
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 
 val Project.coreLibs
     get(): VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("coreLibs")
 
-fun Project.defaultConfiguration(extension: TestedExtension) {
+fun Project.defaultConfiguration(extension: ApplicationExtension) {
     extension.apply {
-        compileSdkVersion(Config.android.compileSdkVersion)
+        compileSdk { version = release(Config.android.compileSdkVersion) }
 
         defaultConfig {
             minSdk = Config.android.minSdkVersion
             targetSdk = Config.android.targetSdkVersion
+
+            namespace = Config.android.nameSpace
+        }
+
+        compileOptions {
+            sourceCompatibility = Config.jvm.javaVersion
+            targetCompatibility = Config.jvm.javaVersion
+        }
+
+        kotlinExtension.apply {
+            jvmToolchain(Config.jvm.kotlinJvm.target.toInt())
+        }
+    }
+}
+
+fun Project.defaultConfiguration(extension: LibraryExtension) {
+    extension.apply {
+        compileSdk { version = release(Config.android.compileSdkVersion) }
+
+        defaultConfig {
+            minSdk = Config.android.minSdkVersion
+//            targetSdk = Config.android.targetSdkVersion
 
             namespace = Config.android.nameSpace
         }
@@ -76,7 +100,7 @@ fun Project.configureDetekt() {
     }
 }
 
-fun TestedExtension.configureBuildTypes() {
+fun CommonExtension.configureBuildTypes() {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
@@ -89,13 +113,11 @@ fun TestedExtension.configureBuildTypes() {
     }
 }
 
-fun TestedExtension.configurePackaging() {
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-            merges += "META-INF/LICENSE.md"
-            merges += "META-INF/LICENSE-notice.md"
-        }
+fun CommonExtension.configurePackaging() {
+    packaging.resources {
+        excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        excludes += "META-INF/LICENSE.md"
+        excludes += "META-INF/LICENSE-notice.md"
     }
 }
 
@@ -105,9 +127,9 @@ fun DependencyHandler.implementation(dependencyNotation: Any): Dependency? = add
 
 fun DependencyHandler.api(dependencyNotation: Any): Dependency? = add("api", dependencyNotation)
 
-fun DependencyHandler.testApi(dependencyNotation: Any): Dependency? = add("testApi", dependencyNotation)
+fun DependencyHandler.testImplementation(dependencyNotation: Any): Dependency? = add("testImplementation", dependencyNotation)
 
-fun DependencyHandler.androidTestApi(dependencyNotation: Any): Dependency? = add("androidTestApi", dependencyNotation)
+fun DependencyHandler.testFixturesApi(dependencyNotation: Any): Dependency? = add("testFixturesApi", dependencyNotation)
 
 fun DependencyHandler.debugApi(dependencyNotation: Any): Dependency? = add("debugImplementation", dependencyNotation)
 
