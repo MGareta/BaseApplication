@@ -114,7 +114,10 @@ abstract class BaseActivity : ComponentActivity() {
                             modifier = Modifier
                                 .fillMaxSize(),
                             backStack = navigationGraphManager.get().backStack,
-                            sceneStrategy = bottomSheetStrategy then dialogStrategy,
+                            sceneStrategies = listOf(
+                                bottomSheetStrategy,
+                                dialogStrategy
+                            ),
                             entryDecorators = listOf(
                                 rememberSaveableStateHolderNavEntryDecorator(),
                                 rememberSharedViewModelStoreNavEntryDecorator(
