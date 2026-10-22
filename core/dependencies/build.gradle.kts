@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
     `kotlin-dsl`
@@ -13,7 +13,7 @@ java {
 
 kotlin {
     compilerOptions {
-        jvmTarget = JvmTarget.JVM_21
+        languageVersion = KotlinVersion.KOTLIN_2_4
     }
 }
 
