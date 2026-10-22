@@ -19,9 +19,12 @@ import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 val Project.coreLibs
     get(): VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("coreLibs")
 
+@Suppress("UnstableApiUsage")
 fun Project.defaultConfiguration(extension: ApplicationExtension) {
     extension.apply {
-        compileSdk { version = release(Config.android.compileSdkVersion) }
+        compileSdk {
+            version = release(Config.android.compileSdkVersion)
+        }
 
         defaultConfig {
             minSdk = Config.android.minSdkVersion
@@ -35,19 +38,25 @@ fun Project.defaultConfiguration(extension: ApplicationExtension) {
             targetCompatibility = Config.jvm.javaVersion
         }
 
+        testFixtures {
+            enable = true
+        }
+
         kotlinExtension.apply {
             jvmToolchain(Config.jvm.kotlinJvm.target.toInt())
         }
     }
 }
 
+@Suppress("UnstableApiUsage")
 fun Project.defaultConfiguration(extension: LibraryExtension) {
     extension.apply {
-        compileSdk { version = release(Config.android.compileSdkVersion) }
+        compileSdk {
+            version = release(Config.android.compileSdkVersion)
+        }
 
         defaultConfig {
             minSdk = Config.android.minSdkVersion
-//            targetSdk = Config.android.targetSdkVersion
 
             namespace = Config.android.nameSpace
         }
@@ -55,6 +64,10 @@ fun Project.defaultConfiguration(extension: LibraryExtension) {
         compileOptions {
             sourceCompatibility = Config.jvm.javaVersion
             targetCompatibility = Config.jvm.javaVersion
+        }
+
+        testFixtures {
+            enable = true
         }
 
         kotlinExtension.apply {
