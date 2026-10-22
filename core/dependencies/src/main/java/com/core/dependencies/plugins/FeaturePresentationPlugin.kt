@@ -1,6 +1,6 @@
 package com.core.dependencies.plugins
 
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.LibraryExtension
 import com.core.dependencies.utils.configureBuildTypes
 import com.core.dependencies.utils.configureDetekt
 import com.core.dependencies.utils.configurePackaging
@@ -9,6 +9,7 @@ import com.core.dependencies.utils.defaultConfiguration
 import com.core.dependencies.utils.detektPlugins
 import com.core.dependencies.utils.implementation
 import com.core.dependencies.utils.ksp
+import com.core.dependencies.utils.testImplementation
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
@@ -18,7 +19,6 @@ class FeaturePresentationPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             val androidLibraryPlugin = coreLibs.findPlugin("android-library").get().get()
-            val kotlinAndroidPlugin = coreLibs.findPlugin("kotlin-android").get().get()
             val kotlinComposePlugin = coreLibs.findPlugin("kotlin-compose").get().get()
             val kotlinSerializablePlugin = coreLibs.findPlugin("kotlin-serializable").get().get()
             val googleKspPlugin = coreLibs.findPlugin("google-ksp").get().get()
@@ -33,7 +33,6 @@ class FeaturePresentationPlugin : Plugin<Project> {
 
             with(pluginManager) {
                 apply(androidLibraryPlugin.pluginId)
-                apply(kotlinAndroidPlugin.pluginId)
                 apply(kotlinComposePlugin.pluginId)
                 apply(kotlinSerializablePlugin.pluginId)
                 apply(googleKspPlugin.pluginId)
@@ -63,6 +62,9 @@ class FeaturePresentationPlugin : Plugin<Project> {
                 // Hilt
                 implementation(dependencyNotation = hiltAndroidDependency)
                 ksp(dependencyNotation = hiltCompilerDependency)
+
+                // Test
+                testImplementation(dependencyNotation = testFixtures(notation = project(projectPath = ":core:presentation")))
 
                 // Detekt
                 detektPlugins(dependencyNotation = detektKtlintDependency)

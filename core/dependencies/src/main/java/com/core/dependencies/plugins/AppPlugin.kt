@@ -1,7 +1,6 @@
 package com.core.dependencies.plugins
 
 import com.android.build.api.dsl.ApplicationExtension
-import com.android.build.gradle.TestedExtension
 import com.core.dependencies.config.Config
 import com.core.dependencies.utils.configureBuildTypes
 import com.core.dependencies.utils.configureDetekt
@@ -20,7 +19,6 @@ class AppPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             val androidApplicationPlugin = coreLibs.findPlugin("android-application").get().get()
-            val kotlinAndroidPlugin = coreLibs.findPlugin("kotlin-android").get().get()
             val kotlinComposePlugin = coreLibs.findPlugin("kotlin-compose").get().get()
             val googleKspPlugin = coreLibs.findPlugin("google-ksp").get().get()
             val googleHiltPlugin = coreLibs.findPlugin("google-hilt").get().get()
@@ -33,7 +31,6 @@ class AppPlugin : Plugin<Project> {
 
             with(pluginManager) {
                 apply(androidApplicationPlugin.pluginId)
-                apply(kotlinAndroidPlugin.pluginId)
                 apply(kotlinComposePlugin.pluginId)
                 apply(kotlinComposePlugin.pluginId)
                 apply(googleKspPlugin.pluginId)
@@ -42,7 +39,7 @@ class AppPlugin : Plugin<Project> {
             }
 
             with(extensions.getByType<ApplicationExtension>()) {
-                defaultConfiguration(extension = this as TestedExtension)
+                defaultConfiguration(extension = this)
                 configureBuildTypes()
                 configurePackaging()
 

@@ -1,7 +1,6 @@
 package com.core.dependencies.plugins
 
-import com.android.build.gradle.LibraryExtension
-import com.core.dependencies.utils.androidTestApi
+import com.android.build.api.dsl.LibraryExtension
 import com.core.dependencies.utils.api
 import com.core.dependencies.utils.configureBuildTypes
 import com.core.dependencies.utils.configureDetekt
@@ -12,6 +11,7 @@ import com.core.dependencies.utils.defaultConfiguration
 import com.core.dependencies.utils.detektPlugins
 import com.core.dependencies.utils.implementation
 import com.core.dependencies.utils.ksp
+import com.core.dependencies.utils.testFixturesApi
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
@@ -22,7 +22,6 @@ class CorePresentationPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             val androidLibraryPlugin = coreLibs.findPlugin("android-library").get().get()
-            val kotlinAndroidPlugin = coreLibs.findPlugin("kotlin-android").get().get()
             val kotlinComposePlugin = coreLibs.findPlugin("kotlin-compose").get().get()
             val kotlinSerializablePlugin = coreLibs.findPlugin("kotlin-serializable").get().get()
             val googleKspPlugin = coreLibs.findPlugin("google-ksp").get().get()
@@ -52,7 +51,6 @@ class CorePresentationPlugin : Plugin<Project> {
 
             with(pluginManager) {
                 apply(androidLibraryPlugin.pluginId)
-                apply(kotlinAndroidPlugin.pluginId)
                 apply(kotlinComposePlugin.pluginId)
                 apply(kotlinSerializablePlugin.pluginId)
                 apply(googleKspPlugin.pluginId)
@@ -99,7 +97,7 @@ class CorePresentationPlugin : Plugin<Project> {
                 ksp(dependencyNotation = hiltCompilerDependency)
 
                 // Test
-                androidTestApi(dependencyNotation = testInstrumentedBundle)
+                testFixturesApi(dependencyNotation = testInstrumentedBundle)
 
                 // Detekt
                 detektPlugins(dependencyNotation = detektKtlintDependency)

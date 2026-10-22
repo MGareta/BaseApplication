@@ -1,6 +1,6 @@
 package com.core.dependencies.plugins
 
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.LibraryExtension
 import com.core.dependencies.utils.api
 import com.core.dependencies.utils.configureBuildTypes
 import com.core.dependencies.utils.configureDetekt
@@ -10,6 +10,7 @@ import com.core.dependencies.utils.defaultConfiguration
 import com.core.dependencies.utils.detektPlugins
 import com.core.dependencies.utils.implementation
 import com.core.dependencies.utils.ksp
+import com.core.dependencies.utils.testImplementation
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
@@ -19,7 +20,6 @@ class FeatureDataPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             val androidLibraryPlugin = coreLibs.findPlugin("android-library").get().get()
-            val kotlinAndroidPlugin = coreLibs.findPlugin("kotlin-android").get().get()
             val kotlinSerializablePlugin = coreLibs.findPlugin("kotlin-serializable").get().get()
             val googleKspPlugin = coreLibs.findPlugin("google-ksp").get().get()
             val googleHiltPlugin = coreLibs.findPlugin("google-hilt").get().get()
@@ -33,7 +33,6 @@ class FeatureDataPlugin : Plugin<Project> {
 
             with(pluginManager) {
                 apply(androidLibraryPlugin.pluginId)
-                apply(kotlinAndroidPlugin.pluginId)
                 apply(kotlinSerializablePlugin.pluginId)
                 apply(googleKspPlugin.pluginId)
                 apply(googleHiltPlugin.pluginId)
@@ -50,7 +49,7 @@ class FeatureDataPlugin : Plugin<Project> {
 
             dependencies {
                 // Core
-                api(dependencyNotation = project(":core:data"))
+                api(dependencyNotation = project(projectPath = ":core:data"))
 
                 // Kotlin
                 ksp(dependencyNotation = kotlinMetadataDependency)
@@ -58,6 +57,9 @@ class FeatureDataPlugin : Plugin<Project> {
                 // Hilt
                 implementation(dependencyNotation = hiltAndroidDependency)
                 ksp(dependencyNotation = hiltCompilerDependency)
+
+                // Test
+                testImplementation(dependencyNotation = testFixtures(notation = project(projectPath = ":core:data")))
 
                 // Detekt
                 detektPlugins(dependencyNotation = detektKtlintDependency)
