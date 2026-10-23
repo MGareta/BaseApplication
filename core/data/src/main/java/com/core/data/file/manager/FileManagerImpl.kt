@@ -16,23 +16,13 @@ import java.io.File
 
 class FileManagerImpl(
     @param:ApplicationContext private val context: Context,
-    private val permissionManager: IPermissionManager,
+    private val permissionManager: IPermissionManager
 ) : IFileManager {
-    /**
-     * **How it works:**
-     * This function first checks if the app has the necessary read external storage permission.
-     * If not, it requests the permission. If the permission is denied, it returns an
-     * `ApiResult.Exception`.
-     *
-     * If the permission is granted, it searches for a file in the downloads directory whose
-     * name (excluding the extension) matches the provided `fileName`.
-     *
-     * If a matching file is found, it creates a content URI for the file using `FileProvider`
-     * and returns an `ApiResult.Success` containing a `FileData` object with the file name and URI.
-     *
-     * If no matching file is found, it returns an `ApiResult.NoContent`.
-     */
-    override suspend fun findFile(fileName: String, mimeType: String): ApiResult<FileData> {
+
+    override suspend fun findFile(
+        fileName: String,
+        mimeType: String
+    ): ApiResult<FileData> {
         val permissionStatus = if (!permissionManager.hasPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
             val permissionResult = permissionManager.requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
 
@@ -73,20 +63,15 @@ class FileManagerImpl(
                     file,
                 ),
                 mimeType = mimeType,
-            ),
+            )
         )
     }
 
-    /**
-     * **How it works:**
-     * This function handles the necessary permission checks for writing to external storage,
-     * creates the Downloads directory if it doesn't exist, and then writes the provided
-     * byte array data to a file within that directory. It also determines the file
-     * extension based on the provided MIME type and constructs the appropriate file name.
-     * Finally, it returns an ApiResult containing the FileData, which includes the file name
-     * and a content URI for the newly saved file.
-     */
-    override suspend fun saveFile(data: ByteArray, fileName: String, mimeType: String): ApiResult<FileData> {
+    override suspend fun saveFile(
+        data: ByteArray,
+        fileName: String,
+        mimeType: String
+    ): ApiResult<FileData> {
         val permissionStatus = if (!permissionManager.hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             val permissionResult = permissionManager.requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
@@ -128,7 +113,7 @@ class FileManagerImpl(
                 "$fileName.$fileExtension"
             } else {
                 fileName
-            },
+            }
         )
 
         documentBytes.use { input ->
@@ -138,7 +123,7 @@ class FileManagerImpl(
         }
 
         return ApiResult.Success(
-            FileData(
+            data = FileData(
                 fileName = fileName,
                 uri = FileProvider.getUriForFile(
                     context,
@@ -146,7 +131,7 @@ class FileManagerImpl(
                     outputFile,
                 ),
                 mimeType = mimeType,
-            ),
+            )
         )
     }
 }

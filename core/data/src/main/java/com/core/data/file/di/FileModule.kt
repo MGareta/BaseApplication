@@ -14,11 +14,14 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object FileModule {
+
     @Singleton
     @Provides
-    fun providesFileManager(@ApplicationContext context: Context, permissionManager: IPermissionManager): IFileManager =
-        FileManagerImpl(
-            context = context,
-            permissionManager = permissionManager,
-        )
+    fun providesFileManager(
+        @ApplicationContext context: Context,
+        permissionManager: IPermissionManager
+    ): IFileManager = FileManagerImpl(
+        context = context,
+        permissionManager = permissionManager
+    )
 }
