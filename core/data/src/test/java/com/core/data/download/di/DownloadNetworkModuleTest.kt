@@ -1,7 +1,6 @@
-package com.core.data.download
+package com.core.data.download.di
 
 import com.core.data.download.api.DownloadApiService
-import com.core.data.download.di.DownloadNetworkModule
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.components.SingletonComponent

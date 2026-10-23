@@ -2,10 +2,10 @@ package com.core.data.download
 
 import android.Manifest
 import android.app.Application
-import androidx.core.content.FileProvider
 import com.core.data.HiltRobolectricBaseTest
 import com.core.data.download.api.DownloadApiService
 import com.core.data.download.manager.IDownloadManager
+import com.core.data.download.utils.clearFileProviderCache
 import com.core.data.file.manager.IFileManager
 import com.core.data.network.model.ApiResult
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -157,15 +157,4 @@ class DownloadManagerTest : HiltRobolectricBaseTest() {
         assertTrue(result is ApiResult.Error)
         assertTrue(!File(context.filesDir, "documents/$fileName.pdf").exists())
     }
-
-    private fun clearFileProviderCache() {
-        val cacheField = FileProvider::class.java
-            .getDeclaredField("sCache")
-            .apply {
-                isAccessible = true
-            }
-
-        (cacheField.get(null) as MutableMap<*, *>).clear()
-    }
 }
-

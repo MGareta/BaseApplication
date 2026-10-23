@@ -15,6 +15,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DownloadModule {
+
     @Singleton
     @Provides
     fun providesDownloadManager(
