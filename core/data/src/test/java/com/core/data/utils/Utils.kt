@@ -1,4 +1,4 @@
-package com.core.data.download.utils
+package com.core.data.utils
 
 import androidx.core.content.FileProvider
 

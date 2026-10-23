@@ -5,9 +5,9 @@ import android.app.Application
 import com.core.data.HiltRobolectricBaseTest
 import com.core.data.download.api.DownloadApiService
 import com.core.data.download.manager.IDownloadManager
-import com.core.data.download.utils.clearFileProviderCache
 import com.core.data.file.manager.IFileManager
 import com.core.data.network.model.ApiResult
+import com.core.data.utils.clearFileProviderCache
 import dagger.hilt.android.testing.HiltAndroidTest
 import io.mockk.coEvery
 import io.mockk.coVerify
