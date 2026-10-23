@@ -5,11 +5,13 @@ import com.core.dependencies.utils.api
 import com.core.dependencies.utils.configureBuildTypes
 import com.core.dependencies.utils.configureDetekt
 import com.core.dependencies.utils.configurePackaging
+import com.core.dependencies.utils.configureTests
 import com.core.dependencies.utils.coreLibs
 import com.core.dependencies.utils.defaultConfiguration
 import com.core.dependencies.utils.detektPlugins
 import com.core.dependencies.utils.implementation
 import com.core.dependencies.utils.ksp
+import com.core.dependencies.utils.kspTest
 import com.core.dependencies.utils.testFixturesApi
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -56,6 +58,7 @@ class CoreDataPlugin : Plugin<Project> {
                 defaultConfiguration(extension = this)
                 configureBuildTypes()
                 configurePackaging()
+                configureTests()
             }
 
             configureDetekt()
@@ -84,6 +87,7 @@ class CoreDataPlugin : Plugin<Project> {
 
                 // Test
                 testFixturesApi(dependencyNotation = testUnitBundle)
+                kspTest(dependencyNotation = hiltCompilerDependency)
                 testFixturesApi(dependencyNotation = testInstrumentedBundle)
 
                 // Detekt
