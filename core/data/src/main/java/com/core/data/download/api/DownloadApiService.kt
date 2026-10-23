@@ -8,7 +8,11 @@ import retrofit2.http.Streaming
 import retrofit2.http.Url
 
 fun interface DownloadApiService {
+
     @GET
     @Streaming
-    suspend fun downloadFile(@Url url: String, @HeaderMap headers: Map<String, String>): ApiResult<ResponseBody>
+    suspend fun downloadFile(
+        @Url url: String,
+        @HeaderMap headers: Map<String, String>
+    ): ApiResult<ResponseBody>
 }
