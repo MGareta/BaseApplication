@@ -31,6 +31,9 @@ squareup-retrofit = "3.0.0"
 squareup-kotlinx = "3.0.0"
 squareup-okhttp = "5.5.1"
 
+# Robolectric
+robolectric = "4.17"
+
 # Mock
 mockk = "1.14.11"
 
@@ -82,6 +85,9 @@ squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", versi
 squareup-retrofit-converter = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "squareup-kotlinx" }
 squareup-okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "squareup-okhttp" }
 
+# Robolectric
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+
 # Mock
 mockk = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
 mockk-agent = { group = "io.mockk", name = "mockk-agent", version.ref = "mockk" }
@@ -119,7 +125,13 @@ feature-data = { id = "feature.data", version = "unspecified" }
 feature-presentation = { id = "feature.presentation", version = "unspecified" }
 
 [bundles]
-test-unit = ["androidx-espresso", "kotlin-coroutines-test"]
+test-unit = [
+    "androidx-espresso",
+    "kotlin-coroutines-test",
+    "robolectric",
+    "google-hilt-test",
+    "mockk"
+]
 test-instrumented = [
     "androidx-espresso",
     "androidx-rules",
