@@ -13,8 +13,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DownloadNetworkModule {
 
-    @Provides
     @Singleton
+    @Provides
     fun providesDownloadApiService(
         retrofitFactory: RetrofitFactory,
         environmentManager: IEnvironmentManager,
