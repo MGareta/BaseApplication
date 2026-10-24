@@ -12,9 +12,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object SessionModule {
+
     @Singleton
     @Provides
-    fun providesSessionManager(cacheManager: ICacheManager): ISessionManager = SessionManagerImpl(
-        cacheManager = cacheManager,
+    fun providesSessionManager(
+        cacheManager: ICacheManager
+    ): ISessionManager = SessionManagerImpl(
+        cacheManager = cacheManager
     )
 }
