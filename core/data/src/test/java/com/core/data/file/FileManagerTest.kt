@@ -22,13 +22,13 @@ class FileManagerTest : HiltRobolectricBaseTest() {
     @Inject
     lateinit var fileManager: IFileManager
 
-    private fun uniqueFileName(): String = "file_${UUID.randomUUID()}"
+    private val uniqueFileName: String = "file_${UUID.randomUUID()}"
 
     override fun initDependencies() {
         shadowOf(context as Application)
             .grantPermissions(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
             )
 
         clearFileProviderCache()
@@ -36,47 +36,44 @@ class FileManagerTest : HiltRobolectricBaseTest() {
 
     @Test
     fun savesFileWithPdfExtensionAndContents() = test {
-        val fileName = uniqueFileName()
         val fileBytes = byteArrayOf(1, 2, 3)
 
         val result = fileManager.saveFile(
             data = fileBytes,
-            fileName = fileName,
-            mimeType = "application/pdf",
+            fileName = uniqueFileName,
+            mimeType = "application/pdf"
         )
 
         assertTrue(result is ApiResult.Success)
 
         val fileData = (result as ApiResult.Success).data
-        assertEquals(fileName, fileData.fileName)
+        assertEquals(uniqueFileName, fileData.fileName)
         assertEquals("application/pdf", fileData.mimeType)
         assertArrayEquals(
             fileBytes,
-            File(context.filesDir, "documents/$fileName.pdf").readBytes(),
+            File(context.filesDir, "documents/$uniqueFileName.pdf").readBytes()
         )
     }
 
     @Test
     fun findsSavedFile() = test {
-        val fileName = uniqueFileName()
-
         val saveResult = fileManager.saveFile(
             data = byteArrayOf(1, 2, 3),
-            fileName = fileName,
-            mimeType = "application/pdf",
+            fileName = uniqueFileName,
+            mimeType = "application/pdf"
         )
 
         assertTrue(saveResult is ApiResult.Success)
 
         val result = fileManager.findFile(
-            fileName = fileName,
-            mimeType = "application/pdf",
+            fileName = uniqueFileName,
+            mimeType = "application/pdf"
         )
 
         assertTrue(result is ApiResult.Success)
 
         val fileData = (result as ApiResult.Success).data
-        assertEquals(fileName, fileData.fileName)
+        assertEquals(uniqueFileName, fileData.fileName)
         assertEquals("application/pdf", fileData.mimeType)
         assertEquals("content", fileData.uri.scheme)
     }
@@ -84,8 +81,8 @@ class FileManagerTest : HiltRobolectricBaseTest() {
     @Test
     fun returnsNoContentWhenFileDoesNotExist() = test {
         val result = fileManager.findFile(
-            fileName = uniqueFileName(),
-            mimeType = "application/pdf",
+            fileName = uniqueFileName,
+            mimeType = "application/pdf"
         )
 
         assertTrue(result is ApiResult.NoContent)

@@ -33,7 +33,7 @@ class DownloadManagerTest : HiltRobolectricBaseTest() {
     @Inject
     lateinit var downloadManager: IDownloadManager
 
-    private fun uniqueFileName(): String = "download_${UUID.randomUUID()}"
+    private val uniqueFileName: String = "download_${UUID.randomUUID()}"
 
     override fun initDependencies() {
         shadowOf(context as Application)
@@ -47,24 +47,23 @@ class DownloadManagerTest : HiltRobolectricBaseTest() {
 
     @Test
     fun returnsExistingFileWithoutDownloading() = test {
-        val fileName = uniqueFileName()
         val savedResult = fileManager.saveFile(
             data = byteArrayOf(1, 2, 3),
-            fileName = fileName,
-            mimeType = "application/pdf",
+            fileName = uniqueFileName,
+            mimeType = "application/pdf"
         )
 
         assertTrue(savedResult is ApiResult.Success)
 
         val result = downloadManager.requestDownload(
-            fileName = fileName,
-            url = "https://example.com/document.pdf",
+            fileName = uniqueFileName,
+            url = "https://example.com/document.pdf"
         )
 
         assertTrue(result is ApiResult.Success)
 
         val fileData = (result as ApiResult.Success).data
-        assertEquals(fileName, fileData.fileName)
+        assertEquals(uniqueFileName, fileData.fileName)
         assertEquals("application/pdf", fileData.mimeType)
 
         coVerify(exactly = 0) {
@@ -77,84 +76,80 @@ class DownloadManagerTest : HiltRobolectricBaseTest() {
 
     @Test
     fun downloadsAndSavesResponseUsingUrlExtension() = test {
-        val fileName = uniqueFileName()
         val responseBytes = byteArrayOf(1, 2, 3)
         val headers = mapOf("Authorization" to "Bearer token")
 
         coEvery {
             downloadApiService.downloadFile(
                 url = "https://example.com/document.pdf",
-                headers = headers,
+                headers = headers
             )
         } returns ApiResult.Success(responseBytes.toResponseBody())
 
         val result = downloadManager.requestDownload(
-            fileName = fileName,
+            fileName = uniqueFileName,
             url = "https://example.com/document.pdf",
-            headers = headers,
+            headers = headers
         )
 
         assertTrue(result is ApiResult.Success)
 
         val fileData = (result as ApiResult.Success).data
-        assertEquals(fileName, fileData.fileName)
+        assertEquals(uniqueFileName, fileData.fileName)
         assertEquals("application/pdf", fileData.mimeType)
 
         coVerify(exactly = 1) {
             downloadApiService.downloadFile(
                 url = "https://example.com/document.pdf",
-                headers = headers,
+                headers = headers
             )
         }
 
         assertArrayEquals(
             responseBytes,
-            File(context.filesDir, "documents/$fileName.pdf").readBytes()
+            File(context.filesDir, "documents/$uniqueFileName.pdf").readBytes()
         )
     }
 
     @Test
     fun usesProvidedExtensionWhenUrlHasNone() = test {
-        val fileName = uniqueFileName()
 
         coEvery {
             downloadApiService.downloadFile(
                 url = "https://example.com/document",
-                headers = emptyMap(),
+                headers = emptyMap()
             )
         } returns ApiResult.Success("text".toByteArray().toResponseBody())
 
         val result = downloadManager.requestDownload(
-            fileName = fileName,
+            fileName = uniqueFileName,
             url = "https://example.com/document",
-            extension = "txt",
+            extension = "txt"
         )
 
         assertTrue(result is ApiResult.Success)
         assertEquals("text/plain", (result as ApiResult.Success).data.mimeType)
         assertArrayEquals(
             "text".toByteArray(),
-            File(context.filesDir, "$fileName.txt").readBytes()
+            File(context.filesDir, "$uniqueFileName.txt").readBytes()
         )
     }
 
     @Test
     fun propagatesDownloadFailureWithoutSavingFile() = test {
-        val fileName = uniqueFileName()
-
         coEvery {
             downloadApiService.downloadFile(
                 url = "https://example.com/document.pdf",
-                headers = emptyMap(),
+                headers = emptyMap()
             )
         } returns ApiResult.Error(httpCode = 500, response = "Server error")
 
         val result = downloadManager.requestDownload(
-            fileName = fileName,
-            url = "https://example.com/document.pdf",
+            fileName = uniqueFileName,
+            url = "https://example.com/document.pdf"
         )
 
         assertTrue(result is ApiResult.Error)
-        assertTrue(!File(context.filesDir, "documents/$fileName.pdf").exists())
+        assertTrue(!File(context.filesDir, "documents/$uniqueFileName.pdf").exists())
     }
 }
