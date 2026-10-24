@@ -12,8 +12,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object PermissionModule {
+
     @Singleton
     @Provides
-    fun providesPermissionManager(activityResultManager: IActivityResultManager): IPermissionManager =
-        PermissionManagerImpl(activityResultManager)
+    fun providesPermissionManager(
+        activityResultManager: IActivityResultManager
+    ): IPermissionManager = PermissionManagerImpl(
+        activityResultManager = activityResultManager
+    )
 }
