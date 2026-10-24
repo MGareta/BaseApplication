@@ -5,8 +5,11 @@ import kotlinx.serialization.Serializable
 import java.util.Calendar
 import kotlin.time.Duration
 
-@OptIn(InternalSerializationApi::class)
+@InternalSerializationApi
 @Serializable
-data class CacheEntry(val value: String, val duration: Duration) {
+data class CacheEntry(
+    val value: String,
+    val duration: Duration
+) {
     val timestamp: Long = Calendar.getInstance().time.time
 }

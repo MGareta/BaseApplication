@@ -20,8 +20,9 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object CacheModule {
-    @Provides
+
     @Singleton
+    @Provides
     fun providesJsonConfiguration(): Json = Json {
         prettyPrint = true
         ignoreUnknownKeys = true
@@ -32,31 +33,36 @@ object CacheModule {
         allowStructuredMapKeys = true
     }
 
+    @Singleton
     @Provides
     @IntoMap
     @CacheScopeKey(CacheScope.MEMORY_CACHE)
-    fun providesCacheMemoryScope(@ApplicationContext context: Context, json: Json): ICacheScope = CacheMemoryScope(
+    fun providesCacheMemoryScope(
+        @ApplicationContext context: Context,
+        json: Json
+    ): ICacheScope = CacheMemoryScope(
         context = context,
-        json = json,
+        json = json
     )
 
+    @Singleton
     @Provides
     @IntoMap
     @CacheScopeKey(CacheScope.DISK_CACHE)
     fun providesCacheDiskScope(
         @ApplicationContext context: Context,
         json: Json,
-        securityManager: ISecurityManager,
+        securityManager: ISecurityManager
     ): ICacheScope = CacheDiskScope(
         context = context,
         json = json,
-        securityManager = securityManager,
+        securityManager = securityManager
     )
 
     @Singleton
     @Provides
     fun providesCacheManager(
-        caches: Map<@JvmSuppressWildcards CacheScope, @JvmSuppressWildcards ICacheScope>,
+        caches: Map<@JvmSuppressWildcards CacheScope, @JvmSuppressWildcards ICacheScope>
     ): ICacheManager = CacheManagerImpl(
         caches = caches,
     )
