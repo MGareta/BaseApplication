@@ -16,11 +16,14 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object SecurityModule {
+
+    @Singleton
     @Provides
     @IntoMap
     @CipherTypeKey(CipherType.RSA)
     fun providesCryptographyRsaType(): ICryptographyType = CryptographyRsaType()
 
+    @Singleton
     @Provides
     @IntoMap
     @CipherTypeKey(CipherType.AES)
@@ -29,8 +32,8 @@ object SecurityModule {
     @Singleton
     @Provides
     fun providesSecurityManager(
-        cryptography: Map<@JvmSuppressWildcards CipherType, @JvmSuppressWildcards ICryptographyType>,
+        cryptography: Map<@JvmSuppressWildcards CipherType, @JvmSuppressWildcards ICryptographyType>
     ): ISecurityManager = SecurityManagerImpl(
-        cryptography = cryptography,
+        cryptography = cryptography
     )
 }

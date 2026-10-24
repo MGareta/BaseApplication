@@ -4,4 +4,6 @@ import com.core.data.security.model.CipherType
 import dagger.MapKey
 
 @MapKey
-annotation class CipherTypeKey(val value: CipherType)
+annotation class CipherTypeKey(
+    val value: CipherType
+)
