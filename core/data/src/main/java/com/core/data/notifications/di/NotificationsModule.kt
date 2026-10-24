@@ -14,11 +14,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NotificationsModule {
+
     @Singleton
     @Provides
     fun providesNotificationsManager(
         @ApplicationContext context: Context,
-        permissionManager: IPermissionManager,
+        permissionManager: IPermissionManager
     ): INotificationsManager = NotificationsManagerImpl(
         context = context,
         permissionManager = permissionManager,
