@@ -26,8 +26,8 @@ object DownloadModule {
         fileManager = fileManager
     )
 
-    @Provides
     @Singleton
+    @Provides
     fun providesDownloadRepository(
         apiService: DownloadApiService
     ): IDownloadRepository = DownloadRepositoryImpl(
