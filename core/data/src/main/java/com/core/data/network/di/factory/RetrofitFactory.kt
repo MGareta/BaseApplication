@@ -5,5 +5,6 @@ import dagger.assisted.AssistedFactory
 
 @AssistedFactory
 fun interface RetrofitFactory {
+
     fun create(): RetrofitBuilder
 }

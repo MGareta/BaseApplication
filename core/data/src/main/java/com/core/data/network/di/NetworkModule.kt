@@ -35,16 +35,18 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun providesNetworkTrustManager(@ApplicationContext context: Context): NetworkTrustManager = NetworkTrustManager(
-        context = context,
+    fun providesNetworkTrustManager(
+        @ApplicationContext context: Context
+    ): NetworkTrustManager = NetworkTrustManager(
+        context = context
     )
 
-    @Provides
     @Singleton
+    @Provides
     fun providesOkHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
         environmentManager: IEnvironmentManager,
-        networkTrustManager: NetworkTrustManager,
+        networkTrustManager: NetworkTrustManager
     ): OkHttpClient = OkHttpClient
         .Builder()
         .apply {
@@ -60,8 +62,8 @@ object NetworkModule {
             connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
         }.build()
 
-    @Provides
     @Singleton
+    @Provides
     fun providesConverterFactory(): Converter.Factory {
         val contentType = "application/json".toMediaType()
         val json = Json {
@@ -77,12 +79,14 @@ object NetworkModule {
         return json.asConverterFactory(contentType = contentType)
     }
 
-    @Provides
     @Singleton
-    fun providesRetrofitBuilder(httpClient: OkHttpClient, converterFactory: Converter.Factory): Retrofit.Builder =
-        Retrofit
-            .Builder()
-            .client(httpClient)
-            .addCallAdapterFactory(NetworkResultCallAdapterFactory.create())
-            .addConverterFactory(converterFactory)
+    @Provides
+    fun providesRetrofitBuilder(
+        httpClient: OkHttpClient,
+        converterFactory: Converter.Factory
+    ): Retrofit.Builder = Retrofit
+        .Builder()
+        .client(httpClient)
+        .addCallAdapterFactory(NetworkResultCallAdapterFactory.create())
+        .addConverterFactory(converterFactory)
 }
