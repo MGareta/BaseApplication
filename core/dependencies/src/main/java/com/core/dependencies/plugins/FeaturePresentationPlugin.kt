@@ -64,7 +64,9 @@ class FeaturePresentationPlugin : Plugin<Project> {
                 ksp(dependencyNotation = hiltCompilerDependency)
 
                 // Test
-                testImplementation(dependencyNotation = testFixtures(notation = project(projectPath = ":core:presentation")))
+                testImplementation(
+                    dependencyNotation = testFixtures(notation = project(projectPath = ":core:presentation"))
+                )
 
                 // Detekt
                 detektPlugins(dependencyNotation = detektKtlintDependency)

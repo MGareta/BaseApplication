@@ -11,6 +11,7 @@ import com.core.dependencies.utils.defaultConfiguration
 import com.core.dependencies.utils.detektPlugins
 import com.core.dependencies.utils.implementation
 import com.core.dependencies.utils.ksp
+import com.core.dependencies.utils.kspTest
 import com.core.dependencies.utils.testFixturesApi
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -47,7 +48,7 @@ class CorePresentationPlugin : Plugin<Project> {
             val detektKtlintDependency = coreLibs.findLibrary("detekt-ktlint").get()
             val detektLibraryDependency = coreLibs.findLibrary("detekt-library").get()
 
-            val testInstrumentedBundle = coreLibs.findBundle("test-instrumented").get()
+            val testUnitBundle = coreLibs.findBundle("test-unit").get()
 
             with(pluginManager) {
                 apply(androidLibraryPlugin.pluginId)
@@ -97,7 +98,8 @@ class CorePresentationPlugin : Plugin<Project> {
                 ksp(dependencyNotation = hiltCompilerDependency)
 
                 // Test
-                testFixturesApi(dependencyNotation = testInstrumentedBundle)
+                testFixturesApi(dependencyNotation = testUnitBundle)
+                kspTest(dependencyNotation = hiltCompilerDependency)
 
                 // Detekt
                 detektPlugins(dependencyNotation = detektKtlintDependency)

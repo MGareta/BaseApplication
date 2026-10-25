@@ -59,7 +59,9 @@ class FeatureDataPlugin : Plugin<Project> {
                 ksp(dependencyNotation = hiltCompilerDependency)
 
                 // Test
-                testImplementation(dependencyNotation = testFixtures(notation = project(projectPath = ":core:data")))
+                testImplementation(
+                    dependencyNotation = testFixtures(notation = project(projectPath = ":core:data"))
+                )
 
                 // Detekt
                 detektPlugins(dependencyNotation = detektKtlintDependency)

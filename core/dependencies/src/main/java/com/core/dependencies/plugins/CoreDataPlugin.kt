@@ -43,7 +43,6 @@ class CoreDataPlugin : Plugin<Project> {
             val detektLibraryDependency = coreLibs.findLibrary("detekt-library").get()
 
             val testUnitBundle = coreLibs.findBundle("test-unit").get()
-            val testInstrumentedBundle = coreLibs.findBundle("test-instrumented").get()
 
             with(pluginManager) {
                 apply(androidLibraryPlugin.pluginId)
@@ -88,7 +87,6 @@ class CoreDataPlugin : Plugin<Project> {
                 // Test
                 testFixturesApi(dependencyNotation = testUnitBundle)
                 kspTest(dependencyNotation = hiltCompilerDependency)
-                testFixturesApi(dependencyNotation = testInstrumentedBundle)
 
                 // Detekt
                 detektPlugins(dependencyNotation = detektKtlintDependency)
