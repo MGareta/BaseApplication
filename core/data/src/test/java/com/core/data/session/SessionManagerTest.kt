@@ -1,7 +1,7 @@
 package com.core.data.session
 
 import android.os.Looper
-import com.core.data.HiltRobolectricBaseTest
+import com.core.data.BaseTest
 import com.core.data.network.model.ApiResult
 import com.core.data.session.manager.ISessionManager
 import com.core.data.session.model.SessionCommand
@@ -25,7 +25,7 @@ private const val TOKEN = "test-token"
 
 @OptIn(InternalSerializationApi::class)
 @HiltAndroidTest
-class SessionManagerTest : HiltRobolectricBaseTest() {
+class SessionManagerTest : BaseTest() {
 
     @Inject
     lateinit var sessionManager: ISessionManager

@@ -2,7 +2,7 @@ package com.core.data.activityProvider
 
 import android.app.Activity
 import androidx.fragment.app.FragmentActivity
-import com.core.data.HiltRobolectricBaseTest
+import com.core.data.BaseTest
 import com.core.data.utils.ActivityProvider
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.flow.first
@@ -12,7 +12,7 @@ import org.junit.Test
 import org.robolectric.Robolectric
 
 @HiltAndroidTest
-class ActivityProviderTest : HiltRobolectricBaseTest() {
+class ActivityProviderTest : BaseTest() {
 
     override fun initDependencies() = Unit
 

@@ -1,6 +1,6 @@
 package com.core.data.network
 
-import com.core.data.HiltRobolectricBaseTest
+import com.core.data.BaseTest
 import com.core.data.network.model.ApiResult
 import com.core.data.network.utils.getOrElse
 import com.core.data.network.utils.getOrNull
@@ -20,7 +20,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 @HiltAndroidTest
-class ExtensionsTest : HiltRobolectricBaseTest() {
+class ExtensionsTest : BaseTest() {
 
     override fun initDependencies() = Unit
 

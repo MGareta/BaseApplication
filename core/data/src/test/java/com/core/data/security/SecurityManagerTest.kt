@@ -1,7 +1,7 @@
 package com.core.data.security
 
 import android.util.Base64
-import com.core.data.HiltRobolectricBaseTest
+import com.core.data.BaseTest
 import com.core.data.network.model.ApiResult
 import com.core.data.security.cryptography.ICryptographyType
 import com.core.data.security.manager.ISecurityManager
@@ -22,7 +22,7 @@ private const val AES_DATA = "Test AES encryption"
 private const val RSA_DATA = "Test RSA encryption"
 
 @HiltAndroidTest
-class SecurityManagerTest : HiltRobolectricBaseTest() {
+class SecurityManagerTest : BaseTest() {
 
     @Inject
     lateinit var securityManager: ISecurityManager

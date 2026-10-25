@@ -2,7 +2,7 @@ package com.core.data.file
 
 import android.Manifest
 import android.app.Application
-import com.core.data.HiltRobolectricBaseTest
+import com.core.data.BaseTest
 import com.core.data.file.manager.IFileManager
 import com.core.data.network.model.ApiResult
 import com.core.data.utils.clearFileProviderCache
@@ -17,7 +17,7 @@ import java.util.UUID
 import javax.inject.Inject
 
 @HiltAndroidTest
-class FileManagerTest : HiltRobolectricBaseTest() {
+class FileManagerTest : BaseTest() {
 
     @Inject
     lateinit var fileManager: IFileManager

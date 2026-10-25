@@ -1,6 +1,6 @@
 package com.core.data.analytics
 
-import com.core.data.HiltRobolectricBaseTest
+import com.core.data.BaseTest
 import com.core.data.analytics.frameworks.IAnalyticsFramework
 import com.core.data.analytics.manager.IAnalyticsManager
 import com.core.data.analytics.model.AnalyticsFramework
@@ -17,7 +17,7 @@ import org.junit.Test
 import javax.inject.Inject
 
 @HiltAndroidTest
-class AnalyticsManagerTest : HiltRobolectricBaseTest() {
+class AnalyticsManagerTest : BaseTest() {
 
     @Inject
     lateinit var analyticsManager: IAnalyticsManager

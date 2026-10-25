@@ -7,7 +7,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import com.core.data.HiltRobolectricBaseTest
+import com.core.data.BaseTest
 import com.core.data.network.model.ApiResult
 import com.core.data.notifications.manager.INotificationsManager
 import com.core.data.permission.di.PermissionModule
@@ -32,7 +32,7 @@ import javax.inject.Inject
 @HiltAndroidTest
 @UninstallModules(PermissionModule::class)
 @Config(sdk = [Build.VERSION_CODES.TIRAMISU])
-class NotificationsManagerTest : HiltRobolectricBaseTest() {
+class NotificationsManagerTest : BaseTest() {
 
     @BindValue
     @JvmField

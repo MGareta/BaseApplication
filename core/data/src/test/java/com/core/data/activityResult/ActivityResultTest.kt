@@ -8,7 +8,7 @@ import android.net.Uri
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import com.core.data.HiltRobolectricBaseTest
+import com.core.data.BaseTest
 import com.core.data.activityResult.manager.IActivityResultManager
 import com.core.data.activityResult.utils.captureVideo
 import com.core.data.activityResult.utils.createDocument
@@ -33,7 +33,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 @HiltAndroidTest
-class ActivityResultTest : HiltRobolectricBaseTest() {
+class ActivityResultTest : BaseTest() {
 
     private val activityResultManager: IActivityResultManager = mockk()
 

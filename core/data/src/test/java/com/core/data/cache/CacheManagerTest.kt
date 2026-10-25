@@ -1,6 +1,6 @@
 package com.core.data.cache
 
-import com.core.data.HiltRobolectricBaseTest
+import com.core.data.BaseTest
 import com.core.data.cache.manager.ICacheManager
 import com.core.data.cache.model.CacheScope
 import com.core.data.cache.model.config.ImmortalCacheConfig
@@ -24,7 +24,7 @@ import kotlin.time.Duration.Companion.seconds
 
 @HiltAndroidTest
 @UninstallModules(SecurityModule::class)
-class CacheManagerTest : HiltRobolectricBaseTest() {
+class CacheManagerTest : BaseTest() {
 
     @BindValue
     @JvmField

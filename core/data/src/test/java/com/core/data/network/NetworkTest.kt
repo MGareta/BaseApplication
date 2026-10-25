@@ -1,6 +1,6 @@
 package com.core.data.network
 
-import com.core.data.HiltRobolectricBaseTest
+import com.core.data.BaseTest
 import com.core.data.environment.model.Environment
 import com.core.data.network.adapter.NetworkResultCall
 import com.core.data.network.adapter.NetworkResultCallAdapter
@@ -40,7 +40,7 @@ import javax.inject.Inject
 import javax.net.ssl.SSLSession
 
 @HiltAndroidTest
-class NetworkTest : HiltRobolectricBaseTest() {
+class NetworkTest : BaseTest() {
 
     @Inject
     lateinit var retrofitFactory: RetrofitFactory

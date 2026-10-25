@@ -4,7 +4,7 @@ import android.Manifest
 import android.app.Application
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.FragmentActivity
-import com.core.data.HiltRobolectricBaseTest
+import com.core.data.BaseTest
 import com.core.data.activityResult.di.ActivityResultModule
 import com.core.data.activityResult.manager.IActivityResultManager
 import com.core.data.permission.manager.IPermissionManager
@@ -25,7 +25,7 @@ import javax.inject.Inject
 
 @HiltAndroidTest
 @UninstallModules(ActivityResultModule::class)
-class PermissionManagerTest : HiltRobolectricBaseTest() {
+class PermissionManagerTest : BaseTest() {
 
     @BindValue
     @JvmField

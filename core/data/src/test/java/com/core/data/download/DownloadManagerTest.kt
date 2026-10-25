@@ -2,7 +2,7 @@ package com.core.data.download
 
 import android.Manifest
 import android.app.Application
-import com.core.data.HiltRobolectricBaseTest
+import com.core.data.BaseTest
 import com.core.data.download.api.DownloadApiService
 import com.core.data.download.manager.IDownloadManager
 import com.core.data.file.manager.IFileManager
@@ -22,7 +22,7 @@ import java.util.UUID
 import javax.inject.Inject
 
 @HiltAndroidTest
-class DownloadManagerTest : HiltRobolectricBaseTest() {
+class DownloadManagerTest : BaseTest() {
 
     @Inject
     lateinit var downloadApiService: DownloadApiService

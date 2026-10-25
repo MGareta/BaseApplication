@@ -1,6 +1,6 @@
 package com.core.data.network
 
-import com.core.data.HiltRobolectricBaseTest
+import com.core.data.BaseTest
 import com.core.data.environment.di.EnvironmentModule
 import com.core.data.environment.manager.IEnvironmentManager
 import com.core.data.environment.model.Environment
@@ -21,7 +21,7 @@ import javax.net.ssl.SSLSession
 
 @HiltAndroidTest
 @UninstallModules(EnvironmentModule::class)
-class SSLPinningTest : HiltRobolectricBaseTest() {
+class SSLPinningTest : BaseTest() {
 
     @BindValue
     @JvmField

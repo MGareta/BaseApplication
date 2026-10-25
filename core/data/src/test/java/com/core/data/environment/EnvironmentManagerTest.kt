@@ -1,6 +1,6 @@
 package com.core.data.environment
 
-import com.core.data.HiltRobolectricBaseTest
+import com.core.data.BaseTest
 import com.core.data.environment.manager.IEnvironmentManager
 import com.core.data.environment.model.Environment
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -9,7 +9,7 @@ import org.junit.Test
 import javax.inject.Inject
 
 @HiltAndroidTest
-class EnvironmentManagerTest : HiltRobolectricBaseTest() {
+class EnvironmentManagerTest : BaseTest() {
 
     @Inject
     lateinit var environmentManager: IEnvironmentManager
