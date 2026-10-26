@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:b419f3ef32aaf99e5010daba610d965a8823814bf6cdb941b10e639e15314053",
+  "claims": [
+    {
+      "id": "claim_cbd7b77de2f947f497f8a08334cdd150",
+      "statement": "The Gradle build includes :app, :core:data, :core:presentation, :demo:presentation and :demo:data, with core/dependencies included as a plugin build and the coreLibs version catalog.",
+      "evidence": [
+        {
+          "resource": "repo://settings.gradle.kts",
+          "version": "repo-file-v1:sha256:91c189c3148ea02850f1229dc54a209c3ef5395b985139066d33286c1a834f25"
+        }
+      ]
+    },
+    {
+      "id": "claim_9294a7715cca455f8168c56b45e16eb8",
+      "statement": "Feature data modules applying the feature.data convention plugin get :core:data as an api dependency.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L50-L53",
+          "version": "repo-lines-v1:sha256:e8526b366177b939a84e133d4de364e938c4cc7220e7f90e7ce6bb24f1b21a8a:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzFiOTlmYTQyMmY1NzUxOTQwNTMzYzI1MTY5N2QyM2Q5NmMwYzMzMTk4ZDViMzhiMTIyZjEzMTZlNzNhOTllZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTQ1MWRkNzY0ZWU5MjMwNjU0MjRhMjAwZjlmMWQ1YzAxN2JiY2U2ZThkMDU4YzQ1YzZjOTE0ZTBjMTExYWU4NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2RiMTE1MTAyN2VhZTczNTJlOTBjOGZkMmUxNmQ3NzlhNTQ5MTQ5NzA1ZTQzYzg2YmRlOWZiZDFkZmY1MGExZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_68de382d2f274a0cb5285d0350bc41e1",
+      "statement": "The app module defines App extending CoreApp and MainActivity extending BaseActivity.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/com/baseapplication/App.kt",
+          "version": "repo-file-v1:sha256:c95cb5896ee1dbaffec364ba4e91b6d855db3e0580594f539515bdbfdd6bfeb4"
+        },
+        {
+          "resource": "repo://app/src/main/java/com/baseapplication/MainActivity.kt",
+          "version": "repo-file-v1:sha256:4e3b73134151661e4d479cb9b5dfe23205e273e8c772981f72244a2743dcf81a"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T12:11:14.549Z"
+  }
+}

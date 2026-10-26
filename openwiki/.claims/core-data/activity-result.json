@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:46924e16703954ab13ff0820b9386b1f293b03bdaa29d3810dddb7db9aefb4c4",
+  "claims": [
+    {
+      "id": "claim_43c3432ebc024f17bc101e686af58466",
+      "statement": "IActivityResultManager is provided as a @Singleton in SingletonComponent by ActivityResultModule, constructing ActivityResultManagerImpl with no dependencies.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/activityResult/di/ActivityResultModule.kt#L11-L18",
+          "version": "repo-lines-v1:sha256:d4e27846ee9760a25dc79160c68b3663c063178a808b1a8d85af5b0179745d56:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTk1NWY1MWQ3ZTI5MjE3YzExOTQ2YmEwMDg1Y2VhNWRiZmU5MDFmYTcxZTZmYzk2MjE3YmU3ZDc5OWVhOTNmMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWM4OTAwMjM0ZDA4NzA2NTlhMjRlYzQ1NDQzMDdlYmJjYjEzYWNiZDM0YTlhY2U5NDMyMTE1YzE1NGVhZDgxMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_459f7d53fd544e10b040b98c98bef1f8",
+      "statement": "requestResult returns null immediately when ActivityProvider.currentActivity is null; otherwise it registers a launcher on the current activity's ActivityResultRegistry with key \"result_<n>\" and suspends until the callback resumes it, unregistering the launcher in a finally block.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/activityResult/manager/ActivityResultManagerImpl.kt#L24-L76",
+          "version": "repo-lines-v1:sha256:a60f5bbffc42af31bc69c04b0765a4e2e5f1aa70b31451ec873ff76b7fda5f98:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNlMjBiZTk0ODViZWRmYzlhNzkwOTZmMWQ0YjU1OGUwOWVlYjQ3ZWE2YjIzZDRhNjE0ODBjODljMDE0YjFlNDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMxODk2OGFmYjU1MWFjOTZmNTkyNDI4MzFjZTk5YWI0ZTIyYzI5ZjIwZDk4ZmY5NWY3MWVhOThkNDc5ZDlmZTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM1ODVjY2UxYzA0OWYzNjRhZDdjYzkzN2QxOGUwNGUzNjFjMDg2MGMyNjY1NGEzNGNkODBkZjE5NzBmMTU0ODIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2b843db11804468fbbfa3da6bcd38052",
+      "statement": "ActivityResultManagerImpl persists the pending contract simple name and last key increment through a SavedStateProvider under \"activityresult_saved_state\", and a later request with the same contract class reuses the saved key without relaunching.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/activityResult/manager/ActivityResultManagerImpl.kt#L15-L17",
+          "version": "repo-lines-v1:sha256:f1944caa0b1773c61a76a6ba1c87cadb194a5db7cde757c08cfc2be1350cf0c6:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmVhNGYwYjg2Y2E2ODViYzZkMGEwNzE4OGZlNWU3ZGM3ZGIxMGI5MWYxZGFlYzViZWQ1M2NiNTI3YWEwM2IyNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWRjNTY2YWE3OTIyNGQwYjNlMGVjZDg2NjZmMWM3MTZkODc2YmU4OTg5NGYyMjg2ZTA1ZDdjMjZiN2UyNDNkNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjQ3NGMxYjAwMWU5YzU5YmJhZDA2YjA3ZTMxNmQ4MWI0YTljN2JhNzliMWQxZWVlYTY1NTMyZTNlNTNlNmFkNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDlkNDI0OTQzYzJiMzRlMzk1NTZjMTZiMzNkM2JlODg5OWUyNDY5MzQ1OGMyYjQxYTc2MWI2MDYyYWFlYTVkMyJ9"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/activityResult/manager/ActivityResultManagerImpl.kt#L63-L111",
+          "version": "repo-lines-v1:sha256:2bd484c6dec7bf2df8b6ae4eaa7138bef19ec065281f3acdce2dcc82107e67cc:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2NTM3ODgzNDJmZWY4ZDdjNDI1NmZjNDk5ZDFkYjAxMzc0NDhkZTY0N2RlNjAzYjBmNDFlNGE3ZTA4YzY2MjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUyZWQ4NjI3MjRkOTZhZmNiMzg3NWNlYjgzZWI0NTk0NzI3MmE4ZDY5MzQ0YWZlODU3OGQ3ZjY3NjY2NDJiMDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9b19e15de87c4f9ab8d0fd7a2244d0bb",
+      "statement": "Because requestResult collects ActivityProvider.activityFlow with mapLatest, a newly emitted activity cancels the in-flight registration and re-registers the same key on the new activity without launching again.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/activityResult/manager/ActivityResultManagerImpl.kt#L33-L60",
+          "version": "repo-lines-v1:sha256:213c64c08862cd535a98efcd64b27451acbd0737c6a3548025e1be38a2da5a75:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4ODkzYjZlMWM1MjA0NGJkY2YwMmI3N2E2MjQyZTNmZWNkZDNjNmQ5YWIzYzExZjYyYmFjMDFiNzUzMmM2OGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiZjU1NGViYTg2ZmQyMjEzNmZiNzI5ZWUxNjYyNzcyMmI1YmE1ZDgwMTU2OGQ4NmRjNGJjN2UzMzI3YjBlMDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM1MTg3NWNlODY4OGEwNzEwMmIxNTRjZmUyMWUyZTE2ODY4NTgyNjRjMGM1NWU0YTFkZWIwZDFlNjViYzQ5YzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJmNWRmZTMxMTI5MmViYmZlNzNlNmJiM2YxNmM3MzU1MjZkMDYzYmNjNTQ5YzY0MzQ1MTU0YjAzNjk0N2E4NDYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_83f543a4e8aa47ba98db70e11eb7f9d2",
+      "statement": "The activityResult extension helpers wrap ActivityResultContracts; requestPermission, takePicture and captureVideo default to false and getMultipleContents/openMultipleDocuments default to an empty list when requestResult returns null.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/activityResult/utils/Extensions.kt#L11-L104",
+          "version": "repo-lines-v1:sha256:8c7bfe939cc3ff1f46aaa5ec70cadf5a0a6a14b18b00a8f97eacf6b5623b33a9:eyJzZWxlY3RlZExpbmVDb3VudCI6OTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5Yjk2OWQwNTgxMTBlYjEyM2E1NmY1Y2NlZDA4OTRmMDRhOTQ0YmM4ZDBjOTk1MjQ5NmRmYjI0NjM1YjFjZmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUyNTYwYTQxZGE3NGYyMDMyZTk3YTA1MDU2ZTY5ZDhhNDMyNjE5ZmM0ODI0NDA0MjQ4ZDZlYzk4YzQ0ODkzNjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_61bcad29be834b0a8c70cab346a68fed",
+      "statement": "ActivityResultTest only exercises the extension functions against a mocked IActivityResultManager.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/test/java/com/core/data/activityResult/ActivityResultTest.kt#L36-L60",
+          "version": "repo-lines-v1:sha256:dac2c9163334d41851bdb1a05f2a948baef47f0fed783f740da8f480c8f38542:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2Yjc4ODg4NWQ4MThmY2RmMzc3NzRkMmQzOTEyNTE1NDI0M2M2ODg5M2VmZDVmNDUwZGNiYjljZGYxNmI3NmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiOGM4ODNlYTE3YTM0ODY0YmFiYWQ5YTIxNjEwNzZlYTM0OGU1NWI2ODk3NjNmNmJlYzVhN2U5MzFjZmUzM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc0NWQyNGM2YWRjMDE1OWE2OWY5YTM2ZjgxYWE3ZGFiYzc1NDkyMWViMTQ5YjllZGRiZmFmY2I5ODA5ZWI5MjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZiZTcwYTcxMDRjNjg1Yzc5YjliMmI5ZWI3YzVjZDBhM2FhYjJjNmMxNTlhODliYjNhNzE5MjM1OGIzYmYxY2IifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T12:11:14.549Z"
+  }
+}

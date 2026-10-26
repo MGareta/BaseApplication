@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:871cde8d6de1e3dca4712ed3b710992c2ec1c6a73470bc094f3aaa54df21a377",
+  "claims": [
+    {
+      "id": "claim_bcefed3445044ecb98cce24d1b3abd14",
+      "statement": "core/data applies only the core.data convention plugin (CoreDataPlugin), which applies android-library, kotlin-serializable, KSP, Hilt, Dokka and Detekt, exposes kotlinx-serialization-json and Retrofit as api dependencies, and adds DataStore, Hilt, OkHttp logging, the Retrofit kotlinx converter and Firebase analytics/crashlytics as implementation dependencies.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/build.gradle.kts",
+          "version": "repo-file-v1:sha256:5cc19f9114b1580f841d9e3e2847a4dd36e2e6a88e31b30707fd0efd38b5e2f5"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CoreDataPlugin.kt#L21-L97",
+          "version": "repo-lines-v1:sha256:87c8f0004d0085893aea5949f87e581d0c341322d081abd09af752b9c5d92128:eyJzZWxlY3RlZExpbmVDb3VudCI6NzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyZGQ0YWVjZTczZTZlYTAyNWEyOWNhNTJhZjNhZjJmZDg1NTE2MGJkMmVlMGViMTc4OWY4Yjk0OTM1M2VhYTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUxYTc1NmNhMTcwNmM2Y2QwNmM2YzA4NmFhMWZhMmQ2YTA2ZjIyODYzYjYzMjk3Nzc2MmEwNWI4N2UyNzdkM2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_85d8f98fe4234ba7a45cf816d2c683a0",
+      "statement": "core/data exposes the test-unit bundle (coroutines-test, Robolectric, Hilt testing, MockK) through testFixturesApi and uses the Hilt compiler via kspTest.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/gradle/libs.versions.toml#L122-L128",
+          "version": "repo-lines-v1:sha256:6c858707353497541e54aa0f11042b84191708641f76f30a62d2fe1c6bb75765:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmQzMWU4OWU3ZjgxYWMyMTE2YjY2ZDY2OTg5ODY1NmE2YjExMzI4NzdiM2MxMWJjYjc4M2M0MGE0ZTQ4NWYyYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjQyZTJmNGJhMWE3Mzk2MDY5NDFhNWMzZmJlZjA4NDE4Njg5YTNhNjA0ODBiM2I2Y2VmM2Y2ZGQwNTk5N2EyZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CoreDataPlugin.kt#L87-L89",
+          "version": "repo-lines-v1:sha256:2f3907b5a8904fa8999fd7cc4220ed5898a7eceb287e82e36a7b04d7e4ca1dfd:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk4MjQ3MWE0OTkxMDBkMDdiZTJlZDIwZWIxMTM3ZmZhZTkxZGIzMDc5NWMxNzRjN2YwZDJiMjcwZGUxNjJkZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODIwZDgwNmFhZDYxZDE0YmQ1MjYyM2MxZmQ4YWVkNTE1ZGViZmU0YzVjNmMxZDM4YTkxZDE4ZmI0ZGM4YWIxMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjZmOTJjYzQwNjkyMDM1NGFiN2ViMTA5OWZmNzg4N2VlZTc4YjcwNjBhN2ViMTJkNTEwZDZlZjE4ZjNlNTM4NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTkxOGIyYzE2MzM0ZmI1N2JiMzZjMDNhZjAzZWExMTU2YWEyOTg4MmYzNjU3MmI3ZDJkMzBiMzQyOGM3YzdiZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_cec249fd9f7b4c86b32c22a50e08fd44",
+      "statement": "Library modules are configured with compileSdk 37, minSdk 26, Java 21, test fixtures enabled, minified release builds with proguard-rules.pro, and unit tests that include Android resources with --add-opens JVM arguments.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/config/Config.kt#L8-L23",
+          "version": "repo-lines-v1:sha256:5c22ea1e4e73f725fb15770bd1147d38eecd184140ad18e29b91c61a9c807c8c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5MTZkYTdlMjY5MTg1ZTc1ZGE0YWIzYmRhNjhjNmZlMzM3ZDdmNzAzMjQ2ODE0NzkyYjg0MzA0YjU0NTRiNWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViZDI4NjE5ZDQwYzU3ZWZkYjFlZGIyMjUxNDBlZTJmNTBkZTUzOWFhNjcxMTA4NWViZTllY2RmZDNmMWViOGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt#L51-L154",
+          "version": "repo-lines-v1:sha256:c5f3a2509b160100cf313e71eb8e5c8ec103d2c045c91b7d25036b6af441c90e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJkYTQ1M2FlZTIxMWI1ZjM2MmIwOWIyMjE0MzA1MGU3ZmJjYmMwNmE1MTRmMzNhNTlhOThkMDgwOTIwNGQyMmJkIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIxOWU3NjM1NWNmMTE5OTQ4MGMzZjk5ODM2YjE0ODZjODQxZDg5MWZhYWQ5MDRjNjA4ZTA5MzAyMmQzNzU3YWVlIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiJjNzU1ZWJkOWY1YzY1NjQ3ZTI3Y2IzYTgzOTA0ZTAwODkwOWI4M2VlNjUyNzI2Y2VmNDIzNzdhZjFjZGYyMWQ3In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_39f5a5c931334d1496a335085bc33b48",
+      "statement": "Feature data modules depend on core:data as an api dependency plus its test fixtures, while core:presentation depends on it as an implementation dependency.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CorePresentationPlugin.kt#L74-L76",
+          "version": "repo-lines-v1:sha256:c6d60f390897160a0a27b8e113848304486ddc691ef6040cb3a95e576c044a3a:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzFiOTlmYTQyMmY1NzUxOTQwNTMzYzI1MTY5N2QyM2Q5NmMwYzMzMTk4ZDViMzhiMTIyZjEzMTZlNzNhOTllZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTQ1MWRkNzY0ZWU5MjMwNjU0MjRhMjAwZjlmMWQ1YzAxN2JiY2U2ZThkMDU4YzQ1YzZjOTE0ZTBjMTExYWU4NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDkzOTA2MWU4NmIyMDlkMzU4MmE5NWRmZmZkZWVjMWQ3ODBlODllMTkzOTI2ZTUwZTBhYmMwNzA4Mzg4NWMwNiJ9"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L50-L65",
+          "version": "repo-lines-v1:sha256:d327deb4a484b16ce6fed38316a2b5e8eb58c21f7feb7cd3a8650aa6db55c511:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxYjk5ZmE0MjJmNTc1MTk0MDUzM2MyNTE2OTdkMjNkOTZjMGMzMzE5OGQ1YjM4YjEyMmYxMzE2ZTczYTk5ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlhNzk4ZWIxMTE2N2ZiMWJkMTg4YTZhZTFiYWUzNzk3MTJiNzI0MTkzOTdkODEzYjhmMDk0NDBjNmRkYThmODIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_67bd210c8eff464bb446137dd918be9e",
+      "statement": "CoreApp in core/presentation initializes ActivityProvider with the Application in onCreate.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/CoreApp.kt#L6-L12",
+          "version": "repo-lines-v1:sha256:a522194ee8cfb225863991ff4ad857f5712389694a4d488bb6c8390593ea5d0d:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWJhYTNmYzUxYzA3MWY1M2Q3YmFlOTY3ZTA1Y2RkOTg2ZmU4NTIzYjNiZTk0YTRjYjA0ZjYwNzg3NDcwY2U5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTk0MDAxZWQ0OGM2MTVjZjI0ZmFjN2ZjN2FjZTE2ODAwNzgxYTkwNWU3MGVlNWU4ODMyMjljOTg4ZmFiYThjYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a520f9b769ba4b3db2b05c5bae3c0386",
+      "statement": "Pluggable strategies in core/data are registered through Dagger @MapKey multibinding maps keyed by AnalyticsFramework, CacheScope and CipherType, all installed in SingletonComponent as singletons.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/analytics/di/AnalyticsModule.kt#L15-L29",
+          "version": "repo-lines-v1:sha256:70949bc733a381cb07a13ddab4758fff79a37a23cce1d076cfab54d1d8c4cf53:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NTVmNTFkN2UyOTIxN2MxMTk0NmJhMDA4NWNlYTVkYmZlOTAxZmE3MWU2ZmM5NjIxN2JlN2Q3OTllYTkzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjODkwMDIzNGQwODcwNjU5YTI0ZWM0NTQ0MzA3ZWJiY2IxM2FjYmQzNGE5YWNlOTQzMjExNWMxNTRlYWQ4MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/cache/di/CacheModule.kt#L36-L68",
+          "version": "repo-lines-v1:sha256:9a3b70662a757468a89c044f5ba7efa9b6446547f4780bd49b158509b78f6654:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1ZDAwYmQ1MDQwOWM0MWE3MjUwM2QyYTE3YWY4NjUzYTUyNjkxMDgwZmNlM2ZmOTI4ZWMxNzZjMTE2YjVhZjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQxZTBjZWIzOGRkMmIxNTlmMWQ3YzE4ZGYwZTczY2IzMzA2ZDExOGRiZDM4OGM1MTliNGNjOTZlOGQyYjllZTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/security/di/SecurityModule.kt#L16-L39",
+          "version": "repo-lines-v1:sha256:a94c314ceec496c6004f6096420c14cb64f82b07e7fe4405717f0ce02482ea97:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NTVmNTFkN2UyOTIxN2MxMTk0NmJhMDA4NWNlYTVkYmZlOTAxZmE3MWU2ZmM5NjIxN2JlN2Q3OTllYTkzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQzYTk2MmZkOGFjYjgzYmM0NjQ5ZDk5NzdhMmQ0NDk3YzIwYmEzYmNhYzg4M2NjY2EzMmFkMjBiMGRlMDM3MDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_25f1e8bdd2794ee48d48a3572e00ef02",
+      "statement": "core/data's build file sets testInstrumentationRunner to com.core.data.DefaultTestRunner, although the module has no androidTest source set defining it.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/build.gradle.kts",
+          "version": "repo-file-v1:sha256:5cc19f9114b1580f841d9e3e2847a4dd36e2e6a88e31b30707fd0efd38b5e2f5"
+        }
+      ]
+    },
+    {
+      "id": "claim_073db5eada4240d8805397a19017f533",
+      "statement": "core/data ships no consumer ProGuard rules and its proguard-rules.pro contains only the commented default template.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/consumer-rules.pro",
+          "version": "repo-file-v1:sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "resource": "repo://core/data/proguard-rules.pro",
+          "version": "repo-file-v1:sha256:56fd960cf225f6ca40f982b13a5dbb0d8bc3dfde13ff76422825c6070d0a1890"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T12:11:14.549Z"
+  }
+}

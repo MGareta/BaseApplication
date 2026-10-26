@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:30b47bfe150d184f1e5805d87dd50b93f5f5b1acc2823d2b1693c0cc8ad4a699",
+  "claims": [
+    {
+      "id": "claim_e3b1b7c1905f4c0bb11b415edd261cf6",
+      "statement": "DownloadManagerImpl.requestDownload resolves the extension from the URL (falling back to the extension argument), derives the MIME type, returns an existing local file from IFileManager.findFile when it succeeds, and otherwise downloads and saves the body via IFileManager.saveFile.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/download/manager/DownloadManagerImpl.kt#L17-L54",
+          "version": "repo-lines-v1:sha256:c88da10a2fc87e23c8e638af448f65eb425a0be50ddec52a8a4673bf4eaf20a7:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZhODUxZmE4NTVkYTQxMmVjYjA4ZGZiMTdmZGY1ZTYxZjRhYTdhNjc4OTFkZmE0OWM2NTI1MDYyYzIzMTJhMjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFkZjFjN2Y4ODAyMDc4NDc0ODA1NGExMGEyYjFiNjMzOWZkOTQxMGZjNGJkZDRkNTY5N2RhYzg1OWY1MWFjOTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0f99899742204117b4db86ad01a4b309",
+      "statement": "IDownloadManager.requestDownload defaults extension to \"pdf\" and headers to an empty map.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/download/manager/IDownloadManager.kt#L6-L14",
+          "version": "repo-lines-v1:sha256:cea619c42cb57ffb89f7a43259c79e037a5a5fc9f48eba275c1f6c63036dea07:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjBiMzhhZjQ2NzMyNDk0OTJmYTBmOTA1ZDg4YTM4NDQ4YWY2Y2Q2NmFmNGRlNjlhYWYwODYyMGE0Zjk4ZDg1YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmVkY2ZmZjhmNGRiYTE0MWM2OGNkYTg4MGMwZWMxNDU5NDQ2NjAxMGI4YzcyMzg0YTI3NjIyOWEyZGU1ZTIxMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_387f3cb911b54c69bd9d166f5ae44852",
+      "statement": "DownloadApiService is a Retrofit @GET @Streaming service with @Url and @HeaderMap returning ApiResult<ResponseBody>, built by DownloadNetworkModule through RetrofitFactory using the current environment apiUrl and no extra interceptors.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/download/api/DownloadApiService.kt#L10-L18",
+          "version": "repo-lines-v1:sha256:4cdbf6076a8767447fae0ab5ed50caa63541da32f36f8b1ffe9286ec3ac519b4:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDkwOTYxYTQyYWNkMTFkZTkwNTVkMTY5ZjA5MGE5ZjBlNWYyNTUyNDc2ZWEzNGEzZDQwOTliMWNlY2EzYjdiNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTI2YTNlNzhhZDQxMGUwMmQwMGM1ZmQwZGUwNDkxY2QyNzBlYzJiYzA2NzcxNjMwMjUzOGE1ZDVlNzg5ZmFlNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/download/di/DownloadNetworkModule.kt#L12-L28",
+          "version": "repo-lines-v1:sha256:4c1fb1b8dbd074467536e3ab087d12cdc44baea1a8c34b514e59c25c4e5f31ce:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NTVmNTFkN2UyOTIxN2MxMTk0NmJhMDA4NWNlYTVkYmZlOTAxZmE3MWU2ZmM5NjIxN2JlN2Q3OTllYTkzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjODkwMDIzNGQwODcwNjU5YTI0ZWM0NTQ0MzA3ZWJiY2IxM2FjYmQzNGE5YWNlOTQzMjExNWMxNTRlYWQ4MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_829da0ba49c34a0da13c7224b2d61086",
+      "statement": "DownloadModule provides singleton IDownloadManager (with IDownloadRepository and IFileManager) and IDownloadRepository (with DownloadApiService) in SingletonComponent.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/download/di/DownloadModule.kt#L15-L36",
+          "version": "repo-lines-v1:sha256:7b759b7c2286cb9069e3de3db94ba0bc88614327144aed03f2e30f08e4a1fabc:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NTVmNTFkN2UyOTIxN2MxMTk0NmJhMDA4NWNlYTVkYmZlOTAxZmE3MWU2ZmM5NjIxN2JlN2Q3OTllYTkzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjODkwMDIzNGQwODcwNjU5YTI0ZWM0NTQ0MzA3ZWJiY2IxM2FjYmQzNGE5YWNlOTQzMjExNWMxNTRlYWQ4MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cc2e369ad61344e1b0861157b94a7cae",
+      "statement": "Download tests replace DownloadNetworkModule with a mockk DownloadApiService and grant storage permissions through Robolectric before exercising DownloadManagerImpl.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/test/java/com/core/data/download/DownloadManagerTest.kt#L24-L47",
+          "version": "repo-lines-v1:sha256:d7550f3fe5d5e834921561866d6014a02a746e2db9dc4ee07db41ae399e155e9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyMGFhOGI5MmJmNWUzNTY0ZTNkMTM4OWU1NjcwNTc4YTIxN2I5ZGIyNzZkZjc4MjQ0YmVmN2ZkZTk5ZjU4MTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwMzFiODQxNzljZWIxY2E5YzYwMDUxYTZkMDZiZjA3OTk5MmZmMzFmYmY1YmY5YjZlZTE5MWYyZjE4MzRmMjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJlOWUzOGI1NTkwODBiODdhNTdlMGFhYjYxOGE0ODM0MTI0Y2RkNTZhN2M4YTgxNjMxNGQ4MzcwN2VmN2Y1YWUifQ"
+        },
+        {
+          "resource": "repo://core/data/src/test/java/com/core/data/download/di/DownloadNetworkModuleTest.kt",
+          "version": "repo-file-v1:sha256:e429454f662d4bc4953068e036ead61d1f2f6c971b3ddb01e036c0329389c709"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T12:11:14.549Z"
+  }
+}

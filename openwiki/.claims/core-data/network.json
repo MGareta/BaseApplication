@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:52646fe738dbf061e007518aa51e347a08338922ea414c5ec8f5aa4e9f8b8da1",
+  "claims": [
+    {
+      "id": "claim_ce6d45c71f9b442bb087ee384a20a76c",
+      "statement": "ApiResult is a sealed interface with Success(data), Error(httpCode, response), Exception(exception) and NoContent subtypes; NoContent is a plain class without data-class equality.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/network/model/ApiResult.kt#L3-L19",
+          "version": "repo-lines-v1:sha256:5b7015edb7c3f66b333d7bd2a2ce9128ac3a4e49caed4f0df042a9f18e411b1a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzZGM1NzhiYWZkNjkwNDQ0Mzk2YzBiZjgwYjZhOTFkODk0NTI1YjE4M2Y0NDVlMDI4NmJhMDQ3ZWViNmRmN2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMzNDU3NDE3MDRlNDY1NjA3MjlmNTc4YjAyZDcxYzYzOGM3MzBkMzQ2YmM3NzdlNzAyY2ZlNWJhNTdhYmVjOGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_16df37b0f73f41b3a43a45340bef7b04",
+      "statement": "safeApiCall maps a successful response to Success or NoContent (null body), a non-successful response to Error with the HTTP code and error body string, and any thrown Throwable to Exception.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/network/utils/SafeApiCall.kt#L6-L28",
+          "version": "repo-lines-v1:sha256:5e1238a623ac85e64097b7ba6fd88b3bc4ff26f3856a8f2d0b58bb9356c86f92:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlOGIzODAyNjZmMjM1NTk1ZTVjNThhOTdmNmIwOTZmYjRiOWI4YzYyYmVlYWM1OTRkMjY5YjFjNGY1NDJjZmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg3NDU4Y2MwZDdkMDJlMjBiNWFlNzk1OWQ4ZGNlMTliOGE5YTliNjg2YTA2ZjIxMmE1N2E5N2JmZWNmMWQ2N2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f2dbdd41b4454453b8d52b68378c722c",
+      "statement": "NetworkResultCallAdapterFactory adapts only Call<ApiResult<T>> return types; NetworkResultCall always delivers results through callback.onResponse (transport failures become ApiResult.Exception) and throws NotImplementedError from execute().",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/network/adapter/NetworkResultCall.kt#L11-L58",
+          "version": "repo-lines-v1:sha256:206b49ec08ec7aff12d5539932acc3f7bccb060443b02f96e1df0654881d39f5:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2ODRjNTY3OWI0ZjY0ODczMzI1NTIzYTljZWVlNTcxY2I5Yjk1MTU3YWI1NTE4ZTI3ZDFhNTUzODUyMzllMzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlmNDhlOGE4ODRjODcwZjBmMDgyMjY2ZDA5YWY1ZGQ1ZDQ3MmM5ZDBjOWZiYTE2OWZhMDdjMGVmYWFkMjQwZjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/network/adapter/NetworkResultCallAdapterFactory.kt#L16-L33",
+          "version": "repo-lines-v1:sha256:79a21e413d69c4ca1769c9bf418ca3edb0d29c2a94beb081ee15762bd4fb6d61:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYzhjYjRmYmRkMTU3M2E0OTBkNDM4N2JjODA5MmRiYTc1N2NkODRiYTY3NWZmMGUwNTQ3M2UwNDdlOGEwNTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlmYjJmMGY0ZDU0Y2VkNWIyNjIzMzE3Zjc0Yjk2ZTBmMTcxZjk0N2FhNzY0YmYyNDQ1ZGVjODc2ZWI5YjVjMmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5a70871a669544df9d04025e6a3d2d23",
+      "statement": "NetworkModule provides a singleton OkHttpClient with a BODY-level logging interceptor and 30-second timeouts, a kotlinx-serialization JSON converter with ignoreUnknownKeys, and a Retrofit.Builder with NetworkResultCallAdapterFactory but no base URL.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/network/di/NetworkModule.kt#L25-L92",
+          "version": "repo-lines-v1:sha256:5000cfdd6e7b5e65301630c4fdebc0154f6b0a0ae4d692ba7f075f2a34f95763:eyJzZWxlY3RlZExpbmVDb3VudCI6NjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NTVmNTFkN2UyOTIxN2MxMTk0NmJhMDA4NWNlYTVkYmZlOTAxZmE3MWU2ZmM5NjIxN2JlN2Q3OTllYTkzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZlMWQwMDI2ZjA4M2U4ODkwNjhlNzZlMmE1NDExNDRkOGE5OTU4MGY3M2Y5YjBmMDNmMTY0NTc0MTUwOTJmNmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_24d003511f624fec96b858e7a4c84a1b",
+      "statement": "RetrofitFactory (an @AssistedFactory) creates RetrofitBuilder instances whose build overloads set the base URL from an Environment or explicit URL and, when interceptors are supplied, rebuild Retrofit with a cloned OkHttpClient containing them.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/network/di/builder/RetrofitBuilder.kt#L9-L60",
+          "version": "repo-lines-v1:sha256:b984bb14d8d13a8e0c076ba2f1c6813a8c1ad804d99d747e2d3641e1e7c5a28f:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0NTU1Mjg0ZWJmYjMyMWRlNDE2M2YwYWI2NzdmNTExNjE1NzBhYWE1YWRjZGM4ZGQyMzJmNmRkMzI1YjE0YWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ0NGFhZWFiMjFiNmIwNTExN2FmZmRjNWY2NTQ0YTU0NGI5YTA3N2VmYjg2ZDc2OWJkYjY5NzI1OTliZGI2NjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/network/di/factory/RetrofitFactory.kt#L6-L10",
+          "version": "repo-lines-v1:sha256:6a63d87e6fb814c21cc1d9b48af09346b5b84e2665318581177337caf4c64752:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGUwOWRmMDBiM2EyZGVlMDg0OWZlODk0MDE5YjIzN2JhZmE2ODFhMDY3NDA4YjU1NGI5ZDFhODY4ZDA5Y2Q5NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODlmNTc2ODIwZDc2NmU0MDAwOWYxOGY0YmRkNzhlYzZlNmMzNTJiNDUxYjg1ZTE4MzYzMDZiOTkxYzNkZTUzOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_96ab72eebe084e86aeb307dec7dfe887",
+      "statement": "ApiResult.map is a flat-map whose transform returns an ApiResult, converts thrown exceptions into ApiResult.Exception and re-wraps non-success results; the on* operators return the original result.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/network/utils/Extensions.kt#L8-L81",
+          "version": "repo-lines-v1:sha256:a027ed73fa7f0648ace338f2bc5370f4711e019ae8598f7a8020c36dded085d9:eyJzZWxlY3RlZExpbmVDb3VudCI6NzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc1MDdmOGI5OThkNTE5MmI4ODAyMDY1NzI1ODE3ZTRiZmQyMjNkNWMyNDkxNjgyNzY3YWQ0ODQ4ZDA0NjRhYmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzZjI1ZjYxMDEzMmZiYTljM2Y3ODc3NmE0NzcxZDI2ZmZhOGE0YzVhYjg4ZmUyYjViNmZjZjVlY2ViYWMxY2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJjZDNkYzNiMGU1YjExNTgxZGY5ZWE1NjcxNWQ0NjRhYzliYWFlYmRhZDA2YzVlZDI5OWI3NzI5NDM5YWE1OGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_257a3a54fd254fb4b392c083c662b5bd",
+      "statement": "With SSL pinning enabled, the secure trust manager has no certificates and the hostname verifier only accepts hosts in an empty whitelist, so pinned connections are rejected; disableSSLPinning trusts all certificates and hostnames.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/network/ssl/NetworkTrustManager.kt#L13-L79",
+          "version": "repo-lines-v1:sha256:29150997a0a8edb5cc92c92c0b91db04b0343da0418f650c7c18dafb7f1dc7c4:eyJzZWxlY3RlZExpbmVDb3VudCI6NjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiZDY1NjkyYjY0OGJkOTE0NTU2MDRmYTRmNDlkZDg3MWM2NTc4MGYyYTM2NGNhZDM2ZjM4YzllOTUwMTIwMjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE1NWNhN2IwMjk0MDE3ZmMxMTE5NGRjZDg1NzI5YzgwN2MxY2FlOWYwMmI0ZDlhODkxNzUxMGJmMDMyMmMzNGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/network/ssl/SSLPinning.kt#L11-L67",
+          "version": "repo-lines-v1:sha256:24158e587ef037334018408ff17e4e9c4dc521b40f2500b45b2c9f43827f93f0:eyJzZWxlY3RlZExpbmVDb3VudCI6NTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlmZjYyNGZhMTA5ZjQ3MmMxZTQzYWE1ZTk5NWIxMmQ1ZDk5ZjhmYTJkZTA2NWRlZGJmNDQ0MGUzYmI2Y2Y3NTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiOGM0MjJmYmRmM2Q1ZWUxODMzOGY4N2FjOGZiMDQ4MWUxZDk0YmJlM2FjZDE5YTUwYmYzYzIzODgxMDZmNWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://core/data/src/test/java/com/core/data/network/SSLPinningTest.kt#L23-L56",
+          "version": "repo-lines-v1:sha256:77219c47c50d2f8421f7b76676a2920422bee94258f5224c2f7269797f31f71d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcyZmNjODJhN2U0MDI3YTA3NGZlNDBlYzk2YzhmMGExYWE1MmNkODRmMzliNDNlYmVmYjJjYzIyMGUxM2JhYmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2ZGYwY2NhNzkyYmQ3NGQyY2NmZTI4MjcwNzBiM2JhYmJmYzE3YWY4MGQ2MDlhNTg0MzdmZTJjMGQ0OWI5ZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3b667b0e60e04eaaa9dbb285272ee062",
+      "statement": "network_config.xml defines cleartext and debug trust-anchor settings but is not referenced by an android:networkSecurityConfig attribute in core/data's manifest.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/AndroidManifest.xml#L12-L25",
+          "version": "repo-lines-v1:sha256:3beb70bc809b5ae73b6c02c975fbbc4f440f81916feb1e8cbe0980c54f70723b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0MzVhMDVlZGZjNDdlY2ZhOTE1NjZlNWIxODhkY2M2OGJiZThlYTFmMDNjNTk2MGU4YzFjNDE2NGU3N2RkOTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkNjAzN2U3NjgwOTFhNjY1NzE0YzA0NmIwNDA5OWEyYmFmYTlkMmVmYjk2YjE5Y2NkYzg2NTg3ZDM0ZjFkMjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBkODJhYmJjY2JlMzBjMmUzNDhjYzFhMGM0MGQ4OWQ4YjkwNjAwMTBiMjFkNmNiNDhiZTEwNTUyZDZiMDMxNmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1YTg4NTBmY2YyNDA5M2VkYjcwMWM1NWIwY2E3YjM2Mjc1MjVkZTVkOGY4ODdjOGJjNjk4OTBjNmRkMmVhNWEifQ"
+        },
+        {
+          "resource": "repo://core/data/src/main/res/xml/network_config.xml",
+          "version": "repo-file-v1:sha256:0f97fd16813435d2b9193d738aaddb3663d3b6c98c19dd0133f5d215e3508c70"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T12:11:14.549Z"
+  }
+}

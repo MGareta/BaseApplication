@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:90de6aa590288d99b0944a2dd924bd72861cca3c67d42ccfde51c01233b3b0c6",
+  "claims": [
+    {
+      "id": "claim_5efc505b492846a99b8dd5d4800723ac",
+      "statement": "Environment is a sealed class with DEV, UAT and PROD data-class subtypes whose default apiUrl values are http://dev.api.example.com, http://uat.api.example.com and http://api.example.com.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/environment/model/Environment.kt#L3-L24",
+          "version": "repo-lines-v1:sha256:ea8c070ecf785dd2d035746f6f6d42dbef52e0964b8b5b96c3cfed7dd2e0ec2b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyOWMyODk5NGQ3YjU1ZjI4NDE2Y2NmNWE1ODhhMTRmZDBkNzlmODhmOTIyZTY4ZTk5MjBjYjkzYWUxMzllM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgxMGJhZTMwMDJlMjFkYzViY2U0YzVlYjVkOGE4OGM2ODA4ZGIzZGE4MTFhYWI0ZjI0YTVhNDc3MDdiZThkMDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_edd70ea839514e258018d4b0f040917a",
+      "statement": "IEnvironmentManager is a @Singleton holding a mutable, non-persisted environment property that defaults to Environment.DEV().",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/environment/di/EnvironmentModule.kt#L11-L18",
+          "version": "repo-lines-v1:sha256:af12179a995ea8fe399f9bcb961ae05cd2951b5f329d3d8515cc3ad4b61c736c:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTk1NWY1MWQ3ZTI5MjE3YzExOTQ2YmEwMDg1Y2VhNWRiZmU5MDFmYTcxZTZmYzk2MjE3YmU3ZDc5OWVhOTNmMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWM4OTAwMjM0ZDA4NzA2NTlhMjRlYzQ1NDQzMDdlYmJjYjEzYWNiZDM0YTlhY2U5NDMyMTE1YzE1NGVhZDgxMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/environment/manager/EnvironmentManagerImpl.kt#L5-L8",
+          "version": "repo-lines-v1:sha256:c198facceb532a3424330c434bf7c0b215812774f7b27d612c1dc4a8dcb70928:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDI1NDFmYjFjMjViYzIwMDk1YTg5MTM5YWUzZjlkYjgwOGI2ZTRkODg2OGYwZWU4NDE5NmE5Y2QyOTkyZGFiZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjFjNDQ1MTQ4MzgyM2FmYTYyOGUwNTIxMGZjZTNmYWZhMWFjMjE0NWQ1NjAxMDc0Y2NlMWE4YzMyMzJjNDBmMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_27ead3c315eb424781550dddadf42f51",
+      "statement": "NetworkModule enables SSL pinning on the singleton OkHttpClient only when environmentManager.environment equals Environment.PROD() (data-class equality, so a PROD with a custom apiUrl disables pinning); otherwise it installs the trust-all configuration.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/network/di/NetworkModule.kt#L44-L63",
+          "version": "repo-lines-v1:sha256:4e0bf6658cc035449dbd8c94934a90bf0c52c9c15cb70e5fa0723d1812e40b89:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1ZDAwYmQ1MDQwOWM0MWE3MjUwM2QyYTE3YWY4NjUzYTUyNjkxMDgwZmNlM2ZmOTI4ZWMxNzZjMTE2YjVhZjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyZGEzNjEwNTcxMGFkMWI1ZDcwNzljNzc5OTA5YzNjYjNlMzUwNDc3YTQ3MTc2NzFmMWRhMGZlNjA4MzY0ZDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM0OGEwNTZjYTBmY2M4MzQyNTQwNTRlMTdkNjFhNGVhMTMxODcyODMxMDhmYTdiNGYxNzMyZjQxNjMyMjU2NGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNmNzhlZGIxZjNlN2JjMWE0MTAzNTJiZTJkMmI1Y2NkNjA1MTYzMThhN2IzMmVkZDg1ZWEzOWFmY2NjNjcxMWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d03586ef5aa84d91afe097d3a395e9e3",
+      "statement": "Retrofit services take their base URL from Environment.apiUrl when built, so environment changes after singleton creation do not affect existing services.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/download/di/DownloadNetworkModule.kt#L16-L27",
+          "version": "repo-lines-v1:sha256:1cd8f1673293e2b9b32bf4280f51edc10eb06631e6232d759eddd8cd749eb826:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1ZDAwYmQ1MDQwOWM0MWE3MjUwM2QyYTE3YWY4NjUzYTUyNjkxMDgwZmNlM2ZmOTI4ZWMxNzZjMTE2YjVhZjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZhNTk0MjBiNmJmM2FjNzU4MWQ3ZTVkN2I5MGFlYTI3YWZjYzNmNmQ0OWVlODUxMTVmYzMxM2JmNzVkYTBhNmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/network/di/builder/RetrofitBuilder.kt#L14-L27",
+          "version": "repo-lines-v1:sha256:913dcdf0ed77c6c4246d44fe9b9123280e57db9f32c2c18717721149e8dc04da:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhY2U1MmMzYmUyNjUzZDJmZDExZDQ5N2E4MzRhNmY0M2Q4NjhhN2E0NzE5OTIzZDYyOGM3MGZmYjY2MmZiMWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MmFlNWNkY2MxNzUzMWQ1NzE5MzdkNjM5NGE3YTg3NGJjMTI5NjZlY2E0OTZjZjIyMjZhYTY0MTIzNmZiNDAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE2ZGY4ODI3NmZhZDVkNmEyZjkxM2UyYzEzZmU2MDhmNGUzNjBiYTUzZTdiNmI0MDI0MGZiYjhkMDllMzA2MGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYwMWM5OWRlMThmNjg0YzBkYzMxNTMzYmI0Nzg5YzliYjkyODVhOTc5NTk4YTEwZmQzM2ExNTUxYjM2ODRkYjQifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T12:11:14.549Z"
+  }
+}

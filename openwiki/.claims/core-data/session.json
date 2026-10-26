@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:02cd93e6e4e562ea0049c139a5fa41cdb3cac1fca4a329156a132ce4e341cec2",
+  "claims": [
+    {
+      "id": "claim_c3f0fade02f6478a859b862d5b1690f1",
+      "statement": "SessionManagerImpl emits SessionCommand.Warning when a CountDownTimer(5000 ms, 3000 ms interval) tick has 3000 ms or less remaining and SessionCommand.TimeOut on finish, through a conflated Channel exposed via receiveAsFlow.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/session/manager/SessionManagerImpl.kt#L17-L48",
+          "version": "repo-lines-v1:sha256:03ea16526c09734ae3a29928fa06c6f64239d78766cc69546f7e953396997423:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0ZTVkMDAyNDcyNWI0ODU5NjBjOGM5ZjUyMDcwNWVjNmI0NmFmZGU2OWEyMzk0MzllMjYwNmIwNjhmYzliZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiNDY3YWFmMzMzY2EyYWM2M2U1ZGEwYzNjOTc2NTM0Y2FlMGI1MWMxMWY2YjY1YzE1YmRmOTk0NDMyMjVlMDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM4MjNkMjQyOWNiN2FhMjliZDVjODY5ZGJjNTE3MWRlYTk1NzU1NDRmOTMzYzQ0ZDRlNTJjNTM3YjdkNjEwMzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRhZjViM2Y0ZTcxMmUyNmQ4YTljZDk5Zjc5ZTYxNTkwNDViZTQ0ZTdkMmIzM2UyMThhMTAwNjE2NzUzYzI0ZmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a97d36781d3140678ed061ebb844eaf9",
+      "statement": "startSession starts the timer, sets Active and caches SessionData(user, token) in MEMORY_CACHE with an ImmortalCacheConfig under Constants.SESSION_CACHE_KEY; invalidateSession cancels the timer, sets Inactive and deletes that entry; restartSessionTimeout is a no-op while Inactive.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/session/manager/SessionManagerImpl.kt#L50-L94",
+          "version": "repo-lines-v1:sha256:c4db07871cf795594661bbc39b2377bfd8fb8017cd28b562b79a6538d8dc2158:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczNjc1NDAzYWViOTAzYTNiYWE5NTJkNmJjM2MwNDU4ZjlmNTE0OGUyMDU1MWZkOGYyNmExYWQ0YTBjYzIyN2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU2NDA1YjQxNDY1YmRmNjUwYWNiZDkwNzBlMmNiMWEwZTU3NWI4YmU0YTI1N2Q3ZjE5ZDVlMGVmNGU4ZTRmYmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e766faca2fd14a1d8944d3924ff3ac00",
+      "statement": "SESSION_CACHE_KEY is \"SESSION\" followed by a random UUID hex string generated per process.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/session/utils/Constants.kt",
+          "version": "repo-file-v1:sha256:36259742321e75c598be047bfaceada7435a6b5fc809ef0ccfefd511cefb6210"
+        }
+      ]
+    },
+    {
+      "id": "claim_54024c4fa20241278a5cd2a0c64056c4",
+      "statement": "BaseActivity collects session commands with distinctUntilChanged, mapping Warning to onSessionWarning and TimeOut to onSessionTimeout (default invalidates the session), and restarts the timeout on user interaction.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L170-L186",
+          "version": "repo-lines-v1:sha256:5626f54604a864c0fd2abff9285027908431735e396471c1db6ab0ba307b1d75:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJmM2UzN2Y2NzljZDY2NzAyYjcxZjNmOThkN2IyYjYyZTAwMGEzM2FkYjQ4OTE1NDdjNjZhOTJkNDEyNGIxNzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L85-L96",
+          "version": "repo-lines-v1:sha256:acd16e10d10077b8913878a94140d35c753370323ba28af66426c9f8a2ccd261:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4ZDNhNTgyMmM3YmM4NzIwMTkyYjY0NjAzYzZlNWQ1YTUwNTdkY2JiMWJhMjdhNWJlYzFkNTE1ZjRkNDNkMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyZDg3MTc4MDMwNWQ3NDc1MTAzMzViNjU2ZmJmZThiOWEwZmI5OTgzNjhhNTYzNzhkOGUyNDM4MTg3OGNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0MDhmMzM4MTYzZDlkOWYwZTI5ZTIxMmZjYjdjNWZjOWYzNWIwNzc5YmQwNGI0NTM2ZmY4ZjNlMTg2NDYwZjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9947ff02383045cc8ab03d823775d7c0",
+      "statement": "SessionModule provides a singleton ISessionManager backed by ICacheManager.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/session/di/SessionModule.kt#L12-L23",
+          "version": "repo-lines-v1:sha256:634aa555fe9e719d983f969ef4153278e3d455c40158294b0f64a1beccd5ecdd:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NTVmNTFkN2UyOTIxN2MxMTk0NmJhMDA4NWNlYTVkYmZlOTAxZmE3MWU2ZmM5NjIxN2JlN2Q3OTllYTkzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjODkwMDIzNGQwODcwNjU5YTI0ZWM0NTQ0MzA3ZWJiY2IxM2FjYmQzNGE5YWNlOTQzMjExNWMxNTRlYWQ4MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T12:11:14.549Z"
+  }
+}

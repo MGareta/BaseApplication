@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:e2abd9bdaee92cf7b3ab6d634f27ece50494fe51006df3b70d91f098983fdd5d",
+  "claims": [
+    {
+      "id": "claim_52a83143b7e04f2890b46bc92ae0f805",
+      "statement": "CacheModule binds CacheMemoryScope under CacheScope.MEMORY_CACHE and CacheDiskScope under CacheScope.DISK_CACHE into a Hilt map that CacheManagerImpl receives, and provides the singleton kotlinx Json configuration used by the scopes.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/cache/di/CacheModule.kt#L20-L69",
+          "version": "repo-lines-v1:sha256:5670a6a82bbb8d0239c73b6fea1a701a9f20ce76e711bfef92ad0db2d09052b5:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NTVmNTFkN2UyOTIxN2MxMTk0NmJhMDA4NWNlYTVkYmZlOTAxZmE3MWU2ZmM5NjIxN2JlN2Q3OTllYTkzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiNDZiZGMyMmJkNzUzMTdhOGE1MTI0YzVjMDlmN2QwNzlhMDJmNDRlODQxM2MwZTQzYWI3YzA1MWIzMTdlNmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fbcf090ffb544dcb9a83e9b3944f2ecf",
+      "statement": "CacheManagerImpl.getData returns ApiResult.Exception(NoSuchElementException) for an unregistered scope, deleteData with a null scope deletes the key from every scope, and cacheData on an unknown scope is a no-op.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/cache/manager/CacheManagerImpl.kt#L13-L55",
+          "version": "repo-lines-v1:sha256:67cdf247b7688469ae24abc3ead2171dddffa692adc474787841bff0b9063c3d:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkY2NjNThlNjlkZjJkNDEyNTllNjM1ZTk2OGM5MTkyY2ZiZjg3MjYxNGE0YjRhNDkyZDVlMDAxM2ViNjg4MjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk1NmI5YzRjYjc0MjY2ODMyZDM5Y2E0MGM3MzcwNzdhMTk2OTFmY2E4OThhZmE2OTQwMDEzMTE0ZWViYTFhMDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f2b4f9633c9e4ae3be0a1bc0198bff31",
+      "statement": "CacheMemoryScope stores CacheEntry objects in an android.util.LruCache whose max size is memoryClass*1024*1024/8 without a sizeOf override, and returns NoContent for missing or expired entries.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/cache/scopes/memory/CacheMemoryScope.kt#L28-L83",
+          "version": "repo-lines-v1:sha256:e6ecf46c60ae0c462a12b37e8dc63b296a6a16bd5d24d110325fa5174834808e:eyJzZWxlY3RlZExpbmVDb3VudCI6NTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmZWVjMWNiZjZlNjdhMTViOTIxZDQ1MDA4MWFmMmRhN2ZlODc1MTc0MTIyNDQxNmU5MGMwOTAwNGNjYWNiNWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM0ZmFjZTI1MjkyOTE0N2Y5MDViNDFhM2FlY2E4YWViNjc5ZTNiOWViYjIzYjM4MGNhZjhjMjQxZjYyNTc4ZGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIxMGNmZTk4ZTA2MzgwMTliOWRlMGI4OGEyYzg2MGNlNjE4YWQ0OGFkMWU3OTg4ZWQ4MjBiNjFjNmRhY2ExYjYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e5549be9a3dc4e3d93def97ebb5e2594",
+      "statement": "CacheDiskScope persists entries in a Preferences DataStore named \"cache\", AES-encrypting the serialized value, the CacheEntry and the key via ISecurityManager, and looks entries up by decrypting each stored key name until one matches.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/cache/scopes/disk/CacheDiskScope.kt#L28-L147",
+          "version": "repo-lines-v1:sha256:1fab167529ab3ba79cac8a41e41d05d3a52270c1bb126b41e54c4595353da1e1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJhNjNjMTkzYWQzZmVjYTY0ZDgwNjE3NDg2YTJhYWE0YjFhMTEzMzJmNWE5NjRjMmUwMjJjYzIzNjNkMGJmNmM3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI4NjZmMjkzYWYzZGUxMTNkYzQ4YTQ3ZTFmYTUxZWU1YThiZGU4MjRkZGM5MWViN2JkYmJlYmY1ZGI0ZjUzYTM4IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI1N2E3MWU3NjdkM2RkZWI5ZGI1MTE1Y2YzM2VlYWE1NjQ0Y2IwNDY3NzVlNzY5YjQ0MTE3MjQ3M2IwYzY0OTEyIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_52e3adaa00e34795bbf19ef226a18e01",
+      "statement": "A CacheEntry expires when timestamp plus duration in milliseconds is before now; infinite durations (ImmortalCacheConfig or unknown configs) never expire.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/cache/model/CacheEntry.kt#L8-L15",
+          "version": "repo-lines-v1:sha256:1b6825a28164ae0597271d8d7e3df6d656c8295e04003a978a472b0aa63ec6b2:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmYzOGU0NmZhMzAzMDU4YmVhN2FlM2MyZWYwNWRhNmU4NmNmM2E4NTQxNDZjNmU3YWRlY2Y4MGVhZTdjNWY1ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTE0MmEyYzU1YTk3NTQ4OWMyNGUxZTY0MTZjNzViYTA5OTU2MzdkNGJkN2IzOTMyZjEwOGEzMDg5ZTRhY2ZlOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/cache/utils/Extensions.kt#L13-L24",
+          "version": "repo-lines-v1:sha256:6e5df15a9faeb56f7f47bf53703f802007c8ca07293b2f9144143c27e903c8b4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwMGQxYTI2YTBmZjExZDU4NzhjM2JlZjQ0MTMzZThmNzJhZmZhZTQ2NjY1NGE4NTcyOTg0ODlkNzA2YjcwYmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNhYjAyMTA3MGNmOGI5NzI2MDQyY2ZkODkwMDlkYjI1NmRhZDI2ODcyNGY0OGU3MmY4NjgwNDFlNWNkYTJkZmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3ZjFlMjJlZjUyMWI1NWM2MTAzZjYwYzAwNTNhZWI1OTlkYTI0NTM4ODU3YmE5ZmRmMTA0YTc4ZTQ1NjYyMWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cc4c4a354dad44109b62d0f6e12edd80",
+      "statement": "repositoryPattern returns cached data on a hit, otherwise (or when config.bypassCache is true) calls the source and caches only ApiResult.Success results.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/cache/utils/Extensions.kt#L26-L59",
+          "version": "repo-lines-v1:sha256:c55a941919f02f9c71eec1069927b61b03bd41af1a64d6fc7d9daee5f0591a6b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2Njk2NTEyMjFiZDM5YTNhY2VjZTJhYTJmYWY4YTI5YTg1MTI3Y2RiOTFlZjQ1ODZiZWU1OWUxOTJiOGVkOTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFhZGMwMjc4NzQ5OTM1NDU0NGRjMmI2M2QxM2I0YmNjYmE5YjEwNTQ0YmYzMGVjMzM1MTNkNWE2NjcyMTcwZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e8a32aadf2b640d58446a8eef501e2bb",
+      "statement": "DynamicLookupSerializer only supports encoding: it serializes ArrayList recursively and other values via the contextual or class serializer, while deserialize throws.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/cache/utils/DynamicLookupSerializer.kt#L13-L49",
+          "version": "repo-lines-v1:sha256:28de5f950d18246d9f6645c2f92a49bfdbcc65ce709ccbb1afa57ef22bffe198:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwMGQxYTI2YTBmZjExZDU4NzhjM2JlZjQ0MTMzZThmNzJhZmZhZTQ2NjY1NGE4NTcyOTg0ODlkNzA2YjcwYmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI2YTljODM5ODQ5NDJkZjZjYjZkNTQ1NTRjZmI0YzkxNzZhNWNmYjIxYzgwMjdmYjFiNmE4ZjQ4ZGU0ZjdjMDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b1c29d00bd17413e8a3ce25c1617a85c",
+      "statement": "CacheManagerTest uninstalls SecurityModule and binds an identity ISecurityManager mock, exercising both scopes for caching, deletion, scope clearing, TTL expiry and repositoryPattern.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/test/java/com/core/data/cache/CacheManagerTest.kt",
+          "version": "repo-file-v1:sha256:377b37407cc3e38ea75fd7c8878fa8a94f5684ec8357a850fa37038d2c4c8882"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T12:11:14.549Z"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:fc70fb237b6dc1e1d5ae5f99716965154f7ce86c2eb5026222a0614527b6f9eb",
+  "claims": [
+    {
+      "id": "claim_0b1434773e4248ceb1e9d3f96fea1114",
+      "statement": "Analytics frameworks are contributed to a Hilt map via @IntoMap and @AnalyticsFrameworkKey; FirebaseAnalyticsFramework is bound under AnalyticsFramework.FIREBASE through an unchecked cast to IAnalyticsFramework<BaseAnalyticsView, BaseAnalyticsEvent>.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/analytics/di/AnalyticsFrameworkKey.kt#L6-L9",
+          "version": "repo-lines-v1:sha256:55bd64cf2eb11e4478d98b1cf3f970257300a8f78797a49e12ddaf4101cfbcc0:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzFlODQ3NTk5ZTY1YTE5NjZkOGIxODVmYTg0Y2NjMTkyNjdhNGNjNmZjOGY2MDAxNzA0MmI1M2ExNjczN2YwZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFmYmEwNTI3YzM5NTNjNGI2ZTBlNWI1NzM5YmE4MzYxMmY4MDUzYmNkYzk0NjY3MzAxOTNjZDFkNTkwYjQwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWJmNDI1N2M0MDFjZjg0YzNmOWVkNDYyMzU1YzJlZGZlYjM4Mjg2ZWFkYmIwMDA3M2E4M2U5MDNmOWQ2ZjA2ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/analytics/di/AnalyticsFrameworkModule.kt#L15-L26",
+          "version": "repo-lines-v1:sha256:6744b659aed62d72db734ef07464816e1f85779db094c55683479d6633ed1c04:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NTVmNTFkN2UyOTIxN2MxMTk0NmJhMDA4NWNlYTVkYmZlOTAxZmE3MWU2ZmM5NjIxN2JlN2Q3OTllYTkzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQzYTk2MmZkOGFjYjgzYmM0NjQ5ZDk5NzdhMmQ0NDk3YzIwYmEzYmNhYzg4M2NjY2EzMmFkMjBiMGRlMDM3MDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4439831370d04eb6bf8f11b03efa70d5",
+      "statement": "AnalyticsManagerImpl.initialize runs every framework's initialize concurrently with async/awaitAll and returns the first ApiResult.Exception if any, otherwise ApiResult.Success(Unit).",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/analytics/manager/AnalyticsManagerImpl.kt#L19-L33",
+          "version": "repo-lines-v1:sha256:ddfbdebbd092a9f2666b9c36b6b7e54da89b07c1530f65345ed612e5fc81ecf7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc1MmIwMWE5NTk0ZmVjNjA4ZDgzZDUyM2I4NTA5MTI0MGRmM2FhYjdhNjgyYTJjODIyOWQzZDVlMmUyNGQ2NDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc0NmQ2NmQ3OWEyZTA5ZjRmNTU0ODY3ZTM1ZjE5OWE0NzE3OTJlYThmYzBhMjFmNGFkYTMyZmJhOGVlNDgwYjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc4MjkxM2FmNGFkNTY1ZjFmYzhkYjdiYWM1NTZkMjBhZDYxOGIzZjQzNjVlMWMzNDliYWVhM2E1NmJkNTFkNDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1a555f63399b4b9fbda4cbeb2c1ae990",
+      "statement": "trackView and trackEvent route to the single framework selected by the AnalyticsFramework argument and silently do nothing when that framework is not registered.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/analytics/manager/AnalyticsManagerImpl.kt#L35-L47",
+          "version": "repo-lines-v1:sha256:01bd4a0687364e444b2feff4aea80b926e2a2dfe605991d05c200f477f13e56f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmN2JiNTVjNzVhNmQ0ZTI1NTgwNjIxY2YyMGVlNzZiZmJhMjdjODk2MWZkM2NhNDM2YjY0NDEwZTYzNDc5NjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRlZTJjM2U5OGQ3ODQxOWExNzM5MjdhNjY4MmYxOGEwYmU0N2M5MjZkNTNhN2JlMGRiNmI3NmZhMGQxY2JhY2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7e97d0d946fe4e5cb6e1c4043e137657",
+      "statement": "FirebaseAnalyticsFramework enables Crashlytics collection on initialize (catching exceptions into ApiResult.Exception), logs views as FirebaseAnalytics.Event.SCREEN_VIEW with the view data as bundle, and logs events with event.key as the event name.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/analytics/frameworks/firebase/FirebaseAnalyticsFramework.kt#L13-L34",
+          "version": "repo-lines-v1:sha256:fdb097bf48a21b9e30c29390fc3e6cb822df4398a0e776ca078b9a9246d6a7b3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIzZWU5Y2YwMDFiY2E5MzhmY2U5ODczNzNmMjBkOGE2MjcxZmIyN2VkNzVmZDZkZDk1YmI5NWM1N2NiNTk0MTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY5NmQ5NmM2YzY5M2JjZGM5NjUxZjc2MzA1ODk3OTRhMWUwMDQ4N2IzZTIwMWE0NGFmYTJhZWI5MzExOGFiODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2c92ea57bfc04fe8ad639fed5cce47ea",
+      "statement": "Tests replace AnalyticsFrameworkModule with AnalyticsFrameworkModuleTest via @TestInstallIn, binding a relaxed mockk framework under FIREBASE.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/test/java/com/core/data/analytics/di/AnalyticsFrameworkModuleTest.kt#L15-L28",
+          "version": "repo-lines-v1:sha256:2714fd58cf76e711e1428ebd3f3d87e175b615364b6c1124f388f51346a5d091:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NTVmNTFkN2UyOTIxN2MxMTk0NmJhMDA4NWNlYTVkYmZlOTAxZmE3MWU2ZmM5NjIxN2JlN2Q3OTllYTkzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFkYzQzMTI3ZWViMjlmNzQzMzE1Njk2YzE5ZTNjNzVkNmQxMmFlNWE1NjgxYjQ1MzNhY2UyMTNhNGM0MDI3NTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T12:11:14.549Z"
+  }
+}

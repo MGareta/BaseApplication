@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:bca3766f875e330470dd91418691ed24c60f7f5aec3afe49f0307245325437bd",
+  "claims": [
+    {
+      "id": "claim_a3e41a1c5a794a4e8f949f4f4af5ae64",
+      "statement": "The app's MainActivity extends BaseActivity, which extends ComponentActivity rather than FragmentActivity, while ActivityProvider only records FragmentActivity instances, so activity-dependent core/data requests have no current activity in the shipped app.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/com/baseapplication/MainActivity.kt",
+          "version": "repo-file-v1:sha256:4e3b73134151661e4d479cb9b5dfe23205e273e8c772981f72244a2743dcf81a"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/utils/ActivityProvider.kt#L45-L63",
+          "version": "repo-lines-v1:sha256:6c8f21f1668db01f400a0d6a8ab70f289eaf59abbfd04f0de46cf8626efde48c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkYmU0MWYwNWVmZGEzZGE0ZGMwYWY1MzA3YjE0ODA4OWExZDljOGQ2MDliODdiMWE3MWIxYmYzMjg0Nzc1NmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY0OTM0YjA5YmFkNWRhODZlOTEwNDNjODczY2NlYTQ2Mjc0NWM2ODIxYTIxMDFjMmIyMTk0ODhkNWE3NTQyNTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIxZDI4NWRkMjQzMGNkZGEwYjBlMjI0OGU4NDQxYTg4ZTA3MTg0ODFhOWUyMmY1YTkyNWI1MjU5NzMyMWM0NzEifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L50-L50",
+          "version": "repo-lines-v1:sha256:9d1d9b46d613dade48920b1bc7c1ad063c7c2a9250d17e2066efbee6e929123a:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWQxZDliNDZkNjEzZGFkZTQ4OTIwYjFiYzdjMWFkMDYzYzdjMmE5MjUwZDE3ZTIwNjZlZmJlZTZlOTI5MTIzYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWQxZDliNDZkNjEzZGFkZTQ4OTIwYjFiYzdjMWFkMDYzYzdjMmE5MjUwZDE3ZTIwNjZlZmJlZTZlOTI5MTIzYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTZjNzczYmQ3YTcwZTRmODMzMjJkOWY3YjE3ZDU2NzQ2YzkxOGRiNWQ4M2IzODM1ZTk3ZDVlZTI4NGFmZDIyNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2EwYTE2ZTQ3NDg1NGZlOTUxMmZjZjE5Yjk2MTcyMTVlNjE3MjgxYjNkMjUyYTQ2NjgwYjRhNjI0OThiMzZiYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_40079093e63c4a3da02596566e365dfc",
+      "statement": "BaseActivity collects ISessionManager.commands to call onSessionWarning/onSessionTimeout (default invalidates the session) and restarts the session timeout on every user interaction.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L170-L186",
+          "version": "repo-lines-v1:sha256:5626f54604a864c0fd2abff9285027908431735e396471c1db6ab0ba307b1d75:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJmM2UzN2Y2NzljZDY2NzAyYjcxZjNmOThkN2IyYjYyZTAwMGEzM2FkYjQ4OTE1NDdjNjZhOTJkNDEyNGIxNzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L85-L96",
+          "version": "repo-lines-v1:sha256:acd16e10d10077b8913878a94140d35c753370323ba28af66426c9f8a2ccd261:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4ZDNhNTgyMmM3YmM4NzIwMTkyYjY0NjAzYzZlNWQ1YTUwNTdkY2JiMWJhMjdhNWJlYzFkNTE1ZjRkNDNkMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyZDg3MTc4MDMwNWQ3NDc1MTAzMzViNjU2ZmJmZThiOWEwZmI5OTgzNjhhNTYzNzhkOGUyNDM4MTg3OGNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0MDhmMzM4MTYzZDlkOWYwZTI5ZTIxMmZjYjdjNWZjOWYzNWIwNzc5YmQwNGI0NTM2ZmY4ZjNlMTg2NDYwZjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c9618cd44d794db5b71a0898359c2a3b",
+      "statement": "Feature API services are provided by injecting RetrofitFactory and IEnvironmentManager into a Hilt provider and calling create().build(kClass, environment or url, interceptors).",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/download/di/DownloadNetworkModule.kt#L12-L28",
+          "version": "repo-lines-v1:sha256:4c1fb1b8dbd074467536e3ab087d12cdc44baea1a8c34b514e59c25c4e5f31ce:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NTVmNTFkN2UyOTIxN2MxMTk0NmJhMDA4NWNlYTVkYmZlOTAxZmE3MWU2ZmM5NjIxN2JlN2Q3OTllYTkzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjODkwMDIzNGQwODcwNjU5YTI0ZWM0NTQ0MzA3ZWJiY2IxM2FjYmQzNGE5YWNlOTQzMjExNWMxNTRlYWQ4MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/network/di/builder/RetrofitBuilder.kt#L14-L42",
+          "version": "repo-lines-v1:sha256:025a48629854fd0a4cc65b055ac3da80421109beabeae4d795b990ad4da77f0a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhY2U1MmMzYmUyNjUzZDJmZDExZDQ5N2E4MzRhNmY0M2Q4NjhhN2E0NzE5OTIzZDYyOGM3MGZmYjY2MmZiMWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MmFlNWNkY2MxNzUzMWQ1NzE5MzdkNjM5NGE3YTg3NGJjMTI5NjZlY2E0OTZjZjIyMjZhYTY0MTIzNmZiNDAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE2ZGY4ODI3NmZhZDVkNmEyZjkxM2UyYzEzZmU2MDhmNGUzNjBiYTUzZTdiNmI0MDI0MGZiYjhkMDllMzA2MGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBmOGVmNWI2YmEzN2QzNTA0ZThhNDBjNzZiODYyYjZiYjRmNjUwOWVmYzYxZmE4YmFjNTA1MjRjNDdmZTAyM2EifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b7f6adba125d46aaa5363cac902a722a",
+      "statement": "Feature data modules receive core:data as an api dependency through the FeatureDataPlugin.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L50-L65",
+          "version": "repo-lines-v1:sha256:d327deb4a484b16ce6fed38316a2b5e8eb58c21f7feb7cd3a8650aa6db55c511:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxYjk5ZmE0MjJmNTc1MTk0MDUzM2MyNTE2OTdkMjNkOTZjMGMzMzE5OGQ1YjM4YjEyMmYxMzE2ZTczYTk5ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlhNzk4ZWIxMTE2N2ZiMWJkMTg4YTZhZTFiYWUzNzk3MTJiNzI0MTkzOTdkODEzYjhmMDk0NDBjNmRkYThmODIifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T12:11:14.549Z"
+  }
+}

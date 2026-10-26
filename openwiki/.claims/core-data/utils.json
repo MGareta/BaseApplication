@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:dac312614cfe70d3c5b083ef2f018896f89ebc8433c95751396a7a50501cc2b0",
+  "claims": [
+    {
+      "id": "claim_4151f77996444be6a38f81b8bcb470d2",
+      "statement": "ActivityProvider.init stores the Application as applicationContext and registers lifecycle callbacks that record the activity in a WeakReference on create, start and resume, but only when it is a FragmentActivity.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/utils/ActivityProvider.kt#L38-L63",
+          "version": "repo-lines-v1:sha256:7706a7e5fe979af4f45a8b46690b5b8227190dfb7c3a7df56b9fadf6a15d26ed:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1ZGEzYzFjYzJkNTE2ZjlhOGIwZDM1OTczZWNmZjliZTk0MWQyMTQ4Njc0ZGRlNzA0MTQwZmE4OTRlNzUwZTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUxNDU4NDA3NDAzMjY5NjI4ODBjOTFmYzUyMTY1Njc5YzE5ZTBlYjYzYmI3NzkxYThhNjhlZmNhNGIyMzQyMDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIxZDI4NWRkMjQzMGNkZGEwYjBlMjI0OGU4NDQxYTg4ZTA3MTg0ODFhOWUyMmY1YTkyNWI1MjU5NzMyMWM0NzEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_49e596aa77da4e2695977301a4fce214",
+      "statement": "currentActivity and activityFlow only expose the tracked activity while its lifecycle is at least INITIALIZED, and activityFlow de-duplicates emissions of the same activity instance.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/utils/ActivityProvider.kt#L26-L36",
+          "version": "repo-lines-v1:sha256:ec5b3c33362aa2f6318fb2e31c7c486f98e1cb3e225bdfab9078f2067bb74f9d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2Yzc4OTdhNWQ0MzcwMGJmOGQ3OGQ0YTliOTI0ODI3ZjI4MDllMjY5YjY5MjU5MGE3NzU4MDI4NDM1YTZjOTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiMzI3MGUzMWRmMzljNDNkMzAxZDEwYmExMjVkODIzZjEzZjg2OTk5NTgwODgwYjg3OTg0MWJhNTJiMDBmMjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5ZWEyODQ5MDc5ZTY3Zjk1YzZiMjJmZjkzY2U5NGZjNDRlNTIyZThlMDhkZWZiZjFmMjQxYTNiYmMyYWYwYTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ4OGVjNTkyNjMzOTdhNWE1YjY2NDM0YzgxZGM2MTAxZmYyYTAzYzNhNjk0ZTFmM2VkMGYzMTQxMDY3YjgzMTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_91f0375c29b64089badea08f49015afa",
+      "statement": "ActivityProvider ignores pause, stop, save-state and destroy callbacks; destroyed activities are hidden by the lifecycle filter rather than cleared.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/utils/ActivityProvider.kt#L65-L88",
+          "version": "repo-lines-v1:sha256:3d1302e069a68a85a4baf5b17c53376a9e1236ecc05306dace978683e35670c3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyNDE5YTY4ZWM1ZTRkOTk5ZmEwNTFlNDY3MzIyOTVjYzg3NjY4NDQ1N2ZmODRlNWUxNTYyZGE2ZDhiYzY0MTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8b3dda25b1fd4392b2ed6870b8edb914",
+      "statement": "The app's App class extends CoreApp, whose onCreate calls ActivityProvider.init.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/com/baseapplication/App.kt",
+          "version": "repo-file-v1:sha256:c95cb5896ee1dbaffec364ba4e91b6d855db3e0580594f539515bdbfdd6bfeb4"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/CoreApp.kt#L6-L12",
+          "version": "repo-lines-v1:sha256:a522194ee8cfb225863991ff4ad857f5712389694a4d488bb6c8390593ea5d0d:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWJhYTNmYzUxYzA3MWY1M2Q3YmFlOTY3ZTA1Y2RkOTg2ZmU4NTIzYjNiZTk0YTRjYjA0ZjYwNzg3NDcwY2U5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTk0MDAxZWQ0OGM2MTVjZjI0ZmFjN2ZjN2FjZTE2ODAwNzgxYTkwNWU3MGVlNWU4ODMyMjljOTg4ZmFiYThjYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e4618c96d5cd4385be61fb3d5cf179fa",
+      "statement": "MainActivity extends BaseActivity, which extends ComponentActivity and therefore is not tracked by ActivityProvider.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/com/baseapplication/MainActivity.kt",
+          "version": "repo-file-v1:sha256:4e3b73134151661e4d479cb9b5dfe23205e273e8c772981f72244a2743dcf81a"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L50-L50",
+          "version": "repo-lines-v1:sha256:9d1d9b46d613dade48920b1bc7c1ad063c7c2a9250d17e2066efbee6e929123a:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWQxZDliNDZkNjEzZGFkZTQ4OTIwYjFiYzdjMWFkMDYzYzdjMmE5MjUwZDE3ZTIwNjZlZmJlZTZlOTI5MTIzYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWQxZDliNDZkNjEzZGFkZTQ4OTIwYjFiYzdjMWFkMDYzYzdjMmE5MjUwZDE3ZTIwNjZlZmJlZTZlOTI5MTIzYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTZjNzczYmQ3YTcwZTRmODMzMjJkOWY3YjE3ZDU2NzQ2YzkxOGRiNWQ4M2IzODM1ZTk3ZDVlZTI4NGFmZDIyNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2EwYTE2ZTQ3NDg1NGZlOTUxMmZjZjE5Yjk2MTcyMTVlNjE3MjgxYjNkMjUyYTQ2NjgwYjRhNjI0OThiMzZiYSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T12:11:14.549Z"
+  }
+}

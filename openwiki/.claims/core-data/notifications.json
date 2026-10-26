@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:86ba337c2766dd71012ffdfd4d338b8e82723384d8ea4c427d8ef57de050d1e1",
+  "claims": [
+    {
+      "id": "claim_a59b94454b7c44c0994d0f97c6c1b6fc",
+      "statement": "INotificationsManager exposes only enableDeviceNotifications, areDeviceNotificationsEnabled and erasedNotificationFromStatusBar; it has no API to create channels or post notifications.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/notifications/manager/INotificationsManager.kt#L6-L15",
+          "version": "repo-lines-v1:sha256:ee296a2187e8e8ba7cb94517070c2f68e49d9fd3cb9a206b2d2e3e144fc6370f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhM2VhODk0OGZhZTk4ZGE3NTIzYWRiMTZiYWJmYWM3NmU3NTdlZGFjOGE5YWJjODViOWQ4MjUxOTE4NGY4NWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0OGVhMjY0MWI0Mzg5ZmQ2NzIwNDAxNjY4ZWU4OTJmM2VjOTFiYTI3MGY0NDIxN2Y3ZTNhZjU2NWI4ZmNhM2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_31238ebd1e514c01a4cac2ccfbbb1e57",
+      "statement": "NotificationsManagerImpl.enableDeviceNotifications (annotated @RequiresApi TIRAMISU) requests POST_NOTIFICATIONS through IPermissionManager and wraps the status in ApiResult.Success; areDeviceNotificationsEnabled returns the permission state on API 33+ and true below.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/notifications/manager/NotificationsManagerImpl.kt#L18-L41",
+          "version": "repo-lines-v1:sha256:f0b0b0b59fbc5001f333f1a1cf8c849f5b2c9cc4d16684189d5893ad1d627119:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyNWQ4NTgxNzFjODQ0ODViYmY1MjE3MWEwZmU0OWRjZDk1ZGFkN2MwOGViYjc3YTFiNzg3NTExNzFiNzAwZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhZmMyY2NkNDk1ZDE5YjExNWY5NTZkZGM2MTMxNDVmYjk2MGMxZTc5NjI1NTc1M2JlYmUxMjZiMzlhNWM1MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI0MzczMTczMDc4Njk5ZTVlYWFhN2I4Y2YwMWM3NzVjODQwZjE4MWY3ZDZlMWU0ZWRmODNkZjg0NzliYWVlNmQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ac01c9595db34f049cc405a4c0a9f7f7",
+      "statement": "erasedNotificationFromStatusBar cancels the first active notification whose tag equals the given id, using NotificationManagerCompat.cancel(tag, id).",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/notifications/manager/NotificationsManagerImpl.kt#L43-L58",
+          "version": "repo-lines-v1:sha256:f8454f7ba42390d5b689a94ed38ea8c88f8675c5063f2da6f6fff26add461684:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxNzVjMGI0Y2U0YTU2MjA5YzIzYzUxNjAxNTIxNGM3NDJjZWUwYzUzOTc5ZTg0ZTQ1NTcyMmUxYmQxMjBkMDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmMGQ3NTk1MGRmMGZmOWEzZWU5NjYzOWRjYzhmZjVlYWVkYjQwZDY4MmJlYTkyNjIyYjUyMGRkODg3ZDkzZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e6b4cf17254f49e39de4749ef98c79a6",
+      "statement": "NotificationsModule provides a singleton INotificationsManager built from the application context and IPermissionManager.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/notifications/di/NotificationsModule.kt#L14-L27",
+          "version": "repo-lines-v1:sha256:b6d5f74fea88e1b0cba551706400ad638207e8a2cc11fdcee7f607d7829f9363:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NTVmNTFkN2UyOTIxN2MxMTk0NmJhMDA4NWNlYTVkYmZlOTAxZmE3MWU2ZmM5NjIxN2JlN2Q3OTllYTkzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjODkwMDIzNGQwODcwNjU5YTI0ZWM0NTQ0MzA3ZWJiY2IxM2FjYmQzNGE5YWNlOTQzMjExNWMxNTRlYWQ4MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_70c1b3139edf40369a97ea2a621b470d",
+      "statement": "NotificationsManagerTest uninstalls PermissionModule, binds a mock IPermissionManager and runs on SDK TIRAMISU, with one test on S_V2 for the pre-Android-13 default.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/test/java/com/core/data/notifications/NotificationsManagerTest.kt#L33-L50",
+          "version": "repo-lines-v1:sha256:b1ff06c0c4630ceaa14b847414ed898b562c50a92d341e77dfb429b9b18167cb:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVkYmRlMTBmNmZiYThiNzE2NTBmM2UyMWE3NTgxMTc1M2NlMjdkMzg5NmViODk1NDJmYWQxMmJiMTdiZWQ4M2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4ZTI1ZGFmYjdkN2EwNDI4MDIzNWMyMzkxNDE5NTY5NTMzMWMzNzY3YTNjZjkyN2M0NTcxOGUzMTdmYjUxZDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI2NDEyNTlmZTVhMGM4ZjlmYzFhZjZkN2M0YTJjMjY5NDhhOGUwM2E5Y2ZiMjc0ZDExYWM4N2QwZDJhMDFjOWYifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T12:11:14.549Z"
+  }
+}

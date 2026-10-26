@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:d1cf24c0849ce259f2a4ba1d6a8d801e9e6575eba8be279807f2f5f4453485c0",
+  "claims": [
+    {
+      "id": "claim_0c561058f10f4213809ab6f2d0d2f88d",
+      "statement": "FileManagerImpl.findFile looks in filesDir (documents/ for application/pdf, root otherwise) for the first file whose name without extension equals fileName, returning NoContent when none matches and a FileProvider URI with authority context.packageName when found.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/file/manager/FileManagerImpl.kt#L22-L68",
+          "version": "repo-lines-v1:sha256:e247398388eb3c127c18101c7a35ab7dce0a89561320c580a2da4b26d24c9eb2:eyJzZWxlY3RlZExpbmVDb3VudCI6NDcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNjYmUzNmJjYmRiOGVmNzVkYWRkNWM3ZGYzZDE0MjJjMmY3NDkyYjAyNzNiMDA2NTY1MTBhMzc0ZWI2YjQ5OWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdhMjc2ZDMyNzBmM2JhM2I2MWViY2ZlZDNkNmEyZmU3OTJmNGRlYTU0NzZhMWIwZjVhZjIxZWZlZTNjZWIwZmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA3MzdiYTdkNDcyNzk5MTk0MTM1MTAyNTkyYTUyZDhhNTc5M2RhYTFiOTU2MTkyY2QxNmQ1ZGE1ZGRhNDNjZjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e5144279866048efbd7d45bf739a9154",
+      "statement": "FileManagerImpl.saveFile writes the bytes to filesDir/<subdirectory>/<fileName>.<extension from MimeTypeMap>, creating the subdirectory when missing, and returns ApiResult.Exception if directory creation fails.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/file/manager/FileManagerImpl.kt#L70-L136",
+          "version": "repo-lines-v1:sha256:787172806d763afd6ef3d4b93c03069909dc17529795acb81b47e22ea57b4cf3:eyJzZWxlY3RlZExpbmVDb3VudCI6NjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlYTRiYTE4YTIyMDA4ODkwZDMyN2YyNTliYWMxYzE3YjE3Y2I4MzJlZmYwNGYxYmM1NDEwNzk3NDY0NjUzOWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmMGQ3NTk1MGRmMGZmOWEzZWU5NjYzOWRjYzhmZjVlYWVkYjQwZDY4MmJlYTkyNjIyYjUyMGRkODg3ZDkzZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_771599f5fb3a483292bf15173a0f7fc2",
+      "statement": "FileManagerImpl requests READ/WRITE_EXTERNAL_STORAGE through IPermissionManager when not granted, treats any non-granted result as granted on API 33+, and returns ApiResult.Exception(\"Permission denied\") only for PermissionStatus.Denied.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/file/manager/FileManagerImpl.kt#L26-L40",
+          "version": "repo-lines-v1:sha256:bca21977fa07a0cc58de5661e089a09d90523c347bf0f94538f9bbc2cc0fcfe2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwMWI4MTMxNjgwM2M3ZmRjM2Q0YmIyY2E4MDY3ZjBlNWU4Yzc3OGQ2OTQ2NzM1ZGQ5ZWVmZDBjZDNmNTVlYzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRhZjFiY2IyY2NmZmJjMTBmYTdlMmVmNTNmMTA1YjljNDcwMjQ4YTdmODdhMzdiY2M5ZDI1NzYyMGEwYmRhYmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwNTBmZTk2MDU5ZjlmMjJiZDE4NTg0YzdhMWZmOGZhY2I0ZTBiZGMzMGU2MzczYThiNWIxYmU0YjI1NmQ3MTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_776cce25b78b4d498f526c354aad17b6",
+      "statement": "core/data's manifest declares a non-exported androidx FileProvider with authority ${applicationId} whose provider_paths.xml exposes the entire filesDir, plus storage permissions capped at maxSdkVersion 32 and POST_NOTIFICATIONS.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/AndroidManifest.xml#L5-L25",
+          "version": "repo-lines-v1:sha256:c5cfd361f67e8368e3a281a1637b12401e8a5576e953cdc54e1a76c7bfb8ac8a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImViNjJkYWRhZDcyNzVlMGYyYTAyNWZlNzRkMzAyZjc4YmRiYTRiYjI4ODExZDY5ODJmZmIxNDYzNzMzYzIwYjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkNjAzN2U3NjgwOTFhNjY1NzE0YzA0NmIwNDA5OWEyYmFmYTlkMmVmYjk2YjE5Y2NkYzg2NTg3ZDM0ZjFkMjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI1NTQ0OGE4NWI1NThjNmFlMDJmZWNiZTM1NGZmY2EwYWQ1ZDY5ZTJkY2E1N2RjZTY4MGIxYmU3Zjk4MmNjYjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1YTg4NTBmY2YyNDA5M2VkYjcwMWM1NWIwY2E3YjM2Mjc1MjVkZTVkOGY4ODdjOGJjNjk4OTBjNmRkMmVhNWEifQ"
+        },
+        {
+          "resource": "repo://core/data/src/main/res/xml/provider_paths.xml",
+          "version": "repo-file-v1:sha256:9551cb32f054c72840021e240cf12f064c4a08800396c7cf813b162a599d9663"
+        }
+      ]
+    },
+    {
+      "id": "claim_ce862eca67b4412999fb07bbba383610",
+      "statement": "FileModule provides IFileManager as a singleton built from the application context and IPermissionManager.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/file/di/FileModule.kt#L14-L27",
+          "version": "repo-lines-v1:sha256:f464b9084c57f5c4b957e797d946b5276c0005216b184cb1b0706a0033ef9d76:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NTVmNTFkN2UyOTIxN2MxMTk0NmJhMDA4NWNlYTVkYmZlOTAxZmE3MWU2ZmM5NjIxN2JlN2Q3OTllYTkzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjODkwMDIzNGQwODcwNjU5YTI0ZWM0NTQ0MzA3ZWJiY2IxM2FjYmQzNGE5YWNlOTQzMjExNWMxNTRlYWQ4MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T12:11:14.549Z"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:6a363a5a02be165dedacbe2a3bf7ef8b7135222a1028c59456b49bdff13b9e4c",
+  "claims": [
+    {
+      "id": "claim_dd4a44b8b2e740288484f90e78e06135",
+      "statement": "PermissionManagerImpl.hasPermission checks the permission against ActivityProvider.applicationContext with ActivityCompat.checkSelfPermission.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/permission/manager/PermissionManagerImpl.kt#L17-L22",
+          "version": "repo-lines-v1:sha256:261c5f6b7e21526519a4d0143984c50470048232bb693531db80df0a0b390a52:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODEwZDY2NzZjNmZiMjczNTViM2YwMWY3NThiYjYzNDZhYzMxZGFlZmJmNWE4ODNjNGUxMDhhNmM4Njc5NzEwMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjQxZjkzNTdlZjQ3NjQxZjIxZTUzZjI3MGIwMTU0NGFiMmM3MjhhZjRjNzRkZWZiNjI2YzkxNTIwY2JhMGZkMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmFiNzdhNzlmYzNkMGRlZWI4M2E5MjI5N2ZiNWIwZDFlZjEwMWIxM2NlOTFlM2M0YTQ4MTlhYjBjOGZlNjYwZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDA1NWM1OWI2M2Y5NzE3ZjQyNzg3YmE4MDU5Nzc3M2RiYTJhYzZkNmQ1ODA5ZTQ2ZjRmOTNiZGQ4NGI4OWEzNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_04d7bc23d47740dbaa8af69802f498d4",
+      "statement": "requestPermission asks through IActivityResultManager and returns Granted when granted, otherwise ShowRationale if the current activity reports shouldShowRequestPermissionRationale, else Denied.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/permission/manager/PermissionManagerImpl.kt#L24-L48",
+          "version": "repo-lines-v1:sha256:c8b99ff801233a01e94d3f4c06c46fa48d509159098f7b9b2229533f85e021da:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyMDc0NzYwYTljODAyMzM0OWYzYjdmOTI0ZjU1YWExZTcwZTlhMWEzNDM4NDU3MzIyYmU3N2QxOWEzNGNhYTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkxODBhNTNlMGQxZGRiOTBkN2EyMjUwZWEzOTc2MmI0ZmRjM2NiNmQzODNmMmIwNjhhYWQzYjE1ODAxNzRjNWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQwOWRjNWQxZDM0N2I1YjM5Mzc0YzRhODk1ZDUyOTBiMjMwZWY3NTNiY2JiNDczYmI2NGYwMWY4YWIxZTEwZTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_53ca30116a534aaa89cb6221ebf2109b",
+      "statement": "requestPermissions maps each requested permission to Granted, ShowRationale or Denied, and when the multi-permission request returns null (no activity) falls back to hasPermission giving only Granted or Denied.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/permission/manager/PermissionManagerImpl.kt#L50-L79",
+          "version": "repo-lines-v1:sha256:709e353947c31c7f1a8f0da66027be323c84efa730fd4c9b65033240cf58aaf4:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3MjQ0YjRhZTIwMWExMmU3NWU4ZDlkZWI5YmVlOTAwZDNhMmI0NGRlZTg4OGQwYzg4NWIxNDMyMjdiNjQwZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f2cb5df2b20746658cce6ced700375e3",
+      "statement": "PermissionStatus is a sealed class with Granted, Denied and ShowRationale data objects.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/permission/model/PermissionStatus.kt",
+          "version": "repo-file-v1:sha256:21cea59e40ce742ac43c4a21aa4a120692413f367d0680430bf625383103dc3f"
+        }
+      ]
+    },
+    {
+      "id": "claim_79dcd65375544ab68f739596296ed8fe",
+      "statement": "PermissionModule provides a singleton IPermissionManager that depends on IActivityResultManager.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/permission/di/PermissionModule.kt#L12-L23",
+          "version": "repo-lines-v1:sha256:ba1db7c52fdaa6228433c58a05b6183be707739d562c8deca4f5d0a6f7a577da:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NTVmNTFkN2UyOTIxN2MxMTk0NmJhMDA4NWNlYTVkYmZlOTAxZmE3MWU2ZmM5NjIxN2JlN2Q3OTllYTkzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjODkwMDIzNGQwODcwNjU5YTI0ZWM0NTQ0MzA3ZWJiY2IxM2FjYmQzNGE5YWNlOTQzMjExNWMxNTRlYWQ4MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c4f4ad129c7f468a99edf85fbb7349f0",
+      "statement": "PermissionManagerTest uninstalls ActivityResultModule and binds a mock IActivityResultManager via @BindValue.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/test/java/com/core/data/permission/PermissionManagerTest.kt#L27-L37",
+          "version": "repo-lines-v1:sha256:6579be93d62febd4b5d7eb8783dfa52e03d6cf33fd20ef632b4a6b41ecce4604:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE3NDU4YjlmOTY5NmEyMzM5YzEwNjczYmE3ZmIzMzY4YWY3ZDUyZDUwZTljMDRlZWI2Zjk0Mzk1YmQ1ZDk3OGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlNTMxY2I2MGY1NzYwOTE0MTJkZmExODAyMjRkMGZlNjAwYTI4YThmZWRiMGE4ZmRlYzg5MTM2MzFkZDBjYWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4ZTI1ZGFmYjdkN2EwNDI4MDIzNWMyMzkxNDE5NTY5NTMzMWMzNzY3YTNjZjkyN2M0NTcxOGUzMTdmYjUxZDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU4ODkzNzQyNzJkZWVhMzY5NGUwOGQ2OTUwMTcyMjc3ZmEzODU2MWMxNDkyNjQ4Nzc4NDNjZWYyZGFlNmUxMzkifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T12:11:14.549Z"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:f43bf374441e2cffdaeef9ca59cb20a85a8d51e51380c4701c2b7997eb70e0e9",
+  "claims": [
+    {
+      "id": "claim_d2c83449e0144178953092b286fc4c9b",
+      "statement": "BaseTest runs tests with Robolectric and HiltTestApplication, installs an UnconfinedTestDispatcher as Main, injects via HiltAndroidRule, initializes ActivityProvider with the application, then calls the abstract initDependencies, and exposes a test{} helper using runTest.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/test/java/com/core/data/BaseTest.kt#L26-L65",
+          "version": "repo-lines-v1:sha256:50eb231879a4e2e81fb3fe0be05ab378d4f2e2395d227a91c4f405d8a18bfeff:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1YzYyYTIwOWVmMmRhY2ViMDQ2ZDUxOGRlYWU1Y2MwOTk1YWIwMWJjYzNjNDc1NWQwODhkODBmMGI3ZDI4NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NGNjMmMxMjUyOWJkYjdkMDc0Zjc1MTU5ZDU0MDZiOGJkMmJiMzQ4YWIzNTMyMTUzZjE0Y2QyN2M4ZDYwNDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9060ee617abc4baf83705e29a7a597fd",
+      "statement": "The test source set defines an android.util.Base64 object backed by java.util.Base64 so Base64 calls work on the JVM.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/test/java/android/util/Base64.kt",
+          "version": "repo-file-v1:sha256:33df6097df15defb20e6f361beba732546bc92bac0f9f017e2590402c15f4951"
+        }
+      ]
+    },
+    {
+      "id": "claim_461ed04505dc4535a35e1b1a18bbed8f",
+      "statement": "clearFileProviderCache clears FileProvider's private static sCache via reflection for file-related tests.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/test/java/com/core/data/utils/Utils.kt",
+          "version": "repo-file-v1:sha256:049c108269f6ae526923f88d816b6ed3258724150e326a620095be8d864f6e59"
+        }
+      ]
+    },
+    {
+      "id": "claim_092639176bd74a65bf961312aaaf9ad0",
+      "statement": "ImmediateCall is a synchronous fake Retrofit Call that delivers a fixed response or failure, and executeNetworkResultCall wraps a Call in NetworkResultCall and returns the delivered ApiResult.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/test/java/com/core/data/network/utils/ImmediateCall.kt",
+          "version": "repo-file-v1:sha256:5b222e0e82eefc3e6917939d47ae3f7c7d40176db8ead92229573afb17df53fb"
+        },
+        {
+          "resource": "repo://core/data/src/test/java/com/core/data/network/utils/Utils.kt",
+          "version": "repo-file-v1:sha256:6cd45fb43e28fdfdef496e4680bfd074e64867f8c8d5dd8fad1a5c2aca6ac6fc"
+        }
+      ]
+    },
+    {
+      "id": "claim_482ee9cb9ac7411e9ab09470e20c4dd0",
+      "statement": "AnalyticsFrameworkModule and DownloadNetworkModule are globally replaced in tests by @TestInstallIn modules providing MockK fakes.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/test/java/com/core/data/analytics/di/AnalyticsFrameworkModuleTest.kt",
+          "version": "repo-file-v1:sha256:bb7fc4940146aaa618493b88a6440221ea35230261af8bdd4daa9428199f43b8"
+        },
+        {
+          "resource": "repo://core/data/src/test/java/com/core/data/download/di/DownloadNetworkModuleTest.kt",
+          "version": "repo-file-v1:sha256:e429454f662d4bc4953068e036ead61d1f2f6c971b3ddb01e036c0329389c709"
+        }
+      ]
+    },
+    {
+      "id": "claim_ab8a26f1df72465baad95b05c4166671",
+      "statement": "Unit tests include Android resources and run with --add-opens JVM arguments configured by configureTests.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt#L137-L154",
+          "version": "repo-lines-v1:sha256:8cb3fac58c280f3b3ce305ebb39c7de7e0b1e4b725aee9689706dcb29b041133:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxMGI1ZDU4YjE0ZTg4NjhjMGRiZTI1MDY0YmVmNGZmY2M4ZTkxMDBiMmZhNDg2Mjk4MTE5M2U4MmJmMjc1MzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM3NTVlYmQ5ZjVjNjU2NDdlMjdjYjNhODM5MDRlMDA4OTA5YjgzZWU2NTI3MjZjZWY0MjM3N2FmMWNkZjIxZDcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1d0447ffd3fa42529f3ba74f6b47bb9a",
+      "statement": "ActivityProviderTest verifies that FragmentActivity instances are tracked and cleared after destroy while plain Activity instances are ignored.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/test/java/com/core/data/activityProvider/ActivityProviderTest.kt",
+          "version": "repo-file-v1:sha256:f491316b94dc7532aebb342a551926c3bd6cf488032bbce4f76d12c40483b7a3"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T12:11:14.549Z"
+  }
+}
