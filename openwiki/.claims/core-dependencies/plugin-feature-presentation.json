@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:175a4f161c7aa8255c890df82a94fd3c96dd93bc52b406257ba6532ed9983d19",
+  "claims": [
+    {
+      "id": "claim_19e885b0b5f64e2d9969af4c57abc2c3",
+      "statement": "FeaturePresentationPlugin applies the Android library, Kotlin Compose, Kotlin serialization, KSP, Hilt and Detekt plugins and enables Compose without test JVM configuration.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt#L21-L53",
+          "version": "repo-lines-v1:sha256:c79bce7f53bdac4d9504c12d23eb188039fffa55d982f1d0038624b77495455e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiOTczMmMwY2ExNTk0ZGU0YjY4MzE5ODM2Mjg4MGY4OTUwNzAzZjQxNTdlYTJjZmM0ZjA4YWFmZDAyYWNkYjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxNTk5NjAwYTMzMTY2ZTE1NmJkYTM0YmVkY2E1YTRlNDBjODdlYjJkZWU2Y2U5MmE3NzM0NGE3YjAwNThlZjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY2YzU2YTkyZDQwNGJlY2YyYmU1YzhhODBlZGNkZTYzZGIxNjRkMTFmNTVkOWQxMDllNzI3NGE4ZGU1ODgyZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI5MjA0ZWRlZDY3N2UyNzkwYjEzMDhiY2ZkZDI3ZDAwMzYyNjExOGMxMGVlM2NmMGViMDU2YTY5YThiN2MzNTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_91c694d2d7e645768282f3a028099800",
+      "statement": "FeaturePresentationPlugin adds core:presentation and Hilt as implementation, Hilt and metadata KSP processors, core:presentation test fixtures for unit tests, and the ktlint and libraries Detekt rules.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt#L55-L74",
+          "version": "repo-lines-v1:sha256:677cdfb59f2bb63d886591bf72a613b3f16e5d0e5d8a2c5975e657a3ec0957ee:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxYjk5ZmE0MjJmNTc1MTk0MDUzM2MyNTE2OTdkMjNkOTZjMGMzMzE5OGQ1YjM4YjEyMmYxMzE2ZTczYTk5ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YTM2NWE5MGVjMTFlOTA0MzI3NTJjZjkzNzZlYzVlZDM2YjgwYmE1ZThlNjg1NGZjZjk4OTcwZDMwNDQ0NjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c23a2ecc6dfc43f7a0e0bd5e7afd5abf",
+      "statement": "demo:presentation applies the feature.presentation plugin with an empty android block and no namespace override.",
+      "evidence": [
+        {
+          "resource": "repo://demo/presentation/build.gradle.kts",
+          "version": "repo-file-v1:sha256:9ed2bd449ef55866be7981c241460e9a5c028665bee920ef2b89b31d654a7db6"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T16:41:29.588Z"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:5f22e7ddea7fad859b48fc64c7d09eed9ba45c9ab9c45bb5aed7343b1d08cff5",
+  "claims": [
+    {
+      "id": "claim_c95b4bfdb1ad4e958d56c6e4ca8d634f",
+      "statement": "core:presentation depends on core:data with implementation and feature presentation modules depend on core:presentation with implementation, so core/data types are not on feature presentation compile classpaths unless added separately.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CorePresentationPlugin.kt",
+          "version": "repo-file-v1:sha256:6e00421372a973445cadcc8449e4e824250e37c19689043d1b4c6b763ec37779"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt#L55-L69",
+          "version": "repo-lines-v1:sha256:1481674dfde14b17d4050993dd12903d408c9292f35799c611986c8e49362170:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxYjk5ZmE0MjJmNTc1MTk0MDUzM2MyNTE2OTdkMjNkOTZjMGMzMzE5OGQ1YjM4YjEyMmYxMzE2ZTczYTk5ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMDM0ODFjNTdkMGYwZGMwZjc2Y2QyY2M4YjM2MDRjNGU4Mjk2ZGE0MTIyYWRkMTllODE3NDVkYzdlMzMxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5MThiMmMxNjMzNGZiNTdiYjM2YzAzYWYwM2VhMTE1NmFhMjk4ODJmMzY1NzJiN2QyZDMwYjM0MjhjN2M3YmQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_db67b5e02b544752be471143bf90c4e3",
+      "statement": "BaseViewModel implements CoroutinesUseCaseRunner, whose public functions take and return core/data's ApiResult types.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/viewmodel/BaseViewModel.kt#L15-L22",
+          "version": "repo-lines-v1:sha256:c67818cfb9af41e2bbe1ab3723b2b41c117ebb6578796f93b406e893902100d5:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDJjMTgwMDMwNDI2YjQzZDAwMGNiODU2YzhkOGE0MDNiNGFlNjAyZDgzYzE4ODllNjA0ODA5MTZiMzg4Mzg2ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzViODFlZjFjOWNkNDdlOTJjMDFjYWMxZWQ4NTM5ZjdkYTZmMzA3ZmQ1MzY1ZTgxODdmNzQwNjEwMGJkZWY4NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzBjOTkwNzBjMjI2MjZiNzFlM2FlZjY0OGNhMDRkZDIzZjM4MGUwNGY3NWI4N2U3NzJmOWEzNjQ0OGJkY2FlNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2I3MGRlNTI2ZGUxZGRmYTYzOWU1ZmZlOTMyMDRjY2ViMDNjMGIyNTU2NzY2OGVlZTlhNWE0ODM3MDRkMGJmMiJ9"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/coroutines/CoroutinesUseCaseRunner.kt#L21-L72",
+          "version": "repo-lines-v1:sha256:df283fdf34e3ff043168f75ca0e82c84594a687fe922da8146cb867677d8e8d3:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwODVkYjZiMzAwNjY4YWI3NWIzM2U3ZmY4OTUwYjA1OTRkMjE5ODdiMGUyOTZiNmU5MDY1ZjZiYTIwNGUwMTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmYmM4MWU0ZjZlNTNmZDU3MWFjYWI0MmM2NmI3YmM2YWJiOTk3Y2ZjYjA5M2Q4YmNjYjY0OTAyYjU5ODE3OGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBlMmUyNWIxZmM4MGNiMjYyMDU5MzM4MGJhNzZjOGIxOWRkYzcxM2QyODA0Y2RkMTM3ZmMzYmE3MGZhZGU2ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU5NTY5YzY3NzlmZDMyZjBjMmMzZTZjY2UwOTViYmM4ZmIwNTdmMDM4NDEzYzJjYzk5Yzg0YTYxMGVlMzEzZTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_df09192cc8d04a8fbc8fb70a081a436f",
+      "statement": "Feature data modules expose core:data as an api dependency and get core:data's test fixtures for unit tests, but add no kspTest Hilt compiler.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L50-L69",
+          "version": "repo-lines-v1:sha256:123df76247f4393fd6915d7a3b237cb2aa171875e7542fc2825736cd1c99f57c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxYjk5ZmE0MjJmNTc1MTk0MDUzM2MyNTE2OTdkMjNkOTZjMGMzMzE5OGQ1YjM4YjEyMmYxMzE2ZTczYTk5ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YTM2NWE5MGVjMTFlOTA0MzI3NTJjZjkzNzZlYzVlZDM2YjgwYmE1ZThlNjg1NGZjZjk4OTcwZDMwNDQ0NjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5700831238a3405bb8b7773280c443e9",
+      "statement": "The app module depends on core:presentation and demo:presentation with implementation and declares no test dependencies or dependency on demo:data.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts",
+          "version": "repo-file-v1:sha256:a297709c30b110427d3eaa506ef5a3054afa308cff627aca1e0ce6713fc5a511"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/AppPlugin.kt#L72-L85",
+          "version": "repo-lines-v1:sha256:42800a89dfb8d08db6641d987e97491c8d0a0491d04097b27ae537b1fbf22de7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxYjk5ZmE0MjJmNTc1MTk0MDUzM2MyNTE2OTdkMjNkOTZjMGMzMzE5OGQ1YjM4YjEyMmYxMzE2ZTczYTk5ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YTM2NWE5MGVjMTFlOTA0MzI3NTJjZjkzNzZlYzVlZDM2YjgwYmE1ZThlNjg1NGZjZjk4OTcwZDMwNDQ0NjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0210802e84c243f681d955468f038ea5",
+      "statement": "core:data exposes kotlinx-serialization-json and Retrofit as api, keeping DataStore, Hilt, the Retrofit converter, OkHttp logging and Firebase as implementation.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CoreDataPlugin.kt#L65-L94",
+          "version": "repo-lines-v1:sha256:399dcc04fc7a1c1d3fd4d4adcae9d3ba825bc0235909bb543009d66e76479faa:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxYjk5ZmE0MjJmNTc1MTk0MDUzM2MyNTE2OTdkMjNkOTZjMGMzMzE5OGQ1YjM4YjEyMmYxMzE2ZTczYTk5ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YTM2NWE5MGVjMTFlOTA0MzI3NTJjZjkzNzZlYzVlZDM2YjgwYmE1ZThlNjg1NGZjZjk4OTcwZDMwNDQ0NjkifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T16:41:29.588Z"
+  }
+}

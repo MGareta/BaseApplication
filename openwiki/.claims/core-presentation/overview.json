@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:d712c7c0ee240949f334ffea287824e190a8e3be1950fa1846f994ee8023a345",
+  "pageVersion": "sha256:73f764e5a382e1504a125b31eb40ea5f64459ac04101ebed34fb397980e3af10",
   "claims": [
     {
       "id": "claim_c19e3159af164d8ab34212293d7f9aab",
@@ -75,10 +75,24 @@
           "version": "repo-file-v1:sha256:d286ec5977b4583a931cabfaae287b58a4ab39aa4d73a7f2f74baa08803839f1"
         }
       ]
+    },
+    {
+      "id": "claim_ec826e4ffe0f4f4bab3a48093077c71b",
+      "statement": "core/presentation's build applies the core.presentation plugin id, which core/dependencies registers to com.core.dependencies.plugins.CorePresentationPlugin.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/build.gradle.kts#L36-L60",
+          "version": "repo-lines-v1:sha256:514837eff8f96fb653bbfe30c1301f38219eca8d97337f6e1d026f78676aa3c5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTM5ODcxYzk1ZTI1MmZmMmU0M2VhYWIzODI5MGQ5MzI3ZDgyMTMzZWQ0NzdiNGUxMTI1M2JhNWY5ODc4YzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU3YTk3ZWM3NjRjNGM3NDRhNzU1MWEwMGJhYWU0ZDhkZGRhYzM2ZDU2M2I0MjE1NDNhYTBiNTBmOWQ2YzcwN2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMxNmYxNmFmYTZiZjU0NTQ1NTQ4N2Y0MmI5NTBmZGZkZGJjYWNmMDQ4YTFmNDY5YmExMmUwYjgwNDQ0NTlkMjkifQ"
+        },
+        {
+          "resource": "repo://core/presentation/build.gradle.kts",
+          "version": "repo-file-v1:sha256:669d5f95c29172d6260f134a4addd5b9fff911a4757b44d3e286378a6bde5b58"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T15:48:49.783Z"
+    "at": "2026-10-26T16:41:29.588Z"
   }
 }

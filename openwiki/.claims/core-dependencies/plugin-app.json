@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:7566d95d555280b80848011c1500b4391f686f64f777d868817027dc59447a71",
+  "claims": [
+    {
+      "id": "claim_5ab93db8630b4af18327107ac7488f3b",
+      "statement": "AppPlugin applies com.android.application, the Kotlin Compose plugin (twice), KSP, Hilt and Detekt, but not the serialization, Dokka, Crashlytics or Google Services plugins.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/AppPlugin.kt#L21-L39",
+          "version": "repo-lines-v1:sha256:8beb1e0fa64878539ba5ec38ec1eb8df5600fcb3366adb9320512c452ecc01b7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjNTRiZDdkNzAyZGFiYjNmMDE4YWMxYjE4Mjk1MzQ5MzVmZjZhYWZmYWE3YzFiY2QwODI1NDRkZTM4ZGRlYTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjOWY5OGE2YzJhYmNjZTMyYzI0M2RhMDYwZjNkOTc1M2M1OWM0NjE4YTM2OWMyYTExODU3N2U3MmI5NTVmMzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlkYTIyNWQyMzcwNGEzZWVlYzdmMWQ3ZTZmZjk1NzU2NWE2MTU2MWFhNTExMTEzNzA3NjdiYTNhNDcyYmFjOTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_854441d5698f4fb286aecc294fec5bb6",
+      "statement": "AppPlugin sets the application id and version from Config, shrinks resources and signs release builds with the debug signing config, and adds .debug and -debug suffixes to debug builds with Compose enabled.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/AppPlugin.kt#L41-L68",
+          "version": "repo-lines-v1:sha256:4e3be0dea715cf8bcb21569a195df861fd0b918ecb8b3f31888d9dee9d72a6fe:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU4NzMwYTJkMmUxZDcwY2U2NGYwNDIwYTI1ZWVlMGVkNjQyZDhiYjZkOTY0YmQzNTc2MjMyMGM4ZWQ1NDg1MTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI0NzEyMDE3NDlmZmQwYjZjOWViMWNhOGJkOWFmODkxYjczNDRlZTVhN2E1ZmRlZjcyZjY1YzMxYjg0MmI0YjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_460cd11616194121b2567ac381c12553",
+      "statement": "The app module depends on core:presentation (from AppPlugin) and demo:presentation (from its build file) with implementation, plus Hilt runtime, KSP processors and the ktlint Detekt rules.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts",
+          "version": "repo-file-v1:sha256:a297709c30b110427d3eaa506ef5a3054afa308cff627aca1e0ce6713fc5a511"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/AppPlugin.kt#L72-L85",
+          "version": "repo-lines-v1:sha256:42800a89dfb8d08db6641d987e97491c8d0a0491d04097b27ae537b1fbf22de7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxYjk5ZmE0MjJmNTc1MTk0MDUzM2MyNTE2OTdkMjNkOTZjMGMzMzE5OGQ1YjM4YjEyMmYxMzE2ZTczYTk5ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YTM2NWE5MGVjMTFlOTA0MzI3NTJjZjkzNzZlYzVlZDM2YjgwYmE1ZThlNjg1NGZjZjk4OTcwZDMwNDQ0NjkifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T16:41:29.588Z"
+  }
+}

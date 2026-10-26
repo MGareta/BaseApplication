@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:77f0039b354ae37544af7c04d0da58424650bce2a730690fbdbb59bcb6cca299",
+  "pageVersion": "sha256:73330df24c7a152e388b4a4ad06418c14a7af0ffbe5967050b616a605b05190b",
   "claims": [
     {
       "id": "claim_cbd7b77de2f947f497f8a08334cdd150",
@@ -63,10 +63,38 @@
           "version": "repo-file-v1:sha256:80b1aaf95e51a1766c781ac765392eae98d96f4eb3df09c7b18aa34026f0055b"
         }
       ]
+    },
+    {
+      "id": "claim_ab03ed5784c44269b8b05772a085b79b",
+      "statement": "Convention plugins default every module's namespace to com.base.application, and the demo modules do not override it.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt#L51-L77",
+          "version": "repo-lines-v1:sha256:9e594953fd83914160b5fa2a8f4164661f7953a40291547a962295c01896c7d6:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhNDUzYWVlMjExYjVmMzYyYjA5YjIyMTQzMDUwZTdmYmNiYzA2YTUxNGYzM2E1OWE5OGQwODA5MjA0ZDIyYmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM2ZDMzNDQzMTQ3OGJiMDQ1Yjk5YTU5NWRmZmU5MGMxMjBkMmJiODMzNzNlNzRiM2Q1NzczYWM3N2VkMmU5NzkifQ"
+        },
+        {
+          "resource": "repo://demo/data/build.gradle.kts",
+          "version": "repo-file-v1:sha256:3ee06e3079bf6ae42ef0f455dfb4315763aaac442de3c97d36d9e3bdf166e1db"
+        },
+        {
+          "resource": "repo://demo/presentation/build.gradle.kts",
+          "version": "repo-file-v1:sha256:9ed2bd449ef55866be7981c241460e9a5c028665bee920ef2b89b31d654a7db6"
+        }
+      ]
+    },
+    {
+      "id": "claim_92e76c413e3c48f7b9a1663c230c8795",
+      "statement": "Release builds of the app are signed with the debug signing config.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/AppPlugin.kt#L52-L57",
+          "version": "repo-lines-v1:sha256:69ff165ae3bcfd7ad8714ddaae2ddb5f913820470f67e9502a91918dc3ed18dd:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjMxZTEwNTE4NjgxZmVjMDc4ZTk1NjcwMmE3MDYyMTI5M2ZhNDc0YjZlZGMxMzFkYTM0NmNlYjlmMDQ3N2ZiMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGRiMzM5YzE3ZDRjYzU0ZTcwYzRmY2ZlY2I2MTFiYjllN2QzNjNmMjViMThlMDkyM2ExZDMwNmNjOTU5MjRlNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzA0YjI2NWJjOWVmNzYwNGNhYmY3OTc2NThjZTM5NWUxYzJkM2JkYjczZTIwNzZmMGQ1YWZhZDM2MjdhMmJmYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjg3ZDdiMWYyM2QxMmY5ODNiMDJhMWNhNjI4NzczOWQ5MjIxNGQxMThjYmM5NTU3MWZkMDJhNDliOGU5MjM1NiJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T15:48:49.783Z"
+    "at": "2026-10-26T16:41:29.588Z"
   }
 }

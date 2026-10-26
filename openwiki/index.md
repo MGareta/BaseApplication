@@ -9,4 +9,5 @@ okf_version: "0.2"
 # Directories
 
 - [core-data](core-data/)
+- [core-dependencies](core-dependencies/)
 - [core-presentation](core-presentation/)

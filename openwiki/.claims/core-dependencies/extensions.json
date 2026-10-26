@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:5f61676c98c078284879a2c95b299c2a95605aa19cad6c41a462b04cb61d27a5",
+  "claims": [
+    {
+      "id": "claim_a21ad9bf5fce4ca2814aa4b5c5baf8c4",
+      "statement": "Project.coreLibs resolves the version catalog named coreLibs from the VersionCatalogsExtension.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt#L19-L20",
+          "version": "repo-lines-v1:sha256:36bd9635da8da0319f02875d68d53dedcd20ef499246008c8617d0c91d5dc1da:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ5MzFiYjNjZjI3ZmZiOGM5ZDY5NDg0MTcyMmFhMzI0Y2VlNTExMTJiNzA5OTE5YmVmMDcxYWRhMWY2YjczYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjE2ZWZlMjJkYmFhNTY1OGFhN2QwOWViYTRkZTZiNWZiODM0NGZlZjUxZDc4OTAzZjgxMTRlMmRjMmNlMjhlNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWJiZDllNzYwMzFiZjY4ZmM5NWYyYmExYmJmMTRlMzRhOTRmOWMzODhlOTBmZGQxMzZkMDU5YjZkNGM2NDdiYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODc3MGE4OTU3NmUwNWQzNjE5ZWEzNDYxM2Q1M2Q2N2FmZDEzODg1MWQ5Yzc5ZjcxODRmOTU3NDg5MDFhNDViNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_9eee77765a484e33ba13692d1c72ed6f",
+      "statement": "configureBuildTypes enables minification for release with proguard-android-optimize.txt and the module's proguard-rules.pro, and configurePackaging excludes the AL2.0/LGPL2.1 and LICENSE META-INF resources.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt#L116-L135",
+          "version": "repo-lines-v1:sha256:cc2a461091dec89f68de66b9ac5b278e2a018efee9ca4445bb9f331f605b3633:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1NTYyNzk3ZmNjMmJlOGE0OGE0ZTE2ODk0MzMwZmMyNDNlMWE3OTM1Y2IxMjZhOTk3MGQ0N2UyZTg2YzY1MzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFhNTVlNWNjZWM2MmM3NWM0MDBlYTJjNzcwZjdlYjJjZjg1NmRkNzlhZDM0YWYwMGQwODE1Y2RlOWM5MWUwNGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5ca84228f2d34116a629fd46ec58974c",
+      "statement": "configureTests includes Android resources in unit tests and adds --add-opens JVM arguments, and only CoreDataPlugin calls it.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CoreDataPlugin.kt#L56-L61",
+          "version": "repo-lines-v1:sha256:47ae6f8d5ae7f2e569d7a3aa9016959bdaffef36ba5a9fa67ebd9609842decbc:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWJmM2UxYjFmMzVhMWZmYzAwNjkwZWNjMmQ4NzY4MGYzZjI2ZmM2MjU0ZTJhMjhjY2E2MDlmMThhYTkxMDdjNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTUyMmM0MmNkMTljNmQwM2Q4MDhjNDUyNzIwNTUyODI1YjdlYTFjNWI0OTFiMjE4NTExY2FjNzQxNWNmOWQ5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjQ3MTIwMTc0OWZmZDBiNmM5ZWIxY2E4YmQ5YWY4OTFiNzM0NGVlNWE3YTVmZGVmNzJmNjVjMzFiODQyYjRiMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTQ1MWRkNzY0ZWU5MjMwNjU0MjRhMjAwZjlmMWQ1YzAxN2JiY2U2ZThkMDU4YzQ1YzZjOTE0ZTBjMTExYWU4NCJ9"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt#L137-L154",
+          "version": "repo-lines-v1:sha256:8cb3fac58c280f3b3ce305ebb39c7de7e0b1e4b725aee9689706dcb29b041133:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxMGI1ZDU4YjE0ZTg4NjhjMGRiZTI1MDY0YmVmNGZmY2M4ZTkxMDBiMmZhNDg2Mjk4MTE5M2U4MmJmMjc1MzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM3NTVlYmQ5ZjVjNjU2NDdlMjdjYjNhODM5MDRlMDA4OTA5YjgzZWU2NTI3MjZjZWY0MjM3N2FmMWNkZjIxZDcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_428345b34bf54c5bbf2bf66ca0ce6814",
+      "statement": "The DependencyHandler helpers add the ksp, kspTest, implementation, api, testImplementation, testFixturesApi and detektPlugins configurations, while debugApi adds debugImplementation.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt#L156-L170",
+          "version": "repo-lines-v1:sha256:ddc77a529b7fcd910d5f9dde75278a16e045c389c4a443b85b9bbe47055d6db2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxY2ZmYTVhYmVkNzY5MDgzYzdkNzYxODQ4MWQ0MDg3ZTZjMTZjMTllMjlhMzFiNDVmNDc4MDYzZjg1ZjdlODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE5NzdhNWJkOGYyZmI1Mzc2ZTFlYWNiNjAzMmNmNTkyNTYyYmI4MjEzOTY2NTE0NzBmNGI4MjU3Nzk5MDYwNzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6950b16c113745199d10c4bacc30a9d2",
+      "statement": "No convention plugin configures consumerProguardFiles, so library consumer-rules.pro files are not applied to consumers.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt#L116-L127",
+          "version": "repo-lines-v1:sha256:cf5990f6f836f1eacfe1981c490eed25a566d46c5dff16ac9ff13656cdfecfe1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1NTYyNzk3ZmNjMmJlOGE0OGE0ZTE2ODk0MzMwZmMyNDNlMWE3OTM1Y2IxMjZhOTk3MGQ0N2UyZTg2YzY1MzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3NzY4ZjdiNTU5YjExNWZiOWQ0MDQzZDg4MDVlOTUxYTNmMzkwNmQ1MjljNDU1OTQ4MDQ0MjFiOWU4NzZhZjkifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T16:41:29.588Z"
+  }
+}

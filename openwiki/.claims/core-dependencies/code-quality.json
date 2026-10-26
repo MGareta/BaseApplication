@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:03d91550e8fed7c9cdf77d16ae1e79f8c2af184b96df94923acfcdf29a94b98b",
+  "claims": [
+    {
+      "id": "claim_451d0a50094c4814af9d1aadd5ac812c",
+      "statement": "configureDetekt creates the root build/reports/detekt directory at configuration time, enables autoCorrect and parallel, uses the module directory as source, and writes only an HTML report named after the project path with colons replaced by underscores.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt#L79-L114",
+          "version": "repo-lines-v1:sha256:05ffc2f6b781156dc6ed0a0d1c76cc5e69f95b8f17b9cb83dc9d949f90a64c84:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlZGM2MGQ3NDU3NDIwZDU1MjljM2E1ZTdlMDMzODFhNzEwNmJmOWQ4YmZmOWExZTc2ODcxOTVlMGViNzViMDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlNmQyMTI4ZGE0MjA4NjRkYTk2ZTM0YWQ5NzRkMWEwMjg5YjQyN2Y4NjFiOThhMjI2NWFkOGU3MDRkMGEzNTkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_464445920fe243d280449081d3827b15",
+      "statement": "Every convention plugin applies the dev.detekt plugin and the ktlint wrapper rules, while the libraries rule set is added to all library plugins but not to the app plugin.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/AppPlugin.kt#L27-L85",
+          "version": "repo-lines-v1:sha256:dadde7ea57578af83be1ec77252ea05a364099e1d2e626b73d040686bdb1c023:eyJzZWxlY3RlZExpbmVDb3VudCI6NTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkNDBlYzBjYjJkOGMwOTQ5YzdmZDc5YmI3NzQxNTRkN2M2ZWJiNTlmMGYxYzY2NzhiNmNhNGEzZGY3Nzk1YzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM1YTcyNzg5OTFiNDlkNDYxMjE2MTQyYmFjYzAzMWI3YTAxMDZkNDk4ZmRlMDEwZmJkNDk0NDYyNWFlMTY4NjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YTM2NWE5MGVjMTFlOTA0MzI3NTJjZjkzNzZlYzVlZDM2YjgwYmE1ZThlNjg1NGZjZjk4OTcwZDMwNDQ0NjkifQ"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L66-L68",
+          "version": "repo-lines-v1:sha256:9a798eb11167fb1bd188a6ae1bae379712b72419397d813b8f09440c6dda8f82:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWE1YzQ1N2VmOTc3NWExMmY5NzA4ZmQ0MjU1NjhmOGVjNWI1NTNiZGRkOTVmYmU5OWVmNWMyZDQ1ZTcwNTYyZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTA2M2M0NGU0MTc0ODNkMmE1ZGVmMDU4MDNjZjc0Mjk3N2M0NmZhMjg0YTRhMmM0Y2EyOGY3YmQ4NWE1OWQxZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWUwMjBhYjQyNjIwN2E4ZmM1MWNjZTc4ZjFiNTEwOTQ0NDU4ZmMyNTc1Y2Y5NTQ1OGFjZWFkNDJmZjRjNTM1ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmYzZTM3ZjY3OWNkNjY3MDJiNzFmM2Y5OGQ3YjJiNjJlMDAwYTMzYWRiNDg5MTU0N2M2NmE5MmQ0MTI0YjE3OSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_356dff5ba277446aa989d76197fb7a32",
+      "statement": "Detekt is pinned to 2.0.0-alpha.6 for the plugin, Gradle plugin library, ktlint wrapper and libraries rules.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/gradle/libs.versions.toml#L41-L42",
+          "version": "repo-lines-v1:sha256:720a7f92ef5462e245eefc1e05fb3f1a0198139dd01c1ae817a69aa77d3c6fcf:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzgwYjIxMjQxOTZmMTI3NmQxYzA1ODEzYjhjYjhkZjRjNjNlOWVlZTQyYjdhNmI5MjBhNTU5M2JmY2ExNjU0NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzk1Y2M3ODAyOTBhOTQ2ZjQ0MWQ1ZDNmYTQzNTAyNWJjOTdhM2RiMjhiMTJlYTVlNTgwMTU2N2YyZTUzYTBhNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTU1MzY0Y2ExOGY0ODJjYzMyNWNkMmViOWZkNGI5MDA0Zjc1YWNkYzZjYzJiYzYxN2VkOGRlOTlkMDg0YjIwYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2IxYWVmZDY2MzExNDIyMDMxNGU2MjNlOTVkMDlkMWI4ODE0ZGIxNjQzNmVjZTUxMzk1ZmE0ZTZjNjBmYzIwZSJ9"
+        },
+        {
+          "resource": "repo://core/dependencies/gradle/libs.versions.toml#L90-L93",
+          "version": "repo-lines-v1:sha256:222faf37f5a50e22021b4526e7cac84fbf71036805599d8cead3b7c306f0689e:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTMyNTFiZjAyYTlkNGQwMTY1NDY4NmNhMWIxM2Y1MDYwZjhkNzIyOGIwMDRjNzY1MGIyMzlhYmYxNWM3ODM5MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjQ3OGRmNTI5ZDMwNTkxYTliZmZhMDE0YzU2ZmVjMWI5NzBkYWQ1YWI1ODA0YThlNDI2MDkzMzQzYjM2Y2Q2ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTcwYjZiMmQxYmY4YTcyOTkyMjYxYjk3YjlkNGRhZWExOTg4MjhkZDA2YTU0MDIxNTNjN2ViNTBjODk0ODNjMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTk0MjYzMzk5ZGQyOTU5NjRkMjIwMTM3NWI5NTZjMWMzZTVlOTc0ZDllYzA5N2E1MWIzNTFiMjY5MTE0MzlmOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_731f272328d547e381cc52e8d5ada8e5",
+      "statement": "detekt.yml limits methods to 60 lines, functions to 5 parameters, files and classes to 11 functions, lines to 100 characters, and sets ReturnCount and ThrowsCount to a maximum of 0.",
+      "evidence": [
+        {
+          "resource": "repo://config/detekt/detekt.yml#L114-L156",
+          "version": "repo-lines-v1:sha256:d6adb324d0677d4c42e5c8ef9436ce4c68af70b032350f2ca04d588063dfc87a:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzYTAzYjcxYTdhNDNiZjJlNWI3YmNjMzZiZWYyZWZhN2FjNzU5NDBmYmRkNGZmNzYwODFkZTIyOTYxNjQwNzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU4ZDM4NDc2MWM3ZGMwNTRjNzM1MzU1NzE4YTc1ZDMzNzllNTI1NjZlYWE2MmVmYTRiZmRiOTJlMTA4YmQzNDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmODA4MTEzOTdkMDJmMWU2NTJhZGY5NTdhMTk0NjgxODgwM2Q2YzY0MzYxZjczYmE2OWQ5MTZmNDYyZGVhYzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlMjYxYzc4YTVmYTIzY2FiNDA5MzA5OGNhZTE3MTZiMjg5NDIxYmRmN2I0YmEwMGUzYTIyZGE0NmZmOWU3MTQifQ"
+        },
+        {
+          "resource": "repo://config/detekt/detekt.yml#L689-L691",
+          "version": "repo-lines-v1:sha256:b1466a274518131eadbf12e5363dcfd0494443f79ea6a07e0506db491069d63d:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzBhNTliMDJmYTkwMjUzYzBjOTIwNGRhNTc5MmUwNjRiMmExZWZjZmE2MjlmNDRiNDQ2OGVmZTAxNjY1NDY2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGUzMzc2M2ExYTRjZTMzODZlZjcxMGFmYjI3ZjkzYzgzYTVhODYwODkxOGRlYTJkN2Q3ZTdlN2RjMzhkNzVmNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2EzOTQ5ZjVlMmYyZWZiYWJjNjRkYjQ2ZWMyODdhMWY3ODhiYTUyMmUyNGQyODk5MTk0ZGI2ZGQ1OGQxMzVhMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDgzOTBjYjhkMmE1YzU2ZmFmNzgwZTA5NTBhYWQ3MWFjODc2ZTZlM2MyNTU5YWRjOTk2MTZmMjE0ZTVkYWRlZSJ9"
+        },
+        {
+          "resource": "repo://config/detekt/detekt.yml#L734-L755",
+          "version": "repo-lines-v1:sha256:0ace0761ecf676082d1fb37e992ae23268d6fbe0d870bc5c89513faab51f7529:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwYjE2MjU1ZWI4NmE1MDIzZGRmNTAwMWM4MDAzYTEzZjg4YzhiNjYzN2M0YzhmZDE0NjMxNDdiZGE5ODU2MDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0MmIzYTVmZjhlOWI5ZmU3MTVmOTBkY2QwMWEyMzAwZmI5Y2M3ZDE4Y2MxN2JjZTUxZTFjODU3NzMwOGQ5YmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlMDhiODQxZDIyMDdkNmRkZDA1ZjhhZDk3ODM2MzRiZmIxMTkzN2I0NDg4NDZkYTk1MjZjODYzOWIyMWMwOGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE0ZjZhOGYwZDdjYjdhMjVkOTQzZjVmNjlhNGQwZThmNmZkOGE5MGY4NGM4YTdkMTA1YmViZjBlMWRmYmFmNWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a183cd2c5c154f48a1a290c52a0eb37f",
+      "statement": "detekt.yml requires KDoc on public classes, functions and properties, enables ktlint with intellij_idea style and autoCorrect, and activates the libraries rule set.",
+      "evidence": [
+        {
+          "resource": "repo://config/detekt/detekt.yml#L1210-L1221",
+          "version": "repo-lines-v1:sha256:b04abdf1f506467ffd2bc3886113ff8248ea62f246de7c1048bbe36a76a1a8f1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMwNGIxNmZlOGQwMDZhMDRhNGRiZjFjZjEzYmFjNDY1NGY1NjZkM2QwMGFjMWIwMWI5Y2VlZWMxNDNjNDc4NTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlYWU2NDVjYmNkN2U2ZTMzMzE2NzNiNzUzNjY2MGU3NTYyZDczNDgxNzk4ZmRkZjE4MzM4ZTZjZTI0NDU0YjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIyMTJkMWY2NTZiMjVjYjJiYzJjNWEwMjhiZDlmMmIzOWNkYTNlZjExZGZhMDVjMDc5YzllZTQzYWUxODU1MTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://config/detekt/detekt.yml#L60-L75",
+          "version": "repo-lines-v1:sha256:d02101eeaa52f85b06987f034287e402178992eafb07b77e699b15f36b5d6143:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM4MWE4Njk5M2MwZjZmN2I1NDk2YzM1YzY2ZTdhMzZjN2ZlNTRkNjNmNDA1YmIwOTZjOTk3MTQyNWFjZDMxMWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmNDk3MzgwYzFkN2JjMzA4ZjJkY2IwYWIwMWM5NjZkNzVkN2JlZDY0YjQyNDg4OGIwMDE0ZTBjYWVlMTFkYTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg4OGM4N2QzMmMwZjY3MjhhYzc2MmUzMTY0NjNhOGY1YzllYTU5MGU5YzZiZmMyZDQ3ODgwOWUzMGYyZTkxZjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYxYThjNDE0N2E5YTNjMTM5MzEzODcyNWZiODQ1NjI5YjE0OThkNTVhOWJkZmU1YzBkN2I2OWNkYzgyZjA0NzEifQ"
+        },
+        {
+          "resource": "repo://config/detekt/detekt.yml#L855-L858",
+          "version": "repo-lines-v1:sha256:e9a6931c4e6fca1bee6aea6db70b4dae5527b20671abb715429bb1567f962ae9:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDc4MTA4ZjcyZjk0YzY3ZWFjMTJjM2ZhNGNiYzQzNmFjM2M4MTUwNTFkZTU3N2ZhYzY3YTNhNzc4YTM4Y2JiNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzg2MjE5MjJjZWU3M2QyZGU3Njk2YmMwNGM2MTFmZDU1ZTNkZjllNTY5ODRlNzY0ZWU3NmUwZjcwOGE5Yjc3YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzc1YmVmMmI1OGQxNzUyMGFjODgyNDQ2MThlNDQ3OWYxODM2Y2Y2OWI2Y2MxZjE0ZTM3MjVlMzRjNzBkNjAxZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWNjZDNhNjU0OTk5ZTYwNDlkZGFiMGE1MDU1NTlkOGRlODRkMGNjNWI4ZGFmNWMzZDQzZjIzZWIxMjJlYjRjOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5e56e1f05576462ea6f0d4fe9c1ad2c9",
+      "statement": "The OpenWiki workflow runs daily at 08:00 UTC or on demand, installs openwiki 0.7.2, runs openwiki code --update with OpenAI credentials, and opens a pull request on the openwiki/update branch.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/openwiki-update.yml",
+          "version": "repo-file-v1:sha256:c31005f16763845e6dcd826d671cf11890a4c8e12498fd2b59428be80e3b585a"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T16:41:29.588Z"
+  }
+}

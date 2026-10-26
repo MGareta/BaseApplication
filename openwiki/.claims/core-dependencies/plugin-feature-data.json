@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:2313b8ffa8f84c8b445e53b741ebed55b567f47a628e4b20e24b918b798ed775",
+  "claims": [
+    {
+      "id": "claim_1108bb3ea4ab4e83bbede3e05314e2cd",
+      "statement": "FeatureDataPlugin applies the Android library, Kotlin serialization, KSP, Hilt and Detekt plugins and configures defaults, build types and packaging without Compose or test JVM configuration.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L22-L48",
+          "version": "repo-lines-v1:sha256:8a57fc8c261d61daf58addfa240d51e4678e54ce1dcaf4ec7a2472a444c75404:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiOTczMmMwY2ExNTk0ZGU0YjY4MzE5ODM2Mjg4MGY4OTUwNzAzZjQxNTdlYTJjZmM0ZjA4YWFmZDAyYWNkYjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxNTk5NjAwYTMzMTY2ZTE1NmJkYTM0YmVkY2E1YTRlNDBjODdlYjJkZWU2Y2U5MmE3NzM0NGE3YjAwNThlZjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRlZjA4NWEwMTEyNTQzODgwMGU1NzQ2MjJkNDU3ODY3ZmVhOTc1ODg2NmNlYWUyZjJhNjJhOWY3ODZhMGNlMTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI5MjA0ZWRlZDY3N2UyNzkwYjEzMDhiY2ZkZDI3ZDAwMzYyNjExOGMxMGVlM2NmMGViMDU2YTY5YThiN2MzNTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0c1959a392594b708a08ac4f3a4aeeb6",
+      "statement": "FeatureDataPlugin adds core:data as api, Hilt runtime and KSP processors, core:data test fixtures for unit tests, and the ktlint and libraries Detekt rules.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L50-L69",
+          "version": "repo-lines-v1:sha256:123df76247f4393fd6915d7a3b237cb2aa171875e7542fc2825736cd1c99f57c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxYjk5ZmE0MjJmNTc1MTk0MDUzM2MyNTE2OTdkMjNkOTZjMGMzMzE5OGQ1YjM4YjEyMmYxMzE2ZTczYTk5ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YTM2NWE5MGVjMTFlOTA0MzI3NTJjZjkzNzZlYzVlZDM2YjgwYmE1ZThlNjg1NGZjZjk4OTcwZDMwNDQ0NjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_38cb6494c2114b13ba4a3899034f4179",
+      "statement": "demo:data applies the feature.data plugin with an empty android block and no namespace override.",
+      "evidence": [
+        {
+          "resource": "repo://demo/data/build.gradle.kts",
+          "version": "repo-file-v1:sha256:3ee06e3079bf6ae42ef0f455dfb4315763aaac442de3c97d36d9e3bdf166e1db"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T16:41:29.588Z"
+  }
+}

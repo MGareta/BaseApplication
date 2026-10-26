@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:bb82efcc2f7f69fee81c812e2314e990fd86fa61f8aded73ed3c43a7178a3193",
+  "claims": [
+    {
+      "id": "claim_5601437021f948c9b90c9bd3797c40e4",
+      "statement": "Modules are registered with include() in the root settings, apply a convention plugin through its coreLibs alias, and are wired into the app with implementation(project(...)) dependencies.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts",
+          "version": "repo-file-v1:sha256:a297709c30b110427d3eaa506ef5a3054afa308cff627aca1e0ce6713fc5a511"
+        },
+        {
+          "resource": "repo://demo/presentation/build.gradle.kts",
+          "version": "repo-file-v1:sha256:9ed2bd449ef55866be7981c241460e9a5c028665bee920ef2b89b31d654a7db6"
+        },
+        {
+          "resource": "repo://settings.gradle.kts#L33-L41",
+          "version": "repo-lines-v1:sha256:d3a8ab5dd80048071837487daa2bb70eee94a839a0a7b4630a1a87aa97ed4496:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjNmZDE1MzY3ODBiMzQwNzdlNTNkZGJhYTk3MjViMjY4ZmRkNzk4ZDkyM2Y0OWUyZDlhZjM1YTBmZTM3ZWVmOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTNiZTZkZmFmZjYyZjBiY2JmMTRkMGVhZWJhOWE1NTBmMjE3MjRjYjY5MGY1N2JiNjI2ZWEyMjY3M2QxM2I2ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTllNzYzNTVjZjExOTk0ODBjM2Y5OTgzNmIxNDg2Yzg0MWQ4OTFmYWFkOTA0YzYwOGUwOTMwMjJkMzc1N2FlZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_875ba6cae00f4e40854b6e9a56cc30a9",
+      "statement": "A convention plugin is added by registering an id and implementation class in core/dependencies' gradlePlugin block and declaring a matching unspecified-version alias in the catalog's plugins section.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/build.gradle.kts#L36-L60",
+          "version": "repo-lines-v1:sha256:514837eff8f96fb653bbfe30c1301f38219eca8d97337f6e1d026f78676aa3c5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTM5ODcxYzk1ZTI1MmZmMmU0M2VhYWIzODI5MGQ5MzI3ZDgyMTMzZWQ0NzdiNGUxMTI1M2JhNWY5ODc4YzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU3YTk3ZWM3NjRjNGM3NDRhNzU1MWEwMGJhYWU0ZDhkZGRhYzM2ZDU2M2I0MjE1NDNhYTBiNTBmOWQ2YzcwN2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMxNmYxNmFmYTZiZjU0NTQ1NTQ4N2Y0MmI5NTBmZGZkZGJjYWNmMDQ4YTFmNDY5YmExMmUwYjgwNDQ0NTlkMjkifQ"
+        },
+        {
+          "resource": "repo://core/dependencies/gradle/libs.versions.toml#L115-L120",
+          "version": "repo-lines-v1:sha256:cc58056707b9dd0be4d5d99c33b7f5cc75cb1c18870f2e5cd6543394f901bc4f:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzY4ZmUzOTZiOGIzYzMyYTYxMWY0MDRkMDQ3ZTM2YzUyN2RmMzhiOWE0Y2NlM2U3MWYxZDMzYmE2ZjYxODRiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjQzODNhZTc2NDM3Y2QzODhiZjg4MDJjNWY2NDA1MjA3NmViMDczZTJiNmMzNGYzYjAxMDk5ZTU1ZjUyMzNlNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjI5MmJiNTlmZWFmMzc5YzdlYmRiY2NjYWZlODA1NjBkNmM1YWRmODRmYTkwNGVkMDAwZDNmM2NiOWIyOTc3MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTgyMjM5ZjNjNzY0Zjg5ZWYxYzI4MmM5ZTgyNjA1ODgxM2JkOWViNzg4OTFlN2MzMDk5NmZkNjUxODUzNWEzYyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5eb5916e51e643d9b485a877fcc92e1a",
+      "statement": "Third-party Gradle plugins are put on the build classpath by declaring them with apply false in the root build script before convention plugins apply them by id.",
+      "evidence": [
+        {
+          "resource": "repo://build.gradle.kts",
+          "version": "repo-file-v1:sha256:c88179299510ea0518681ddaca28616eadaae9ca85a36e80b406dc6f49d198ec"
+        }
+      ]
+    },
+    {
+      "id": "claim_0799952b77de41c9a7a379caf9ca6e2e",
+      "statement": "Kotlin sources in test fixtures are enabled through android.experimental.enableTestFixturesKotlinSupport in gradle.properties.",
+      "evidence": [
+        {
+          "resource": "repo://gradle.properties#L12-L12",
+          "version": "repo-lines-v1:sha256:f1c39be8f23098a0e32c0cca39aedc9eb417b9e75d27a8c8052f20dbb3fb9f66:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjFjMzliZThmMjMwOThhMGUzMmMwY2NhMzlhZWRjOWViNDE3YjllNzVkMjdhOGM4MDUyZjIwZGJiM2ZiOWY2NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjFjMzliZThmMjMwOThhMGUzMmMwY2NhMzlhZWRjOWViNDE3YjllNzVkMjdhOGM4MDUyZjIwZGJiM2ZiOWY2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWY3NmYyMjJjMTBjZDAyM2Q4OWUyNGQ3MDY3NTBhMTEyMTZkNjJmMGM3N2I4MGM5ODkzYjFkOGI5ODc3NGI1NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T16:41:29.588Z"
+  }
+}

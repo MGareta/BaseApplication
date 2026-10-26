@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:00e9b5c1744dcca1e3dc38a0d9b3d43e4db0a34a48487379c9252609486a991f",
+  "claims": [
+    {
+      "id": "claim_83e2d377226b4021b196a508e94ab2d0",
+      "statement": "CoreDataPlugin applies the Android library, Kotlin serialization, KSP, Hilt, Dokka and Detekt plugins and is the only convention plugin that calls configureTests.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CoreDataPlugin.kt#L24-L63",
+          "version": "repo-lines-v1:sha256:3627f93f03dd6cf766afc32df0ac9a938f3a8740aa2c34672fe4e755fff1ddf5:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiOTczMmMwY2ExNTk0ZGU0YjY4MzE5ODM2Mjg4MGY4OTUwNzAzZjQxNTdlYTJjZmM0ZjA4YWFmZDAyYWNkYjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxNTk5NjAwYTMzMTY2ZTE1NmJkYTM0YmVkY2E1YTRlNDBjODdlYjJkZWU2Y2U5MmE3NzM0NGE3YjAwNThlZjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQxMThiYzM4ZWZjMTlmMDhmOWYyNjAxNDg5NzRjZjk0MWEyNDg2Njc2MDRjZjIwYzVkMjg1OTg2ZDA3MzA4NzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgxZDU0YjFjOWJlOWQzYWI3NGQyY2VlNDEwNzIwYWE0NDE2ODhiZDc2Yjc3OTFhMzRiZWNhMDRjNmZlNGM4MTIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_06614a8d3eff433a916bfaddfad6ce49",
+      "statement": "CoreDataPlugin adds kotlinx-serialization-json and Retrofit as api, DataStore preferences, Hilt, the Retrofit kotlinx converter, OkHttp logging-interceptor and Firebase BoM/analytics/crashlytics as implementation, the test-unit bundle as testFixturesApi, Hilt compiler for ksp and kspTest, and the ktlint and libraries Detekt rules.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/gradle/libs.versions.toml#L49-L93",
+          "version": "repo-lines-v1:sha256:80ebcc73ddc245ebd0a1edd752c72da5dd3cd9253c252e27c03c5bbed6a7b8d9:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxOThhMDA1NzhlNTU0N2M1YTcyNTEzNDVhMDhmNzczNDJmMmQzOWZjOTBiZTA0MDU4Y2Y0MzE2MDZhZDQzMmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY0NzhkZjUyOWQzMDU5MWE5YmZmYTAxNGM1NmZlYzFiOTcwZGFkNWFiNTgwNGE4ZTQyNjA5MzM0M2IzNmNkNmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVkNjkyNjJlY2NkODBjZWU0ODJiMzFmZjM2NDY0ZGFhY2YyOTMxZTkxMzc4OWYyMzRiZmE4ZTdkZTRhMTg0NGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk5NDI2MzM5OWRkMjk1OTY0ZDIyMDEzNzViOTU2YzFjM2U1ZTk3NGQ5ZWMwOTdhNTFiMzUxYjI2OTExNDM5ZjgifQ"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CoreDataPlugin.kt#L65-L94",
+          "version": "repo-lines-v1:sha256:399dcc04fc7a1c1d3fd4d4adcae9d3ba825bc0235909bb543009d66e76479faa:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxYjk5ZmE0MjJmNTc1MTk0MDUzM2MyNTE2OTdkMjNkOTZjMGMzMzE5OGQ1YjM4YjEyMmYxMzE2ZTczYTk5ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YTM2NWE5MGVjMTFlOTA0MzI3NTJjZjkzNzZlYzVlZDM2YjgwYmE1ZThlNjg1NGZjZjk4OTcwZDMwNDQ0NjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fd92f570ff6f451b8430aa36c96c2189",
+      "statement": "core/data's build file sets namespace com.core.data and a testInstrumentationRunner of com.core.data.DefaultTestRunner.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/build.gradle.kts",
+          "version": "repo-file-v1:sha256:5cc19f9114b1580f841d9e3e2847a4dd36e2e6a88e31b30707fd0efd38b5e2f5"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T16:41:29.588Z"
+  }
+}

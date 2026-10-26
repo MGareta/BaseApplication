@@ -3,10 +3,9 @@ type: module overview
 title: core/presentation module overview
 description: Overview of the core/presentation Android library (namespace com.core.presentation). Covers its package map, the single-activity Navigation3 + MVI architecture, the Compose design system, its dependency on core/data, the CorePresentationPlugin build (plugins, api vs implementation dependencies), how the app and feature presentation modules consume it, and its manifest, resources and ProGuard files.
 tags: [core-presentation, architecture, compose, gradle, hilt, navigation3]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T15:48:49.783Z
 sources:
+  - id: openwiki-source-e109b62d9d6821d541faa04b
+    resource: repo://core/dependencies/build.gradle.kts
   - id: openwiki-source-6e98d638297776b5f81f559d
     resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/AppPlugin.kt
   - id: openwiki-source-b93e89ddcc6bb7ffc877b9e1
@@ -29,7 +28,10 @@ sources:
     resource: repo://core/presentation/src/main/res/values/preloaded_fonts.xml
   - id: openwiki-source-af3f0101eba467e367f76d65
     resource: repo://core/presentation/src/main/res/values/strings.xml
-generated: { by: "claude-code", at: "2026-10-26T15:48:49.783Z" }
+generated: { by: "claude-code", at: "2026-10-26T16:41:29.588Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-10-26T16:41:29.588Z
 ---
 
 # core/presentation module overview
@@ -81,6 +83,9 @@ flowchart LR
 Classes used from core/data: `ActivityProvider` (CoreApp), `ISessionManager` and `SessionCommand` (BaseActivity), and `ApiResult` (CoroutinesUseCaseRunner).
 
 ## Build setup
+
+> Full plugin reference: [Plugin: core.presentation](../core-dependencies/plugin-core-presentation.md). Feature modules use
+> [Plugin: feature.presentation](../core-dependencies/plugin-feature-presentation.md). See also the [dependency visibility matrix](../core-dependencies/dependency-visibility.md).
 
 `core/presentation/build.gradle.kts` applies `alias(coreLibs.plugins.core.presentation)` and sets `namespace = "com.core.presentation"`. That's all.
 The plugin is `com.core.dependencies.plugins.CorePresentationPlugin` (included build `core/dependencies`):

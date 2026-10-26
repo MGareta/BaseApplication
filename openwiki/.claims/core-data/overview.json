@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:36fd37bce54777719fbfe5ab94cb01fb40c1a97fb9f07fe921651a292d67b3e1",
+  "pageVersion": "sha256:49f0a868c9ef17463a209fe7d26b8abff391249079320e0f6623aa7be39e83c7",
   "claims": [
     {
       "id": "claim_bcefed3445044ecb98cce24d1b3abd14",
@@ -109,10 +109,24 @@
           "version": "repo-file-v1:sha256:56fd960cf225f6ca40f982b13a5dbb0d8bc3dfde13ff76422825c6070d0a1890"
         }
       ]
+    },
+    {
+      "id": "claim_ccab6641318f41e0b9087366fe68c4cc",
+      "statement": "core/data's build applies the core.data plugin id, which core/dependencies registers to com.core.dependencies.plugins.CoreDataPlugin.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/build.gradle.kts",
+          "version": "repo-file-v1:sha256:5cc19f9114b1580f841d9e3e2847a4dd36e2e6a88e31b30707fd0efd38b5e2f5"
+        },
+        {
+          "resource": "repo://core/dependencies/build.gradle.kts#L36-L60",
+          "version": "repo-lines-v1:sha256:514837eff8f96fb653bbfe30c1301f38219eca8d97337f6e1d026f78676aa3c5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTM5ODcxYzk1ZTI1MmZmMmU0M2VhYWIzODI5MGQ5MzI3ZDgyMTMzZWQ0NzdiNGUxMTI1M2JhNWY5ODc4YzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU3YTk3ZWM3NjRjNGM3NDRhNzU1MWEwMGJhYWU0ZDhkZGRhYzM2ZDU2M2I0MjE1NDNhYTBiNTBmOWQ2YzcwN2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMxNmYxNmFmYTZiZjU0NTQ1NTQ4N2Y0MmI5NTBmZGZkZGJjYWNmMDQ4YTFmNDY5YmExMmUwYjgwNDQ0NTlkMjkifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T12:11:14.549Z"
+    "at": "2026-10-26T16:41:29.588Z"
   }
 }

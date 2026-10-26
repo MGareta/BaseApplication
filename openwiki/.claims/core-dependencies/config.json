@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:c85dc3ef9e33b85d91439777d5f5dbc4b67902edcb55c8ba2764e0ab44bd922e",
+  "claims": [
+    {
+      "id": "claim_8dfbd90db8374f29aa594e6f5b755b9b",
+      "statement": "Config sets minSdk 26, targetSdk 37, compileSdk 37, applicationId and default namespace com.base.application, versionCode 1, versionName 1.0, and Java/Kotlin JVM target 21.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/config/Config.kt",
+          "version": "repo-file-v1:sha256:f7cffbcbf05721a62552493907e4ddc2bf0e7fd0b462c0f3ef43a3083b73eb84"
+        }
+      ]
+    },
+    {
+      "id": "claim_8878610dc0214a469db786ecb662c898",
+      "statement": "Both defaultConfiguration overloads apply compileSdk, minSdk, the shared default namespace, Java 21 compile options, test fixtures and a JVM toolchain from Config, but only the application overload sets targetSdk.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt#L22-L77",
+          "version": "repo-lines-v1:sha256:707dfd0c4aeeb836d93a2c09bb13dc0bb835aa69e3237134d7f66501b174f620:eyJzZWxlY3RlZExpbmVDb3VudCI6NTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhNDUzYWVlMjExYjVmMzYyYjA5YjIyMTQzMDUwZTdmYmNiYzA2YTUxNGYzM2E1OWE5OGQwODA5MjA0ZDIyYmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3NDdjYzk0ZjZjM2NkMTJkMTI4OTkzMmY4NGE4ZjRhNDVlNDhjOTdkMmU5ZWIzNTk0ZjczOTdkNzUzM2IyZGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM2ZDMzNDQzMTQ3OGJiMDQ1Yjk5YTU5NWRmZmU5MGMxMjBkMmJiODMzNzNlNzRiM2Q1NzczYWM3N2VkMmU5NzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_31ebc81ce4a148ceb14c15522e8db65b",
+      "statement": "core/data and core/presentation override the namespace in their build files, while app, demo:data and demo:presentation keep the shared default com.base.application.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts",
+          "version": "repo-file-v1:sha256:a297709c30b110427d3eaa506ef5a3054afa308cff627aca1e0ce6713fc5a511"
+        },
+        {
+          "resource": "repo://core/data/build.gradle.kts",
+          "version": "repo-file-v1:sha256:5cc19f9114b1580f841d9e3e2847a4dd36e2e6a88e31b30707fd0efd38b5e2f5"
+        },
+        {
+          "resource": "repo://demo/data/build.gradle.kts",
+          "version": "repo-file-v1:sha256:3ee06e3079bf6ae42ef0f455dfb4315763aaac442de3c97d36d9e3bdf166e1db"
+        },
+        {
+          "resource": "repo://demo/presentation/build.gradle.kts",
+          "version": "repo-file-v1:sha256:9ed2bd449ef55866be7981c241460e9a5c028665bee920ef2b89b31d654a7db6"
+        }
+      ]
+    },
+    {
+      "id": "claim_ca5c65f5ea1c4698817688d3b139e6f6",
+      "statement": "AppPlugin applies applicationId, versionCode and versionName from Config.android.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/AppPlugin.kt#L46-L50",
+          "version": "repo-lines-v1:sha256:1d0f0db104e028a0501104086b871aa105da2b2ad6c562e925a06dd2e4e3b16f:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDk1ZjczODVlMmJlODU4ZmU0Nzg0YjNiNzhjODllZmNmM2JmMmNmY2M5MzBjY2E3MDc0ODlmYjA4YWM1OWQ4MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGM2NDc5Y2MyMzA0NDBmZDQxZTgyMjQyMTg2Nzk2OTg1NTlkMjg5M2JkNjdiNDM4MGFmYWI4MTFiMzhhNTVhYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzI2YjZlMTY4NGU2NGM0ZTllNDdjMzJlYjlkODA0Njk1ZjE5MzUwNmI4MmNiNzhmNzI4YjVlOGY4YTMyNjRiYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDdlZDdhNjk4ZTVjYzc1ZThmM2VkNjk3NDk1NTgxOGVhNGViMzZmYWNhMDU1ODdhMTcwZmE5NGY2NDVjYmFlNyJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T16:41:29.588Z"
+  }
+}

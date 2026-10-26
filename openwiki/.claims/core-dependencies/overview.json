@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:81bc6ca660b737f0ea346b57c086e179e0d68a9db26e92e0265d025f4b7aee42",
+  "claims": [
+    {
+      "id": "claim_cacb9a77525a44a8b71f3e3c0c2d46d0",
+      "statement": "core/dependencies registers five Gradle plugins: app -> AppPlugin, core.data -> CoreDataPlugin, core.presentation -> CorePresentationPlugin, feature.data -> FeatureDataPlugin and feature.presentation -> FeaturePresentationPlugin.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/build.gradle.kts#L36-L60",
+          "version": "repo-lines-v1:sha256:514837eff8f96fb653bbfe30c1301f38219eca8d97337f6e1d026f78676aa3c5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTM5ODcxYzk1ZTI1MmZmMmU0M2VhYWIzODI5MGQ5MzI3ZDgyMTMzZWQ0NzdiNGUxMTI1M2JhNWY5ODc4YzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU3YTk3ZWM3NjRjNGM3NDRhNzU1MWEwMGJhYWU0ZDhkZGRhYzM2ZDU2M2I0MjE1NDNhYTBiNTBmOWQ2YzcwN2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMxNmYxNmFmYTZiZjU0NTQ1NTQ4N2Y0MmI5NTBmZGZkZGJjYWNmMDQ4YTFmNDY5YmExMmUwYjgwNDQ0NTlkMjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ca9ff2da15a1473db7386c53ff8660f1",
+      "statement": "The included build uses kotlin-dsl with Java 21 and Kotlin language version 2.4, enables strict plugin validation that fails on warnings, excludes all tests, and compiles against AGP, the Kotlin Gradle plugin and the Detekt Gradle plugin as compileOnly.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/build.gradle.kts#L1-L34",
+          "version": "repo-lines-v1:sha256:771240ea79834dcf2d2f0f9375249dd0b13a89a811f652039fb158da922d03bf:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4YTlhNmY3ZTY5Nzk4MTgxNDBlYzc4N2E3NDgyYmFhMGRmNDFhNjg2NTIyYjc1ODQ4NWM3NmI0NjZhZmEwODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjllYTVhOTgwYzRjZTRjZDA5ZTk4ZThkYTNkMDBhZmUxOTA4MmVlOWFkZTdiNWEwMzgxM2I3NDFjODQzMjE0MmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM2ZDJmNWUwODk3YWZmN2Q2MGU5NDE4NjQ5ZmE5MDM4ZjNjODdjZDk1YTg5Mzc3NGU5MjZhYjdlNzQxMTgzOTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7bf46f4a8d554713a734cdaffdde620e",
+      "statement": "The root settings include core/dependencies via pluginManagement, enforce FAIL_ON_PROJECT_REPOS with google and mavenCentral, create the coreLibs catalog from core/dependencies/gradle/libs.versions.toml, and include app, core:data, core:presentation, demo:presentation and demo:data.",
+      "evidence": [
+        {
+          "resource": "repo://settings.gradle.kts",
+          "version": "repo-file-v1:sha256:91c189c3148ea02850f1229dc54a209c3ef5395b985139066d33286c1a834f25"
+        }
+      ]
+    },
+    {
+      "id": "claim_2229cd76eb88418bb510b3174b94a09a",
+      "statement": "The root build declares the Android application/library, Kotlin Compose and serialization, KSP, Hilt, Crashlytics, Dokka and Detekt plugins with apply false.",
+      "evidence": [
+        {
+          "resource": "repo://build.gradle.kts",
+          "version": "repo-file-v1:sha256:c88179299510ea0518681ddaca28616eadaae9ca85a36e80b406dc6f49d198ec"
+        }
+      ]
+    },
+    {
+      "id": "claim_2f5855a1f9f3478786f3a52f277881a1",
+      "statement": "The build uses Gradle 9.8.2 with parallel execution, build caching, configure-on-demand, non-transitive R classes and experimental test-fixtures Kotlin support enabled.",
+      "evidence": [
+        {
+          "resource": "repo://gradle.properties",
+          "version": "repo-file-v1:sha256:c1a55271065cd2a8bad0c1be510cdf0ba6e07aaa36979c5571f8a56c865c394f"
+        },
+        {
+          "resource": "repo://gradle/wrapper/gradle-wrapper.properties",
+          "version": "repo-file-v1:sha256:a4cc012297c47129e8917a16e0dc48e3e2f87d9845a4d8fc33b964f5e711a13f"
+        }
+      ]
+    },
+    {
+      "id": "claim_47e059cf5b9c42b3a7d127b537e1dfd5",
+      "statement": "The included build's settings define its own repositories and a coreLibs catalog from the same TOML, with rootProject.name core.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/settings.gradle.kts",
+          "version": "repo-file-v1:sha256:5c3b50941ee0e053fe8d58914e5aec6315c0704a306364ff04335e333d69226c"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T16:41:29.588Z"
+  }
+}

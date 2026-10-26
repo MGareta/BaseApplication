@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:efc5df0162d99648299685db77f3b48a3c978890f22b547e2ddd580cb9c4aee0",
+  "claims": [
+    {
+      "id": "claim_1dc1f523d7dc4ba6bb4201998410245d",
+      "statement": "CorePresentationPlugin applies the Android library, Kotlin Compose, Kotlin serialization, KSP, Hilt and Detekt plugins and enables Compose, without calling configureTests.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CorePresentationPlugin.kt#L50-L70",
+          "version": "repo-lines-v1:sha256:1d43ca78324c493379e799e86c655ce395e3de7111c921b81c67a45cc58c04cb:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU0ZWRjZGUwYjJmMDhmOTg1NGU2YzdlZDliMjQ2ZjY1MjliMWNkZWFhMDU1MzJjNzlmMmM4ZTg3NjU1MDgxYTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8f9871f1b2b6434fba5465103b8e5e92",
+      "statement": "CorePresentationPlugin adds core:data, kotlin-reflect, the Compose BoM platform and Hilt as implementation, ui-tooling as debugImplementation, and kotlinx-serialization, Compose foundation, ui-tooling-preview, Material3, lifecycle-viewmodel-compose, navigation-ui-ktx, hilt-navigation-compose, Navigation3 runtime and UI, paging-compose and browser as api.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CorePresentationPlugin.kt#L72-L108",
+          "version": "repo-lines-v1:sha256:c2f34ae0b1ef4ad4c4315b1f2760849e85ee15dcfdbb4ec387c11e64f4bfce69:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxNTk5NjAwYTMzMTY2ZTE1NmJkYTM0YmVkY2E1YTRlNDBjODdlYjJkZWU2Y2U5MmE3NzM0NGE3YjAwNThlZjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE3NjFiZjRiZTFiMWZjOTM5NDEyZDdiNjhhY2VkZmUyNjNjMWNiYzIyMjMxMjEyZGYzOTA5YzcyMjljZDE2ZWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3OTRkMDJhODEyMTk0NGQxNzZkMjY1ZTliYjljYzU5ZjZhYjg5MGJjYWRmOGFlZmRlYmRiYmI0ZjJlYTg0NDQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3d2bb6d52b6942668a9b2428393c6706",
+      "statement": "Compose foundation and tooling artifacts are versionless BoM-managed entries, while Material3 is pinned to 1.4.0 and androidx-paging resolves to paging-compose 3.5.3.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/gradle/libs.versions.toml#L55-L67",
+          "version": "repo-lines-v1:sha256:dd1eb882418699c49c4138706b7d96e9d75dc688bb08a05ee6544a21f17530f5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4NjExOGM3OGZkNmU0MjQ2YzIxZjdhN2U1MzUyMDNhNmE3NTcwZjMxN2UwOWJiMzFlNjhlNWYyZjYxZWFjMTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM0M2I1OWQxNzMzZTkyM2RkODFkYzAzOTdlYWUxNTlkNmM1ZGMwMzllNDhmNjU3MTQ1YmU3OWE4ZjdlNGY5ZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3ZjVmYmRlNWNmNjY0OGQwYTgwMDFiMDBkMTVmNmUxYmY3MWM1NzgzZTNjYzMxNjEzMTZjZDczZmJiZWRhOTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE0ZmZjOWU2MzRjOWVjNDhlN2FiMTRkZjY1MTFhMzdkMWQyN2UzMTM2ZmZhNDNjMTQ1NjQwZDk3ZDZmZGI3OTEifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T16:41:29.588Z"
+  }
+}

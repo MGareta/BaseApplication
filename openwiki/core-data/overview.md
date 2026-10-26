@@ -5,7 +5,7 @@ description: Overview of the core/data Android library (namespace com.core.data)
 tags: [core-data, architecture, hilt, gradle, android]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-26T12:11:14.549Z
+    at: 2026-10-26T16:41:29.588Z
 sources:
   - id: openwiki-source-a89a46a6562e5231bac73204
     resource: repo://core/data/build.gradle.kts
@@ -19,6 +19,8 @@ sources:
     resource: repo://core/data/src/main/java/com/core/data/cache/di/CacheModule.kt
   - id: openwiki-source-06989fd0488e75538fde6e49
     resource: repo://core/data/src/main/java/com/core/data/security/di/SecurityModule.kt
+  - id: openwiki-source-e109b62d9d6821d541faa04b
+    resource: repo://core/dependencies/build.gradle.kts
   - id: openwiki-source-4a1624a1ef947742c273fc18
     resource: repo://core/dependencies/gradle/libs.versions.toml
   - id: openwiki-source-3118d53a07141851841743f5
@@ -33,7 +35,7 @@ sources:
     resource: repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt
   - id: openwiki-source-7a8a9bf9712d2c5d9bff4f29
     resource: repo://core/presentation/src/main/java/com/core/presentation/CoreApp.kt
-generated: { by: "claude-code", at: "2026-10-26T12:11:14.549Z" }
+generated: { by: "claude-code", at: "2026-10-26T16:41:29.588Z" }
 ---
 
 # core/data module overview
@@ -108,6 +110,9 @@ Hilt edges (provider parameters): `SessionModule(ICacheManager)`, `CacheModule(I
 `PermissionModule(IActivityResultManager)`.
 
 ## Build setup
+
+> Full plugin reference: [Plugin: core.data](../core-dependencies/plugin-core-data.md). See also the [version catalog](../core-dependencies/version-catalog.md)
+> and the [dependency visibility matrix](../core-dependencies/dependency-visibility.md).
 
 `core/data/build.gradle.kts` applies only `alias(coreLibs.plugins.core.data)`, sets `namespace = "com.core.data"` and
 `testInstrumentationRunner = "com.core.data.DefaultTestRunner"`. That class doesn't exist in the module (there's no `androidTest` source set),

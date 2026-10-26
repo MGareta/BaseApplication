@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:3a0128b9e2ffb5c515c1c100443527333b0c9d66878d950d09cca0a77198a2ef",
+  "claims": [
+    {
+      "id": "claim_484ad88ab7bf46488cfa2099bc7a0d53",
+      "statement": "The catalog pins AGP 9.4.1, Kotlin 2.4.21, KSP 2.3.12, Hilt 2.60.1, Compose BoM 2026.09.00, Material3 1.4.0, Navigation3 1.2.0, Retrofit 3.0.0, OkHttp 5.5.1, Firebase BoM 35.1.0, Robolectric 4.17, MockK 1.14.11, Dokka 2.2.0 and Detekt 2.0.0-alpha.6.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/gradle/libs.versions.toml#L1-L43",
+          "version": "repo-lines-v1:sha256:f8d74ed02961c0dca4a6ff056628c2f2b9a3fe9c4de50ec9e743a1de783b0243:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5Y2ZhY2I4ZjFkYTQ4NWZlNzgwYzEwMmUzYmZmODI3NTU2NGJlMGNhODljY2UzOTY2NDhkZWM1YmU5YzdmNDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5OGIyYThjNmM5MDBhMDgzNjhjNmUyN2FmOTIzODllZWMxNTk2OTE2ZGI5OTRhNTVmYThmMmRlOTAwNWRiNTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cf84c185abe041f1bc54ddc65eae5381",
+      "statement": "The androidx-navigation alias maps to navigation-ui-ktx and the androidx-paging alias maps to paging-compose.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/gradle/libs.versions.toml#L61-L66",
+          "version": "repo-lines-v1:sha256:97560e449ec4260e4dc86f0f266fca87a83a4c1db929edab498b7949bb700281:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2ZkMzdmNTg3ZTBlMTkzMzcxNTBiNjE3MGUyODVmMzBkM2UzZTRlM2RmYWE3NjNmZDY2MDg4MzBlYzkwOTVkNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzgyYzUzMjZiYzI5YTc5MWI3YzUxMTI1YTc1NmI4Zjc4YmY5YWJlODAwNTUwMzdhMDg1NDcyN2NkZDQzNTMwNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2IyZjNhZGY2MTE3Mjc1MzY0Y2NjZWFmZjExYzlmNzc1NTM1YWI1ZTQzNGYyODljNGViZjFmNmY5MzAyYTJjYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWFjMGY2MjgyYWVlNGFkMTRkYjVkOTJjMTBmM2M2MjU2NTE5NjVmMGRkZDAwMmJkM2NlZTk2NmI3YjkyNzVkYiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_9395bc59a7cf40b2877f184d3a4c55ab",
+      "statement": "The test-unit bundle contains kotlinx-coroutines-test, Robolectric, hilt-android-testing and mockk-android.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/gradle/libs.versions.toml#L122-L128",
+          "version": "repo-lines-v1:sha256:6c858707353497541e54aa0f11042b84191708641f76f30a62d2fe1c6bb75765:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmQzMWU4OWU3ZjgxYWMyMTE2YjY2ZDY2OTg5ODY1NmE2YjExMzI4NzdiM2MxMWJjYjc4M2M0MGE0ZTQ4NWYyYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjQyZTJmNGJhMWE3Mzk2MDY5NDFhNWMzZmJlZjA4NDE4Njg5YTNhNjA0ODBiM2I2Y2VmM2Y2ZGQwNTk5N2EyZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_085f90dd7ece49b8888e99120d47175f",
+      "statement": "The google-crashlytics plugin is declared in the catalog and in the root build with apply false but no convention plugin applies it.",
+      "evidence": [
+        {
+          "resource": "repo://build.gradle.kts#L8-L8",
+          "version": "repo-lines-v1:sha256:31350f781d2be5bc708e82cb1c4d843d4e549ed222d4ba1a4e5eb4502431ef26:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzEzNTBmNzgxZDJiZTViYzcwOGU4MmNiMWM0ZDg0M2Q0ZTU0OWVkMjIyZDRiYTFhNGU1ZWI0NTAyNDMxZWYyNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzEzNTBmNzgxZDJiZTViYzcwOGU4MmNiMWM0ZDg0M2Q0ZTU0OWVkMjIyZDRiYTFhNGU1ZWI0NTAyNDMxZWYyNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzk2OGE3N2IxNWZkMWE2OTc0NzdlNmY2YjU1MzU4NDdkYTU2NWI3MDQxMGE1YjBjYzgwMjliYmI2Yjk3Njk0ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWMyZGE3NDc5ODMwNGQ0ZTk5MzhlOTljZGJkMzJmYmUwOTQxNWYxMDU2Y2VlMzBjOWFjMzgxMWQyNWI3MzNmZSJ9"
+        },
+        {
+          "resource": "repo://core/dependencies/gradle/libs.versions.toml#L107-L107",
+          "version": "repo-lines-v1:sha256:7af357acf0f4733ade4093ed987a169e845480eb80f854630627ba10b77445be:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2FmMzU3YWNmMGY0NzMzYWRlNDA5M2VkOTg3YTE2OWU4NDU0ODBlYjgwZjg1NDYzMDYyN2JhMTBiNzc0NDViZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2FmMzU3YWNmMGY0NzMzYWRlNDA5M2VkOTg3YTE2OWU4NDU0ODBlYjgwZjg1NDYzMDYyN2JhMTBiNzc0NDViZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTYxZjQ1ZGEyY2MyMzE2ZDM5ZDQ1ZjYyOTFiM2ZjOGIzMTFhZWVhODY2YWQ5ZmZlNmY5MWYzMzY3N2MyZWVhOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTZhNzE3Y2QwNjQwMWM0YTFjMjE5Yzk4MmQ1NzI4YTBlYWNmMDE1MzQ2MzRmNTI2ZTE5ZDY0ZWJjMTJmZTk4MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a4209232f7a34a74bfb455446b26824e",
+      "statement": "The catalog declares the app, core.data, core.presentation, feature.data and feature.presentation convention plugin ids with version unspecified.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/gradle/libs.versions.toml#L115-L120",
+          "version": "repo-lines-v1:sha256:cc58056707b9dd0be4d5d99c33b7f5cc75cb1c18870f2e5cd6543394f901bc4f:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzY4ZmUzOTZiOGIzYzMyYTYxMWY0MDRkMDQ3ZTM2YzUyN2RmMzhiOWE0Y2NlM2U3MWYxZDMzYmE2ZjYxODRiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjQzODNhZTc2NDM3Y2QzODhiZjg4MDJjNWY2NDA1MjA3NmViMDczZTJiNmMzNGYzYjAxMDk5ZTU1ZjUyMzNlNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjI5MmJiNTlmZWFmMzc5YzdlYmRiY2NjYWZlODA1NjBkNmM1YWRmODRmYTkwNGVkMDAwZDNmM2NiOWIyOTc3MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTgyMjM5ZjNjNzY0Zjg5ZWYxYzI4MmM5ZTgyNjA1ODgxM2JkOWViNzg4OTFlN2MzMDk5NmZkNjUxODUzNWEzYyJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T16:41:29.588Z"
+  }
+}

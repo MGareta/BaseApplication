@@ -8,22 +8,30 @@ sources:
     resource: repo://app/src/main/java/com/baseapplication/App.kt
   - id: openwiki-source-e38439f5bc06bf873d6444ad
     resource: repo://app/src/main/java/com/baseapplication/MainActivity.kt
+  - id: openwiki-source-6e98d638297776b5f81f559d
+    resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/AppPlugin.kt
   - id: openwiki-source-ebbe359b8fc397d0e2f617b5
     resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt
   - id: openwiki-source-1f78a6fb10e2b39879415b1c
     resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt
+  - id: openwiki-source-bbb0f73ef5c40bd97bd940fa
+    resource: repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt
   - id: openwiki-source-f96123c650a78c26f62af83d
     resource: repo://core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt
   - id: openwiki-source-e8b13a3752a96095685bba51
     resource: repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/decorators/viewModel/NavigationGraphViewModelStoreOwner.kt
+  - id: openwiki-source-5ad5829264c75ebc25f88ee6
+    resource: repo://demo/data/build.gradle.kts
+  - id: openwiki-source-823d791cada9047e35d0e367
+    resource: repo://demo/presentation/build.gradle.kts
   - id: openwiki-source-dc2f4215d060ab5729f6cb69
     resource: repo://demo/presentation/src/main/java/com/demo/presentation/di/DemoScreenModule.kt
   - id: openwiki-source-e620d7484b72a53c7fa812cd
     resource: repo://settings.gradle.kts
-generated: { by: "claude-code", at: "2026-10-26T15:48:49.783Z" }
+generated: { by: "claude-code", at: "2026-10-26T16:41:29.588Z" }
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-26T15:48:49.783Z
+    at: 2026-10-26T16:41:29.588Z
 ---
 
 # Quickstart
@@ -67,6 +75,19 @@ in `ActivityRetainedComponent`.
 | Test ViewModels and components | [core-presentation/testing](core-presentation/testing.md) |
 | Recognise or migrate the old Navigation Compose code | [core-presentation/navigation-legacy](core-presentation/navigation-legacy.md) |
 
+### Build and modules (core/dependencies)
+
+| I need to... | Read |
+|---|---|
+| Understand the included build, plugins and module graph | [core-dependencies/overview](core-dependencies/overview.md) |
+| Create a new feature data or presentation module, add a library, add a plugin | [core-dependencies/recipes](core-dependencies/recipes.md) |
+| Fix "unresolved reference" / missing classes between modules | [core-dependencies/dependency-visibility](core-dependencies/dependency-visibility.md) |
+| Look up a library version, coordinates or who uses it | [core-dependencies/version-catalog](core-dependencies/version-catalog.md) |
+| See exactly what a module-type plugin configures | [plugin-app](core-dependencies/plugin-app.md), [plugin-core-data](core-dependencies/plugin-core-data.md), [plugin-core-presentation](core-dependencies/plugin-core-presentation.md), [plugin-feature-data](core-dependencies/plugin-feature-data.md), [plugin-feature-presentation](core-dependencies/plugin-feature-presentation.md) |
+| Change SDK levels, JVM, application id or version | [core-dependencies/config](core-dependencies/config.md) |
+| Understand shared build helpers (build types, packaging, tests) | [core-dependencies/extensions](core-dependencies/extensions.md) |
+| Run or tune Detekt / the OpenWiki workflow | [core-dependencies/code-quality](core-dependencies/code-quality.md) |
+
 ### Data and platform services (core/data)
 
 | I need to... | Read |
@@ -104,3 +125,10 @@ in `ActivityRetainedComponent`.
 10. `ContainerComponent`, `PagingComponent` and the list Loading/Error helpers are commented out ([components-layout](core-presentation/components-layout.md)).
 11. `Theme` forces `fontScale = 1f`, which ignores the user's font size ([theme](core-presentation/theme.md)).
 12. Import from `com.core.presentation.navigation3`, not the legacy `com.core.presentation.navigation` (same type names).
+13. **Always set `android { namespace = "..." }` in new modules.** The plugins default every module to `com.base.application`, and `:demo:*` currently share it with `:app`
+    ([config](core-dependencies/config.md)).
+14. Feature presentation modules and `:app` can't see core/data types (`ApiResult`, managers) unless they depend on a feature data module or core:data
+    ([dependency-visibility](core-dependencies/dependency-visibility.md)).
+15. Only `core.data` configures Robolectric unit tests. Feature plugins have no `kspTest` for Hilt, and nothing provides Compose UI test artifacts ([recipes](core-dependencies/recipes.md#8-enable-tests-for-a-module-type)).
+16. Release builds are signed with the debug key, minified, and have no keep rules. The Crashlytics and Google Services plugins aren't applied ([plugin-app](core-dependencies/plugin-app.md)).
+17. Detekt runs with `autoCorrect = true` (it rewrites sources) on a 2.0 alpha with strict rules ([code-quality](core-dependencies/code-quality.md)).
