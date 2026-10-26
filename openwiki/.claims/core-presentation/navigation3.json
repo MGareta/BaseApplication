@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:d752753750083b1afa253f37a0b61709785a5ff8ec20cd0669e172e15136b3f1",
+  "claims": [
+    {
+      "id": "claim_3b860ea09af540dc900889a4f19f4e0a",
+      "statement": "The navigation3 NavigationModule is installed in ActivityRetainedComponent and provides activity-retained INavigationGraphFactory, a SupervisorJob Main.immediate CoroutineScope and INavigationGraphManager from Class-keyed maps of graphs and entry sets.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/di/NavigationModule.kt",
+          "version": "repo-file-v1:sha256:96da206cdde3a4fb0fe91aba6857059e6273f6507deb0858c0c2f8ea19933350"
+        }
+      ]
+    },
+    {
+      "id": "claim_aa3311e2938e449fa101490dfdd3eb8d",
+      "statement": "Features register a graph by contributing, under the same @ClassKey in ActivityRetainedComponent, an INavigationGraph map entry and a Set<INavigationEntry<INavigationDestination, ViewModel>> map entry.",
+      "evidence": [
+        {
+          "resource": "repo://demo/presentation/src/main/java/com/demo/presentation/di/DemoScreenModule.kt",
+          "version": "repo-file-v1:sha256:1d86d514d05bc299109c256de409c982bf2ce69d3354bc6bbf35c6c6d7a59592"
+        }
+      ]
+    },
+    {
+      "id": "claim_5f01886829734099bf7bcec4463ddfd0",
+      "statement": "NavigationGraphFactoryImpl keeps only graphs that have both a graph and an entry set for the same key and requires exactly one INavigationGraphLauncher, throwing IllegalStateException otherwise.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt#L58-L111",
+          "version": "repo-lines-v1:sha256:46580a95f299f707a9f7e278032db5d729f14fc14542ad4392f045812e65658e:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4NjVmZWY1OTZkNTRjOTFhNWFkYzFkYjdmMjFmYzdiNWQxNzAyZDZkODdkNWYyZGRiYzNhZDI3YTM4MmYxNTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM4NTQ1Nzg3N2RmMDgxMWQ1YTViN2ZjODg0MDM1YmY1MzI4MzI5OGVjZWUzMDFjOTgyZDFkNDEzMTM2N2VhYTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFlODY4MzQ3ZjY1Nzk3MzU3YzE5NTJhNjM1NzI1NTY0OWQzNGRmN2IxYTEzYmVmYzBhNmY2ZDgzZmQwMTMzODAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_66aacd00a7554195a0be2c9f42952243",
+      "statement": "register adds an entry provider per entry keyed by the destination class qualified name, attaches bottom-sheet or dialog scene metadata for the specialized entry types, and renders by creating the ViewModel with viewModel(modelClass) and calling Render; getNavigationGraphFromDestination throws IllegalArgumentException for unknown destinations.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt#L133-L172",
+          "version": "repo-lines-v1:sha256:45f98392bd54ccd314a343f79a089a5c8e3d0ecaadd68b9016714edbac71dea4:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2YmE0ZjY1OWVhMGRiYzJkY2ZjNDdlMjQ2OTcwNzliOTk0Zjg5OGNjMGIxODMyNDBlNTlmYzFiY2M1OTAwZTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdiNGE4OTdlZDAyNzRmMTg2ODA5ODdiYTQ3NjE5OWMyY2NmZTRkMTZhNDA5MTljZjhhMTFmNWY2MTJhNDg5MzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c85ea43b8f114eb5bee6822b4b06ab32",
+      "statement": "NavigationGraphManagerImpl initializes the back stack with the objectInstance of the launcher graph's first entry destination, pushes and pops with goToDestination/goBack, and clears ViewModelStores of graphs no longer represented in the back stack.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/manager/NavigationGraphManagerImpl.kt#L57-L178",
+          "version": "repo-lines-v1:sha256:6d1c48e573ca3169dc9fe9938afaf5f38ef98bd626a139ecbf5c1add611b5fab:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIyLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiZGYxMDg3NTdlNTA0ZTU4NjIxODBlYWQxMGNmM2JhMzc5OTIxMGNkMGIxNDc5NWFiOGEwMmFhNWRkNjBhYzM0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIyZDIxNTljZGJjY2Q5YTE0YTdjMjYxMTYxODliOGM5ZmZmNzUzM2M2YmYyNmExY2M0NzU4OTQxYzE0YTdiMTc2IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MSwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJkMTBiMzZhYTc0YTU5YmNmNGE4ODE4NTgzN2Y2NThhZmFmMzY0NmVmZjJiYjE2YzM5MjhkMGU5MzM1ZTk0NWQyIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_3fdf7f1e11434910bac07971180572c2",
+      "statement": "SharedViewModelStoreNavEntryDecorator provides the owning graph's ViewModelStore as LocalViewModelStoreOwner through a plain ViewModelStoreOwner without a default factory, and forwards onPop to the manager.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/decorators/viewModel/NavigationGraphViewModelStoreOwner.kt",
+          "version": "repo-file-v1:sha256:80b1aaf95e51a1766c781ac765392eae98d96f4eb3df09c7b18aa34026f0055b"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/decorators/viewModel/SharedViewModelStoreNavEntryDecorator.kt#L64-L92",
+          "version": "repo-lines-v1:sha256:acbac5b8ac616bccaaebdf71896fdde47f34ba018229233d16e9d9e71e64743b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzYTVhYWRkN2M5YTJhZjNiMDM0OTlkYzE5OGE0YTY2ZjI1NmNlNDdlNzVkOTZjYzhkMDhhYmE0NjQ1M2U3MTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwMGYxNjU4ZDVmNDYwZWVlM2JiMzhjNzQ4NjJmYjc3NTE3NWUwODkyYjUzZGVmYTAyMjdhZjVlZDg2ZDNjYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5b1e6f3d567d4d22bd62bd25f5906738",
+      "statement": "BottomSheetSceneStrategy renders the top entry inside a ModalBottomSheet overlay when its metadata contains ModalBottomSheetProperties under the \"bottomsheet\" key.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/scenes/BottomSheetSceneStrategy.kt#L92-L153",
+          "version": "repo-lines-v1:sha256:26a278ffec91d3c067fe6bc03738185b409dbe39adf0839575344f6d664ee3fd:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4YTc1ODM2NjIzNjY5MTJlM2RiMzBmN2YzNDFlYTk3YmMwYjBhNTU4YTMxNGE5ZTNjMTJjYjM0OGEzNzE3ODIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxMGIzNmFhNzRhNTliY2Y0YTg4MTg1ODM3ZjY1OGFmYWYzNjQ2ZWZmMmJiMTZjMzkyOGQwZTkzMzVlOTQ1ZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI1ZDUyYjExNDJkYjQwZGNlMTcyODIzMjA0NjIzODQ0MWQ0N2Y0YzJjOWNiNmQ4MThlYmVhZmZhMzI5ZjAwNDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_84dbb18ca8ad4c9290c84700aadca3a2",
+      "statement": "INavigationEntry requires a dagger.Lazy<INavigationGraphManager> navigator and a Render(params, viewModel) composable, and resolves its destination and ViewModel classes by reflecting over its parameterized superclass.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/INavigationEntry.kt#L30-L132",
+          "version": "repo-lines-v1:sha256:545ed0bc20225ef0cbaa3cd211146fdea827e479b4de290176a94c3395d6791b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIxNTljZGE3ZTc2ZjhmOWJiNGUwMzcwZTRjZGZlNTM5ZDIyNjJjY2Y2ZGNlMGViNDhlZmUyZjBlN2NkYmU0NTU3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJkMTBiMzZhYTc0YTU5YmNmNGE4ODE4NTgzN2Y2NThhZmFmMzY0NmVmZjJiYjE2YzM5MjhkMGU5MzM1ZTk0NWQyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI5ZTI1MDk0NTU3ZDk4MDlkZGMzYWJiODM2ZDQ0NmYzZGRhNjIxMjkwYjE2M2UzMGYwZGNlNzZlMjMxNDVhNzIzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T15:48:49.783Z"
+  }
+}

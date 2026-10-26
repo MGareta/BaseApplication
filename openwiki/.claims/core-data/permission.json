@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:6a363a5a02be165dedacbe2a3bf7ef8b7135222a1028c59456b49bdff13b9e4c",
+  "pageVersion": "sha256:23de26058fd676c7023644bde854b14c75e0a11418e73cffc4ed759db7ade318",
   "claims": [
     {
       "id": "claim_dd4a44b8b2e740288484f90e78e06135",
@@ -61,10 +61,28 @@
           "version": "repo-lines-v1:sha256:6579be93d62febd4b5d7eb8783dfa52e03d6cf33fd20ef632b4a6b41ecce4604:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE3NDU4YjlmOTY5NmEyMzM5YzEwNjczYmE3ZmIzMzY4YWY3ZDUyZDUwZTljMDRlZWI2Zjk0Mzk1YmQ1ZDk3OGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlNTMxY2I2MGY1NzYwOTE0MTJkZmExODAyMjRkMGZlNjAwYTI4YThmZWRiMGE4ZmRlYzg5MTM2MzFkZDBjYWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4ZTI1ZGFmYjdkN2EwNDI4MDIzNWMyMzkxNDE5NTY5NTMzMWMzNzY3YTNjZjkyN2M0NTcxOGUzMTdmYjUxZDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU4ODkzNzQyNzJkZWVhMzY5NGUwOGQ2OTUwMTcyMjc3ZmEzODU2MWMxNDkyNjQ4Nzc4NDNjZWYyZGFlNmUxMzkifQ"
         }
       ]
+    },
+    {
+      "id": "claim_a288a1ec68614b339ad7c53023e59de2",
+      "statement": "With the app's BaseActivity being a ComponentActivity untracked by ActivityProvider, requestPermission resolves to Denied without a dialog and requestPermissions falls back to current grants, while hasPermission still works via the application context.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/permission/manager/PermissionManagerImpl.kt#L24-L79",
+          "version": "repo-lines-v1:sha256:9c747856ce5a4037e39e8853fd39ef0db6fa9065fe75a76d4bdb73b166cb09cc:eyJzZWxlY3RlZExpbmVDb3VudCI6NTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyMDc0NzYwYTljODAyMzM0OWYzYjdmOTI0ZjU1YWExZTcwZTlhMWEzNDM4NDU3MzIyYmU3N2QxOWEzNGNhYTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkxODBhNTNlMGQxZGRiOTBkN2EyMjUwZWEzOTc2MmI0ZmRjM2NiNmQzODNmMmIwNjhhYWQzYjE1ODAxNzRjNWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/utils/ActivityProvider.kt#L45-L63",
+          "version": "repo-lines-v1:sha256:6c8f21f1668db01f400a0d6a8ab70f289eaf59abbfd04f0de46cf8626efde48c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkYmU0MWYwNWVmZGEzZGE0ZGMwYWY1MzA3YjE0ODA4OWExZDljOGQ2MDliODdiMWE3MWIxYmYzMjg0Nzc1NmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY0OTM0YjA5YmFkNWRhODZlOTEwNDNjODczY2NlYTQ2Mjc0NWM2ODIxYTIxMDFjMmIyMTk0ODhkNWE3NTQyNTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIxZDI4NWRkMjQzMGNkZGEwYjBlMjI0OGU4NDQxYTg4ZTA3MTg0ODFhOWUyMmY1YTkyNWI1MjU5NzMyMWM0NzEifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L49-L50",
+          "version": "repo-lines-v1:sha256:73a5c2051eefd78cda855c942d88b77498176e0778b8cd9d8a93038760be6e6e:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzY3N2JhNzJhZDEyM2M2MGI1NjhkN2FmZGZiNWUwOTc5MmFiMDMxMTgxZmJlOGI1OWZhMTM5ZWUyMTYyZDczNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWQxZDliNDZkNjEzZGFkZTQ4OTIwYjFiYzdjMWFkMDYzYzdjMmE5MjUwZDE3ZTIwNjZlZmJlZTZlOTI5MTIzYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTQzZjA1ZWVmNDM0ZGJmNTAxYmY1MzZiMDg0NmZmMzA1MjU3Y2U2MDE2Y2FhNDkwMTg1MzE2ZjYxZGE1ODkxNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2EwYTE2ZTQ3NDg1NGZlOTUxMmZjZjE5Yjk2MTcyMTVlNjE3MjgxYjNkMjUyYTQ2NjgwYjRhNjI0OThiMzZiYSJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T12:11:14.549Z"
+    "at": "2026-10-26T15:48:49.783Z"
   }
 }

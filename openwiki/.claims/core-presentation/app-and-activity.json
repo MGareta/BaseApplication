@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:d345596a593c553465483e06e24095c54286af522025c49c47674196b6abb839",
+  "claims": [
+    {
+      "id": "claim_42883e537d1249b3a30ad2c258e533d5",
+      "statement": "CoreApp is an open Application whose onCreate calls ActivityProvider.init(this).",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/CoreApp.kt#L6-L12",
+          "version": "repo-lines-v1:sha256:a522194ee8cfb225863991ff4ad857f5712389694a4d488bb6c8390593ea5d0d:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWJhYTNmYzUxYzA3MWY1M2Q3YmFlOTY3ZTA1Y2RkOTg2ZmU4NTIzYjNiZTk0YTRjYjA0ZjYwNzg3NDcwY2U5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTk0MDAxZWQ0OGM2MTVjZjI0ZmFjN2ZjN2FjZTE2ODAwNzgxYTkwNWU3MGVlNWU4ODMyMjljOTg4ZmFiYThjYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e944748ab7ae428dae3e5dd7645d2a77",
+      "statement": "BaseActivity is an @AndroidEntryPoint ComponentActivity that field-injects dagger.Lazy instances of the navigation3 INavigationGraphFactory, INavigationGraphManager and ISessionManager.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L49-L59",
+          "version": "repo-lines-v1:sha256:fc420cacd9da927d9d24be8dd57c340ec1a55c938e237ac52b28f78e52823e77:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NzdiYTcyYWQxMjNjNjBiNTY4ZDdhZmRmYjVlMDk3OTJhYjAzMTE4MWZiZThiNTlmYTEzOWVlMjE2MmQ3MzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljMjg0ZjQ1NTQyNjA0NzYyNzYzNTI2ZDExOTI4MGE2ZWE5Y2M1YWZjZjk4NGM3ZDY3YTA5MGViYzlmNzA1NjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE0M2YwNWVlZjQzNGRiZjUwMWJmNTM2YjA4NDZmZjMwNTI1N2NlNjAxNmNhYTQ5MDE4NTMxNmY2MWRhNTg5MTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5NmJiNzc4MmQwNmMwNGM3MTg1YzQ3YmJmZmUyYmRmMzQyOGM4MTk5NTRjOGI4Y2E2NGZhY2M0YmNkYjFjN2MifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e8976ddaaea542b3bd984b0e5a568d44",
+      "statement": "BaseActivity.onCreate sets night mode to follow the system, enables edge-to-edge with transparent light system bar styles and disables navigation bar contrast enforcement on API 29+ before calling super.onCreate.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L61-L79",
+          "version": "repo-lines-v1:sha256:da0242d684a47d2a83f4eec355bf21ee3a80ab579dbd8bccfa792ced334d7070:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY4YjUwMzJiNzIyZjM4N2I0ZjkwN2Y4NzllMzI0N2FlMjdmZjFiNmI2M2JlNmUyYzZmOTVkZTA5YWRmNjYxZmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0ZWVmZWM3ZGI4ZTBhMDI5N2U1NmI5ZDYwMjM2OGI3MmU1ZGFmMzk3ZDZhNGI3ZDZhMDIwZjQ2Mzk1YWRkY2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZmOGI2OGExZTdlNDg0OWMxNmI3ZTlhYWMzZGEyYmMxYTFkYzU2YWE0ZWM4MzlkNTAwZjdjMmRjNWM0MGYxMjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhkODU4YTAwZmM0N2YxNWMxNDFkMjc3ZTIzMDMwOWU4YzBjODNiOWMzYmY1N2U3MjFkNzU5YTdmNzlmZDhlNzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_86171387fac247b0b78fcd78c4eae04d",
+      "statement": "BaseActivity renders a Navigation3 NavDisplay inside Theme using the manager's backStack, BottomSheetSceneStrategy and DialogSceneStrategy, the saveable-state and shared graph ViewModelStore entry decorators, and an entryProvider populated by INavigationGraphFactory.register.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L81-L133",
+          "version": "repo-lines-v1:sha256:139d85cf57f322a5cc5549303f5de4df6dfa5ef2dffc2e056d955114f6e6dec6:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmMzJlNzU1MDgyNDA0ZDE3NGZjNGIxZGJlYzgwOGJmNmRhYjdmYWUxMGUyMzNjOTkyZjhjM2M1YTdhMzk5NTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhZDZjOGVhYTg1M2RmYjcwNzIwNTFhNWY1OTYyOWJiNzZmMDJkMTMzMDQyZjY0MTQzNDNmYTAxOWFiOGU2ZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZjNDdhNDQyMGVhM2M0MWNiZmEyMDAyMWIzY2UyMjc3MGI4M2VlNWRkMzg0YjBiZDg0MDFjZjMyN2ZlMmU1MTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ2MTc3NWIyN2VkMmNlY2NiOTAyMDI4YmFlNzc0Mjc5Mzg5ZjY3ODRhZmM0YzZmM2FmOWZlNWVhMDQ5ZjY0NTIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ddcdd372d8d74ecfa8a6d0b2d2242f8b",
+      "statement": "BaseActivity shows BottomNavBarComponent only when the graph of the top back-stack destination implements INavigationGraphBottomNavBar, and passes an empty onTabSelected callback.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L135-L164",
+          "version": "repo-lines-v1:sha256:a352f2f33046639479256ad7c54ad55a45fc340ea25ff222396c1236ca763bba:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlNTc4ZDExMGVlYjE5MWQ5ZGY2NmRmODllNzkwMzBiZTc2ODZmZTgxMWQ3NjA5NjE1YjBjNDg3M2UyNTU0YjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU3YTVmZmEzZTA5NWRmMDViNmIzMzMzODcxYWJhMWMxYjNlMjVhYjNkYmYxZDQ5MmYxNTRjMmNjMmIxMjJmNTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgyMjg2MmZkYmMyMzYwMzNjOTFmNzk2YjcxODNhNTc0ODU2YzQ1YTY3YmRiZTZkYjc1ODE2NzEwYjk5MzM3MTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdkZWQ1N2NkZjYyOGU3YmNmYjdkNzY2MzJhOGQ3MTQ4NzM0YzA0MWJjNjUwMjBkZDg5NmJlZjE4OGE3YTIyMTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1acbb8b672f5490b826c1961e7c03203",
+      "statement": "BaseActivity routes session Warning and TimeOut commands to the abstract onSessionWarning and open onSessionTimeout (default invalidates the session) and restarts the session timeout on every user interaction.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L171-L186",
+          "version": "repo-lines-v1:sha256:7f810df94aba6cb9f48ad0995383c4e5e351cf12400667aaf6f742256520da7a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0N2M0NTYxMzNmYjFmMjBkNWZlNWU4NWVlNmVmZWU1ZmE4NjkyN2ViMmZkNWY4YTlhNWY4ZDllNmNiOTg4ZWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L85-L96",
+          "version": "repo-lines-v1:sha256:acd16e10d10077b8913878a94140d35c753370323ba28af66426c9f8a2ccd261:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4ZDNhNTgyMmM3YmM4NzIwMTkyYjY0NjAzYzZlNWQ1YTUwNTdkY2JiMWJhMjdhNWJlYzFkNTE1ZjRkNDNkMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyZDg3MTc4MDMwNWQ3NDc1MTAzMzViNjU2ZmJmZThiOWEwZmI5OTgzNjhhNTYzNzhkOGUyNDM4MTg3OGNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0MDhmMzM4MTYzZDlkOWYwZTI5ZTIxMmZjYjdjNWZjOWYzNWIwNzc5YmQwNGI0NTM2ZmY4ZjNlMTg2NDYwZjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ed024e5fef4b4680af0967afeb2d7736",
+      "statement": "The app's MainActivity implements onSessionWarning and onSessionTimeout with TODO() calls.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/com/baseapplication/MainActivity.kt#L6-L17",
+          "version": "repo-lines-v1:sha256:06999c70624084fe21c80b7f383a3faa76fbf031c6ec7651a13518960b954c87:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NzdiYTcyYWQxMjNjNjBiNTY4ZDdhZmRmYjVlMDk3OTJhYjAzMTE4MWZiZThiNTlmYTEzOWVlMjE2MmQ3MzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU3ZGYyMDc2ODk5NDhkNGY0NmNlNTZlMDJkYWMxNzU1NTc2MjBhNTcxYjE0YjUwMWE2MWQ3ZDk5Mjk4OTY4ZWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T15:48:49.783Z"
+  }
+}

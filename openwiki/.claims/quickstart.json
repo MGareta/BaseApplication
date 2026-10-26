@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:b419f3ef32aaf99e5010daba610d965a8823814bf6cdb941b10e639e15314053",
+  "pageVersion": "sha256:77f0039b354ae37544af7c04d0da58424650bce2a730690fbdbb59bcb6cca299",
   "claims": [
     {
       "id": "claim_cbd7b77de2f947f497f8a08334cdd150",
@@ -35,10 +35,38 @@
           "version": "repo-file-v1:sha256:4e3b73134151661e4d479cb9b5dfe23205e273e8c772981f72244a2743dcf81a"
         }
       ]
+    },
+    {
+      "id": "claim_e4b24ab5c68449398daf5abe63278be2",
+      "statement": "Feature presentation modules depend on core:presentation through the feature.presentation plugin and contribute Navigation3 graphs and entries in ActivityRetainedComponent.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt",
+          "version": "repo-file-v1:sha256:2f1a3cf4d138bc897d602f95568838a1c9709a01f848ea0522dcbe4981e64e3f"
+        },
+        {
+          "resource": "repo://demo/presentation/src/main/java/com/demo/presentation/di/DemoScreenModule.kt",
+          "version": "repo-file-v1:sha256:1d86d514d05bc299109c256de409c982bf2ce69d3354bc6bbf35c6c6d7a59592"
+        }
+      ]
+    },
+    {
+      "id": "claim_b0f19e297cd14c359619fc36f60016bd",
+      "statement": "Navigation3 entries obtain ViewModels via viewModel(modelClass) under a graph ViewModelStoreOwner that supplies no default (Hilt) factory, and loadInitData is not invoked.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt#L150-L159",
+          "version": "repo-lines-v1:sha256:f03ef3098c0faa1f3a1ad137f1acdefd427a874437bb7647f5c28c6c4b302788:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NWM3NjI0ZGMxYWQ2ZDU4YTMyZTcxMWRmYzdjYWJmZWQ3ZmZjMmE4NDBhM2Y0Njg4YzU2ZmRiMjc0NjlhMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjNjQ3OWNjMjMwNDQwZmQ0MWU4MjI0MjE4Njc5Njk4NTU5ZDI4OTNiZDY3YjQzODBhZmFiODExYjM4YTU1YWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA4NDAyNzUyYWMzYmE2MTk4Yzk0MzVhNjk1OWVhMDVmZDg2OWFjYTE2ZjU0ZWMwMjQ0MGFlNjM3YjFlYzUzMTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAyMjc5NjRkNmQ4OGIwNWViMGZiZDZjMzY3MTYzYTdmNzY5MjljNmVlN2E5Y2UxZDRkZjRmN2Y0MWIzNGUxNGUifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/decorators/viewModel/NavigationGraphViewModelStoreOwner.kt",
+          "version": "repo-file-v1:sha256:80b1aaf95e51a1766c781ac765392eae98d96f4eb3df09c7b18aa34026f0055b"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T12:11:14.549Z"
+    "at": "2026-10-26T15:48:49.783Z"
   }
 }

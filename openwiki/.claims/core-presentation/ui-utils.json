@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:850f6abd2b30950b7afaf74344459ae1020b07633e5243fea26d28efdbcc26ec",
+  "claims": [
+    {
+      "id": "claim_d080b9b3ea2d472d9b940dd41c2107f3",
+      "statement": "accessibilityFocusTarget clears focus, waits delayMillis (default 50 ms) and requests focus on the given FocusRequester whenever its key changes, and makes the node focusable.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/utils/AccessibilityUtils.kt#L31-L54",
+          "version": "repo-lines-v1:sha256:c93e481db94cacd4b2c28e69e192fead65779df73cd162ae1b55ff1af6bf4236:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOGQ5NzlhM2JiNjU4M2YyOWJhYmZlZmJlNGM4YjUwMGMxMDcxOWJjOTc4ODgwNzYyMTlhYWY3NTUzZDAzOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5ZjkzMDgzYzE5NzEyMWI5ODI3MDBiYThhZmFiZDE3MjJjZjFkM2U3NDA0NTA5ZTgwZWZhMjcyNDdmNjJmMDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_14fbf394e2414ecfb706b90409aa5932",
+      "statement": "BorderIndication draws a 30% black overlay while pressed and the shape outline plus a 10% black overlay while hovered or focused, without clipping the overlay to the shape.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/utils/BorderIndication.kt",
+          "version": "repo-file-v1:sha256:ffd8864186cf6cc2095af347fb918f2dd942f4e791355497428fdd872f6f4c4d"
+        }
+      ]
+    },
+    {
+      "id": "claim_e7ab0ffb3b7a433093c44fecba446c88",
+      "statement": "ComposableLifecycle wraps LifecycleStartEffect to call onComposableStarted on start and onComposableStopped on stop or disposal, and rememberFlowWithLifecycle remembers flow.flowWithLifecycle for the given lifecycle and minimum state.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/utils/ComposeUtils.kt",
+          "version": "repo-file-v1:sha256:2ccb860dc9369be360f709ad5e86e20a8c06cc80d1bc603e1c060121a6d527be"
+        }
+      ]
+    },
+    {
+      "id": "claim_c5175c5f1aa34c1a9f275d82c8119327",
+      "statement": "ui/utils Extensions provide composable dp/px conversions, composable conditional Modifier helpers (thenOnTrue, thenOnFalse, thenOnNotNull, thenOnNull and two then overloads), ignoreHorizontalParentPadding, and String.inputToAmount converting raw digits to a BigDecimal with the given scale.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/utils/Extensions.kt#L16-L116",
+          "version": "repo-lines-v1:sha256:9a9b9c03e1ad235a58b625ad663d71d2cb85733030087203c6fc7706a8e0a8fb:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAxLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlYzA4OTU1N2RlOGVhMWU2NzA3ZTAwOGE2ZGNhZDRkN2UxNjgwODZmN2ZhNzE2MWI0MmUzNGE1ODNiMzMyZGNlIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI2MzFjYTdmZjNhOTkyZjM2ZTU4NGM4OTk0NGUxYzk3MDdmMmEzNzVlYjdiMTJkNjcwMjJmN2FhMDM3OGFiZWMzIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_95b5e0fbe4244aab87aca4cb9d73cea6",
+      "statement": "isKeyboardOpenAsState reports the keyboard as open when more than 15% of the screen height is hidden from the window's visible display frame, using a global layout listener.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/utils/KeyboardUtils.kt",
+          "version": "repo-file-v1:sha256:1f2faa9c0a1ad81ae8ba3044255a797a160d7da3fd4ccbc134828cc86ac47113"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T15:48:49.783Z"
+  }
+}

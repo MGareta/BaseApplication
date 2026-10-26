@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:ecea328a0482c3442b326144242dbc1e1c8e7e6285f2f52d42711f76e9d76cde",
+  "claims": [
+    {
+      "id": "claim_89d57e4d8a9c4d20a178c40a2f308e94",
+      "statement": "withUseCaseScope launches in useCaseCoroutineScope, invokes loadingUpdater(true), runs every block in parallel child launches joined with joinAll, calls onError for caught Exceptions, and always invokes loadingUpdater(false) and onComplete in finally.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/coroutines/CoroutinesUseCaseRunner.kt#L24-L44",
+          "version": "repo-lines-v1:sha256:5f48b566325b8fe8947c055739e72285fbf04f21f8a1aba1584c94a678918c61:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3MTk3NmZmZGViNDQwZWVmZmM5OWU5NTk5MTI1ZmEzN2U3NjEwN2MzNTI4Y2EzZTU2Nzk1MTExMmE0OGIzYmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFmYzQ2NWEwMGQyNWIzYWE1NTA4ZTQ3MjNkZTdiNDgzZmM1ZjQ5NzNhNzc5NWYyMDBkMjA5MDkzYjVhNzVmNDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU2ODA5YWEyMTg4NjcyYmZkNWY2OWJjZjg3MWUyYTY5Y2Q1ZTNmNmE0MzNjOTc2NzVkNGVjZjcyZDg4ZGQwMGUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0b1c16a22c504be5a9a9e9669be37163",
+      "statement": "withUseCaseScopeLazily maps Success to UiResult.Success, Error and Exception through the caller's mappers, and NoContent to UiResult.NoContent, exposing it via stateIn with SharingStarted.WhileSubscribed() and UiResult.Loading as default initial value.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/coroutines/CoroutinesUseCaseRunner.kt#L46-L64",
+          "version": "repo-lines-v1:sha256:3029e93c1f2f0892615cbc1e8a6a0f0fed3b95435e216e3af0f3b94cf23989fe:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2NWZlYTdkYzI1MzI2NzQ5YTlkZWZkNTc2NDIyZjk2YmRjOWQ1YjY4OTM4ZmFiYTA4ZTJmYWYwZmMzY2M3YmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFiODAzMDJhMzJkZDRlMDc5NTYwZTRhMzY5NGY3NzkxMjhmN2YxYjJhYmYzYTdmMmY4Njc4NWM1MzBkMGI2N2MifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b28e0054bcec4698b7688223f0121c45",
+      "statement": "withUseCaseScopePaging builds a Pager whose PagingSource uses the current key as prevKey, calculateNextPage(pageId) as nextKey, ends on NoContent, converts Error and Exception results to LoadResult.Error after invoking the callbacks, returns a null refresh key, and caches the flow in the use case scope.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/coroutines/CoroutinesUseCaseRunner.kt#L66-L121",
+          "version": "repo-lines-v1:sha256:4086ebc7181c6891697bd02d1535d264592ae6b54a5ad77bf5f343c1fce53bfd:eyJzZWxlY3RlZExpbmVDb3VudCI6NTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmM2VmM2ZjNmVkMDVjMGE2OWMxYTliODMyMGI3ZWQ0ZjRhNGFiNjQyNGZkNzQ0YWUyNWY3OGNjNjk1OTAzM2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdjZTE2ODcyYmNmMzdkZDllZTk0NGE0Nzg5NTFmYWI5YjZhMGViNGI4NjBlNjRlM2Q3NzIyMjdlODdlYzY0ZjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a42239ca30a443c2ac1c6e95b436f6f4",
+      "statement": "BaseViewModel implements CoroutinesUseCaseRunner with viewModelScope as useCaseCoroutineScope.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/viewmodel/BaseViewModel.kt#L15-L22",
+          "version": "repo-lines-v1:sha256:c67818cfb9af41e2bbe1ab3723b2b41c117ebb6578796f93b406e893902100d5:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDJjMTgwMDMwNDI2YjQzZDAwMGNiODU2YzhkOGE0MDNiNGFlNjAyZDgzYzE4ODllNjA0ODA5MTZiMzg4Mzg2ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzViODFlZjFjOWNkNDdlOTJjMDFjYWMxZWQ4NTM5ZjdkYTZmMzA3ZmQ1MzY1ZTgxODdmNzQwNjEwMGJkZWY4NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzBjOTkwNzBjMjI2MjZiNzFlM2FlZjY0OGNhMDRkZDIzZjM4MGUwNGY3NWI4N2U3NzJmOWEzNjQ0OGJkY2FlNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2I3MGRlNTI2ZGUxZGRmYTYzOWU1ZmZlOTMyMDRjY2ViMDNjMGIyNTU2NzY2OGVlZTlhNWE0ODM3MDRkMGJmMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_0fb9e60962f04748a66e4ff73ccdbf2e",
+      "statement": "zipWithPreviousCount pairs each back-stack list with the previous list's size and is used by the legacy BottomSheetHost.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/coroutines/Utils.kt",
+          "version": "repo-file-v1:sha256:5d28a7138e81a41c7ff728a0e480d5a210a333b80233329f4ad150c70962f1d5"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation/model/utils/navigator/bottomSheet/BottomSheetHost.kt#L45-L58",
+          "version": "repo-lines-v1:sha256:74e71399cde927e2a879c8ba946d771915089b05ea5c8c2ca59f5a2ff55a8100:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA5YTU2N2ZmZjViYjY1ZTM0MGYxOGI5ZjBkZjk2YTQyNzYyMDI1ZmU4NTNlYWRjMjMwODFlYjJjZmExZDRkNGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY3ZmNiYzcwOTcwYTdkYWQyMzJkOTY5OGM2MWNhYzYxMGMxM2ZlOGE0ZDc3MGE5NzE2ZjllZjYxNjc1OTExZDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFjMzdhNGY2YTI1YWQ3YjRlYWNlN2MwNGNjY2E0M2U3ODc4ZDlmMzM3MTc2YjdiMTAzYmVlMDIxZTU5YzhhODIifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T15:48:49.783Z"
+  }
+}

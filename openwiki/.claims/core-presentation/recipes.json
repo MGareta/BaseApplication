@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:94c4bb8b68063eed899c939b160130261286c87ef007f6da14f679cb4b266a93",
+  "claims": [
+    {
+      "id": "claim_c35c8e22c61241a8b85d8cc541a1a53f",
+      "statement": "A feature screen consists of a serializable INavigationDestination, an @Inject INavigationEntry (or its dialog/bottom-sheet subclass) with a dagger.Lazy navigator and Render, and a Hilt module in ActivityRetainedComponent contributing the graph and its entry set under the same @ClassKey.",
+      "evidence": [
+        {
+          "resource": "repo://demo/presentation/src/main/java/com/demo/presentation/di/DemoScreenModule.kt",
+          "version": "repo-file-v1:sha256:1d86d514d05bc299109c256de409c982bf2ce69d3354bc6bbf35c6c6d7a59592"
+        },
+        {
+          "resource": "repo://demo/presentation/src/main/java/com/demo/presentation/navigation/DemoScreenNavEntry2.kt",
+          "version": "repo-file-v1:sha256:a9b9219e6d0cc06b798cfb3b3f4f5d7087889df4948e37907d5e080b6f3ae3c8"
+        },
+        {
+          "resource": "repo://demo/presentation/src/main/java/com/demo/presentation/navigation/DemoScreenNavGraphEntry.kt",
+          "version": "repo-file-v1:sha256:ae44bac13b54522a7f12eac9ffe899fd9463993e21bd26f62750802a0d39f26e"
+        }
+      ]
+    },
+    {
+      "id": "claim_7389c0b06e6048f1aca16cf45546c5a8",
+      "statement": "The demo's DemoScreenNavGraph is currently both the launcher graph and a bottom-nav graph, with notificationCount implemented as flowOf(0) cast to StateFlow.",
+      "evidence": [
+        {
+          "resource": "repo://demo/presentation/src/main/java/com/demo/presentation/navigation/DemoScreenNavGraph.kt",
+          "version": "repo-file-v1:sha256:51de71c55632f5ed0cddea5a3faabdfd9e1405ba910a46903641ea23fab4ae49"
+        }
+      ]
+    },
+    {
+      "id": "claim_c65336063e5a4050937695b3e4407096",
+      "statement": "Screens in bottom-nav graphs attach LocalBottomNavBarScrollConnection via nestedScroll and apply navigation bar insets plus bottomNavBarPadding, as DemoScreen does.",
+      "evidence": [
+        {
+          "resource": "repo://demo/presentation/src/main/java/com/demo/presentation/view/DemoScreen.kt",
+          "version": "repo-file-v1:sha256:a7d5880e5e232a1546694102366cd46fbd80c47ed0da2ea92cc551e5d9d79d07"
+        }
+      ]
+    },
+    {
+      "id": "claim_c493307683504166bf8dd56481e7bcc8",
+      "statement": "MainActivity's session warning and timeout hooks are unimplemented TODOs that must be replaced before sessions are used.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/com/baseapplication/MainActivity.kt",
+          "version": "repo-file-v1:sha256:4e3b73134151661e4d479cb9b5dfe23205e273e8c772981f72244a2743dcf81a"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T15:48:49.783Z"
+  }
+}

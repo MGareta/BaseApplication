@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:74ed898c5e4492db08685ea9429a47779fe70f7c5ba5456fa297f6e7988179b8",
+  "claims": [
+    {
+      "id": "claim_444eda089fd04d2fbde57aed7a218b73",
+      "statement": "TopNavBarComponent is a CenterAlignedTopAppBar with a body.large title, an optional back icon button when onNavigateBack is set, the provided actions followed by an optional close button, and the surface background as container color.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/topnavbar/TopNavBarComponent.kt#L28-L91",
+          "version": "repo-lines-v1:sha256:ee25577d569d9fbf9b5b4026a894149a5ec491998ebe9950c2eae901802b8d35:eyJzZWxlY3RlZExpbmVDb3VudCI6NjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4YTc1ODM2NjIzNjY5MTJlM2RiMzBmN2YzNDFlYTk3YmMwYjBhNTU4YTMxNGE5ZTNjMTJjYjM0OGEzNzE3ODIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA1M2U2MjJkN2Q3MTgxZDg5YjYwZTk1YzFlMDVkODRkNWQ0ODkwOTIxZWJjYTRhZjE1ZmE2YTQ3N2U2YmVjYmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE1MmE0YjY0YjI5Y2VlYTQ3YjViZGY0MjMyMWVhMjc4ZjJlNjBlYjJlNGU1MzIyZjE5NjE5ZjJhMGU4ZWU1NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3b8206fb4919445c967be177f5a9616a",
+      "statement": "ToolbarComponent's Default family collapses its whole content (offset limit equals minus its height) with an elevation shadow when content overlaps, while the Animate family collapses expandedContent down to collapsedContent and exposes only one of them to accessibility at a time.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/toolbar/ToolbarComponent.kt#L51-L507",
+          "version": "repo-lines-v1:sha256:2dcb2631fb4d8ca5d09b8b39659afcbec0f9471a4286e9891f9b58d18198974b:eyJzZWxlY3RlZExpbmVDb3VudCI6NDU3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI3MGFmNWFlNzQ0OGFhYzQ0ZDZmY2JiY2Y1NTI1MjBiYmQ5MjhiMjAyYTA3MDNlNDUyOWQwYTY1Nzk1MjY5NzRkIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxNTJhNGI2NGIyOWNlZWE0N2I1YmRmNDIzMjFlYTI3OGYyZTYwZWIyZTRlNTMyMmYxOTYxOWYyYTBlOGVlNTU1In0"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/toolbar/model/ToolbarFamily.kt",
+          "version": "repo-file-v1:sha256:6ad9c767724453439481234e99c1e9542b6eaec072d185f8ca48c9f8c271c41d"
+        }
+      ]
+    },
+    {
+      "id": "claim_b609e931348f43fead7cf7f308b0e67f",
+      "statement": "Toolbar scroll behaviors are created with pinnedScrollBehavior, enterAlwaysScrollBehavior and exitUntilCollapsedScrollBehavior, which default to an internal rememberSaveable ToolbarComponentState, a medium-low stiffness spring snap and a spline decay fling.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/toolbar/behavior/utils/Utils.kt",
+          "version": "repo-file-v1:sha256:15c42e5908837381b801f3f20b33965b6afcd489de3c0dd920c8d761aae1506f"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/toolbar/state/ToolbarComponentState.kt#L12-L25",
+          "version": "repo-lines-v1:sha256:2d9ec6653e68ee24245a18ce7db831616bef6babdd4c6b655a5a76504dd87b61:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOGQ5NzlhM2JiNjU4M2YyOWJhYmZlZmJlNGM4YjUwMGMxMDcxOWJjOTc4ODgwNzYyMTlhYWY3NTUzZDAzOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk0NDU1ZGRiZjdlOWE4NjJkOWJiMmY1NGQ5YTFlMzQzOTY4ZTQxMjc3MTc4ZDI3MjBjYTE1YWIwN2E3Mzc3ZjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFkNzUzYjk0MDIyMmYyYjlhNGRiNWE4YjI1ZGFmNDg3MWMzNzhmMDI1MmU2YTcwMGJjYjAyMTU0ZjY2YzhjOTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cde5b5b3454b409195a07370a16283c0",
+      "statement": "The enter-always behavior consumes all pre-scroll deltas into the toolbar height offset, while exit-until-collapsed only collapses in pre-scroll and expands in post-scroll when the content cannot consume the upward scroll.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/toolbar/behavior/ToolbarEnterAlwaysScrollBehavior.kt#L24-L42",
+          "version": "repo-lines-v1:sha256:e20fde7f035ed4ce8b4a170135d4e2a6d68367f1548aa9cb5d7e01dcd6274de6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBiMzEzZGNiZjkwNGY3ZWM1NzM5OGE3NjE2N2YxNTBjMDI1NWU3YmM2YmE1ZWUxNTczMGYzMDQyYzIxOTBiYzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM1NjRlNzc3NzVhOTY5MTU2ZTY2YzNmZTZlY2U3YmU0ZmM2YjUzYTY4OWVkMjMwNjY1MmZlZGU1OGQyMTU2MmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg0ZGZhMGNmMWM1MjEwNTU5YTMyOWM4ZjRkNDY1NjhhOGY0YmEzMWMxNzViYmMyNWVkN2JlYzJmYmViZTc1NTgifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/toolbar/behavior/ToolbarExitUntilCollapsedScrollBehavior.kt#L24-L80",
+          "version": "repo-lines-v1:sha256:5b3475a20a1f5857bc6bafee5c16dca43ea2f16d8d8617930c5c515ff6c6e81f:eyJzZWxlY3RlZExpbmVDb3VudCI6NTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBiMzEzZGNiZjkwNGY3ZWM1NzM5OGE3NjE2N2YxNTBjMDI1NWU3YmM2YmE1ZWUxNTczMGYzMDQyYzIxOTBiYzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM1NjRlNzc3NzVhOTY5MTU2ZTY2YzNmZTZlY2U3YmU0ZmM2YjUzYTY4OWVkMjMwNjY1MmZlZGU1OGQyMTU2MmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3OGJjYmNmMWQ0YTY3ZjM2OGZjNWRlMDgzMzZiOTE0NWVkNTM4MTk5NDViMjk1NDNiMjY1ZTg0NjhhYTRjNGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fd061c67b20e49e2a022e5e79ac79020",
+      "statement": "settleComponent applies fling decay to a partially collapsed toolbar and snaps it fully collapsed when the collapsed fraction reaches 1 - collapsedHeight/expandedHeight; it never snaps back open.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/toolbar/state/utils/Utils.kt#L12-L76",
+          "version": "repo-lines-v1:sha256:e70214d0812e8069c131658b381c0d99169b824d32fadfd8113a656c271e152f:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4MDI5Y2JkNjZmYzhmNzU2YmYwNWEwMTVmNDIxMjliMDViMThmYWJkOWI4MTdmNGE4NjQyYzk5NDVjYWFkMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5Y2U4NDFlNTY2YmNkZjAzZDBmMTBhOGM3MTYzMmY0ZDljNzBkMjFjNzA2YTNhNGEwODc4Y2ZlOGRhOTkyMDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_054a990bff7b455d948a59b4881ff1c4",
+      "statement": "BottomNavBarComponent sorts graphs by order, renders non-FAB graphs as selectable tabs in a rounded pill and FAB graphs as circular buttons, switches to a compact inline layout when the scroll connection is inline, expands on any click, and never reads notificationCount.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/bottomnavbar/BottomNavBarComponent.kt#L57-L310",
+          "version": "repo-lines-v1:sha256:30924da4c31cffd10642bc631ba299ca3e6905f185f69a55dba4598e9b83e66a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjU0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI2Yzc1MjZkNTAyM2M5ZGNlZGJkZDExMjQ5ZjA5YmQ4ZGZjYzA4ZWRhMDI4NjcyZTM5NTRmZGRhYTUwODNiMDMyIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxNTJhNGI2NGIyOWNlZWE0N2I1YmRmNDIzMjFlYTI3OGYyZTYwZWIyZTRlNTMyMmYxOTYxOWYyYTBlOGVlNTU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_4d1cc745ec354577923bc32f70e4b821",
+      "statement": "BottomNavBarScrollConnection toggles isInline after accumulated consumed scroll passes a threshold (default 48 dp, OnScrollDown) without consuming scroll, and Modifier.bottomNavBarPadding adds animated bottom padding of the bar height plus 16 dp from LocalBottomNavBarScrollConnection.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/bottomnavbar/scrollconnection/BottomNavBarScrollConnection.kt#L14-L86",
+          "version": "repo-lines-v1:sha256:bc586d52db428f48501e097f88ef4ccd5dff4b1f8316d3e26e15a48018640191:eyJzZWxlY3RlZExpbmVDb3VudCI6NzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjMzUxZmRiZTkwMDUwN2ExNGYyZGY1Mzk2Zjg2MGY5MzliN2I1MDhkMjc2YzI5M2MzZjI1MDIyMGJhZDhhNTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQxMmQ2YWY0YzYzMTVjNTM0Nzk3NjYxODBkYzBhYjExODRlODQzNTNiYTU2ZDA3MTBjYmNkODZhZjc1Y2ZmNDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/bottomnavbar/scrollconnection/utils/ComposeUtils.kt",
+          "version": "repo-file-v1:sha256:bd9aeb24c6e633cece1380e85098b2124e42c1bfec01ea815ffd48f5143617fa"
+        }
+      ]
+    },
+    {
+      "id": "claim_97379f59f7a94979bf25d365148a1acc",
+      "statement": "TabComponent keeps the selected tab in unkeyed internal state initialized from currentTab, exposes no selection callback, and renders the selected tab's content below a PrimaryTabRow using IconText, Icon or Text tab styles.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/tab/TabComponent.kt#L31-L131",
+          "version": "repo-lines-v1:sha256:5d3f61a9fc37fefa522279be94b01025b806d97abdf24fbb630baa77b92be979:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAxLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIzZGQ4ZTE4MjJmNTNhYmU4ODFlMGQ3OTRjZDE3MTE0NjU4ZDMzNTA1NjIxZjkyMDgyZjRiNmVkYjViM2EwZGEzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxNTJhNGI2NGIyOWNlZWE0N2I1YmRmNDIzMjFlYTI3OGYyZTYwZWIyZTRlNTMyMmYxOTYxOWYyYTBlOGVlNTU1In0"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/tab/model/TabStyle.kt",
+          "version": "repo-file-v1:sha256:a3cdb83dd3e39981a171936e5860a8608c0c4f08c460ddf7f4fc11d0cedf8754"
+        }
+      ]
+    },
+    {
+      "id": "claim_e79e8d90fbf448009f7bfd31ccf81bcc",
+      "statement": "StepperComponent draws one equal-weight segment per enum step, filling reached steps with the accent background, making the current segment 8 dp tall, and announcing 'Step X of Y' via the accessibility_step string.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/stepper/StepperComponent.kt#L40-L123",
+          "version": "repo-lines-v1:sha256:17de3f5e87e4dee52ed87ec7c8172e764127ab48c18f9b79bb00e293d0493b3a:eyJzZWxlY3RlZExpbmVDb3VudCI6ODQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOGQ5NzlhM2JiNjU4M2YyOWJhYmZlZmJlNGM4YjUwMGMxMDcxOWJjOTc4ODgwNzYyMTlhYWY3NTUzZDAzOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjNWQ4OGI5ZDRmMjY0MmIxM2EyYzNhZmQ0OTYxYmM3ODVlYjdiOWI0NjgwMjUxODFkM2ExOWQxMGQzODk2NWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE1MmE0YjY0YjI5Y2VlYTQ3YjViZGY0MjMyMWVhMjc4ZjJlNjBlYjJlNGU1MzIyZjE5NjE5ZjJhMGU4ZWU1NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T15:48:49.783Z"
+  }
+}

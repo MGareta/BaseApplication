@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:d712c7c0ee240949f334ffea287824e190a8e3be1950fa1846f994ee8023a345",
+  "claims": [
+    {
+      "id": "claim_c19e3159af164d8ab34212293d7f9aab",
+      "statement": "core/presentation applies the core.presentation convention plugin, which applies android-library, kotlin-compose, kotlin-serializable, KSP, Hilt and Detekt, enables Compose, depends on core:data as implementation, and exposes Compose foundation/material3, lifecycle ViewModel, Navigation Compose, navigation-hilt, Navigation3 runtime and UI, Paging, Browser and kotlinx-serialization as api dependencies.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CorePresentationPlugin.kt",
+          "version": "repo-file-v1:sha256:6e00421372a973445cadcc8449e4e824250e37c19689043d1b4c6b763ec37779"
+        },
+        {
+          "resource": "repo://core/presentation/build.gradle.kts",
+          "version": "repo-file-v1:sha256:669d5f95c29172d6260f134a4addd5b9fff911a4757b44d3e286378a6bde5b58"
+        }
+      ]
+    },
+    {
+      "id": "claim_cf9548b5f61f46869ff4a204098d0c93",
+      "statement": "Feature presentation modules and the app module depend on core:presentation as an implementation dependency.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/AppPlugin.kt",
+          "version": "repo-file-v1:sha256:c2377860a77ae77b06009383a9665fbfdb817ab7234fc1e6638fd7fba9c6877d"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt",
+          "version": "repo-file-v1:sha256:2f1a3cf4d138bc897d602f95568838a1c9709a01f848ea0522dcbe4981e64e3f"
+        }
+      ]
+    },
+    {
+      "id": "claim_a8ccc5de672b46dfb354f59bb936eb74",
+      "statement": "core/presentation's manifest is empty, its consumer-rules.pro is empty and its proguard-rules.pro only contains the commented template.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/consumer-rules.pro",
+          "version": "repo-file-v1:sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "resource": "repo://core/presentation/proguard-rules.pro",
+          "version": "repo-file-v1:sha256:56fd960cf225f6ca40f982b13a5dbb0d8bc3dfde13ff76422825c6070d0a1890"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/AndroidManifest.xml",
+          "version": "repo-file-v1:sha256:f0f4b47043b24ea2136dabe1cd4309c3b71d84d779889989dbe6d6e5126bfd56"
+        }
+      ]
+    },
+    {
+      "id": "claim_44b8207de4714a1e816a1c57472983dc",
+      "statement": "The Inter font resources are downloadable font XMLs served by the Google Fonts provider with bundled provider certificates, and a preloaded_fonts array lists all six weights.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/res/font/inter.xml",
+          "version": "repo-file-v1:sha256:3652bbac963fc0d6a8c7802c4e4f24d5bd9579c01b42269dc55f156e4ae74c4b"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/res/values/font_certs.xml",
+          "version": "repo-file-v1:sha256:da8691b43b0b188e2a4eb0b9e70a141a1224c7b04a999ffb8ac2e2bf00b108ba"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/res/values/preloaded_fonts.xml",
+          "version": "repo-file-v1:sha256:d5871f80db015e5b689c06cf81ca77e44a14ae8ab28e94e6970cb2273bc89bcb"
+        }
+      ]
+    },
+    {
+      "id": "claim_0de03c0433264657aca11cb05b5df515",
+      "statement": "core/presentation ships English-only strings for dialog buttons, password visibility, character counters, multiselect, stepper, amount and date-picker accessibility announcements.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/res/values/strings.xml",
+          "version": "repo-file-v1:sha256:d286ec5977b4583a931cabfaae287b58a4ab39aa4d73a7f2f74baa08803839f1"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T15:48:49.783Z"
+  }
+}

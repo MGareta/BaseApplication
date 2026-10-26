@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:206bb5ddce9e53285498c63976c07b7ff8cdb3fe94d2c7eef439138b77e0f218",
+  "claims": [
+    {
+      "id": "claim_13c1b66f0b264874b821ec302a6fa229",
+      "statement": "FormState.validate validates every field and returns true only if all fields pass.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/FormState.kt",
+          "version": "repo-file-v1:sha256:75eceaa65a5ad620552f7eed8c849fd92b041aaf89e46da4b238be2604190ead"
+        }
+      ]
+    },
+    {
+      "id": "claim_8acca9342bd34c8a82e5c2193d66bc5a",
+      "statement": "BaseFieldState holds Compose-backed errorMessage and hasError, exposes setError/clearError, and getData returns the transformed value when a transform and value exist.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/BaseFieldState.kt#L10-L42",
+          "version": "repo-lines-v1:sha256:bedfc12f059fe0a3a4ab76bdd179679e58cde9d69bc338c772f259fa5da9a41d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0OWMyZjJjODlhOTIxMjk0NDEwMTE5ZmM5YjFjZjRkZTZjZGE4ZDc0YTg2OWZjZjZjNjgyYzZlODA2MDY2NzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0MTkyZjFiYTY3ZGY0Yjk4NTBlNjY3MWY2NjU0Zjk3ZDVkZTUyMzY0NjI4MjhjODBmMjc2MzUyM2M5ZDdmZTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ae8c4a12f67c4b5b8be707a1eb53764c",
+      "statement": "TextFieldState.validate runs validators in order and stops at the first failure, supporting Required, MinSize, MaxSize, MinValue, MaxValue, Equal, Email, Phone, Dni, Nie, Passport, Regex and Custom, and throwing for other validators.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/input/TextFieldState.kt#L14-L180",
+          "version": "repo-lines-v1:sha256:d9e5f3fac16a2996649e2c83927809cd6ac4773d6d4b97db89c4c0ec917dd3ad:eyJzZWxlY3RlZExpbmVDb3VudCI6MTY3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIxNDljMmYyYzg5YTkyMTI5NDQxMDExOWZjOWIxY2Y0ZGU2Y2RhOGQ3NGE4NjlmY2Y2YzY4MmM2ZTgwNjA2Njc1IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJkMTBiMzZhYTc0YTU5YmNmNGE4ODE4NTgzN2Y2NThhZmFmMzY0NmVmZjJiYjE2YzM5MjhkMGU5MzM1ZTk0NWQyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJjY2VlMTM1YTg3NGNkODFiZjNiOWQ5MGFhOGM0OTRhMDgzNmVhMzRlMjM2OTNkMDJmNDQ4NGZiMDFjYTc5ZThlIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_6732e9aff0984f24823940827cc62ef7",
+      "statement": "TextFieldState size, value and equality validators build their error message with value!!, so they throw NullPointerException when the value is null.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/input/TextFieldState.kt#L66-L94",
+          "version": "repo-lines-v1:sha256:cfd104e21094804d8df02c62c78305fd2ea9db18d72262f8890676b7dc25b9ea:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlZDZkOTJiNjEwYzlmYmRhY2YzMTJiMzRkZmE2ODIyZDBjNDY3NjU1Njk3OTFjNmQ1MDg3NWZjYTNkZTEzYWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjllZmJiMDk4NGNlZDAyODZjZmExNmFiNDY5MWM0Njk2NjhhZDc1ODU5Njg3OTI3NmU3MzIyNjM2ZjNhNGJkOWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE0YTMxZmI5NzYwMjY4YmI1ZTg0MzRiZGMwOTllNmMyOWMxMThlYjY2YmIwZmNjOGZmNDE2ODI5NTI5OWZlOTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_28c5889b5e354c3488dd90d939a9b697",
+      "statement": "Date and range-date states support Required, MinDate, MaxDate and Custom, with MinDate/MaxDate using exclusive after/before comparisons (on lower/upper for ranges).",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/input/DateFieldFieldState.kt#L29-L65",
+          "version": "repo-lines-v1:sha256:93e902c29c8817a4e820dfaa421dc952b4d0a758b7b8b66ca5b820fcefe61399:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiMTZiMmY4M2QxZWE2MTZmMWVhNzA5YWZmMjY5YzdhZDMwN2E0YmRiZGQxMjZmZjkwYTJmZjA1OGVjNTJlZjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxODZiOTI3YWFlMDNmNjBmZWJiNTFhYmIxOWFhNmY4ODFjZTQ4M2Q5YmZhZjI3MzFkMjBhYjhmNDkxMTQ2MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMTUwMmMzNWJkZDY1NTdlMDU1MTg2YmNiNDRjMWZiY2YyN2FkMmYxOWM5OWM4YzhlYjJhNGFlYTg1YTY1MzkifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/input/RangeDateFieldFieldState.kt#L30-L66",
+          "version": "repo-lines-v1:sha256:bfa06ed7ffbf8f3ef84e43f80de16a05ef2e1aaa78c5344eae4e17a948f5e27e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiMTZiMmY4M2QxZWE2MTZmMWVhNzA5YWZmMjY5YzdhZDMwN2E0YmRiZGQxMjZmZjkwYTJmZjA1OGVjNTJlZjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxODZiOTI3YWFlMDNmNjBmZWJiNTFhYmIxOWFhNmY4ODFjZTQ4M2Q5YmZhZjI3MzFkMjBhYjhmNDkxMTQ2MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMTUwMmMzNWJkZDY1NTdlMDU1MTg2YmNiNDRjMWZiY2YyN2FkMmYxOWM5OWM4YzhlYjJhNGFlYTg1YTY1MzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9d0da2b1266d4189b6219863baa3b280",
+      "statement": "SelectFieldState treats Required as 'value is true', and MultiSelectFieldState stores a snapshot state list with an item toggle change overload and supports MinSize, MaxSize, Required and Custom validators, running all of them.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/multiselect/MultiSelectFieldState.kt",
+          "version": "repo-file-v1:sha256:505e307eab3723e3f1b226773d4d6d54fa1d25c89c0fdb5f8cadf8cadbbe157c"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/select/SelectFieldState.kt",
+          "version": "repo-file-v1:sha256:d95a7c7213a6acc32bd7f001b31626cf05722f64eabc2f3517544c76a6ac3c1e"
+        }
+      ]
+    },
+    {
+      "id": "claim_9c784407b98143baae63f4bed7524dbe",
+      "statement": "Validators is a sealed interface of validator classes including a Custom data class with an unchecked validateGeneric, and Transform is a fun interface mapping a value to the same type.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/utils/Transform.kt",
+          "version": "repo-file-v1:sha256:7ec8ab2cc4cae80fde7fd7ef8a7166efddd67e32e6e14dee447136dd356c6170"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/validators/Validators.kt",
+          "version": "repo-file-v1:sha256:9d2b96eae74c9821b592d606837b7468f0964f68294d9b4509a6fd6668ead9d5"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T15:48:49.783Z"
+  }
+}

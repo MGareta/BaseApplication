@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:3f393159aced9eaafba356c98fa48051584f8afd1f73eafb8af6ada5acc5fc1d",
+  "claims": [
+    {
+      "id": "claim_91464a61af184e1ba18b8694b7ea7bd4",
+      "statement": "BaseViewModel exposes viewState as a StateFlow seeded from setInitialState, an effect flow backed by a CONFLATED Channel, uses viewModelScope as the CoroutinesUseCaseRunner scope, and offers protected setState, setEvent and setEffect helpers.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/viewmodel/BaseViewModel.kt#L15-L64",
+          "version": "repo-lines-v1:sha256:e20cce0b6499fedf474417581832a78355145b5fc4adb281805c95293c2108d4:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyYzE4MDAzMDQyNmI0M2QwMDBjYjg1NmM4ZDhhNDAzYjRhZTYwMmQ4M2MxODg5ZTYwNDgwOTE2YjM4ODM4NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwYzk5MDcwYzIyNjI2YjcxZTNhZWY2NDhjYTA0ZGQyM2YzODBlMDRmNzViODdlNzcyZjlhMzY0NDhiZGNhZTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bb84db84a82044a39fee7e19666b3d3f",
+      "statement": "BaseViewModel evaluates setInitialState while constructing its own MutableStateFlow, before subclass initializers run.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/viewmodel/BaseViewModel.kt#L24-L27",
+          "version": "repo-lines-v1:sha256:aba347e44ea427c54b0938628bb052df4caf4c18661c649c32ed53158db5141a:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTJmZTdiNTIzZTIxYjQzZTI0NGJjNjAzZTQ0NmM2NzhhYmZmM2RkZWNjMGE5N2Q1NjhiODMyMzZmOWY3MDI2NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTMwZTAzZDhiN2Y5ODA3MTlkZjllNTg3Njk3NDg0MDEwYzRjNDU3NDZiNGIxZDEzYWJlMDQ0MWY4YzhhOWIzMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmEyZWU3M2Y0YzI0NDI2NGFmNDM2MDAyYmViN2JlMTcyZjg2NjI4N2E5YjJhZmUwMGQ2MGU1NDYyMGU2N2VjMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzI4Yjg0NDg0MzVkNzlmYTJiZDBjMDBmOTY4Njk0ZDE1MDE1YThhZGYyNTc1YTM2ZTdjZWI3MjA1N2ZkYzZhMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_14f692ada1534a5c95ab101287ec2e4d",
+      "statement": "Screens send events by calling the public handleUiEvents directly on the ViewModel, as the demo entry does.",
+      "evidence": [
+        {
+          "resource": "repo://demo/presentation/src/main/java/com/demo/presentation/navigation/DemoScreenNavGraphEntry.kt#L34-L40",
+          "version": "repo-lines-v1:sha256:76f4c33ef2f26f556ac5f6502a25ec28a1e3cddc458d464a93d9336974f28143:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTFmMGZkM2JmNzA4MDc1MjdlZmQ0MjMyNDE1MTM0NjE3YThlMDNiODQzNTA1YWQwNjFjMGE0YzA0YjRmMjE3NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmJjYjI4YTA0ZjYwMDVhMGM0MzI3MDUzODhmNGViMmRiOTA5NjczNDdhMjY1ZjhiZjlhMDhkMDg5ODkxNDY4MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTFjNWY2MzZmNGYzNzMxYTM0MTYxZTVjOTAzMDhiM2Y5N2U4ZjhjYTA5MDI0YzY4ODQ3OWZjYzM4YTQ0MTM2NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_326ef160be344752abc2e1dfe3cf88e7",
+      "statement": "UiResult is a sealed interface with Success(data), Error(message: String), and non-data Loading and NoContent classes.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/model/UiResult.kt",
+          "version": "repo-file-v1:sha256:e16b08ff98ee3c92d392703cdd693ab31d44cc393618d16cfce581429ed14dfa"
+        }
+      ]
+    },
+    {
+      "id": "claim_56305c93788c466a88d926bb6822b0ce",
+      "statement": "BaseFlow creates a Hilt ViewModel in the legacy navigation graph's back-stack entry ViewModelStore keyed by the ViewModel class simple name and calls loadInitData only when the ViewModel is first created.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/screen/BaseFlow.kt#L17-L52",
+          "version": "repo-lines-v1:sha256:d4d84be34893e4c4853eafc5f2d99526d64538b79c3922ac4e5adfd729da5522:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOGQ5NzlhM2JiNjU4M2YyOWJhYmZlZmJlNGM4YjUwMGMxMDcxOWJjOTc4ODgwNzYyMTlhYWY3NTUzZDAzOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzNGJmYTJhMjBmODMxNmQwZjI1MDJkYTg5MjNmNDVmNTk2NDJiYTk2MWVkNDEwNGZkYzVjYjNjOWNhNzg1YTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_279f0b7bdebc4a4b94cbbe79f464d54a",
+      "statement": "Navigation3 entries obtain their ViewModel with viewModel(modelClass) and pass it to Render without calling loadInitData.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt#L150-L159",
+          "version": "repo-lines-v1:sha256:f03ef3098c0faa1f3a1ad137f1acdefd427a874437bb7647f5c28c6c4b302788:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NWM3NjI0ZGMxYWQ2ZDU4YTMyZTcxMWRmYzdjYWJmZWQ3ZmZjMmE4NDBhM2Y0Njg4YzU2ZmRiMjc0NjlhMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjNjQ3OWNjMjMwNDQwZmQ0MWU4MjI0MjE4Njc5Njk4NTU5ZDI4OTNiZDY3YjQzODBhZmFiODExYjM4YTU1YWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA4NDAyNzUyYWMzYmE2MTk4Yzk0MzVhNjk1OWVhMDVmZDg2OWFjYTE2ZjU0ZWMwMjQ0MGFlNjM3YjFlYzUzMTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAyMjc5NjRkNmQ4OGIwNWViMGZiZDZjMzY3MTYzYTdmNzY5MjljNmVlN2E5Y2UxZDRkZjRmN2Y0MWIzNGUxNGUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_73f7aba60264403d9da6eb1d276b8fd0",
+      "statement": "UiResult.getOrElse returns data for Success and the fallback otherwise, and getOrNull returns null for non-success results.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/utils/Extensions.kt",
+          "version": "repo-file-v1:sha256:1b714a503e940ceb91b465e621bbb9c9c7d9b40c9ec5811585c2b9ab51cc776d"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T15:48:49.783Z"
+  }
+}

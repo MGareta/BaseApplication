@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:f13a9485bbac7f8e9f1f7c8dc38bd1299681994469851a6150e24f8fc32e2bb3",
+  "claims": [
+    {
+      "id": "claim_7cc94d1d2aae4b0e96fdb2ec62d21215",
+      "statement": "Colors aggregates blue, gray, green, orange, red, turquoise and yellow color families with shades 10 to 100 plus white and black; for example green50 is #86BC24 and gray100 is #121212.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/colors/Colors.kt",
+          "version": "repo-file-v1:sha256:8a3994de3d2a5aa7a3d681040e0c1bca2b9a90ffcf49153944f4f8e66e0bc02b"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/colors/gray/GrayColors.kt",
+          "version": "repo-file-v1:sha256:ad6715b91d6b9e81be1a8b70bc140e10b8f92925a619018cb03e441234bb67da"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/colors/green/GreenColors.kt",
+          "version": "repo-file-v1:sha256:781584cf010b99b557342d8397c296b163fe0da3c7baf0910006ea75c5d85d1e"
+        }
+      ]
+    },
+    {
+      "id": "claim_947b912c9841457fa0bf53cb8683d46c",
+      "statement": "ColorsPalette is implemented by LightsColorsPalette and DarkColorsPalette, each with DefaultContrast, MediumContrast and HighContrast objects composed of background, border and content palettes.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/palette/ColorsPalette.kt",
+          "version": "repo-file-v1:sha256:da84fcf0fb791b91a9ea30f22b3c590027312e7343d132c3f7fa464b88fce9bc"
+        }
+      ]
+    },
+    {
+      "id": "claim_199205a51e104484b0e0cdd61a4fc416",
+      "statement": "The background accent role is green50 at default contrast in both light and dark themes, darkening to green60/green80 in light and lightening to green40/green20 in dark for medium and high contrast.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/palette/background/DarkBackgroundPalette.kt",
+          "version": "repo-file-v1:sha256:3eff1390dff08f1cd622229ac05d886c8fa88fa11515a4f3eb8ccb1135eccb9d"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/palette/background/LightBackgroundPalette.kt",
+          "version": "repo-file-v1:sha256:a0326a6879f92deae6ce52273e817ce865200ba10ea264e96b29f3b856bd8543"
+        }
+      ]
+    },
+    {
+      "id": "claim_fd7629c3173949d99037fef9a8d595cb",
+      "statement": "The border onAccent role, used for focus and hover rings, is an orange shade (orange50 at default contrast).",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/palette/border/DarkBorderPalette.kt",
+          "version": "repo-file-v1:sha256:7ae927621de713105822e06cde0be9824dac702993eeb1b9aceaaa7acdf7dea6"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/palette/border/LightBorderPalette.kt",
+          "version": "repo-file-v1:sha256:ef7a5b666823e1af03c5545a72925ce24f825e5f67d8c304d2e05e6a7e15943d"
+        }
+      ]
+    },
+    {
+      "id": "claim_4b13aee5925d47fa9f7f52d052d2716c",
+      "statement": "Content onAccent is black in every palette except light high contrast, where it is white.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/palette/content/DarkContentPalette.kt",
+          "version": "repo-file-v1:sha256:3460352ff64f93f94950c85b07bb949859cd861487dcedb4c1b8336ea5ce85ce"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/palette/content/LightContentPalette.kt",
+          "version": "repo-file-v1:sha256:989bc72602a8fb9502cb63585158c08a090191ab91ab197acd2819d0929bf3e5"
+        }
+      ]
+    },
+    {
+      "id": "claim_a167bbdbee1947f5a921d45e17a5a858",
+      "statement": "Space tokens range from 0 to 96 dp, touch targets are 24/40/48/56 dp, and em line-height multipliers are tight 1.2, normal 1.4 and relaxed 1.5.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/dimensions/dp/space/SpaceDimensions.kt",
+          "version": "repo-file-v1:sha256:77879800531c975d299d142c4333a96636acb142a761ec959f3f6aa3d0afbbeb"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/dimensions/dp/target/TargetDimensions.kt",
+          "version": "repo-file-v1:sha256:ac8e5f3ffc760b1c4cf222b1f09cdbf95dc2329c4f7cf6b280bfaedade300d10"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/dimensions/em/EmDimensions.kt",
+          "version": "repo-file-v1:sha256:4b8d073e22a83faf024823a2f1eb7a7bca53f0ad830e06819fc1e677c16dfa75"
+        }
+      ]
+    },
+    {
+      "id": "claim_6439a396b44442e4a223d25100a463f8",
+      "statement": "Typography styles use the Inter font family with line height equal to font size times an em multiplier, and change weight and letter spacing at high contrast, with title also switching to Bold at medium contrast.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/typographies/base/BaseTypography.kt",
+          "version": "repo-file-v1:sha256:cc17d357005b280df4f32c6db3fae97f031f40430183f419daf884737a0cadde"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/typographies/body/BodyTypographies.kt",
+          "version": "repo-file-v1:sha256:20399d74b8ce84ced8b7ea2e07266b9c1ffeb0707b38be2fae88cad140e84d35"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/typographies/title/TitleTypographies.kt",
+          "version": "repo-file-v1:sha256:7f36008331aa5bf25225f2713b1b8e0a3ea89462d2d792f26ff0b0f56307a18f"
+        }
+      ]
+    },
+    {
+      "id": "claim_7afb72f32c7540b588c806242087a543",
+      "statement": "SpDimensions groups the BodyDimensions (14/16/18 sp), DisplayDimensions (32/40/48 sp), LabelDimensions (12/14/16 sp) and TitleDimensions (20/24/28 sp) objects.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/dimensions/sp/SpDimensions.kt",
+          "version": "repo-file-v1:sha256:1f526de91b7472f85421220b33a20bf6c39a3dfc7c496b34baa836a34471efa4"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/dimensions/sp/body/BodyDimensions.kt",
+          "version": "repo-file-v1:sha256:9a134f9a2ede7d317a8f2e283f763e706cc602425906489a78d4bec277b490bd"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/dimensions/sp/display/DisplayDimensions.kt",
+          "version": "repo-file-v1:sha256:0dbc55d91def8970d0584f93f40a8e9464a71fbab793985a27f1dcec1c603412"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/dimensions/sp/label/LabelDimensions.kt",
+          "version": "repo-file-v1:sha256:54eafe48bf22f825706cad1fdb26f810e3fe873bf58b069d327cef6961d8e582"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/dimensions/sp/title/TitleDimensions.kt",
+          "version": "repo-file-v1:sha256:40a76e3885bf114bec16eac8cf2f82b9c1b2a519c65164e2f6dbf60d112293b7"
+        }
+      ]
+    },
+    {
+      "id": "claim_ad879b6ea8da4cc78511ab7d9270f245",
+      "statement": "Typographies instantiates BodyTypographies, DisplayTypographies, LabelTypographies and TitleTypographies, each a BaseTypography subclass exposing small, medium and large styles.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/typographies/Typographies.kt",
+          "version": "repo-file-v1:sha256:249fd4ae9e49f166c6573b254349bb8bd77fa04b47434d829b3effeb9a7d92df"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/typographies/display/DisplayTypographies.kt",
+          "version": "repo-file-v1:sha256:1d91e552b18cc4bb7f74d189606ad93f1f9a81a96be41689f1bab1e19828b131"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/typographies/label/LabelTypographies.kt",
+          "version": "repo-file-v1:sha256:0632f45da333b71d48101187d65f525a2d44410341e8ce64dd6eab16540806f3"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T16:11:01.468Z"
+  }
+}

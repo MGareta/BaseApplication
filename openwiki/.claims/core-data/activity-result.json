@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:46924e16703954ab13ff0820b9386b1f293b03bdaa29d3810dddb7db9aefb4c4",
+  "pageVersion": "sha256:11637718e72877e6027f1855050f54f706cc561d3e292b31125da5bbe3dd8107",
   "claims": [
     {
       "id": "claim_43c3432ebc024f17bc101e686af58466",
@@ -65,10 +65,32 @@
           "version": "repo-lines-v1:sha256:dac2c9163334d41851bdb1a05f2a948baef47f0fed783f740da8f480c8f38542:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2Yjc4ODg4NWQ4MThmY2RmMzc3NzRkMmQzOTEyNTE1NDI0M2M2ODg5M2VmZDVmNDUwZGNiYjljZGYxNmI3NmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiOGM4ODNlYTE3YTM0ODY0YmFiYWQ5YTIxNjEwNzZlYTM0OGU1NWI2ODk3NjNmNmJlYzVhN2U5MzFjZmUzM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc0NWQyNGM2YWRjMDE1OWE2OWY5YTM2ZjgxYWE3ZGFiYzc1NDkyMWViMTQ5YjllZGRiZmFmY2I5ODA5ZWI5MjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZiZTcwYTcxMDRjNjg1Yzc5YjliMmI5ZWI3YzVjZDBhM2FhYjJjNmMxNTlhODliYjNhNzE5MjM1OGIzYmYxY2IifQ"
         }
       ]
+    },
+    {
+      "id": "claim_73cd12356e8d48069d3ada707fcd6c63",
+      "statement": "Because MainActivity extends BaseActivity, a ComponentActivity that ActivityProvider does not track, ActivityResultManagerImpl.requestResult finds no current activity and returns null in the app as currently wired.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/com/baseapplication/MainActivity.kt#L6-L7",
+          "version": "repo-lines-v1:sha256:38c53361a1bc9481879d058b70ffa4119b44a4b62248f045885b9768370458d6:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzY3N2JhNzJhZDEyM2M2MGI1NjhkN2FmZGZiNWUwOTc5MmFiMDMxMTgxZmJlOGI1OWZhMTM5ZWUyMTYyZDczNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmFiMzU5NjFjNzhlMjg0NmEyMTRhMjk1ZGQwOGY5ODBjMjU3OTRjNDAyMTczOGQ0MGU1NTcxNGNlYWQ2N2YwNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTdkZjIwNzY4OTk0OGQ0ZjQ2Y2U1NmUwMmRhYzE3NTU1NzYyMGE1NzFiMTRiNTAxYTYxZDdkOTkyOTg5NjhlYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzE5MWIyN2MyZDU1MzU5ZTRhZmU2Y2M1MmFkNjI5ZDEwYjJhZTVhODE5NzI5YmJlZDUzY2MzMmYyNmU2NjhjZiJ9"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/activityResult/manager/ActivityResultManagerImpl.kt#L24-L30",
+          "version": "repo-lines-v1:sha256:335aac1a47df4c0ff6cdb6430b7f524da8e24b53f5daa1583ff9500155fdbacb:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2UyMGJlOTQ4NWJlZGZjOWE3OTA5NmYxZDRiNTU4ZTA5ZWViNDdlYTZiMjNkNGE2MTQ4MGM4OWMwMTRiMWU0MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDczM2JhOTI1MDhiOGJmZGYyNzQ1ZmI1M2YyZTI5OWI0MjQ2YjNjNDUyMjIwNTNiZjk4ODkzNGYzYjQ4Y2Q1MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzE4OTY4YWZiNTUxYWM5NmY1OTI0MjgzMWNlOTlhYjRlMjJjMjlmMjBkOThmZjk1ZjcxZWE5OGQ0NzlkOWZlOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGYwZmYwNGM1MzI4ZDljNDAyZjE0OGRjODEzYWY3YzMzZTc3ZmZlN2I3MDU2MzI3ZDBmYWQ0ODExZTVhNjZjNSJ9"
+        },
+        {
+          "resource": "repo://core/data/src/main/java/com/core/data/utils/ActivityProvider.kt#L45-L63",
+          "version": "repo-lines-v1:sha256:6c8f21f1668db01f400a0d6a8ab70f289eaf59abbfd04f0de46cf8626efde48c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkYmU0MWYwNWVmZGEzZGE0ZGMwYWY1MzA3YjE0ODA4OWExZDljOGQ2MDliODdiMWE3MWIxYmYzMjg0Nzc1NmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY0OTM0YjA5YmFkNWRhODZlOTEwNDNjODczY2NlYTQ2Mjc0NWM2ODIxYTIxMDFjMmIyMTk0ODhkNWE3NTQyNTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIxZDI4NWRkMjQzMGNkZGEwYjBlMjI0OGU4NDQxYTg4ZTA3MTg0ODFhOWUyMmY1YTkyNWI1MjU5NzMyMWM0NzEifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L49-L50",
+          "version": "repo-lines-v1:sha256:73a5c2051eefd78cda855c942d88b77498176e0778b8cd9d8a93038760be6e6e:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzY3N2JhNzJhZDEyM2M2MGI1NjhkN2FmZGZiNWUwOTc5MmFiMDMxMTgxZmJlOGI1OWZhMTM5ZWUyMTYyZDczNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWQxZDliNDZkNjEzZGFkZTQ4OTIwYjFiYzdjMWFkMDYzYzdjMmE5MjUwZDE3ZTIwNjZlZmJlZTZlOTI5MTIzYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTQzZjA1ZWVmNDM0ZGJmNTAxYmY1MzZiMDg0NmZmMzA1MjU3Y2U2MDE2Y2FhNDkwMTg1MzE2ZjYxZGE1ODkxNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2EwYTE2ZTQ3NDg1NGZlOTUxMmZjZjE5Yjk2MTcyMTVlNjE3MjgxYjNkMjUyYTQ2NjgwYjRhNjI0OThiMzZiYSJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T12:11:14.549Z"
+    "at": "2026-10-26T15:48:49.783Z"
   }
 }

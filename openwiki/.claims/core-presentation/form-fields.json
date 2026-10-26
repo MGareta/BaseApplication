@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:f3dd3ec7aff9933d2d0c87696e6d64899dd42dfffa4a5a6047ea7fb5d03eeda9",
+  "claims": [
+    {
+      "id": "claim_4b49a7b7bdb94b0da0ef4d848a926558",
+      "statement": "TextFieldComponent renders an OutlinedTextField whose label is the placeholder, shows errors only when the state has an error, the value is non-blank and the field is unfocused, and defaults onValueChange to state.change.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/input/text/TextFieldComponent.kt#L49-L272",
+          "version": "repo-lines-v1:sha256:0ae69360ae420570020faac0af8dec5b16ea911838552bcc34d2a4b5ef7dccf9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjI0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI4M2ZkMjRhYmZkMzljOTUwOTI0MGY4Yzc5ZmY3OWQ2NGY4YjMwNzYxNDVmMWRiMTlhNTA2ZjcwOTYyZjZiMjNkIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI0ZWJmZGEwYWFmNmYzYTgzOTQ0YzExYzJiYTA2NGRjYWZiZmM1ZGNhZTM2ODU1NGQ0OGQ3YmU1ZDViODJmYWIwIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_f5326b7a1ddc4a20806d72701bd3a69b",
+      "statement": "TextAreaComponent is a five-line minimum outlined field with a character counter whose limit comes from the first MaxSize validator or infinity.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/input/text/TextAreaComponent.kt#L55-L310",
+          "version": "repo-lines-v1:sha256:a97d41702c139e0e14bd87073b5cef7eafc17e368eb4e0b971863a1fae8f98be:eyJzZWxlY3RlZExpbmVDb3VudCI6MjU2LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI4M2ZkMjRhYmZkMzljOTUwOTI0MGY4Yzc5ZmY3OWQ2NGY4YjMwNzYxNDVmMWRiMTlhNTA2ZjcwOTYyZjZiMjNkIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI0ZWJmZGEwYWFmNmYzYTgzOTQ0YzExYzJiYTA2NGRjYWZiZmM1ZGNhZTM2ODU1NGQ0OGQ3YmU1ZDViODJmYWIwIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_976f0a95262946278d135f2fea9920c7",
+      "statement": "AmountFieldComponent accepts only digit strings that do not start with 0, formats them with AmountVisualTransformation, and resolves CurrencyType.Symbol by calling Currency.getInstance on the stored symbol string.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/input/amount/AmountFieldComponent.kt#L34-L104",
+          "version": "repo-lines-v1:sha256:2b87c171932aedecbe171c23ee598b90fb6dbe1a24014bd12d7f2c0485c76b03:eyJzZWxlY3RlZExpbmVDb3VudCI6NzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOGQ5NzlhM2JiNjU4M2YyOWJhYmZlZmJlNGM4YjUwMGMxMDcxOWJjOTc4ODgwNzYyMTlhYWY3NTUzZDAzOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY3MDBmZmNlNzk4MDMxNTcyMDZlOGMyMWVkNTJhNjc2MDAyZTFhZWQzYzliMmFmMWUyMTI2NGI1NWFjMDFiODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE1MmE0YjY0YjI5Y2VlYTQ3YjViZGY0MjMyMWVhMjc4ZjJlNjBlYjJlNGU1MzIyZjE5NjE5ZjJhMGU4ZWU1NTUifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/input/amount/model/CurrencyType.kt",
+          "version": "repo-file-v1:sha256:b297afdec29e5096cadc8a5a32349e6d7101598b96faee527ec37e79f27a0507"
+        }
+      ]
+    },
+    {
+      "id": "claim_cc43efce46c5492a9b0a874fc460e654",
+      "statement": "OtpFieldComponent requires a MaxSize validator (throwing otherwise), renders one box per allowed digit, masks digits by default with a toggle, and rejects input longer than the limit.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/input/otp/OtpFieldComponent.kt#L77-L274",
+          "version": "repo-lines-v1:sha256:f4ceb0c7206c490355ba8ab90268ba7dbe8426112b44c493141cdcdc7da1a901:eyJzZWxlY3RlZExpbmVDb3VudCI6MTk4LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIwNTNlNjIyZDdkNzE4MWQ4OWI2MGU5NWMxZTA1ZDg0ZDVkNDg5MDkyMWViY2E0YWYxNWZhNmE0NzdlNmJlY2JlIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIzZjRlNTc4YWNlMDg1YTQwZTE4MzY1NjgwNmI0NDM5ZDRhNDExN2I0N2U1Mzk1NTE1NDZiZDMyZmI3ZDllZDMwIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_98b33f3bd4f542ffbb802f699496ecd7",
+      "statement": "DateFieldComponent and RangeDateFieldComponent display a read-only TextFieldComponent backed by a new validator-less TextFieldState each composition, open Material3 date pickers bounded by the MinDate/MaxDate validators, and write the selection to the field state on OK.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/input/date/DateFieldComponent.kt#L39-L232",
+          "version": "repo-lines-v1:sha256:a8213ce651b9ece4e45624fdcad1c6d8c9c4a362910f0c7377076057d47fd404:eyJzZWxlY3RlZExpbmVDb3VudCI6MTk0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI0ZDA0Mzk2MjUyZGIwZTA1NzcyYmE5NzQ5Nzc0MDI5MGVhNWFiN2ZhNTY4NjA1ZTZiZGYxNjg3YTg1NjFiOGI0IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxNTJhNGI2NGIyOWNlZWE0N2I1YmRmNDIzMjFlYTI3OGYyZTYwZWIyZTRlNTMyMmYxOTYxOWYyYTBlOGVlNTU1In0"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/input/date/RangeDateFieldComponent.kt#L46-L207",
+          "version": "repo-lines-v1:sha256:d5a865e16f39f0c150a7dfd0792bdefbdf9194388e238e7f64438801879c046e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYyLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIzMGMxZjE4OGYxNDJlZDdhODI0NjgwYjIwNzE3MmM1NTE5YmM2MTRhNDhmZGE3Y2YxNjdlZGI4ZGRmNzk5NTZjIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI0ZDA0Mzk2MjUyZGIwZTA1NzcyYmE5NzQ5Nzc0MDI5MGVhNWFiN2ZhNTY4NjA1ZTZiZGYxNjg3YTg1NjFiOGI0IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIyZDk5MTEyYTY1OWM1ZTkzMDFhOTJhZGVlYmUwMzYwOTYwNmM4ODk0N2Y4NmM4YTlkMGJiZGM1ZWUxZjc4NmRmIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_dd56120f011d4c8bac42a1de8369f383",
+      "statement": "CheckboxComponent and ToggleComponent do not update their state when onValueChange is null, because their fallback creates an uninvoked lambda.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/select/checkbox/CheckboxComponent.kt#L83-L98",
+          "version": "repo-lines-v1:sha256:e809029811628597062da59df005d0bfc062c7873254e297796f063e8b6e9d89:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmYjE1NmMxYWJlYjJhZGZhODNmODI1YzQyMzNiNDM4MmQwZjYwNWNiNjIyYmJjYzg1NDFlMTA2MzRkOGU3OTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MDMyZTk2NGQwOTMyMzUxZTVkMTg1MjY5MjgxYjE3MWEzYTA5YjA4YjI4NmU2NjFlYTQ3MDMyM2M4MmViNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNlODEzNjAyYWQ0YjU1MzMxN2UwNzc2MjEwMjIyYjk1OGUxZGRmMWVhNjA5YzYzNmMzMjQ4ZWUyMzY2YTE4MTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE3NDQwOGI2NDA4ZDNlNzBiNGJiY2IwYThkNmYyZTdjNDM4YTZhODgyNjU4ZDJmYmVkYTA0MjRmNzE3ZmRiZDYifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/select/toggle/ToggleComponent.kt#L76-L91",
+          "version": "repo-lines-v1:sha256:5e460affe5c93e7bdb94722af035e01a3a41c41b4c2151272c47f7464a35cf9e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmYjE1NmMxYWJlYjJhZGZhODNmODI1YzQyMzNiNDM4MmQwZjYwNWNiNjIyYmJjYzg1NDFlMTA2MzRkOGU3OTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MDMyZTk2NGQwOTMyMzUxZTVkMTg1MjY5MjgxYjE3MWEzYTA5YjA4YjI4NmU2NjFlYTQ3MDMyM2M4MmViNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNlODEzNjAyYWQ0YjU1MzMxN2UwNzc2MjEwMjIyYjk1OGUxZGRmMWVhNjA5YzYzNmMzMjQ4ZWUyMzY2YTE4MTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE3NDQwOGI2NDA4ZDNlNzBiNGJiY2IwYThkNmYyZTdjNDM4YTZhODgyNjU4ZDJmYmVkYTA0MjRmNzE3ZmRiZDYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ebdb930821fc4e9e837b06d10f80ddda",
+      "statement": "ChipComponent toggles state.change(!value) by default when onValueChange is null.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/select/chip/ChipComponent.kt#L99-L106",
+          "version": "repo-lines-v1:sha256:b8ffeb258cc204ebb39b51bdd7eb9886344e9fd1ad002ca0ceabbe1684090fda:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmJkNmE3MzA2NmRkNDFiNTNhMDJjMDMxZmYwMjFiNjM2MjA0ZjJkZWNmMGU3MzE1ZmNkYWQ2Nzc3MDg0MjJiMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGRiODcyNzAxODczMWQ1NGQzYjM0YjFhOTc3MzFkNThhZDc4MWJkNWRkOTZmMmEwNjZhZWJiZTIzMzk0NmM0NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTk2ZjhjYjA4M2ZhODAwYTRkY2QyOTY5NzIyZDdiOTI2ODZhZGQ5ZWJlMzY1NTQ5MmZhNjcyYjFhN2NlZDI0MiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e01d309281d8406bbb523cc8d08236d4",
+      "statement": "The Hyperlink checkbox style opens Url links in a Custom Tab and sets the checkbox to true once every hyperlink has been clicked.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/select/checkbox/CheckboxComponent.kt#L192-L240",
+          "version": "repo-lines-v1:sha256:a38fb2ea8758176e9e6fec610e06f887564d06bd54e26fefa28db4dfca43b931:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOGQ5NzlhM2JiNjU4M2YyOWJhYmZlZmJlNGM4YjUwMGMxMDcxOWJjOTc4ODgwNzYyMTlhYWY3NTUzZDAzOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU5NmY4Y2IwODNmYTgwMGE0ZGNkMjk2OTcyMmQ3YjkyNjg2YWRkOWViZTM2NTU0OTJmYTY3MmIxYTdjZWQyNDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjljNzgwZDJiMjVlNGU2ODI1YTU2MWY2MzU1N2RlZTI3YzZmMDAyNThiNWU0YTRmOTcyMDZjZTRhNTAyOTcxNWMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_21e03891337e4c14a76c636fe2be48ad",
+      "statement": "Multi-select components lay items out in a NonLazyGridComponent, use the first MaxSize validator as a selection limit (radio behaviour when 1), disable unselected items once the limit is reached, and announce selection counts.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/multiselect/checkbox/MultiCheckboxComponent.kt#L28-L149",
+          "version": "repo-lines-v1:sha256:780532393f37e7def7f9844cabc2e15a0542300073c1cb7b701027e4bd2ec666:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIyLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIwNTNlNjIyZDdkNzE4MWQ4OWI2MGU5NWMxZTA1ZDg0ZDVkNDg5MDkyMWViY2E0YWYxNWZhNmE0NzdlNmJlY2JlIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxNTJhNGI2NGIyOWNlZWE0N2I1YmRmNDIzMjFlYTI3OGYyZTYwZWIyZTRlNTMyMmYxOTYxOWYyYTBlOGVlNTU1In0"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/multiselect/chip/MultiChipComponent.kt#L28-L149",
+          "version": "repo-lines-v1:sha256:26d1ac0ef484c2f947e9cf79f5904d8c12bbd454fe560edff00b38496611320f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIyLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIwNTNlNjIyZDdkNzE4MWQ4OWI2MGU5NWMxZTA1ZDg0ZDVkNDg5MDkyMWViY2E0YWYxNWZhNmE0NzdlNmJlY2JlIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxNTJhNGI2NGIyOWNlZWE0N2I1YmRmNDIzMjFlYTI3OGYyZTYwZWIyZTRlNTMyMmYxOTYxOWYyYTBlOGVlNTU1In0"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/form/fields/multiselect/toggle/MultiToggleComponent.kt#L29-L151",
+          "version": "repo-lines-v1:sha256:848a0cdd04510756a57d6bddcca6c5f788970143798124d36250f0b04c0b8c87:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIwNTNlNjIyZDdkNzE4MWQ4OWI2MGU5NWMxZTA1ZDg0ZDVkNDg5MDkyMWViY2E0YWYxNWZhNmE0NzdlNmJlY2JlIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxNTJhNGI2NGIyOWNlZWE0N2I1YmRmNDIzMjFlYTI3OGYyZTYwZWIyZTRlNTMyMmYxOTYxOWYyYTBlOGVlNTU1In0"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T15:48:49.783Z"
+  }
+}

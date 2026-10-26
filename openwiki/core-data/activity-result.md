@@ -5,17 +5,23 @@ description: How com.core.data.activityResult turns AndroidX ActivityResultContr
 tags: [core-data, activity-result, coroutines, android, hilt]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-26T12:11:14.549Z
+    at: 2026-10-26T15:48:49.783Z
 sources:
+  - id: openwiki-source-e38439f5bc06bf873d6444ad
+    resource: repo://app/src/main/java/com/baseapplication/MainActivity.kt
   - id: openwiki-source-d2e6a80001c9a08605ad669c
     resource: repo://core/data/src/main/java/com/core/data/activityResult/di/ActivityResultModule.kt
   - id: openwiki-source-adb835f40633da33b1530a6d
     resource: repo://core/data/src/main/java/com/core/data/activityResult/manager/ActivityResultManagerImpl.kt
   - id: openwiki-source-9c8dca96896b728201b9fe4a
     resource: repo://core/data/src/main/java/com/core/data/activityResult/utils/Extensions.kt
+  - id: openwiki-source-f657300c43b408062c1260b1
+    resource: repo://core/data/src/main/java/com/core/data/utils/ActivityProvider.kt
   - id: openwiki-source-abb1f279258670e2248cdcce
     resource: repo://core/data/src/test/java/com/core/data/activityResult/ActivityResultTest.kt
-generated: { by: "claude-code", at: "2026-10-26T12:11:14.549Z" }
+  - id: openwiki-source-a8f6f071ebaabf16a777b580
+    resource: repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt
+generated: { by: "claude-code", at: "2026-10-26T15:48:49.783Z" }
 ---
 
 # Activity results (`com.core.data.activityResult`)
@@ -214,6 +220,11 @@ val created: Uri? = activityResultManager.createDocument(fileName = "report.pdf"
 ## Gotchas and constraints
 
 - **`ActivityProvider.init` is mandatory.** Without it `currentActivity` is `null` and every call returns `null`. Only `FragmentActivity` instances are tracked.
+- **Doesn't work in the app as currently wired.** `MainActivity` extends `core/presentation`'s `BaseActivity`, which extends
+  `ComponentActivity`, not `FragmentActivity`. `ActivityProvider` ignores it, so `currentActivity` stays `null` and
+  every `requestResult` call (and every helper extension) returns `null` or its default without showing any UI. Fix it by making the host activity
+  a `FragmentActivity`/`AppCompatActivity`, or by widening `ActivityProvider` to track `ComponentActivity`. See
+  [ActivityProvider](utils.md) and [CoreApp and BaseActivity](../core-presentation/app-and-activity.md).
 - **Single in-flight request.** `pendingResult` and the saved-state provider are single shared slots on a singleton.
   Overlapping requests overwrite `pendingResult`, so state restoration for the earlier request is lost. Serialize requests.
 - **Process death.** The suspended coroutine doesn't survive process death. The saved bundle allows a *new* call with
@@ -229,3 +240,4 @@ val created: Uri? = activityResultManager.createDocument(fileName = "report.pdf"
 - [Permissions](permission.md): built on `requestPermission(s)`.
 - [Recipes](recipes.md): launching for results in features.
 - [Testing](testing.md)
+- [CoreApp and BaseActivity](../core-presentation/app-and-activity.md): the host activity type.

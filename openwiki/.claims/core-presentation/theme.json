@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:2ec115c36a8e33d531bbf62487c0d00c840b6f488d208fd1c8f2053d47088a59",
+  "claims": [
+    {
+      "id": "claim_dd1d4dc25ef543aebae5fd9e9a572a5a",
+      "statement": "LocalColors, LocalPalette, LocalDimensions and LocalTypographies are staticCompositionLocalOf locals without defaults that throw when read outside Theme.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/Theme.kt#L25-L39",
+          "version": "repo-lines-v1:sha256:0ed41b413a455a00980edb68a1f41f1cd803c06a491bba2b302ba0973cd9032a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkMzI4OTFjYmRlYmE5N2IyY2IwNzNjMjIwODQ5NjQ3NDkyY2MwYzBkN2Y3MTdmNTkzYjNmMzE4NTM5Njg4MDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg5MjdjNWUzNTQxN2RlMWE3Mjc5ZjhlZmFlYWY3OTgwNTEzOGJkYTlhMDM0YjQxNDM0ZmNiMjdjNjQwZmZhMDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQwZGJjZGM4MGNkYzA4YTc4YTRkOGI4MmY2NjllYmQzZWY2MjMwZjQxMzg5YzU0YzUxNTk1Zjc5YzkyZDgwM2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a4f6cdc0c1014e81b5780a44519f006a",
+      "statement": "Theme selects a dark or light palette from isSystemInDarkTheme and the system contrast level (>= 1.0 high, >= 0.5 medium, otherwise default) and provides palette, colors, dimensions and contrast-dependent typographies.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/Theme.kt#L41-L93",
+          "version": "repo-lines-v1:sha256:888868de0409b432eb33c1ec64be9360a456c1aaba24589d488f79f145e43246:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOGQ5NzlhM2JiNjU4M2YyOWJhYmZlZmJlNGM4YjUwMGMxMDcxOWJjOTc4ODgwNzYyMTlhYWY3NTUzZDAzOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU3NjQ1MzNlOWEzNmFjMjUwMTEzMWM3MDJlMmVmNzg4Yjc5MmY4Nzc3YTUzOTYwNWY5YjU2MTA5NjJjMzdmMmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM0YWNhNzk1NjU4MTY4NTM3MjkwZmI3NmU3NWUzMmRhZjZhNTI3N2UzNzc1YmFjYzI0NzgyYWNhMzdhODkxNzMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bd1308c872b54d96a27801e28309ffb0",
+      "statement": "Theme overrides LocalDensity with a font scale of 1, disabling the user's system font scaling.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/Theme.kt#L71-L79",
+          "version": "repo-lines-v1:sha256:4540ad796fa8500537cfb8aa71fa94f0bb850c2ab86ffe03205d5fa4f3b8f924:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjUwOTQ0YzQ4YTViYTg4NzI4OWYzMDhjOTY2ZTdlYmRhODRkYzg3ZmE2MjQwMzMyY2NjM2RhYWY4ZjlhZGQxNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmYwZDc1OTUwZGYwZmY5YTNlZTk2NjM5ZGNjOGZmNWVhZWRiNDBkNjgyYmVhOTI2MjJiNTIwZGQ4ODdkOTNlOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTZiZjkzNDI0YzYxZDY4YjFjMDg1ODU4OWQwNzFlMDE2YzRhZWE1ODk0NWNkYzQxYWM5Y2YzMDI5NGZlMzBlNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_2fe130fd19014d4b886c8f487c24889f",
+      "statement": "System contrast is read from UiModeManager with a ContrastChangeListener only on API 34+, and is 0 on older versions.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/Theme.kt#L95-L135",
+          "version": "repo-lines-v1:sha256:4e284d2533d1e3fa6dd3c2ab2dda4da99bb3b0bc6590ae54fe997fea6142ad94:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOGQ5NzlhM2JiNjU4M2YyOWJhYmZlZmJlNGM4YjUwMGMxMDcxOWJjOTc4ODgwNzYyMTlhYWY3NTUzZDAzOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0b863cfa99e3473f81edb713c3bf2c99",
+      "statement": "Typographies use an Inter FontFamily composed of six weight-specific font resources that are Google Fonts downloadable font definitions.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/theme/typographies/base/BaseTypography.kt#L21-L44",
+          "version": "repo-lines-v1:sha256:46d28792dae41919b6c361663a277dc6a1d4bb0d2291119294fa2fe0bad642b1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZiMjNhNjgzYjc0ZmEyNDgzYTkyYmQ5YmU2OTcxNjc2MTJlZDE2MjNmN2IzMDU2ZGM0MWExYTBjODIyOThmMzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiYmZhMWRlZGIwZjY4N2UwMDM2M2E3Zjg5NWZlN2E0YzQ0NTI4Yzc2MGJlMjAwNTc3MzViZTc2MThjZTczNTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjczOGE5ZTYwYjZmZTk1ZjQ0NjdhZmVmNzc2ZTUzYzUyNzBjMWM4MzIxMWU1MDc3YzMwZGQ1YzQ4ZDMxZTlhODYifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/res/font/inter.xml",
+          "version": "repo-file-v1:sha256:3652bbac963fc0d6a8c7802c4e4f24d5bd9579c01b42269dc55f156e4ae74c4b"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T15:48:49.783Z"
+  }
+}

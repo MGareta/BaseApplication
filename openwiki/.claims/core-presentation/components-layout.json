@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:6425684f8233d20fae22d227c051d46a7141211d4a55e6c968ba4844260b8f0f",
+  "claims": [
+    {
+      "id": "claim_1b652caadac541de9ca20cfe9cdbb1cd",
+      "statement": "ContainerComponent.kt, PagingComponent.kt and list/utils/Extensions.kt are entirely commented out, including their package declarations, so these components are not compiled.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/container/ContainerComponent.kt",
+          "version": "repo-file-v1:sha256:cc32c7e188ad2dd2166d08843b895e4bcab30204db21aad575c4ef9b3ca97b72"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/list/PagingComponent.kt",
+          "version": "repo-file-v1:sha256:a3d0916017942a91863fe2fc5a632a08f5a5652d122665f4d9bd42834b1ed181"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/list/utils/Extensions.kt",
+          "version": "repo-file-v1:sha256:8414d2a73a43f6de731311c2e57cd778ca2476e3c9d4db949f463431087d0e6e"
+        }
+      ]
+    },
+    {
+      "id": "claim_deb4ad92016745deaa37a6c4a57ce5ae",
+      "statement": "BottomSheetComponent is a ModalBottomSheet without a drag handle that calls onDismiss both from confirmValueChange when hidden and from onDismissRequest, shows a close icon button that hides the sheet, and passes the SheetState to its content slot.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/bottomsheet/BottomSheetComponent.kt#L45-L169",
+          "version": "repo-lines-v1:sha256:7294e4350a1c63bb0bffd23af67f9c548ce4ba9f76256e244c82e55381a35091:eyJzZWxlY3RlZExpbmVDb3VudCI6MTI1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI4OGE3NTgzNjYyMzY2OTEyZTNkYjMwZjdmMzQxZWE5N2JjMGIwYTU1OGEzMTRhOWUzYzEyY2IzNDhhMzcxNzgyIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJhOGEwZTYxYTlmZGI1MzE0Y2RiYjVkMWUxZGU5YmI3YmI3YWUyMzg5ODI4YjhlNTk5ODdhNWQxNWRlNDMzYjJhIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI3ZTFiN2Y5YTk1YmZhMDVlZTlhMzRlMDZkYzVkY2YyZTE1MGRlYTlkM2YzNTVlZjExYjJjMmU0MTZkZDU2NTAwIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_8f97fcf51a1f4414a13aebd6f82d72b4",
+      "statement": "BottomSheetStyleType Warning, Info, Success and Error map to the matching low background palette color, content color and the ic_warning, ic_info, ic_success and ic_error drawables.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/bottomsheet/model/BottomSheetStyle.kt#L26-L59",
+          "version": "repo-lines-v1:sha256:f7e8b917ea41602770fc96d773a6de9ba4e318d881a0e5c85eee2863e46bc89b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOGQ5NzlhM2JiNjU4M2YyOWJhYmZlZmJlNGM4YjUwMGMxMDcxOWJjOTc4ODgwNzYyMTlhYWY3NTUzZDAzOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFjYzgyOThhYmY5ODY0OWNkNjlhNTFiZTEzYzQ1OWMxNTVjMzVjZjcyNDE3MTExMDRmMzVlYjljMWQ5YTUxNzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_57fb8a9832f64f2b8dafc68199af08fd",
+      "statement": "NonLazyGridComponent lays out itemCount cells in rows of equal-weight columns using Column and Row, with collection semantics for accessibility, composing every item eagerly.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/list/NonLazyGridComponent.kt#L19-L86",
+          "version": "repo-lines-v1:sha256:8a60a81273a27d77de382d88bce9f210f877db66fc03d6847ed5d2ff75645ca6:eyJzZWxlY3RlZExpbmVDb3VudCI6NjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOGQ5NzlhM2JiNjU4M2YyOWJhYmZlZmJlNGM4YjUwMGMxMDcxOWJjOTc4ODgwNzYyMTlhYWY3NTUzZDAzOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFhYWMzODRiODllNDVlN2QyZDk1MmFiNDY5MGY4OTE0ZDU4YjhhN2Y1YjYzZDQ0Y2IwYTIzMzY0ZDcwNDkxZjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c15d505746974827bda37bb58043e4f5",
+      "statement": "PagingResponse is a data class holding a nullable pageId key and a list of items.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/list/model/PagingResponse.kt",
+          "version": "repo-file-v1:sha256:9cd8c5efb361e517cfc1d955311be3634819fba0f1112c030de32de24647170b"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T15:48:49.783Z"
+  }
+}

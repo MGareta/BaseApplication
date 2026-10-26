@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:806939252b31a82f2effa808000e351c5c78d9da246bdab77dcb4f1c9be31822",
+  "claims": [
+    {
+      "id": "claim_a1f96efef13946a39a0e0382aabe5171",
+      "statement": "core/presentation's androidTest BaseTest declares an abstract HiltAndroidRule, injects it and installs an UnconfinedTestDispatcher as Main before each test, and offers a test{} runTest helper.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/androidTest/java/com/core/presentation/BaseTest.kt",
+          "version": "repo-file-v1:sha256:79a509a5a2ff44202dbaa71037dfa24cdd9ca7a8420da9368d7258e30e6dfcae"
+        }
+      ]
+    },
+    {
+      "id": "claim_cebe373839b14dfb83f0f2a3784adf4f",
+      "statement": "DefaultTestRunner is an AndroidJUnitRunner that always instantiates HiltTestApplication, but core/presentation's build file does not configure it as the instrumentation runner.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/build.gradle.kts",
+          "version": "repo-file-v1:sha256:669d5f95c29172d6260f134a4addd5b9fff911a4757b44d3e286378a6bde5b58"
+        },
+        {
+          "resource": "repo://core/presentation/src/androidTest/java/com/core/presentation/DefaultTestRunner.kt",
+          "version": "repo-file-v1:sha256:2938d36d7779db45e0fe9b1efacbe19ae5934843234f4759f5d635163b474bff"
+        }
+      ]
+    },
+    {
+      "id": "claim_016336d739534e3e81a1737ecf2c62b8",
+      "statement": "CorePresentationPlugin only adds the test-unit bundle via testFixturesApi and the Hilt compiler via kspTest for tests, does not apply configureTests, and adds no Compose UI test dependencies.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CorePresentationPlugin.kt",
+          "version": "repo-file-v1:sha256:6e00421372a973445cadcc8449e4e824250e37c19689043d1b4c6b763ec37779"
+        }
+      ]
+    },
+    {
+      "id": "claim_4bfd63772e1542fba2341797825c64c6",
+      "statement": "FeaturePresentationPlugin adds core:presentation's test fixtures as a testImplementation dependency.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt",
+          "version": "repo-file-v1:sha256:2f1a3cf4d138bc897d602f95568838a1c9709a01f848ea0522dcbe4981e64e3f"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T15:48:49.783Z"
+  }
+}

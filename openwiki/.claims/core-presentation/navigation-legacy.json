@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:c52b3f961d707c4122589bc2bece0b36162eeaa8e36aa36b98cd3a20380a557b",
+  "claims": [
+    {
+      "id": "claim_4f4c82b2fbee4ff4947cf84877f864cf",
+      "statement": "The legacy navigation package is not wired into BaseActivity, which uses Navigation3; outside its own package only BaseFlow references it.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L81-L133",
+          "version": "repo-lines-v1:sha256:139d85cf57f322a5cc5549303f5de4df6dfa5ef2dffc2e056d955114f6e6dec6:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmMzJlNzU1MDgyNDA0ZDE3NGZjNGIxZGJlYzgwOGJmNmRhYjdmYWUxMGUyMzNjOTkyZjhjM2M1YTdhMzk5NTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhZDZjOGVhYTg1M2RmYjcwNzIwNTFhNWY1OTYyOWJiNzZmMDJkMTMzMDQyZjY0MTQzNDNmYTAxOWFiOGU2ZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZjNDdhNDQyMGVhM2M0MWNiZmEyMDAyMWIzY2UyMjc3MGI4M2VlNWRkMzg0YjBiZDg0MDFjZjMyN2ZlMmU1MTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ2MTc3NWIyN2VkMmNlY2NiOTAyMDI4YmFlNzc0Mjc5Mzg5ZjY3ODRhZmM0YzZmM2FmOWZlNWVhMDQ5ZjY0NTIifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/screen/BaseFlow.kt",
+          "version": "repo-file-v1:sha256:9ed7a783ac702dbe804b401136224139a9ccf4c05d6969bf8b1cceaafc4e4442"
+        }
+      ]
+    },
+    {
+      "id": "claim_c9e843d1c976443588d5acb6416ea3f4",
+      "statement": "The legacy NavigationModule is installed in SingletonComponent and provides a NavigationGraphFactoryImpl from Class-keyed maps of entries and graphs, a NavigationManagerImpl, and the same instance as INavigationDirections.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation/di/NavigationModule.kt",
+          "version": "repo-file-v1:sha256:a10387dca747ec575415367462a11058385d5e7a33c2e51f4362977c924c6bbd"
+        }
+      ]
+    },
+    {
+      "id": "claim_9977e2e4926c49c7b9f2b836db69095e",
+      "statement": "Legacy NavigationManagerImpl emits Navigate, NavigateUp, PopCurrentBackStack and PopBackStackUntil NavigationIntents through a buffered Channel exposed as the directions flow.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation/manager/NavigationManagerImpl.kt",
+          "version": "repo-file-v1:sha256:314771f3f9c61f1ec75453ea594084df47a8d983fc71a67930025ee1580cb4f0"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation/model/directions/NavigationIntent.kt",
+          "version": "repo-file-v1:sha256:debbdac91c84204ebda86c5872622b46261b7439243f22b4ea32d2a2a2b7a6ed"
+        }
+      ]
+    },
+    {
+      "id": "claim_7ac99c37006e4af59e7e03311d24f738",
+      "statement": "NavGraphBuilder.addGraphs registers each legacy graph as a nested navigation graph routed by the graph class and adds screen, dialog or bottom-sheet destinations whose content runs BaseFlow, ComposableLifecycle and Render, resolving the ViewModel and destination types reflectively from the entry's first supertype.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation/model/utils/NavigationGraphBuilderExtensions.kt#L27-L232",
+          "version": "repo-lines-v1:sha256:d89e63436ab9d99b093ddf1850c26f90b834f523c8386f74a85d71ba344f05db:eyJzZWxlY3RlZExpbmVDb3VudCI6MjA2LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiYmI1YmE2NDJlZWZjYzMzYmMwNTBlNGQ2MDlkZWU5YWRlM2I3ZjRjZDYxOWE4ZmEyZTM5MDVmN2Y0MWY1MzhjIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlMjM4MjRlZDFiODBjZjViZjMyYmRjZDYxYTIxY2JhYmMzZDI5ZWJiZWEyYWIxMzVlNGM0NDRlMjAwNGM2NjFkIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_a068666b7dd84e5689365104d17db276",
+      "statement": "navGraphEntryArgument creates a JSON-string NavType for custom route arguments, and IViewModelNavigationArguments.params decodes a route object from a SavedStateHandle.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation/model/arguments/NavGraphEntryArguments.kt",
+          "version": "repo-file-v1:sha256:dfdefb0311cb32e6b35bafef275e4bcb99147424d845bf43ba18578457c5684a"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation/model/arguments/ViewModelArguments.kt",
+          "version": "repo-file-v1:sha256:1835f42ec23030e840c4dbfe870ddd120a28a272267e69954b140fa803a6df19"
+        }
+      ]
+    },
+    {
+      "id": "claim_f4a256c8a1db4e5484ff71abb768f5fb",
+      "statement": "The legacy M3BottomSheetNavigator and BottomSheetHost render each bottom-sheet back-stack entry in a ModalBottomSheet with configurable secure policy and skipPartiallyExpanded, dismissing via the navigator.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation/model/utils/navigator/bottomSheet/BottomSheetHost.kt",
+          "version": "repo-file-v1:sha256:a24c612051916ec826125059e0ff3f607649fb41efa538d439b8382f02e5c94e"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation/model/utils/navigator/bottomSheet/BottomSheetNavigator.kt",
+          "version": "repo-file-v1:sha256:5f196a8d7cdd0b7f9e5c59d205eb5d1363271bcfdfcc43ee436cb89595dae713"
+        }
+      ]
+    },
+    {
+      "id": "claim_f1e955a01adb4585857e7549a972a41a",
+      "statement": "StableHolder and ImmutableHolder wrap values with @Stable and @Immutable annotations, with asStable and asImmutable extension helpers.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation/model/utils/StabilityWrappers.kt",
+          "version": "repo-file-v1:sha256:598e8415818a51bca0359d897648dad10d59914d99b5a196270a434bb28e5e6e"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T15:48:49.783Z"
+  }
+}

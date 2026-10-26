@@ -3,9 +3,6 @@ type: package reference
 title: Permissions
 description: Reference for com.core.data.permission. Covers IPermissionManager, which checks runtime permissions against the application context and requests single or multiple permissions through IActivityResultManager, mapping results to Granted, Denied or ShowRationale. Also covers the fallback when no activity is available.
 tags: [core-data, permissions, runtime-permissions, hilt]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T12:11:14.549Z
 sources:
   - id: openwiki-source-fea607045c25ba629c669a29
     resource: repo://core/data/src/main/java/com/core/data/permission/di/PermissionModule.kt
@@ -13,9 +10,16 @@ sources:
     resource: repo://core/data/src/main/java/com/core/data/permission/manager/PermissionManagerImpl.kt
   - id: openwiki-source-3f1963a91880a12679e91c65
     resource: repo://core/data/src/main/java/com/core/data/permission/model/PermissionStatus.kt
+  - id: openwiki-source-f657300c43b408062c1260b1
+    resource: repo://core/data/src/main/java/com/core/data/utils/ActivityProvider.kt
   - id: openwiki-source-c10a279edf6c018c181c7ea5
     resource: repo://core/data/src/test/java/com/core/data/permission/PermissionManagerTest.kt
-generated: { by: "claude-code", at: "2026-10-26T12:11:14.549Z" }
+  - id: openwiki-source-a8f6f071ebaabf16a777b580
+    resource: repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt
+generated: { by: "claude-code", at: "2026-10-26T15:48:49.783Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-10-26T15:48:49.783Z
 ---
 
 # Permissions (`com.core.data.permission`)
@@ -126,6 +130,11 @@ val anyLocation = statuses.values.any { it == PermissionStatus.Granted }
 ## Gotchas and constraints
 
 - **No foreground `FragmentActivity` → `Denied`** for single requests (no dialog shown). Batch requests fall back to the current grant state.
+- **This is the current state of the app.** `MainActivity` extends `core/presentation`'s `BaseActivity`, which is a
+  `ComponentActivity` that `ActivityProvider` doesn't track. So today `requestPermission` returns `Denied` without showing a dialog,
+  and `requestPermissions` only reports existing grants. `hasPermission` still works because it uses the application context.
+  The same applies to `FileManagerImpl` (storage on API < 33) and `NotificationsManagerImpl.enableDeviceNotifications`.
+  See [CoreApp and BaseActivity](../core-presentation/app-and-activity.md).
 - `Denied` is ambiguous: it covers both "never asked and denied once without rationale" and "don't ask again". Offer an
   app-settings deep link (`startActivityForResult(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, ...))`).
 - Remember to declare permissions in the feature/app manifest. Requesting an undeclared permission is denied immediately.
@@ -144,3 +153,4 @@ covers `hasPermission` granted/denied (Robolectric grants), `requestPermission` 
 - [File storage](file.md)
 - [Notifications](notifications.md)
 - [Recipes](recipes.md)
+- [CoreApp and BaseActivity](../core-presentation/app-and-activity.md)

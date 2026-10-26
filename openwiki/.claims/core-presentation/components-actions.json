@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:86115a45ebf68b82407943998f311c5bae6da02963cb12ec692e9326dc7236de",
+  "claims": [
+    {
+      "id": "claim_418ab423dd864a2cbd298c125a1c3937",
+      "statement": "BlockButtonComponent always passes enabled = true to the underlying OutlinedButton, ignores clicks when its enabled parameter is false, and marks the node disabled with the AccessibilityState.Click disabledReason as state description.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/button/block/BlockButtonComponent.kt#L35-L145",
+          "version": "repo-lines-v1:sha256:5144f5c02693c26d0d3f824205ca574507416d468410b72d28e05acf56580f19:eyJzZWxlY3RlZExpbmVDb3VudCI6MTExLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIwNTNlNjIyZDdkNzE4MWQ4OWI2MGU5NWMxZTA1ZDg0ZDVkNDg5MDkyMWViY2E0YWYxNWZhNmE0NzdlNmJlY2JlIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxNTJhNGI2NGIyOWNlZWE0N2I1YmRmNDIzMjFlYTI3OGYyZTYwZWIyZTRlNTMyMmYxOTYxOWYyYTBlOGVlNTU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_c7f85db7875945ca82a88ef39d6edd98",
+      "statement": "BlockButtonSizeType Small, Medium and Large map to heights of 40, 48 and 56 dp with body small, medium and large text styles, and Tertiary buttons use zero horizontal padding.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/button/block/model/BlockButtonSize.kt#L31-L102",
+          "version": "repo-lines-v1:sha256:25628c319d2530231a4d76d6b56d7eefadbc4d8f7b61e2f468d015b5ec44965c:eyJzZWxlY3RlZExpbmVDb3VudCI6NzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOGQ5NzlhM2JiNjU4M2YyOWJhYmZlZmJlNGM4YjUwMGMxMDcxOWJjOTc4ODgwNzYyMTlhYWY3NTUzZDAzOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA4NzBkMjg4MzM0ZjgzMzY5MDkwZGYxMDAzMWViZTY1NmVkNzIzZDY1MGRkNWVkZWNkNWM4N2EzMzY2OTNlZGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_92b5deb909a74fae86946f1e023a49ce",
+      "statement": "Primary block buttons use the accent background with onAccent content, Secondary use a transparent background with accent content and an active border, Tertiary use transparent accent text, and hover/focus adds a 1 dp onAccent border.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/button/block/model/BlockButtonStyle.kt#L29-L179",
+          "version": "repo-lines-v1:sha256:8167583ef555a27707916b449952826f8425760c7d392e1638271504bdecf609:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUxLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJiM2Q1YmRlNmJmOGQzN2UwMzA4ZmNhOTlkOGVjNzhlNGVmMDcwZTk3YThlNWM5NTZjMDBkZWVmNTVmNGRlZGRjIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_8c0ed22903d94a90a424e388eef8ae74",
+      "statement": "HyperlinkButtonComponent turns whole-word occurrences of each hyperlinks key into clickable link annotations and reports the mapped HyperlinkButtonType (Action or Url) to onClick without opening URLs itself.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/button/hyperlink/HyperlinkButtonComponent.kt#L23-L128",
+          "version": "repo-lines-v1:sha256:783cbe3a14ff0b3f585da12a1603906a0b5968ce3ba479d1041be18ebc64d57f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA2LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI4N2QxMGMzNzA4ZWM1NGFmMWM1ZTI4Y2JkMzY5ZGYyMGI0ZDE0NGU3M2RhYTRhZmMyNWQ2YTY1N2NmYzk3NTUzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxNTJhNGI2NGIyOWNlZWE0N2I1YmRmNDIzMjFlYTI3OGYyZTYwZWIyZTRlNTMyMmYxOTYxOWYyYTBlOGVlNTU1In0"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/button/hyperlink/model/HyperlinkButtonType.kt",
+          "version": "repo-file-v1:sha256:1762b7f716540ce553c8f605c09bda49b1cbc83ce99ef4ac46100f3e4a084f36"
+        }
+      ]
+    },
+    {
+      "id": "claim_8ce45f7e832c4777897ea4a4aba033c5",
+      "statement": "BadgeStyleType Alert, Inbox, Info and Notification map to warningLow/warning, accentLow/accent, infoLow/info and accent/onAccent palette colors, and badge sizes map to label small, medium and large.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/badge/model/BadgeSize.kt",
+          "version": "repo-file-v1:sha256:7dbd1933e344df8d7b81f6fd7510d1221c043538e75030c251d7d5e45e89a4a4"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/badge/model/BadgeStyle.kt#L27-L60",
+          "version": "repo-lines-v1:sha256:6105fbd80a5e8242dd42f28dd6aa6d2502d5ba60b01d90c42bdf989f41aa6305:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOGQ5NzlhM2JiNjU4M2YyOWJhYmZlZmJlNGM4YjUwMGMxMDcxOWJjOTc4ODgwNzYyMTlhYWY3NTUzZDAzOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmMWIwNGUxMjI4ZWEwZWI5ZDE3YjJlMWNkM2RmM2JhMjc5ZTM0N2NiZTVhYjZiOWRmNjA5OTkzY2JjMDRhZjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ebc3adc553bc473ea8f95f4e1d86edf2",
+      "statement": "AlertComponent renders TopTrigger and Modal families as Dialogs gravitated to the top and bottom respectively, and Message inline, and all families use the ic_password_show and ic_password_hide drawables as leading and close icons.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/alert/AlertComponent.kt#L46-L435",
+          "version": "repo-lines-v1:sha256:b9d0efc123cb7c56de6c5a39c00cb6bb0bf3769e42de29f4e68f0d12b9b8b620:eyJzZWxlY3RlZExpbmVDb3VudCI6MzkwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyZThkOTc5YTNiYjY1ODNmMjliYWJmZWZiZTRjOGI1MDBjMTA3MTliYzk3ODg4MDc2MjE5YWFmNzU1M2QwMzhiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIwNTNlNjIyZDdkNzE4MWQ4OWI2MGU5NWMxZTA1ZDg0ZDVkNDg5MDkyMWViY2E0YWYxNWZhNmE0NzdlNmJlY2JlIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxNTJhNGI2NGIyOWNlZWE0N2I1YmRmNDIzMjFlYTI3OGYyZTYwZWIyZTRlNTMyMmYxOTYxOWYyYTBlOGVlNTU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_594db1e795094bb194b09262f64dd5fb",
+      "statement": "Every AlertStyleType uses the border palette error color as its border, with low background and matching content colors per style.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/alert/model/AlertStyle.kt#L24-L57",
+          "version": "repo-lines-v1:sha256:c46fd2ca01e3f36eab7d37b599ef74b50852b84801bad4979bbac34ffa353659:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOGQ5NzlhM2JiNjU4M2YyOWJhYmZlZmJlNGM4YjUwMGMxMDcxOWJjOTc4ODgwNzYyMTlhYWY3NTUzZDAzOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzZWU1MzYzODQ5YmI3NTJkMWIwYWNkOWEwMjAyMWViMDZjM2IwODRlZDE4NWZkZmVjZTIzYjQ2MDE2ZDRiNWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b9ff1b47656243b5b02c3e3f4fe59b86",
+      "statement": "AmountComponent formats amounts with a locale NumberFormat that truncates (RoundingMode.DOWN), renders only the integer part plus currency when fractionDigits is null or 0, and shows dashes with an 'Amount not available' content description when amount is null.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/components/amount/AmountComponent.kt#L27-L101",
+          "version": "repo-lines-v1:sha256:938195a296b9e700f2afc98e4364226a09242f1c1646e27852c3726c93204fde:eyJzZWxlY3RlZExpbmVDb3VudCI6NzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOGQ5NzlhM2JiNjU4M2YyOWJhYmZlZmJlNGM4YjUwMGMxMDcxOWJjOTc4ODgwNzYyMTlhYWY3NTUzZDAzOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIyYjUwMDA2MGIzZGRhOTA4OGEyZjA4NzUxNjFlOTUzYjA3Y2E1ZjQ4NDMxNTUwYTZkZDIwZGEzMDliZGQ2YTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE1MmE0YjY0YjI5Y2VlYTQ3YjViZGY0MjMyMWVhMjc4ZjJlNjBlYjJlNGU1MzIyZjE5NjE5ZjJhMGU4ZWU1NTUifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/utils/Extensions.kt#L118-L160",
+          "version": "repo-lines-v1:sha256:0401678bc7628567cd85b817f6e2811dc20d660e6161ea04d74f141311def7fe:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjODBlYWQ4MTAzODI0NjI3YzA0OWY2NTU5NDY5M2Q2MGJmZjkwNzVlYTQ3NTk0ZjZjMDg5NDBkZGI2NmYwYTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU5NmY4Y2IwODNmYTgwMGE0ZGNkMjk2OTcyMmQ3YjkyNjg2YWRkOWViZTM2NTU0OTJmYTY3MmIxYTdjZWQyNDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6675d4242d7b44948af4365bbe1b5429",
+      "statement": "In AccessibilityState only Select implements the sealed interface; Click and Description are nested data classes that do not implement AccessibilityState.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/ui/utils/AccessibilityUtils.kt#L14-L28",
+          "version": "repo-lines-v1:sha256:0248b0f67541da3cd44049e2169d15e01c490373c9e7767243fb64c47cd0aba7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhNmFjMThjN2VhNmI5N2U2ODBhMzExNzYxYTQzMjBlZDZhZDY5YjUzY2M5NTgxYTgyNjg2OThmZWZkYTdjYWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc5MjkxNGVmZWE5ZjUwY2FjMjQyNzViMDA5YmQ0ZDEzOTExYzA0NzY3M2E3OGI1YjM4MTU4NGI0ODQ0MDExN2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUyN2EyMWM4MzEzNDUwOGZhYjM0YjEyMjMxNWVjNzU2OGJiZmY4ZDkwNWQyZjUzNDA5ZWU4YzU0OThmZDcyNzkifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-26T15:48:49.783Z"
+  }
+}
