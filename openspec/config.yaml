@@ -1,0 +1,48 @@
+schema: spec-driven
+
+# Project context: injected into every OpenSpec artifact and into `openspec instructions apply|archive`.
+# Facts live in openwiki/ (regenerated daily); this block only points to them and states hard constraints.
+context: |
+  Android app: Kotlin 2.4, Jetpack Compose, Hilt, Navigation3, single activity (BaseActivity). JDK 21, Gradle 9.8, AGP 9.4.
+  HOW to build anything is defined by openwiki/ (start at openwiki/quickstart.md). Data layer: openwiki/core-data/*.md.
+  Presentation layer: openwiki/core-presentation/*.md. Build and modules: openwiki/core-dependencies/*.md.
+  Features are delivered by the orchestrator described in docs/orchestrator/proposal.md (roles, gates, rubric, ownership).
+  Feature layout: :<feature>:data (plugin feature.data, namespace com.<feature>.data) and :<feature>:presentation
+  (plugin feature.presentation, namespace com.<feature>.presentation, depends on :<feature>:data); :app depends on :<feature>:presentation.
+  Only technology documented in the wiki and already exposed by the convention plugins may be used (docs/orchestrator/allowlist.yaml).
+  No new Gradle dependencies, plugins or repositories.
+  Read-only for feature work: core/**, core/dependencies/**, openwiki/**, openspec/specs/**.
+  Data results use ApiResult; UI results use UiResult. Navigation uses com.core.presentation.navigation3 only (never the legacy com.core.presentation.navigation).
+  Known core limitations and their mandatory workarounds are listed in docs/orchestrator/proposal.md section 4 and rubric section 7.2.
+  Platform features that do not work yet (runtime permissions, activity results, session warning UI, bottom-nav tab navigation)
+  must be declared as BLOCKED in the proposal instead of being implemented.
+
+rules:
+  proposal:
+    - Use the sections Why, What Changes, Impact, Platform dependencies, Out of scope, Analytics (template in docs/orchestrator/proposal.md Appendix C.1).
+    - Mark each platform dependency as "not needed", "supported" or "BLOCKED (<reason>)".
+    - List every analytics view and event with class name, Firebase key and params.
+  specs:
+    - Capabilities are exactly <feature>-module, <feature>-data, <feature>-presentation and <feature>-analytics.
+    - One observable behavior per requirement, stated with SHALL or MUST; requirement titles are unique within a capability.
+    - Every requirement has at least one WHEN/THEN scenario that a JVM unit or integration test can assert; scenario titles are unique within a capability.
+  design:
+    - Include the sections Data API surface, Cache policy, Presentation contract, Navigation, Analytics map and Test plan (format in docs/orchestrator/proposal.md Appendix C.4).
+    - Reference wiki pages for every technical decision; do not introduce libraries or patterns absent from the wiki.
+  tasks:
+    - Use exactly these sections, in order - 0. Module, 1. Data, 2. Presentation, 3. Testing.
+    - Every task line starts with one role tag [module], [data], [data-test], [viewmodel], [view], [analytics] or [testing] and never mixes roles.
+    - Every task line ends with "Req: <capability>/<Requirement title>"; test tasks add "Scn: <Scenario title>[, <Scenario title>]".
+    - Each scenario of <feature>-data has a [data-test] task; each scenario of <feature>-presentation and <feature>-analytics has a [testing] task.
+
+operations:
+  apply:
+    guidance:
+      - Implement only the tasks that carry your role tag; never check or uncheck another role's tasks.
+      - Before writing code, read the wiki pages listed for your role in docs/orchestrator/proposal.md section 5 and cite the sections you followed in your summary.
+      - Add "@see openspec <change-id> task <n.m>" to the KDoc of every new Kotlin file.
+      - If a task cannot be done inside your owned paths, without new dependencies, or contradicts the wiki, stop and write openspec/changes/<change-id>/.orchestrator/requests/spec-change-<n>.md.
+      - Run the narrowest Gradle task that proves your change (compile or the module's testDebugUnitTest) before reporting done.
+  archive:
+    guidance:
+      - Archive only when openspec/changes/<change-id>/.orchestrator/archive-approved exists, and always pass --yes.

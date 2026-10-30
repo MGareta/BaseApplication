@@ -1,0 +1,138 @@
+# Technology allowlist for orchestrated feature work.
+# Derived from openwiki/ by the allowlist-derive skill (method: docs/orchestrator/proposal.md §7.1).
+# Consumed by scripts/orchestrator/eval-mechanical.sh (import checks) and by the eval agents (judged rules).
+# Prefix matching: an import is allowed when it starts with one of the listed prefixes.
+# <feature> is substituted at check time.
+
+source_wiki_update: "2026-10-26"
+sources:
+  - openwiki/core-dependencies/dependency-visibility.md#compile-time-visibility-main-source-set
+  - openwiki/core-dependencies/version-catalog.md
+  - openwiki/core-data/overview.md#package-map
+  - openwiki/core-presentation/overview.md#package-map
+
+data:                                   # :<feature>:data src/main
+  imports_allowed:
+    - "com.core.data."
+    - "com.<feature>.data."
+    - "javax.inject."
+    - "dagger."
+    - "kotlinx.serialization."
+    - "kotlinx.coroutines."
+    - "retrofit2."
+    - "okhttp3."
+    - "kotlin."
+    - "java."
+    - "android."
+  forbidden_imports:
+    - "com.core.presentation."          # data must not depend on UI
+    - "androidx.compose."
+    - "androidx.datastore."             # use ICacheManager (core-data/cache.md), DataStore is internal to core:data
+    - "com.google.firebase."            # use IAnalyticsManager (core-data/analytics.md)
+    - "okhttp3.mockwebserver."
+  base_types:
+    - ApiResult
+    - RetrofitFactory
+    - IEnvironmentManager
+    - ICacheManager
+    - CacheScope
+    - ImmortalCacheConfig
+    - TimeToLiveCacheConfig
+    - ISecurityManager
+    - CipherType
+    - IFileManager
+    - IDownloadManager
+    - ISessionManager
+    - IAnalyticsManager
+  annotations: ["@Module", "@InstallIn", "@Provides", "@Singleton", "@Inject", "@Serializable", "@SerialName",
+                "@GET", "@POST", "@PUT", "@PATCH", "@DELETE", "@Path", "@Query", "@Body", "@Header", "@HeaderMap", "@Url"]
+  hilt_components: ["SingletonComponent"]
+
+presentation:                           # :<feature>:presentation src/main
+  imports_allowed:
+    - "com.core.presentation."
+    - "com.core.data.analytics."
+    - "com.core.data.network.model."
+    - "com.core.data.network.utils."
+    - "com.<feature>.presentation."
+    - "com.<feature>.data."
+    - "androidx.compose.foundation."
+    - "androidx.compose.runtime."
+    - "androidx.compose.ui."
+    - "androidx.compose.material3."
+    - "androidx.compose.animation."
+    - "androidx.lifecycle."
+    - "androidx.navigation3."
+    - "androidx.hilt."
+    - "androidx.paging."
+    - "dagger."
+    - "javax.inject."
+    - "kotlinx.serialization."
+    - "kotlinx.coroutines."
+    - "kotlin."
+    - "java."
+    - "android."
+  forbidden_imports:
+    - "com.core.presentation.navigation."            # legacy stack (core-presentation/navigation-legacy.md)
+    - "androidx.navigation.compose."
+    - "androidx.navigation.ui."
+    - "com.core.presentation.ui.components.container."   # commented out (components-layout.md)
+    - "com.core.presentation.ui.components.list.PagingComponent"
+    - "com.core.presentation.ui.components.list.utils."
+    - "retrofit2."                                   # presentation never talks to the network directly
+    - "okhttp3."
+    - "com.google.firebase."
+  forbidden_symbols:                                  # grep patterns (rubric V-1, V-K3, V-K4)
+    - pattern: "Color\\(0x"
+      rule: V-1
+    - pattern: "MaterialTheme\\.colorScheme"
+      rule: V-1
+    - pattern: "MaterialTheme\\.typography"
+      rule: V-1
+    - pattern: "CurrencyType\\.Symbol"
+      rule: V-K3
+    - pattern: "PagingComponent\\(|ContainerComponent\\("
+      rule: V-K4
+  base_types:
+    - BaseViewModel
+    - IBaseContract
+    - UiResult
+    - CoroutinesUseCaseRunner
+    - INavigationDestination
+    - INavigationEntry
+    - INavigationEntryDialog
+    - INavigationEntryBottomSheet
+    - INavigationGraph
+    - INavigationGraphLauncher
+    - INavigationGraphBottomNavBar
+    - INavigationGraphManager
+    - IAnalyticsManager
+    - AnalyticsFramework
+    - BaseFirebaseTrackView
+    - BaseFirebaseTrackEvent
+  annotations: ["@HiltViewModel", "@Inject", "@Module", "@InstallIn", "@Provides", "@IntoMap", "@ClassKey",
+                "@Serializable", "@Composable", "@Preview", "@Stable", "@Immutable", "@OptIn"]
+  hilt_components: ["ActivityRetainedComponent", "SingletonComponent"]
+
+tests:                                  # src/test of both feature modules
+  imports_allowed:
+    - "org.junit."
+    - "io.mockk."
+    - "org.robolectric."
+    - "dagger.hilt.android.testing."
+    - "kotlinx.coroutines.test."
+    - "androidx.test."                  # only if present transitively (Robolectric); verify in pilot
+  forbidden_imports:
+    - "okhttp3.mockwebserver."          # not in the catalog
+    - "com.google.common.truth."
+    - "org.mockito."
+    - "app.cash.turbine."
+
+gradle:
+  feature_build_file_may_contain:       # rubric M-1..M-5
+    - "alias(coreLibs.plugins.feature.data)"
+    - "alias(coreLibs.plugins.feature.presentation)"
+    - "namespace = \"com.<feature>.data\""
+    - "namespace = \"com.<feature>.presentation\""
+    - "implementation(project(\":<feature>:data\"))"
+  no_new_external_dependencies: true

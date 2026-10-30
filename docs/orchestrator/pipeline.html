@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orchestrator pipeline: OpenSpec feature delivery</title>
+<style>
+  .viz-root {
+    color-scheme: light;
+    --page: #f9f9f7;
+    --surface-1: #fcfcfb;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --grid: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11, 11, 11, 0.10);
+    --wash: rgba(11, 11, 11, 0.04);
+    --series-1: #2a78d6;   /* coordinator */
+    --series-2: #eb6834;   /* module */
+    --series-3: #1baf7a;   /* data team */
+    --series-4: #eda100;   /* presentation team */
+    --series-5: #6250d6;   /* testing team */
+    --human: #898781;      /* human approval: neutral, never a series hue */
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .viz-root {
+      color-scheme: dark;
+      --page: #0d0d0d; --surface-1: #1a1a19; --text-primary: #f0efec; --text-secondary: #c3c2b7;
+      --text-muted: #898781; --grid: #2c2c2a; --baseline: #383835; --border: rgba(255, 255, 255, 0.10);
+      --wash: rgba(255, 255, 255, 0.05);
+      --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500; --series-5: #9085e9;
+    }
+  }
+  :root[data-theme="dark"] .viz-root {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface-1: #1a1a19; --text-primary: #f0efec; --text-secondary: #c3c2b7;
+    --text-muted: #898781; --grid: #2c2c2a; --baseline: #383835; --border: rgba(255, 255, 255, 0.10);
+    --wash: rgba(255, 255, 255, 0.05);
+    --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500; --series-5: #9085e9;
+  }
+
+  html, body { margin: 0; }
+  body { background: #f9f9f7; }
+  @media (prefers-color-scheme: dark) { :root:where(:not([data-theme="light"])) body { background: #0d0d0d; } }
+  :root[data-theme="dark"] body { background: #0d0d0d; }
+  .viz-root {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--text-primary);
+    background: var(--page);
+    padding: 24px;
+    line-height: 1.4;
+  }
+  h1 { font-size: 20px; font-weight: 600; margin: 0 0 4px; }
+  .subtitle { color: var(--text-secondary); font-size: 14px; margin: 0 0 16px; max-width: 980px; }
+
+  /* Legend: identity is never color-alone (each node also carries a text team label) */
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0 0 20px; padding: 0; list-style: none; font-size: 13px; color: var(--text-secondary); }
+  .legend li { display: flex; align-items: center; gap: 8px; }
+  .key { width: 12px; height: 12px; border-radius: 4px; background: var(--c); }
+  .key.human { background: transparent; border: 2px dashed var(--human); width: 10px; height: 10px; }
+  .gate-key { color: var(--text-muted); font-size: 14px; line-height: 1; }
+
+  .scroller { overflow-x: auto; padding-bottom: 8px; }
+  .canvas { min-width: 1280px; }
+  .stages, .flow { display: grid; grid-template-columns: 1fr 22px 0.72fr 22px 1.2fr 22px 1.05fr 22px 1.45fr 22px 1.1fr 22px 0.85fr; }
+
+  /* Stage bracket row (workflow args.stage) */
+  .stages { margin-bottom: 8px; }
+  .s-plan { grid-column: 1 / 2; } .s-review { grid-column: 3 / 4; } .s-impl { grid-column: 5 / 12; } .s-arch { grid-column: 13 / 14; }
+  .stage { font-size: 12px; color: var(--text-muted); border-top: 2px solid var(--baseline); padding-top: 4px; letter-spacing: .02em; }
+  .stage b { color: var(--text-secondary); font-weight: 600; }
+
+  .flow { align-items: stretch; }
+  .arrow { display: flex; align-items: center; justify-content: center; color: var(--baseline); font-size: 16px; }
+
+  .phase {
+    display: flex; flex-direction: column; gap: 8px;
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px; padding: 10px;
+    min-width: 0;
+  }
+  .phase.human { background: transparent; border: 2px dashed var(--human); }
+  .phase-title { font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .04em; }
+
+  .node {
+    position: relative; border-radius: 6px; padding: 8px 10px 8px 14px;
+    background: var(--wash); font-size: 13px; outline: none; cursor: default; overflow-wrap: anywhere;
+  }
+  /* Thin identity stripe with a 2px surface gap to the card body */
+  .node::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    border-radius: 4px 0 0 4px; background: var(--c); box-shadow: 2px 0 0 var(--surface-1);
+  }
+  .node .team { display: block; font-size: 11px; color: var(--text-muted); }
+  .node .name { display: block; font-weight: 600; color: var(--text-primary); }
+  .node .what { display: block; color: var(--text-secondary); font-size: 12px; margin-top: 2px; }
+  .node:hover, .node:focus-visible { background: var(--grid); }
+  .node:focus-visible { box-shadow: 0 0 0 2px var(--text-primary); }
+
+  .parallel { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .parallel .tag, .loop { font-size: 11px; color: var(--text-muted); }
+  .parallel-wrap { display: flex; flex-direction: column; gap: 4px; }
+
+  .wiki {
+    display: flex; flex-wrap: wrap; gap: 4px; align-items: baseline; font-size: 11px; color: var(--text-muted);
+  }
+  .wiki code {
+    font-family: inherit; font-size: 11px; color: var(--text-primary); background: var(--wash); border: 1px solid var(--border);
+    border-radius: 4px; padding: 1px 5px; overflow-wrap: anywhere;
+  }
+  .deps { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 2px; font-size: 12px; color: var(--text-secondary); }
+  .deps code { font-family: inherit; font-weight: 600; font-size: 12px; color: var(--text-primary); white-space: nowrap; }
+  .gate {
+    display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--text-secondary);
+    border-top: 1px solid var(--grid); padding-top: 8px; margin-top: auto;
+  }
+  .gate::before { content: ""; flex: 0 0 8px; height: 8px; margin-top: 4px; border: 2px solid var(--baseline); transform: rotate(45deg); border-radius: 2px; }
+  .gate b { color: var(--text-primary); font-weight: 600; }
+
+  .loop { display: flex; gap: 6px; align-items: baseline; }
+  .loop::before { content: "↺"; font-size: 13px; color: var(--text-secondary); }
+
+  .bands { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .band { border: 1px solid var(--border); background: var(--surface-1); border-radius: 8px; padding: 10px 12px; font-size: 13px; color: var(--text-secondary); }
+  .band b { color: var(--text-primary); }
+  .band code, td code { font-size: 12px; }
+
+  /* Tooltip */
+  .tip {
+    position: fixed; z-index: 10; max-width: 340px; pointer-events: none; opacity: 0;
+    background: var(--surface-1); color: var(--text-primary); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 12px; font-size: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    transition: opacity .08s;
+  }
+  .tip.on { opacity: 1; }
+  .tip .t-head { display: flex; align-items: center; gap: 8px; font-weight: 600; margin-bottom: 4px; }
+  .tip .t-key { width: 10px; height: 10px; border-radius: 3px; background: var(--c); }
+  .tip dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; }
+  .tip dt { color: var(--text-muted); }
+  .tip dd { margin: 0; color: var(--text-secondary); }
+
+  details { margin-top: 20px; font-size: 13px; }
+  summary { cursor: pointer; color: var(--text-secondary); font-weight: 600; }
+  table { border-collapse: collapse; width: 100%; margin-top: 8px; background: var(--surface-1); }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  th { color: var(--text-secondary); font-weight: 600; font-size: 12px; }
+  td { color: var(--text-primary); }
+  .theme-toggle { float: right; font: inherit; font-size: 12px; color: var(--text-secondary); background: var(--surface-1); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+
+  @media (forced-colors: active) {
+    .node::before { background: CanvasText; }
+    .key { border: 1px solid CanvasText; }
+  }
+</style>
+</head>
+<body>
+<div class="viz-root">
+  <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle light or dark theme">Theme</button>
+  <h1>Orchestrator pipeline: OpenSpec feature delivery</h1>
+  <p class="subtitle">One OpenSpec change per feature (<code>add-&lt;feature&gt;-feature</code>), run by the <code>openspec-feature</code> workflow in three stages.
+    Each phase ends at a mechanical + judged gate. Fix loops are bounded, and anything beyond a limit stops for a human. Every phase must follow its <code>openwiki/</code> module wiki (HOW to build); the OpenSpec change says WHAT to build. Hover or focus a step for details.</p>
+
+  <ul class="legend" aria-label="Legend">
+    <li><span class="key" style="--c: var(--series-1)"></span>Coordinator</li>
+    <li><span class="key" style="--c: var(--series-2)"></span>Module team</li>
+    <li><span class="key" style="--c: var(--series-3)"></span>Data team</li>
+    <li><span class="key" style="--c: var(--series-4)"></span>Presentation team</li>
+    <li><span class="key" style="--c: var(--series-5)"></span>Testing team</li>
+    <li><span class="key human"></span>Human approval</li>
+    <li><span class="gate-key" aria-hidden="true">◇</span>Gate</li>
+  </ul>
+
+  <div class="scroller">
+    <div class="canvas">
+      <div class="stages" aria-hidden="true">
+        <div class="stage s-plan"><b>stage: "plan"</b></div>
+        <div class="stage s-review">review</div>
+        <div class="stage s-impl"><b>stage: "implement"</b> · guard hook active (<code>.claude/orchestrator-active</code>)</div>
+        <div class="stage s-arch"><b>stage: "archive"</b></div>
+      </div>
+
+      <div class="flow" id="flow">
+        <!-- Plan -->
+        <section class="phase" aria-label="Plan">
+          <div class="phase-title">Preflight + Plan</div>
+          <div class="wiki">wiki <code>quickstart</code><code>*/recipes</code></div>
+          <div class="node" tabindex="0" style="--c: var(--series-1)" data-tip="preflight">
+            <span class="team">Coordinator · gate script</span><span class="name">Preflight</span>
+            <span class="what">OpenSpec 1.15.x, P1/P2, allowlist freshness</span>
+          </div>
+          <div class="node" tabindex="0" style="--c: var(--series-1)" data-tip="plan">
+            <span class="team">Coordinator</span><span class="name">feature-coordinator</span>
+            <span class="what">proposal, 4 spec deltas, design, tasks</span>
+          </div>
+          <div class="gate"><span><b>G0a</b> <span style="white-space:nowrap">validate --strict</span> · role tags · Req/Scn coverage</span></div>
+        </section>
+        <div class="arrow" aria-hidden="true">→</div>
+
+        <!-- Human plan approval -->
+        <section class="phase human" aria-label="Human plan approval">
+          <div class="phase-title">Human</div>
+          <div class="node" tabindex="0" style="--c: var(--human)" data-tip="g0b">
+            <span class="team">Human approval</span><span class="name">G0b plan review</span>
+            <span class="what"><code>openspec show</code> → <code>plan-approved</code></span>
+          </div>
+        </section>
+        <div class="arrow" aria-hidden="true">→</div>
+
+        <!-- Module -->
+        <section class="phase" aria-label="Phase 0 Module">
+          <div class="phase-title">0 · Module</div>
+          <div class="wiki">wiki <code>openwiki/core-dependencies</code></div>
+          <div class="node" tabindex="0" style="--c: var(--series-2)" data-tip="module">
+            <span class="team">Module team</span><span class="name">Gradle configuration</span>
+            <span class="what">feature.data / feature.presentation plugins, namespaces, include in settings.gradle.kts</span>
+          </div>
+          <div class="node" tabindex="0" style="--c: var(--series-2)" data-tip="visibility">
+            <span class="team">Module team</span><span class="name">Module visibility</span>
+            <ul class="deps" aria-label="Module dependencies">
+              <li><code>:app</code> → <code>:f:presentation</code></li>
+              <li><code>:f:presentation</code> → <code>:f:data</code></li>
+            </ul>
+          </div>
+          <div class="node" tabindex="0" style="--c: var(--series-2)" data-tip="moduleeval">
+            <span class="team">Module team · read-only</span><span class="name">feature-module-eval</span>
+            <span class="what">rubric M-* vs core-dependencies wiki</span>
+          </div>
+          <span class="loop">findings → module agent · ≤ 3 rounds</span>
+          <div class="gate"><span><b>G0c</b> M-1…M-10 · wiring · assemble</span></div>
+        </section>
+        <div class="arrow" aria-hidden="true">→</div>
+
+        <!-- Data -->
+        <section class="phase" aria-label="Phase 1 Data">
+          <div class="phase-title">1 · Data</div>
+          <div class="wiki">wiki <code>openwiki/core-data</code></div>
+          <div class="node" tabindex="0" style="--c: var(--series-3)" data-tip="data">
+            <span class="team">Data team</span><span class="name">feature-data</span>
+            <span class="what">API, DTOs, manager, Hilt modules</span>
+          </div>
+          <div class="node" tabindex="0" style="--c: var(--series-3)" data-tip="datatest">
+            <span class="team">Data team</span><span class="name">feature-data-test</span>
+            <span class="what">one test per scenario</span>
+          </div>
+          <span class="loop">failing test → data agent fixes code · ≤ 8</span>
+          <div class="node" tabindex="0" style="--c: var(--series-3)" data-tip="dataeval">
+            <span class="team">Data team · read-only</span><span class="name">feature-data-eval</span>
+            <span class="what">rubric D-*, rulings, API surface</span>
+          </div>
+          <span class="loop">findings → owner · ≤ 3 rounds</span>
+          <div class="gate"><span><b>G1</b> imports · Scn coverage · unit tests</span></div>
+        </section>
+        <div class="arrow" aria-hidden="true">→</div>
+
+        <!-- Presentation -->
+        <section class="phase" aria-label="Phase 2 Presentation">
+          <div class="phase-title">2 · Presentation</div>
+          <div class="wiki">wiki <code>openwiki/core-presentation</code><code>core-data/analytics</code></div>
+          <div class="parallel-wrap">
+            <span class="tag" style="font-size:11px;color:var(--text-muted)">in parallel · contract fixed in design.md</span>
+            <div class="parallel">
+              <div class="node" tabindex="0" style="--c: var(--series-4)" data-tip="viewmodel">
+                <span class="team">Presentation</span><span class="name">feature-viewmodel</span>
+                <span class="what">contract, ViewModel, UI models</span>
+              </div>
+              <div class="node" tabindex="0" style="--c: var(--series-4)" data-tip="view">
+                <span class="team">Presentation</span><span class="name">feature-view</span>
+                <span class="what">screens, Nav3, Hilt nav module</span>
+              </div>
+            </div>
+          </div>
+          <div class="node" tabindex="0" style="--c: var(--series-4)" data-tip="analytics">
+            <span class="team">Presentation</span><span class="name">feature-analytics</span>
+            <span class="what">views/events · insert-only ViewModel lease</span>
+          </div>
+          <div class="node" tabindex="0" style="--c: var(--series-4)" data-tip="preseval">
+            <span class="team">Presentation · read-only</span><span class="name">feature-presentation-eval</span>
+            <span class="what">rubric VM-*, V-*, AN-*</span>
+          </div>
+          <span class="loop">findings → viewmodel / view / analytics · ≤ 3 rounds</span>
+          <div class="gate"><span><b>G2</b> imports · forbidden symbols · compile + :app</span></div>
+        </section>
+        <div class="arrow" aria-hidden="true">→</div>
+
+        <!-- Testing -->
+        <section class="phase" aria-label="Phase 3 Testing">
+          <div class="phase-title">3 · Testing</div>
+          <div class="wiki">wiki <code>core-data/testing</code><code>core-presentation/testing</code></div>
+          <div class="node" tabindex="0" style="--c: var(--series-5)" data-tip="testing">
+            <span class="team">Testing team</span><span class="name">feature-testing</span>
+            <span class="what">JVM feature-integration tests</span>
+          </div>
+          <span class="loop">defect → owning layer fixes · ≤ 3</span>
+          <div class="gate"><span><b>G3</b> all tests · Scn coverage · <span style="white-space:nowrap">validate --strict</span></span></div>
+        </section>
+        <div class="arrow" aria-hidden="true">→</div>
+
+        <!-- Archive -->
+        <section class="phase human" aria-label="Human approval and archive">
+          <div class="phase-title">Human + Archive</div>
+          <div class="node" tabindex="0" style="--c: var(--human)" data-tip="g4">
+            <span class="team">Human approval</span><span class="name">G4 review</span>
+            <span class="what"><code>archive-approved</code></span>
+          </div>
+          <div class="node" tabindex="0" style="--c: var(--series-1)" data-tip="archive">
+            <span class="team">Coordinator</span><span class="name">openspec archive</span>
+            <span class="what">deltas merged into main specs</span>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="bands">
+    <div class="band"><b>Escalation.</b> Any loop over its limit, a spec-attributed failure, a core-change request, or a failed preflight stops the run and returns to the human.
+      Progress is kept in the checked <code>tasks.md</code> boxes and <code>.orchestrator/verdicts/</code>.</div>
+    <div class="band"><b>Guardrails.</b> PreToolUse hook (<code>scripts/orchestrator/guard-paths.sh</code>) blocks edits to <code>core/**</code>, <code>openwiki/**</code>, <code>openspec/specs/**</code>,
+      <code>git push</code>, and <code>openspec archive</code> without approval, but only while a run is active.</div>
+  </div>
+
+  <details>
+    <summary>Table view</summary>
+    <table>
+      <thead><tr><th>Order</th><th>Phase</th><th>Step</th><th>Team</th><th>Follows wiki</th><th>Output</th><th>Gate / limit</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </details>
+
+  <div class="tip" id="tip" role="tooltip"></div>
+</div>
+
+<script>
+  const TEAM = {
+    c: ['Coordinator', '--series-1'], m: ['Module team', '--series-2'], d: ['Data team', '--series-3'],
+    p: ['Presentation team', '--series-4'], t: ['Testing team', '--series-5'], h: ['Human approval', '--human'],
+  }
+  const STEPS = {
+    preflight: { wiki: 'docs/orchestrator/allowlist.yaml (derived from openwiki)', phase: 'Preflight', team: 'c', name: 'Preflight', def: 'scripts/orchestrator/eval-mechanical.py --gate preflight',
+      out: 'Stops unless OpenSpec 1.15.x; PRE-P1/PRE-P2 allowed with allowMissingPrerequisites', gate: 'preflight' },
+    plan: { wiki: 'quickstart + core-*/recipes, dependency-visibility, navigation3', phase: 'Plan', team: 'c', name: 'feature-coordinator', def: '.claude/agents/feature-coordinator.md',
+      out: 'openspec/changes/add-<f>-feature/{proposal,design,tasks}.md + specs/<f>-{module,data,presentation,analytics}', gate: 'G0a: validate --strict, tags, Req/Scn' },
+    g0b: { phase: 'Review', team: 'h', name: 'G0b plan review', def: 'openspec show <id> / openspec view',
+      out: '.orchestrator/plan-approved', gate: 'Scope changes return here' },
+    module: { phase: '0 Module', team: 'm', name: 'Gradle configuration', def: '.claude/agents/feature-module.md',
+      wiki: 'openwiki/core-dependencies: recipes, plugin-feature-data, plugin-feature-presentation, config',
+      out: '<f>/{data,presentation}/build.gradle.kts (namespace com.<f>.data / com.<f>.presentation), manifests, include(":<f>:data", ":<f>:presentation") in settings.gradle.kts',
+      gate: 'Built by feature-module; reviewed at G0c' },
+    visibility: { phase: '0 Module', team: 'm', name: 'Module visibility', def: '.claude/agents/feature-module.md',
+      wiki: 'openwiki/core-dependencies/dependency-visibility',
+      out: 'app/build.gradle.kts: implementation(project(":<f>:presentation")) · <f>/presentation: implementation(project(":<f>:data")), which also exposes core:data types (ApiResult) and puts data Hilt bindings on the app classpath',
+      gate: 'G0c wiring checks (M-3, M-4, M-7)' },
+    moduleeval: { phase: '0 Module', team: 'm', name: 'feature-module-eval', def: '.claude/agents/feature-module-eval.md',
+      wiki: 'openwiki/core-dependencies: recipes, plugin-feature-*, config, dependency-visibility, overview, version-catalog',
+      out: 'verdicts/module-eval-<n>.json (mechanical M-1…M-5, judged M-6…M-10, TR-2)',
+      gate: 'G0c · findings → module agent · ≤ 3 eval rounds' },
+    data: { wiki: 'openwiki/core-data: overview, network, cache, environment, recipes', phase: '1 Data', team: 'd', name: 'feature-data', def: '.claude/agents/feature-data.md',
+      out: 'com.<f>.data.{api,model,manager,repository,di}', gate: 'Fixes failing tests (code) and G1 findings' },
+    datatest: { wiki: 'openwiki/core-data/testing', phase: '1 Data', team: 'd', name: 'feature-data-test', def: '.claude/agents/feature-data-test.md',
+      out: '<f>/data/src/test (Scn: per scenario)', gate: 'Test ↔ fix loop ≤ 8; attribution code/test/spec' },
+    dataeval: { wiki: 'openwiki/core-data (rubric D-*)', phase: '1 Data', team: 'd', name: 'feature-data-eval', def: '.claude/agents/feature-data-eval.md',
+      out: 'verdicts/data-eval-<n>.json, handoff/data-api-surface.json', gate: 'G1 · ≤ 3 eval rounds' },
+    viewmodel: { wiki: 'openwiki/core-presentation: base-architecture, coroutines, forms', phase: '2 Presentation', team: 'p', name: 'feature-viewmodel', def: '.claude/agents/feature-viewmodel.md',
+      out: 'presentation/{viewModel,model/ui}', gate: 'Parallel with view; contract from design.md' },
+    view: { wiki: 'openwiki/core-presentation: navigation3, theme, components-*, form-fields', phase: '2 Presentation', team: 'p', name: 'feature-view', def: '.claude/agents/feature-view.md',
+      out: 'presentation/{view,navigation,model/destination,di}', gate: 'Parallel with ViewModel; V-K known-bug rules' },
+    analytics: { wiki: 'openwiki/core-data/analytics + core-presentation/base-architecture', phase: '2 Presentation', team: 'p', name: 'feature-analytics', def: '.claude/agents/feature-analytics.md',
+      out: 'presentation/analytics + insert-only ViewModel calls', gate: 'AN-1…AN-4' },
+    preseval: { wiki: 'openwiki/core-presentation + core-data/analytics', phase: '2 Presentation', team: 'p', name: 'feature-presentation-eval', def: '.claude/agents/feature-presentation-eval.md',
+      out: 'verdicts/presentation-eval-<n>.json', gate: 'G2 · ≤ 3 eval rounds' },
+    testing: { wiki: 'core-data/testing, core-presentation/testing, navigation3', phase: '3 Testing', team: 't', name: 'feature-testing', def: '.claude/agents/feature-testing.md',
+      out: '<f>/presentation/src/test (real VM → manager → fake API)', gate: 'Defects routed ≤ 3; G3' },
+    g4: { phase: 'Archive', team: 'h', name: 'G4 review', def: 'Human reviews the delivered feature',
+      out: '.orchestrator/archive-approved', gate: 'Required by the guard hook' },
+    archive: { phase: 'Archive', team: 'c', name: 'openspec archive --yes', def: 'stage "archive" of the workflow',
+      out: 'openspec/specs updated; change → changes/archive/YYYY-MM-DD-<id>/', gate: '—' },
+  }
+
+  const tip = document.getElementById('tip')
+  function show(el) {
+    const s = STEPS[el.dataset.tip]
+    const [team, color] = TEAM[s.team]
+    tip.innerHTML = `<div class="t-head"><span class="t-key" style="--c: var(${color})"></span>${s.name}</div>
+      <dl><dt>Team</dt><dd>${team}</dd><dt>Phase</dt><dd>${s.phase}</dd><dt>Defined in</dt><dd>${s.def}</dd>${s.wiki ? `<dt>Follows</dt><dd>${s.wiki}</dd>` : ''}
+      <dt>Writes</dt><dd>${s.out}</dd><dt>Gate / limit</dt><dd>${s.gate}</dd></dl>`
+    const r = el.getBoundingClientRect()
+    tip.classList.add('on')
+    const tw = tip.offsetWidth, th = tip.offsetHeight
+    let x = r.left + r.width / 2 - tw / 2
+    x = Math.max(8, Math.min(x, window.innerWidth - tw - 8))
+    let y = r.bottom + 8
+    if (y + th > window.innerHeight - 8) y = r.top - th - 8
+    tip.style.left = x + 'px'; tip.style.top = y + 'px'
+  }
+  function hide() { tip.classList.remove('on') }
+  document.querySelectorAll('.node[data-tip]').forEach(el => {
+    el.addEventListener('mouseenter', () => show(el))
+    el.addEventListener('mouseleave', hide)
+    el.addEventListener('focus', () => show(el))
+    el.addEventListener('blur', hide)
+  })
+
+  const tbody = document.getElementById('tbody')
+  Object.values(STEPS).forEach((s, i) => {
+    const tr = document.createElement('tr')
+    tr.innerHTML = `<td>${i + 1}</td><td>${s.phase}</td><td>${s.name}</td><td>${TEAM[s.team][0]}</td><td>${s.wiki || '—'}</td><td><code>${s.out}</code></td><td>${s.gate}</td>`
+    tbody.appendChild(tr)
+  })
+
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const root = document.documentElement
+    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches
+    root.dataset.theme = dark ? 'light' : 'dark'
+  })
+</script>
+</body>
+</html>
