@@ -4,11 +4,13 @@ import com.android.build.api.dsl.LibraryExtension
 import com.core.dependencies.utils.configureBuildTypes
 import com.core.dependencies.utils.configureDetekt
 import com.core.dependencies.utils.configurePackaging
+import com.core.dependencies.utils.configureTests
 import com.core.dependencies.utils.coreLibs
 import com.core.dependencies.utils.defaultConfiguration
 import com.core.dependencies.utils.detektPlugins
 import com.core.dependencies.utils.implementation
 import com.core.dependencies.utils.ksp
+import com.core.dependencies.utils.kspTest
 import com.core.dependencies.utils.testImplementation
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -44,6 +46,7 @@ class FeaturePresentationPlugin : Plugin<Project> {
                 defaultConfiguration(extension = this)
                 configureBuildTypes()
                 configurePackaging()
+                configureTests()
 
                 buildFeatures {
                     compose = true
@@ -67,6 +70,7 @@ class FeaturePresentationPlugin : Plugin<Project> {
                 testImplementation(
                     dependencyNotation = testFixtures(notation = project(projectPath = ":core:presentation"))
                 )
+                kspTest(dependencyNotation = hiltCompilerDependency)
 
                 // Detekt
                 detektPlugins(dependencyNotation = detektKtlintDependency)
