@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation3.runtime.NavEntryDecorator
 import com.core.presentation.navigation3.listener.INavigationGraphListener
@@ -27,14 +29,20 @@ import com.core.presentation.navigation3.model.graph.INavigationGraph
 @Composable
 internal fun <T : Any> rememberSharedViewModelStoreNavEntryDecorator(
     navigationGraphManager: INavigationGraphManager,
-    graphs: Map<INavigationGraph, Set<INavigationEntry<INavigationDestination, ViewModel>>>
+    graphs: Map<INavigationGraph, Set<INavigationEntry<INavigationDestination, ViewModel>>>,
+    viewModelProviderFactory: ViewModelProvider.Factory,
+    viewModelCreationExtras: CreationExtras
 ): SharedViewModelStoreNavEntryDecorator<T> {
     return remember(
-        key1 = graphs
+        key1 = graphs,
+        key2 = viewModelProviderFactory,
+        key3 = viewModelCreationExtras
     ) {
         SharedViewModelStoreNavEntryDecorator(
             navigationGraphManager = navigationGraphManager,
-            graphs = graphs
+            graphs = graphs,
+            viewModelProviderFactory = viewModelProviderFactory,
+            viewModelCreationExtras = viewModelCreationExtras
         )
     }
 }
@@ -63,7 +71,9 @@ internal fun <T : Any> rememberSharedViewModelStoreNavEntryDecorator(
  */
 internal class SharedViewModelStoreNavEntryDecorator<T : Any>(
     navigationGraphManager: INavigationGraphManager,
-    graphs: Map<INavigationGraph, Set<INavigationEntry<INavigationDestination, ViewModel>>>
+    graphs: Map<INavigationGraph, Set<INavigationEntry<INavigationDestination, ViewModel>>>,
+    viewModelProviderFactory: ViewModelProvider.Factory,
+    viewModelCreationExtras: CreationExtras
 ) : NavEntryDecorator<T>(
     onPop = {
         (navigationGraphManager as INavigationGraphListener).onPop()
@@ -83,7 +93,11 @@ internal class SharedViewModelStoreNavEntryDecorator<T : Any>(
             )
 
             CompositionLocalProvider(
-                value = LocalViewModelStoreOwner provides NavigationGraphViewModelStoreOwner(store = store)
+                value = LocalViewModelStoreOwner provides NavigationGraphViewModelStoreOwner(
+                    viewModelStore = store,
+                    defaultViewModelProviderFactory = viewModelProviderFactory,
+                    defaultViewModelCreationExtras = viewModelCreationExtras
+                )
             ) {
                 entry.Content()
             }

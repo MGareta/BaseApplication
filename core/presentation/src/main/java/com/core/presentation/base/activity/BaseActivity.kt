@@ -122,7 +122,9 @@ abstract class BaseActivity : ComponentActivity() {
                                 rememberSaveableStateHolderNavEntryDecorator(),
                                 rememberSharedViewModelStoreNavEntryDecorator(
                                     navigationGraphManager = navigationGraphManager.get(),
-                                    graphs = navigationGraphFactory.get().navigationGraphsWithDestinations
+                                    graphs = navigationGraphFactory.get().navigationGraphsWithDestinations,
+                                    viewModelProviderFactory = defaultViewModelProviderFactory,
+                                    viewModelCreationExtras = defaultViewModelCreationExtras
                                 )
                             ),
                             entryProvider = entryProvider {
