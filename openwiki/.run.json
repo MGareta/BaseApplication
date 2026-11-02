@@ -1,0 +1,600 @@
+{
+  "schemaVersion": 1,
+  "runId": "9a483478-7c4d-4a7b-8e6d-265dab97e4ef",
+  "mode": "update",
+  "phase": "generating",
+  "startedAt": "2026-11-02T14:42:55.956Z",
+  "language": "en",
+  "languageChanged": false,
+  "requiredRewritePages": [],
+  "initialPages": [
+    "/openwiki/core-data/activity-result.md",
+    "/openwiki/core-data/analytics.md",
+    "/openwiki/core-data/cache.md",
+    "/openwiki/core-data/download.md",
+    "/openwiki/core-data/environment.md",
+    "/openwiki/core-data/file.md",
+    "/openwiki/core-data/network.md",
+    "/openwiki/core-data/notifications.md",
+    "/openwiki/core-data/overview.md",
+    "/openwiki/core-data/permission.md",
+    "/openwiki/core-data/recipes.md",
+    "/openwiki/core-data/security.md",
+    "/openwiki/core-data/session.md",
+    "/openwiki/core-data/testing.md",
+    "/openwiki/core-data/utils.md",
+    "/openwiki/core-dependencies/code-quality.md",
+    "/openwiki/core-dependencies/config.md",
+    "/openwiki/core-dependencies/dependency-visibility.md",
+    "/openwiki/core-dependencies/extensions.md",
+    "/openwiki/core-dependencies/overview.md",
+    "/openwiki/core-dependencies/plugin-app.md",
+    "/openwiki/core-dependencies/plugin-core-data.md",
+    "/openwiki/core-dependencies/plugin-core-presentation.md",
+    "/openwiki/core-dependencies/plugin-feature-data.md",
+    "/openwiki/core-dependencies/plugin-feature-presentation.md",
+    "/openwiki/core-dependencies/recipes.md",
+    "/openwiki/core-dependencies/version-catalog.md",
+    "/openwiki/core-presentation/app-and-activity.md",
+    "/openwiki/core-presentation/base-architecture.md",
+    "/openwiki/core-presentation/components-actions.md",
+    "/openwiki/core-presentation/components-layout.md",
+    "/openwiki/core-presentation/components-navigation.md",
+    "/openwiki/core-presentation/coroutines.md",
+    "/openwiki/core-presentation/form-fields.md",
+    "/openwiki/core-presentation/forms.md",
+    "/openwiki/core-presentation/navigation-legacy.md",
+    "/openwiki/core-presentation/navigation3.md",
+    "/openwiki/core-presentation/overview.md",
+    "/openwiki/core-presentation/recipes.md",
+    "/openwiki/core-presentation/testing.md",
+    "/openwiki/core-presentation/theme-tokens.md",
+    "/openwiki/core-presentation/theme.md",
+    "/openwiki/core-presentation/ui-utils.md",
+    "/openwiki/quickstart.md"
+  ],
+  "sourceFingerprint": "sha256:093668c22e2bd3e74f0d4573abd588cceb75e8869a852e0f10c0fbbe162cd372",
+  "targetGitHead": "fc8fd3baba48680e5fd2aa8d43019b1cf5cc9f0c",
+  "actor": {
+    "producerActor": "claude-code",
+    "metadataModel": "host-agent/claude"
+  },
+  "previousLastUpdate": {
+    "updatedAt": "2026-10-26T16:51:36.981Z",
+    "command": "update",
+    "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
+    "model": "host-agent/claude",
+    "status": "complete",
+    "language": "en"
+  },
+  "baseGitHead": "382e40583c84090246977e46a5673719a324a7ac",
+  "beforeContentSnapshot": "b1a3eb6398909fecd23738385f64a2f81b1dbaea87ed642762dddbdc62b3e244",
+  "preparedWiki": {
+    "generatedProvenance": [
+      {
+        "page": "/openwiki/core-data/activity-result.md",
+        "bodyHash": "7b98a3101dea4e6e9dc79d5869239b538ca2d74fd4f780b6ae17cc78885d435c",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-data/analytics.md",
+        "bodyHash": "f000c150ab73bf5dfff3ab61854ef017bb051b7de0f865b2b34ac4ae59636712",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T12:11:14.549Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-data/cache.md",
+        "bodyHash": "53d245aeff46f435da27195664b913af48d733d010f8785413cbdf5d4990430b",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T12:11:14.549Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-data/download.md",
+        "bodyHash": "20d7595416f62cb48ebf2c1ce62616aeb8423ef6c0569b935a0ac164a38a9ad7",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T12:11:14.549Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-data/environment.md",
+        "bodyHash": "52aee194b2d927c0e2cbe30c6f7f04da31f3e1200e0ace9083ce16a2a3dd9927",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T12:11:14.549Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-data/file.md",
+        "bodyHash": "42aefd719011fdab0e4dc40924f288eb223b2ae1465db02866b1b00975e22ae1",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T12:11:14.549Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-data/network.md",
+        "bodyHash": "a902daadfd96f44ba7362f97d5b3525458f09d28de7791bc9881dfb9d32e2a77",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T12:11:14.549Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-data/notifications.md",
+        "bodyHash": "2c519d87594c209e3e456043eaed450c248f5bed3b05bd5b1844878cbc042be7",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T12:11:14.549Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-data/overview.md",
+        "bodyHash": "d238403f98bbafa93d9d20c86e79e6c7e1c176d8cde09d66f2c981acd007c2ab",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:41:29.588Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-data/permission.md",
+        "bodyHash": "6e3534a75e16ebc8c73cc10fdf3d11989751a4628965f3c02c84ecf45cb1e0ba",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-data/recipes.md",
+        "bodyHash": "8140f5715e83aa119e5c3c5a79594d5213e7099a640fb9ac9f1842d10f11b893",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T12:11:14.549Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-data/security.md",
+        "bodyHash": "5f74b56202a3885d8e8fb46aa59688045c5dc13ad12f3954c0bc5c006f9d32e1",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T12:11:14.549Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-data/session.md",
+        "bodyHash": "3dfc2cdd309ebab7d79a34629aa521793a9687238d40c8b7733bae1a104e411d",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T12:11:14.549Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-data/testing.md",
+        "bodyHash": "5a079fc2fa529b84a198fc8f5c8ed38c7bdc2ffa1cdaefaf7cd0a57e0f60bd64",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T12:11:14.549Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-data/utils.md",
+        "bodyHash": "3e296a32a0eb774d31506465971016587aead831ee10154fa2e3b4bce93dfdab",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T12:11:14.549Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-dependencies/code-quality.md",
+        "bodyHash": "f4a74cf79da231f653201a2e32be356b607addc7b2625c698bce305e2be98bb0",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:41:29.588Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-dependencies/config.md",
+        "bodyHash": "ae7e6d646da1d1c327af1ec5b083ab6970027a081f78deed9aa11611d225fcda",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:41:29.588Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-dependencies/dependency-visibility.md",
+        "bodyHash": "efa18a2d7f41d119dd3181b368edc89a6ab5771f1f27d1a47c3c1d2ca16a2f7c",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:41:29.588Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-dependencies/extensions.md",
+        "bodyHash": "96011e5e8518f81e168f1afe8ca2d03d12eb36ebe51eac7a0a49a08d5c723b11",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:41:29.588Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-dependencies/overview.md",
+        "bodyHash": "3c62c67d487b6a8850f14fc6557e2da1ce410293d0e5eefaaf48d444159fd7f0",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:41:29.588Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-dependencies/plugin-app.md",
+        "bodyHash": "43ee7a01f5a99bf8a63f96e30e7bd34592fe2a7f7adb6aa9d26be9137aab91c1",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:41:29.588Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-dependencies/plugin-core-data.md",
+        "bodyHash": "e59895f92b669ace86eee2244327c9c66c4c765d511d96707881463a1554f6db",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:41:29.588Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-dependencies/plugin-core-presentation.md",
+        "bodyHash": "484520e457fb99055e01f0cfec03909d338cbcb9e9d593d41d88acf100924639",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:41:29.588Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-dependencies/plugin-feature-data.md",
+        "bodyHash": "ec7a48c37b8d40bd66eb9fbfcb60c1a61c2a224a58761d6e0214fbe6a7a656fc",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:41:29.588Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-dependencies/plugin-feature-presentation.md",
+        "bodyHash": "98e88d85255a384e590f1f1ad79a2e62d3cd3bef4337002ce5b8ed4daeafef27",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:41:29.588Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-dependencies/recipes.md",
+        "bodyHash": "057298560962103cc5dc68967795d98f210188fd9fcb97a276247c8a093ec37b",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:41:29.588Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-dependencies/version-catalog.md",
+        "bodyHash": "d15c84743fb5bea757ee7e609b715cea9130210eb366cfd974297acbf9130050",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:41:29.588Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/app-and-activity.md",
+        "bodyHash": "4456cc106469c028609df033e0aa6b83cf28bd634cd5c505393e6c5d0f7f8cae",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/base-architecture.md",
+        "bodyHash": "6a37930abc5e84df8485168a7bad8e20e92f521c7ff50bfa6269ea3c4960eb59",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/components-actions.md",
+        "bodyHash": "dc1ea3779e238a10b5cb93ae80cd89d3166063efe97a5c87ff3ff5215987616b",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/components-layout.md",
+        "bodyHash": "13482af0af364e7598ff9a1aa835692191880c2e3756f7a443f1f57b2699abbf",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/components-navigation.md",
+        "bodyHash": "f27c3d12de4d0b9078536c38a94e446f7ea641f43ede29cedc5a44c5bb4b153d",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/coroutines.md",
+        "bodyHash": "28458983a8ea4c4b4304441555a27dfbf04b0b2ffeb0689f24af3bff9afac456",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/form-fields.md",
+        "bodyHash": "1cc3b54552669bac28f4d452942defee2da5ffd768fe25f5009a6053291ec064",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/forms.md",
+        "bodyHash": "a66a0407e0660316dd3e78d36e7c0054557334aa6166e382b64aa9b58a7b2c16",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/navigation-legacy.md",
+        "bodyHash": "c32dfb80f93aeb95b52952ee1381cad92873e1e7032a9350f5310213df7a5c09",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/navigation3.md",
+        "bodyHash": "ec7cbe917d3fe6ae0e0147e9069c2269c2c37884f41e0d7675eb0c9ab532418a",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/overview.md",
+        "bodyHash": "ea68a419e1a81690e9ea98e1ed0e3fb51acdfe9765735a9a70691426caa55503",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:41:29.588Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/recipes.md",
+        "bodyHash": "369b210d532f9ced537b6281d7d718c5b973fe2e872710515f4818444ef4d71d",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/testing.md",
+        "bodyHash": "d0a2f6e3173494b3e6c616ecc8f849c589bdd9a3e8b3c4c131bd0ada9b1f6472",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/theme-tokens.md",
+        "bodyHash": "80e3c95908f03e6a32c06cbb07073eb26ec44a02e6167c2f7cc354edf3f489e7",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:11:01.468Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/theme.md",
+        "bodyHash": "704ec9f21eb2d72ce84e532de398c5425d3cc50b5a80aa412323edc25c3ab1d6",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/core-presentation/ui-utils.md",
+        "bodyHash": "4b6cecb1ea539a0740fb3a8c464c1bb4155d855524dd6f4ec96dd69f13666548",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T15:48:49.783Z"
+        }
+      },
+      {
+        "page": "/openwiki/quickstart.md",
+        "bodyHash": "454af8166b061031c8600b4f1a8a0f7a41f002a412ca99763abe909e85b77326",
+        "generated": {
+          "by": "claude-code",
+          "at": "2026-10-26T16:41:29.588Z"
+        }
+      }
+    ]
+  },
+  "plan": {
+    "pages": [
+      {
+        "id": "b927ca44-2941-489c-9a02-c5469a187957",
+        "path": "/openwiki/core-data/overview.md",
+        "title": "Overview",
+        "purpose": "Reconcile stale or unresolved Claims and update this page from current repository evidence while preserving unaffected accurate content.",
+        "seedPaths": [
+          "core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt"
+        ],
+        "relatedPages": [],
+        "instructions": [],
+        "status": "complete",
+        "completedBy": "claude-code"
+      },
+      {
+        "id": "c3656a6d-bd26-4f9b-a171-c9deb96425d7",
+        "path": "/openwiki/core-data/recipes.md",
+        "title": "Recipes",
+        "purpose": "Reconcile stale or unresolved Claims and update this page from current repository evidence while preserving unaffected accurate content.",
+        "seedPaths": [
+          "core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt"
+        ],
+        "relatedPages": [],
+        "instructions": [],
+        "status": "complete",
+        "completedBy": "claude-code"
+      },
+      {
+        "id": "00ab6484-df99-4393-b3f9-ecccfbaa9809",
+        "path": "/openwiki/core-dependencies/dependency-visibility.md",
+        "title": "Dependency Visibility",
+        "purpose": "Reconcile stale or unresolved Claims and update this page from current repository evidence while preserving unaffected accurate content.",
+        "seedPaths": [
+          "core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt"
+        ],
+        "relatedPages": [],
+        "instructions": [],
+        "status": "complete",
+        "completedBy": "claude-code"
+      },
+      {
+        "id": "fe2cd958-6d1f-4308-978f-b6e0e7f84670",
+        "path": "/openwiki/core-dependencies/plugin-feature-data.md",
+        "title": "Plugin Feature Data",
+        "purpose": "Reconcile stale or unresolved Claims and update this page from current repository evidence while preserving unaffected accurate content.",
+        "seedPaths": [
+          "core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt"
+        ],
+        "relatedPages": [],
+        "instructions": [],
+        "status": "complete",
+        "completedBy": "claude-code"
+      },
+      {
+        "id": "a1e47240-142f-4c83-8ee6-c8b82ed17771",
+        "path": "/openwiki/core-dependencies/plugin-feature-presentation.md",
+        "title": "Plugin Feature Presentation",
+        "purpose": "Reconcile stale or unresolved Claims and update this page from current repository evidence while preserving unaffected accurate content.",
+        "seedPaths": [
+          "core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt"
+        ],
+        "relatedPages": [],
+        "instructions": [],
+        "status": "complete",
+        "completedBy": "claude-code"
+      },
+      {
+        "id": "f09cb4fc-c798-4137-8787-e3e6bd091100",
+        "path": "/openwiki/core-presentation/app-and-activity.md",
+        "title": "App And Activity",
+        "purpose": "Reconcile stale or unresolved Claims and update this page from current repository evidence while preserving unaffected accurate content.",
+        "seedPaths": [
+          "core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt"
+        ],
+        "relatedPages": [],
+        "instructions": [],
+        "status": "complete",
+        "completedBy": "claude-code"
+      },
+      {
+        "id": "71dfc02d-b8ca-4400-b4f3-3614a639059c",
+        "path": "/openwiki/core-presentation/base-architecture.md",
+        "title": "Base Architecture",
+        "purpose": "Reconcile stale or unresolved Claims and update this page from current repository evidence while preserving unaffected accurate content.",
+        "seedPaths": [
+          "core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt"
+        ],
+        "relatedPages": [],
+        "instructions": [],
+        "status": "complete",
+        "completedBy": "claude-code"
+      },
+      {
+        "id": "359e22d4-033c-4858-a13d-2c844fbff468",
+        "path": "/openwiki/core-presentation/navigation-legacy.md",
+        "title": "Navigation Legacy",
+        "purpose": "Reconcile stale or unresolved Claims and update this page from current repository evidence while preserving unaffected accurate content.",
+        "seedPaths": [
+          "core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt"
+        ],
+        "relatedPages": [],
+        "instructions": [],
+        "status": "pending"
+      },
+      {
+        "id": "622a691d-e454-4651-8dc6-767bafe1fa0b",
+        "path": "/openwiki/core-presentation/navigation3.md",
+        "title": "Navigation 3",
+        "purpose": "Document the current Navigation3 flow, graph-scoped ViewModel lifecycle, and Hilt-aware ViewModel creation path.",
+        "seedPaths": [
+          "core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt",
+          "core/presentation/src/main/java/com/core/presentation/base/screen/BaseFlow.kt",
+          "core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt",
+          "core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/decorators/viewModel/NavigationGraphViewModelStoreOwner.kt",
+          "core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/decorators/viewModel/SharedViewModelStoreNavEntryDecorator.kt",
+          "demo/presentation/src/main/java/com/demo/presentation/viewModel/DemoViewModel.kt"
+        ],
+        "relatedPages": [
+          "/openwiki/core-presentation/app-and-activity.md",
+          "/openwiki/core-presentation/base-architecture.md",
+          "/openwiki/core-presentation/navigation-legacy.md",
+          "/openwiki/core-presentation/testing.md"
+        ],
+        "instructions": [
+          "Explain that BaseActivity passes its default ViewModelProvider.Factory and CreationExtras through the shared entry decorator; the graph owner exposes those alongside the graph-scoped ViewModelStore; register() wraps the owner factory in HiltViewModelFactory and passes the owner's CreationExtras to viewModel().",
+          "Preserve accurate unaffected content and frontmatter; update the obsolete claim that the graph owner lacks a Hilt-aware factory.",
+          "Recheck how graph scoping and onPop cleanup work; retain statements that remain accurate and reconcile every stale Claim for this page."
+        ],
+        "status": "pending"
+      },
+      {
+        "id": "7c97cbb7-f4e0-40d8-8116-ed99db649d15",
+        "path": "/openwiki/core-presentation/overview.md",
+        "title": "Overview",
+        "purpose": "Reconcile stale or unresolved Claims and update this page from current repository evidence while preserving unaffected accurate content.",
+        "seedPaths": [
+          "core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt"
+        ],
+        "relatedPages": [],
+        "instructions": [],
+        "status": "pending"
+      },
+      {
+        "id": "f2fbfd0f-e3f8-49ad-9a6f-f49a6d4d5b4e",
+        "path": "/openwiki/core-presentation/testing.md",
+        "title": "Testing",
+        "purpose": "Reconcile stale or unresolved Claims and update this page from current repository evidence while preserving unaffected accurate content.",
+        "seedPaths": [
+          "core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt"
+        ],
+        "relatedPages": [],
+        "instructions": [],
+        "status": "pending"
+      },
+      {
+        "id": "1cfba5cf-42d3-432b-aa0a-6c00bf165f8e",
+        "path": "/openwiki/quickstart.md",
+        "title": "Quickstart",
+        "purpose": "Reconcile stale or unresolved Claims and update this page from current repository evidence while preserving unaffected accurate content.",
+        "seedPaths": [
+          "core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt",
+          "core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt",
+          "core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/decorators/viewModel/NavigationGraphViewModelStoreOwner.kt"
+        ],
+        "relatedPages": [],
+        "instructions": [],
+        "status": "pending"
+      }
+    ],
+    "deletePages": []
+  }
+}

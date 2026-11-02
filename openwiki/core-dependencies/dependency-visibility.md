@@ -3,9 +3,6 @@ type: build reference
 title: Dependency visibility matrix
 description: Which libraries and project classes are compile-visible in each module type (app, core:data, core:presentation, feature data, feature presentation) and in their unit tests, derived from the convention plugins' api, implementation and test-fixture declarations. Includes the gaps that cause unresolved-reference errors and how to fix them.
 tags: [core-dependencies, gradle, dependencies, api, implementation, classpath, troubleshooting]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T16:41:29.588Z
 sources:
   - id: openwiki-source-3bfcb28142050978edf94754
     resource: repo://app/build.gradle.kts
@@ -24,6 +21,9 @@ sources:
   - id: openwiki-source-9ade9fd0b236966d699bbe38
     resource: repo://core/presentation/src/main/java/com/core/presentation/coroutines/CoroutinesUseCaseRunner.kt
 generated: { by: "claude-code", at: "2026-10-26T16:41:29.588Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-02T14:42:55.956Z
 ---
 
 # Dependency visibility matrix
@@ -40,8 +40,8 @@ test fixtures' `testFixturesApi` dependencies and anything added with `testImple
 |---|---|---|---|
 | `core.data` | kotlinx-serialization-json, retrofit | datastore-preferences, hilt-android, retrofit converter-kotlinx-serialization, okhttp logging-interceptor, firebase BoM + analytics + crashlytics | `ksp`: kotlin-metadata, hilt-compiler. `testFixturesApi`: test-unit bundle. `kspTest`: hilt-compiler |
 | `core.presentation` | kotlinx-serialization-json, compose foundation, ui-tooling-preview, material3, lifecycle-viewmodel-compose, navigation-ui-ktx, hilt-navigation-compose, navigation3-runtime, navigation3-ui, paging-compose, browser | **project(":core:data")**, kotlin-reflect, compose BoM (platform), hilt-android | `debugImplementation`: ui-tooling. `ksp`: kotlin-metadata, hilt-compiler. `testFixturesApi`: test-unit bundle. `kspTest`: hilt-compiler |
-| `feature.data` | **project(":core:data")** | hilt-android | `ksp`: kotlin-metadata, hilt-compiler. `testImplementation`: `testFixtures(project(":core:data"))` |
-| `feature.presentation` | none | **project(":core:presentation")**, hilt-android | `ksp`: kotlin-metadata, hilt-compiler. `testImplementation`: `testFixtures(project(":core:presentation"))` |
+| `feature.data` | **project(":core:data")** | hilt-android | `ksp`: kotlin-metadata, hilt-compiler. `testImplementation`: `testFixtures(project(":core:data"))`; `kspTest`: hilt-compiler; `configureTests()` |
+| `feature.presentation` | none | **project(":core:presentation")**, hilt-android | `ksp`: kotlin-metadata, hilt-compiler. `testImplementation`: `testFixtures(project(":core:presentation"))`; `kspTest`: hilt-compiler; `configureTests()` |
 | `app` | none | **project(":core:presentation")**, hilt-android | `ksp`: kotlin-metadata, hilt-compiler. The app module also adds `implementation(project(":demo:presentation"))` |
 
 Retrofit's own published dependencies include OkHttp, so `okhttp3.*` types (`OkHttpClient`, `Interceptor`, `ResponseBody`) are typically visible wherever retrofit is.
@@ -69,8 +69,8 @@ Retrofit's own published dependencies include OkHttp, so `okhttp3.*` types (`OkH
 |---|---|---|---|---|
 | `:core:data` | test-unit bundle (coroutines-test, robolectric, hilt-android-testing, mockk-android) via own test fixtures | ✔ | ✔ | `BaseTest` in its own `src/test` |
 | `:core:presentation` | test-unit bundle | ✔ | **✘** | none (androidTest leftovers only) |
-| feature data | test-unit bundle via `testFixtures(":core:data")` | **✘** | **✘** | **none**: core/data has no `src/testFixtures`, so `BaseTest` isn't shared |
-| feature presentation | test-unit bundle via `testFixtures(":core:presentation")` | **✘** | **✘** | none |
+| feature data | test-unit bundle via `testFixtures(":core:data")` | ✔ | ✔ | **none**: core/data has no `src/testFixtures`, so `BaseTest` isn't shared |
+| feature presentation | test-unit bundle via `testFixtures(":core:presentation")` | ✔ | ✔ | none |
 | `:app` | **nothing** | ✘ | ✘ | none |
 
 No module gets Compose UI test artifacts (`ui-test-junit4`, `ui-test-manifest`) or `androidTest` dependencies.
@@ -86,8 +86,8 @@ No module gets Compose UI test artifacts (`ui-test-junit4`, `ui-test-manifest`) 
    or make core:presentation `api` core:data.
 3. **`:app` doesn't depend on `:demo:data`** (only `:demo:presentation`). Hilt aggregates bindings from all modules on the app's runtime classpath, so data modules must be
    reachable from `:app`, either directly or through a presentation module that depends on them.
-4. **Hilt tests in feature modules:** add `kspTest(coreLibs.google.hilt.compiler)` (helper `kspTest` exists in `Extensions.kt`) or `@HiltAndroidTest` classes won't get generated components.
-5. **Robolectric tests outside core:data:** call `configureTests()` in the plugin (resources + `--add-opens`) or tests that touch Android resources or reflection may fail on JDK 21.
+4. **Feature-module test setup:** both feature plugins now call `configureTests()` and add Hilt test code generation with `kspTest(hilt-compiler)`. They still do not share a `BaseTest` through core fixtures.
+5. **Core presentation JVM tests:** `CorePresentationPlugin` does not call `configureTests()`; tests needing Android resources or JDK 21 reflection may need that setup (`isIncludeAndroidResources` plus `--add-opens`).
 6. **Firebase/DataStore in features:** they're `implementation` in core:data. Add them in the feature module if you need the APIs directly.
 
 ## Data flow

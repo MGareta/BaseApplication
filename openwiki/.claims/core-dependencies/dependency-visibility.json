@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:5f22e7ddea7fad859b48fc64c7d09eed9ba45c9ab9c45bb5aed7343b1d08cff5",
+  "pageVersion": "sha256:968502ed43ce1bc8405971b49c266f991df25d5185995e6d8c163eb66e0bb7fb",
   "claims": [
     {
       "id": "claim_c95b4bfdb1ad4e958d56c6e4ca8d634f",
@@ -11,7 +11,7 @@
           "version": "repo-file-v1:sha256:6e00421372a973445cadcc8449e4e824250e37c19689043d1b4c6b763ec37779"
         },
         {
-          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt#L55-L69",
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt#L58-L72",
           "version": "repo-lines-v1:sha256:1481674dfde14b17d4050993dd12903d408c9292f35799c611986c8e49362170:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxYjk5ZmE0MjJmNTc1MTk0MDUzM2MyNTE2OTdkMjNkOTZjMGMzMzE5OGQ1YjM4YjEyMmYxMzE2ZTczYTk5ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMDM0ODFjNTdkMGYwZGMwZjc2Y2QyY2M4YjM2MDRjNGU4Mjk2ZGE0MTIyYWRkMTllODE3NDVkYzdlMzMxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5MThiMmMxNjMzNGZiNTdiYjM2YzAzYWYwM2VhMTE1NmFhMjk4ODJmMzY1NzJiN2QyZDMwYjM0MjhjN2M3YmQifQ"
         }
       ]
@@ -32,11 +32,11 @@
     },
     {
       "id": "claim_df09192cc8d04a8fbc8fb70a081a436f",
-      "statement": "Feature data modules expose core:data as an api dependency and get core:data's test fixtures for unit tests, but add no kspTest Hilt compiler.",
+      "statement": "Feature data modules expose core:data as an api dependency and include core:data test fixtures; FeatureDataPlugin also configures tests and Hilt KSP processing for test sources.",
       "evidence": [
         {
-          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L50-L69",
-          "version": "repo-lines-v1:sha256:123df76247f4393fd6915d7a3b237cb2aa171875e7542fc2825736cd1c99f57c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxYjk5ZmE0MjJmNTc1MTk0MDUzM2MyNTE2OTdkMjNkOTZjMGMzMzE5OGQ1YjM4YjEyMmYxMzE2ZTczYTk5ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YTM2NWE5MGVjMTFlOTA0MzI3NTJjZjkzNzZlYzVlZDM2YjgwYmE1ZThlNjg1NGZjZjk4OTcwZDMwNDQ0NjkifQ"
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L44-L68",
+          "version": "repo-lines-v1:sha256:9a360aeaa68bb75f8800dd62f7fdcc30309e63544e40eab8bde7b246d559c1c6:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiZjNlMWIxZjM1YTFmZmMwMDY5MGVjYzJkODc2ODBmM2YyNmZjNjI1NGUyYTI4Y2NhNjA5ZjE4YWE5MTA3YzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyMGQ4MDZhYWQ2MWQxNGJkNTI2MjNjMWZkOGFlZDUxNWRlYmZlNGM1YzZjMWQzOGE5MWQxOGZiNGRjOGFiMTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI0NzEyMDE3NDlmZmQwYjZjOWViMWNhOGJkOWFmODkxYjczNDRlZTVhN2E1ZmRlZjcyZjY1YzMxYjg0MmI0YjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5MThiMmMxNjMzNGZiNTdiYjM2YzAzYWYwM2VhMTE1NmFhMjk4ODJmMzY1NzJiN2QyZDMwYjM0MjhjN2M3YmQifQ"
         }
       ]
     },
@@ -63,10 +63,20 @@
           "version": "repo-lines-v1:sha256:399dcc04fc7a1c1d3fd4d4adcae9d3ba825bc0235909bb543009d66e76479faa:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxYjk5ZmE0MjJmNTc1MTk0MDUzM2MyNTE2OTdkMjNkOTZjMGMzMzE5OGQ1YjM4YjEyMmYxMzE2ZTczYTk5ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YTM2NWE5MGVjMTFlOTA0MzI3NTJjZjkzNzZlYzVlZDM2YjgwYmE1ZThlNjg1NGZjZjk4OTcwZDMwNDQ0NjkifQ"
         }
       ]
+    },
+    {
+      "id": "claim_7ecf7d4bc51f4260934041be37ba97ff",
+      "statement": "Feature presentation modules include core:presentation test fixtures, configure tests, and run Hilt test code generation through kspTest().",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt#L45-L73",
+          "version": "repo-lines-v1:sha256:c7c1a15da5c3345d10424012fdb8dd3b9f118cf37e3e65734170566a554fb920:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiZjNlMWIxZjM1YTFmZmMwMDY5MGVjYzJkODc2ODBmM2YyNmZjNjI1NGUyYTI4Y2NhNjA5ZjE4YWE5MTA3YzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyMGQ4MDZhYWQ2MWQxNGJkNTI2MjNjMWZkOGFlZDUxNWRlYmZlNGM1YzZjMWQzOGE5MWQxOGZiNGRjOGFiMTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI0NzEyMDE3NDlmZmQwYjZjOWViMWNhOGJkOWFmODkxYjczNDRlZTVhN2E1ZmRlZjcyZjY1YzMxYjg0MmI0YjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5MThiMmMxNjMzNGZiNTdiYjM2YzAzYWYwM2VhMTE1NmFhMjk4ODJmMzY1NzJiN2QyZDMwYjM0MjhjN2M3YmQifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T16:41:29.588Z"
+    "at": "2026-11-02T14:42:55.956Z"
   }
 }

@@ -3,9 +3,6 @@ type: testing guide
 title: Testing core/presentation
 description: The current test setup of core/presentation (an androidTest BaseTest and DefaultTestRunner left over after instrumented-test configuration was removed, and no src/test), what the Gradle plugins provide, and templates for unit-testing BaseViewModels and form states and for Compose UI tests once the missing dependencies are added.
 tags: [core-presentation, testing, robolectric, compose-test, hilt, coroutines]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T15:48:49.783Z
 sources:
   - id: openwiki-source-b93e89ddcc6bb7ffc877b9e1
     resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CorePresentationPlugin.kt

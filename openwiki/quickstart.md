@@ -29,9 +29,6 @@ sources:
   - id: openwiki-source-e620d7484b72a53c7fa812cd
     resource: repo://settings.gradle.kts
 generated: { by: "claude-code", at: "2026-10-26T16:41:29.588Z" }
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T16:41:29.588Z
 ---
 
 # Quickstart

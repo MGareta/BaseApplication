@@ -1,17 +1,17 @@
 ---
 type: build reference
 title: "Plugin: feature.data"
-description: Reference for FeatureDataPlugin (plugin id feature.data), the convention plugin for feature data modules such as :demo:data. Covers the plugins it applies (Android library, serialization, KSP, Hilt, Detekt), its Android configuration, its dependencies (api core:data, Hilt, core:data test fixtures), what it doesn't set up (namespace, Hilt test codegen, Robolectric test config), and a complete module example.
+description: Reference for FeatureDataPlugin (plugin id feature.data), the convention plugin for feature data modules such as :demo:data. Covers its applied plugins, Android and test configuration, dependencies (api core:data, Hilt, test fixtures and Hilt test codegen), and a complete module example.
 tags: [core-dependencies, gradle, convention-plugin, feature-module, data-layer]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T16:41:29.588Z
 sources:
   - id: openwiki-source-ebbe359b8fc397d0e2f617b5
     resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt
   - id: openwiki-source-5ad5829264c75ebc25f88ee6
     resource: repo://demo/data/build.gradle.kts
 generated: { by: "claude-code", at: "2026-10-26T16:41:29.588Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-02T14:42:55.956Z
 ---
 
 # Plugin: `feature.data` (`com.core.dependencies.plugins.FeatureDataPlugin`)
@@ -32,7 +32,7 @@ demo/data/build.gradle.kts        # current user (no main sources yet)
 
 1. **Plugins:** `com.android.library`, `org.jetbrains.kotlin.plugin.serialization`, `com.google.devtools.ksp`, `com.google.dagger.hilt.android`, `dev.detekt`. No Compose and no Dokka.
 2. **`LibraryExtension`:** `defaultConfiguration` (compileSdk 37, minSdk 26, **namespace `com.base.application`**, Java 21, test fixtures, toolchain 21), `configureBuildTypes`,
-   `configurePackaging`. **No `configureTests()`.**
+   `configurePackaging` and `configureTests()` (Android resources for JVM tests plus JDK module-open JVM arguments).
 3. `configureDetekt()`.
 4. **Dependencies:**
 
@@ -42,6 +42,7 @@ demo/data/build.gradle.kts        # current user (no main sources yet)
 | `ksp` | `kotlin-metadata-jvm`, `hilt-android-compiler` |
 | `implementation` | `hilt-android` |
 | `testImplementation` | `testFixtures(project(":core:data"))`, which gives the test-unit bundle (coroutines-test, robolectric, hilt-android-testing, mockk-android) |
+| `kspTest` | `hilt-android-compiler` for test-source Hilt component generation |
 | `detektPlugins` | `detekt-rules-ktlint-wrapper`, `detekt-rules-libraries` |
 
 ## Example module
@@ -66,9 +67,8 @@ Typical content: `OrdersApiService` + an `OrdersNetworkModule` using `RetrofitFa
 ## Gotchas
 
 - **Namespace:** `:demo:data` doesn't set one, so it shares `com.base.application` with `:app` and `:demo:presentation`.
-- **Hilt in tests:** no `kspTest(hilt-compiler)`, so `@HiltAndroidTest` tests won't compile their generated components. Add it to the module or the plugin.
-- **Robolectric:** no `configureTests()` (no `isIncludeAndroidResources`, no `--add-opens`). Copy core/data's `BaseTest` pattern and add the config if needed. `BaseTest` itself isn't shared,
-  because core/data's test fixtures contain no sources.
+- **Hilt in tests:** `kspTest(hilt-compiler)` is configured, so test-source Hilt components can be generated. The core:data test fixture dependency supplies test libraries, but its fixture source set contains no `BaseTest` to share.
+- **Robolectric:** `configureTests()` enables Android resources for JVM tests and adds JDK module-open JVM arguments.
 - `:demo:data` is included in settings but not depended on by any module.
 
 ## Related pages

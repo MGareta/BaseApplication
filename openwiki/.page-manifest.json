@@ -58,11 +58,11 @@
       "completedRunId": "e9c54976-a45d-474e-b89f-a31d34428732"
     },
     "/openwiki/core-data/overview.md": {
-      "pageVersion": "sha256:49f0a868c9ef17463a209fe7d26b8abff391249079320e0f6623aa7be39e83c7",
+      "gitHead": "fc8fd3baba48680e5fd2aa8d43019b1cf5cc9f0c",
+      "sourceFingerprint": "sha256:093668c22e2bd3e74f0d4573abd588cceb75e8869a852e0f10c0fbbe162cd372",
+      "pageVersion": "sha256:ce185fbacc6bd855e50af813221296069b4c6182594e047bba04339ae5896ccf",
       "completedBy": "claude-code",
-      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea",
-      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
-      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be"
+      "completedRunId": "9a483478-7c4d-4a7b-8e6d-265dab97e4ef"
     },
     "/openwiki/core-data/permission.md": {
       "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
@@ -72,11 +72,11 @@
       "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc"
     },
     "/openwiki/core-data/recipes.md": {
-      "gitHead": "869b966f7ab3714aa764880481bab7c6ffa79144",
-      "sourceFingerprint": "sha256:f3243d49876530457897bfff983ecc850e60c6fce212a36e6f9c402e0e12be30",
-      "pageVersion": "sha256:bca3766f875e330470dd91418691ed24c60f7f5aec3afe49f0307245325437bd",
+      "gitHead": "fc8fd3baba48680e5fd2aa8d43019b1cf5cc9f0c",
+      "sourceFingerprint": "sha256:093668c22e2bd3e74f0d4573abd588cceb75e8869a852e0f10c0fbbe162cd372",
+      "pageVersion": "sha256:cefae1312231dbc05a90518a5294d32789ef1d303476a69f130474f9a502d8e8",
       "completedBy": "claude-code",
-      "completedRunId": "e9c54976-a45d-474e-b89f-a31d34428732"
+      "completedRunId": "9a483478-7c4d-4a7b-8e6d-265dab97e4ef"
     },
     "/openwiki/core-data/security.md": {
       "gitHead": "869b966f7ab3714aa764880481bab7c6ffa79144",
@@ -107,207 +107,207 @@
       "completedRunId": "e9c54976-a45d-474e-b89f-a31d34428732"
     },
     "/openwiki/core-dependencies/code-quality.md": {
+      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
+      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be",
       "pageVersion": "sha256:03d91550e8fed7c9cdf77d16ae1e79f8c2af184b96df94923acfcdf29a94b98b",
       "completedBy": "claude-code",
-      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea",
-      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
-      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be"
+      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea"
     },
     "/openwiki/core-dependencies/config.md": {
+      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
+      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be",
       "pageVersion": "sha256:c85dc3ef9e33b85d91439777d5f5dbc4b67902edcb55c8ba2764e0ab44bd922e",
       "completedBy": "claude-code",
-      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea",
-      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
-      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be"
+      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea"
     },
     "/openwiki/core-dependencies/dependency-visibility.md": {
-      "pageVersion": "sha256:5f22e7ddea7fad859b48fc64c7d09eed9ba45c9ab9c45bb5aed7343b1d08cff5",
+      "gitHead": "fc8fd3baba48680e5fd2aa8d43019b1cf5cc9f0c",
+      "sourceFingerprint": "sha256:093668c22e2bd3e74f0d4573abd588cceb75e8869a852e0f10c0fbbe162cd372",
+      "pageVersion": "sha256:968502ed43ce1bc8405971b49c266f991df25d5185995e6d8c163eb66e0bb7fb",
       "completedBy": "claude-code",
-      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea",
-      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
-      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be"
+      "completedRunId": "9a483478-7c4d-4a7b-8e6d-265dab97e4ef"
     },
     "/openwiki/core-dependencies/extensions.md": {
+      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
+      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be",
       "pageVersion": "sha256:5f61676c98c078284879a2c95b299c2a95605aa19cad6c41a462b04cb61d27a5",
       "completedBy": "claude-code",
-      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea",
-      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
-      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be"
+      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea"
     },
     "/openwiki/core-dependencies/overview.md": {
+      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
+      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be",
       "pageVersion": "sha256:81bc6ca660b737f0ea346b57c086e179e0d68a9db26e92e0265d025f4b7aee42",
       "completedBy": "claude-code",
-      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea",
-      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
-      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be"
+      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea"
     },
     "/openwiki/core-dependencies/plugin-app.md": {
+      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
+      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be",
       "pageVersion": "sha256:7566d95d555280b80848011c1500b4391f686f64f777d868817027dc59447a71",
       "completedBy": "claude-code",
-      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea",
-      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
-      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be"
+      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea"
     },
     "/openwiki/core-dependencies/plugin-core-data.md": {
+      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
+      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be",
       "pageVersion": "sha256:00e9b5c1744dcca1e3dc38a0d9b3d43e4db0a34a48487379c9252609486a991f",
       "completedBy": "claude-code",
-      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea",
-      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
-      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be"
+      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea"
     },
     "/openwiki/core-dependencies/plugin-core-presentation.md": {
+      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
+      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be",
       "pageVersion": "sha256:efc5df0162d99648299685db77f3b48a3c978890f22b547e2ddd580cb9c4aee0",
       "completedBy": "claude-code",
-      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea",
-      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
-      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be"
+      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea"
     },
     "/openwiki/core-dependencies/plugin-feature-data.md": {
-      "pageVersion": "sha256:2313b8ffa8f84c8b445e53b741ebed55b567f47a628e4b20e24b918b798ed775",
+      "gitHead": "fc8fd3baba48680e5fd2aa8d43019b1cf5cc9f0c",
+      "sourceFingerprint": "sha256:093668c22e2bd3e74f0d4573abd588cceb75e8869a852e0f10c0fbbe162cd372",
+      "pageVersion": "sha256:dfbb448a48bbc672d450324d225dfc2d5a0b10e1a23eb9eb2456983e445c0572",
       "completedBy": "claude-code",
-      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea",
-      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
-      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be"
+      "completedRunId": "9a483478-7c4d-4a7b-8e6d-265dab97e4ef"
     },
     "/openwiki/core-dependencies/plugin-feature-presentation.md": {
-      "pageVersion": "sha256:175a4f161c7aa8255c890df82a94fd3c96dd93bc52b406257ba6532ed9983d19",
+      "gitHead": "fc8fd3baba48680e5fd2aa8d43019b1cf5cc9f0c",
+      "sourceFingerprint": "sha256:093668c22e2bd3e74f0d4573abd588cceb75e8869a852e0f10c0fbbe162cd372",
+      "pageVersion": "sha256:36ad53bc9fc18fdacb63817bfa414ee5e3c60af2ffb2b96ae85b12d2dfac8d6a",
       "completedBy": "claude-code",
-      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea",
-      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
-      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be"
+      "completedRunId": "9a483478-7c4d-4a7b-8e6d-265dab97e4ef"
     },
     "/openwiki/core-dependencies/recipes.md": {
+      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
+      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be",
       "pageVersion": "sha256:bb82efcc2f7f69fee81c812e2314e990fd86fa61f8aded73ed3c43a7178a3193",
       "completedBy": "claude-code",
-      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea",
-      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
-      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be"
+      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea"
     },
     "/openwiki/core-dependencies/version-catalog.md": {
+      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
+      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be",
       "pageVersion": "sha256:3a0128b9e2ffb5c515c1c100443527333b0c9d66878d950d09cca0a77198a2ef",
       "completedBy": "claude-code",
-      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea",
-      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
-      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be"
+      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea"
     },
     "/openwiki/core-presentation/app-and-activity.md": {
-      "pageVersion": "sha256:521b71b47f155ed3bfe5a399ffb09e0082535e056dabb78b700e5b9b9ce27720",
+      "gitHead": "fc8fd3baba48680e5fd2aa8d43019b1cf5cc9f0c",
+      "sourceFingerprint": "sha256:093668c22e2bd3e74f0d4573abd588cceb75e8869a852e0f10c0fbbe162cd372",
+      "pageVersion": "sha256:0cf47f572aea780505b728aa1a2642e239eb70407b376c6350877e7e0c178713",
       "completedBy": "claude-code",
-      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc",
-      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
-      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4"
+      "completedRunId": "9a483478-7c4d-4a7b-8e6d-265dab97e4ef"
     },
     "/openwiki/core-presentation/base-architecture.md": {
-      "pageVersion": "sha256:dd8dd68510f8a1ef307947cef1aa25f061ee05a2389f51ba093aa2053beb4f7b",
+      "pageVersion": "sha256:08dcabac89e51005a35698d531e1b34697213d56ff144be211eb98c4f42c5f47",
       "completedBy": "claude-code",
-      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc",
-      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
-      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4"
+      "completedRunId": "9a483478-7c4d-4a7b-8e6d-265dab97e4ef",
+      "gitHead": "fc8fd3baba48680e5fd2aa8d43019b1cf5cc9f0c",
+      "sourceFingerprint": "sha256:093668c22e2bd3e74f0d4573abd588cceb75e8869a852e0f10c0fbbe162cd372"
     },
     "/openwiki/core-presentation/components-actions.md": {
+      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
+      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4",
       "pageVersion": "sha256:efef93464513a87e5ca6e6f91c20ba162250d885622521d3e9065577132304f0",
       "completedBy": "claude-code",
-      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc",
-      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
-      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4"
+      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc"
     },
     "/openwiki/core-presentation/components-layout.md": {
+      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
+      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4",
       "pageVersion": "sha256:cb26ba4b936d846b0eddcc4f6319fd22d5db325bb1a9713e0c674b5fb25dac4c",
       "completedBy": "claude-code",
-      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc",
-      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
-      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4"
+      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc"
     },
     "/openwiki/core-presentation/components-navigation.md": {
+      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
+      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4",
       "pageVersion": "sha256:8171e54a9b29e6eb2497de73f92b5ae6fc2f43a597832bbfa4ad0ff018966bb2",
       "completedBy": "claude-code",
-      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc",
-      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
-      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4"
+      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc"
     },
     "/openwiki/core-presentation/coroutines.md": {
+      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
+      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4",
       "pageVersion": "sha256:dfd8e967b1e8abc32942048e4a6c03f528e6d9d1791c3b6b3d47d13debe97783",
       "completedBy": "claude-code",
-      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc",
-      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
-      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4"
+      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc"
     },
     "/openwiki/core-presentation/form-fields.md": {
+      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
+      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4",
       "pageVersion": "sha256:884e21a8b9500a14a6b108f5c21a2b61b0af6140feb5ea3dfbacd62c5bf3e39b",
       "completedBy": "claude-code",
-      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc",
-      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
-      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4"
+      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc"
     },
     "/openwiki/core-presentation/forms.md": {
+      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
+      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4",
       "pageVersion": "sha256:88f4523c818624b6c237d1907206836a9774015efb9145ae6dd264d84842b83a",
       "completedBy": "claude-code",
-      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc",
-      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
-      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4"
+      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc"
     },
     "/openwiki/core-presentation/navigation-legacy.md": {
+      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
+      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4",
       "pageVersion": "sha256:2783ba673972370ae43995bc67f580e10abfa73469cbb6f82a10ea72abdeea8c",
       "completedBy": "claude-code",
-      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc",
-      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
-      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4"
+      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc"
     },
     "/openwiki/core-presentation/navigation3.md": {
+      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
+      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4",
       "pageVersion": "sha256:60c0d9d5930efbea2060c3a51ea4add7f2970a98a3c176245a8c2a284971cf2a",
       "completedBy": "claude-code",
-      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc",
-      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
-      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4"
+      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc"
     },
     "/openwiki/core-presentation/overview.md": {
+      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
+      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be",
       "pageVersion": "sha256:73f764e5a382e1504a125b31eb40ea5f64459ac04101ebed34fb397980e3af10",
       "completedBy": "claude-code",
-      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea",
-      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
-      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be"
+      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea"
     },
     "/openwiki/core-presentation/recipes.md": {
+      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
+      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4",
       "pageVersion": "sha256:b6481212a3fc33078c6624bd99038759d7f9eb0a65e266503d8d3fc2277bce0b",
       "completedBy": "claude-code",
-      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc",
-      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
-      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4"
+      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc"
     },
     "/openwiki/core-presentation/testing.md": {
+      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
+      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4",
       "pageVersion": "sha256:30dab8cfe639683c8157370ef42dcebf89c2e1a14b07c7c660f9c91556ed6348",
       "completedBy": "claude-code",
-      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc",
-      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
-      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4"
+      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc"
     },
     "/openwiki/core-presentation/theme-tokens.md": {
+      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
+      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4",
       "pageVersion": "sha256:15e261a241841a0d74698f6fbda1773f54ddffbd3e6ecf95156235ec99111ce0",
       "completedBy": "claude-code",
-      "completedRunId": "5d27f978-932a-4620-b40f-8a2b261bc1e2",
-      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
-      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4"
+      "completedRunId": "5d27f978-932a-4620-b40f-8a2b261bc1e2"
     },
     "/openwiki/core-presentation/theme.md": {
+      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
+      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4",
       "pageVersion": "sha256:ac80443e4f58d4b83c0509fe81a9f804bdb5082c8cfe4ef56f08bf672def4f9a",
       "completedBy": "claude-code",
-      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc",
-      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
-      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4"
+      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc"
     },
     "/openwiki/core-presentation/ui-utils.md": {
+      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
+      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4",
       "pageVersion": "sha256:2d4f611af08f38e3210c19eead22ab040d5769342d7f84d93f715b8cdaa62ac7",
       "completedBy": "claude-code",
-      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc",
-      "gitHead": "92fc80b1ed2f5c4b004cdee4695b52f047c4bd5b",
-      "sourceFingerprint": "sha256:97a867ea54bffc14dbe2bdbd52044b41537edcbd0f9f29eba9e408ee3a4e5fc4"
+      "completedRunId": "86c4ed83-a094-4ca7-bfe0-c6a897ace4bc"
     },
     "/openwiki/quickstart.md": {
+      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
+      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be",
       "pageVersion": "sha256:73330df24c7a152e388b4a4ad06418c14a7af0ffbe5967050b616a605b05190b",
       "completedBy": "claude-code",
-      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea",
-      "gitHead": "382e40583c84090246977e46a5673719a324a7ac",
-      "sourceFingerprint": "sha256:c2a78f5e4de4db35d76cb02574f04b4b5e35b97d5ba88c5f729cf15e4315d9be"
+      "completedRunId": "46860938-d28c-49ff-80d8-675e4b5011ea"
     }
   }
 }

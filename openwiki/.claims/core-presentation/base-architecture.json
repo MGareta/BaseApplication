@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:dd8dd68510f8a1ef307947cef1aa25f061ee05a2389f51ba093aa2053beb4f7b",
+  "pageVersion": "sha256:08dcabac89e51005a35698d531e1b34697213d56ff144be211eb98c4f42c5f47",
   "claims": [
     {
       "id": "claim_91464a61af184e1ba18b8694b7ea7bd4",
@@ -54,11 +54,15 @@
     },
     {
       "id": "claim_279f0b7bdebc4a4b94cbbe79f464d54a",
-      "statement": "Navigation3 entries obtain their ViewModel with viewModel(modelClass) and pass it to Render without calling loadInitData.",
+      "statement": "Navigation3 entries create each ViewModel with Compose viewModel() using the graph owner and HiltViewModelFactory built from the host factory and creation extras, pass it to Render, and still do not call loadInitData().",
       "evidence": [
         {
-          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt#L150-L159",
-          "version": "repo-lines-v1:sha256:f03ef3098c0faa1f3a1ad137f1acdefd427a874437bb7647f5c28c6c4b302788:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NWM3NjI0ZGMxYWQ2ZDU4YTMyZTcxMWRmYzdjYWJmZWQ3ZmZjMmE4NDBhM2Y0Njg4YzU2ZmRiMjc0NjlhMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjNjQ3OWNjMjMwNDQwZmQ0MWU4MjI0MjE4Njc5Njk4NTU5ZDI4OTNiZDY3YjQzODBhZmFiODExYjM4YTU1YWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA4NDAyNzUyYWMzYmE2MTk4Yzk0MzVhNjk1OWVhMDVmZDg2OWFjYTE2ZjU0ZWMwMjQ0MGFlNjM3YjFlYzUzMTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAyMjc5NjRkNmQ4OGIwNWViMGZiZDZjMzY3MTYzYTdmNzY5MjljNmVlN2E5Y2UxZDRkZjRmN2Y0MWIzNGUxNGUifQ"
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt#L154-L173",
+          "version": "repo-lines-v1:sha256:34825985bfdef79e1f6803fc5fbd334028b440a5443b499fbddaecc74a77636f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NWM3NjI0ZGMxYWQ2ZDU4YTMyZTcxMWRmYzdjYWJmZWQ3ZmZjMmE4NDBhM2Y0Njg4YzU2ZmRiMjc0NjlhMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjNjQ3OWNjMjMwNDQwZmQ0MWU4MjI0MjE4Njc5Njk4NTU5ZDI4OTNiZDY3YjQzODBhZmFiODExYjM4YTU1YWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA4NDAyNzUyYWMzYmE2MTk4Yzk0MzVhNjk1OWVhMDVmZDg2OWFjYTE2ZjU0ZWMwMjQ0MGFlNjM3YjFlYzUzMTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAyMjc5NjRkNmQ4OGIwNWViMGZiZDZjMzY3MTYzYTdmNzY5MjljNmVlN2E5Y2UxZDRkZjRmN2Y0MWIzNGUxNGUifQ"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/decorators/viewModel/NavigationGraphViewModelStoreOwner.kt",
+          "version": "repo-file-v1:sha256:78446cb6b00f10e8cee4cf655d6234630315f1b0aacff7cb1af1b63a92113056"
         }
       ]
     },
@@ -75,6 +79,6 @@
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T15:48:49.783Z"
+    "at": "2026-11-02T14:42:55.956Z"
   }
 }

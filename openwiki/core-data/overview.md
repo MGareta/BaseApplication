@@ -5,7 +5,7 @@ description: Overview of the core/data Android library (namespace com.core.data)
 tags: [core-data, architecture, hilt, gradle, android]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-26T16:41:29.588Z
+    at: 2026-11-02T14:42:55.956Z
 sources:
   - id: openwiki-source-a89a46a6562e5231bac73204
     resource: repo://core/data/build.gradle.kts
@@ -152,7 +152,7 @@ Kotlin is 2.4.21. AndroidX Activity/Fragment/Core/Lifecycle come in transitively
   - `BaseActivity` injects `dagger.Lazy<ISessionManager>`, collects `commands` (`Warning` → `onSessionWarning()`, `TimeOut` → `onSessionTimeout()`,
     which by default calls `invalidateSession()`) and calls `restartSessionTimeout()` on user interaction.
   - `CoroutinesUseCaseRunner` maps `ApiResult` to `UiResult` and paging.
-- `FeatureDataPlugin` → `api(project(":core:data"))` (so feature data modules re-export it) and `testImplementation(testFixtures(project(":core:data")))`.
+- `FeatureDataPlugin` → `api(project(":core:data"))` (so feature data modules re-export it) and `testImplementation(testFixtures(project(":core:data")))`. It also calls `configureTests()` and adds Hilt's test compiler through `kspTest(...)`.
   core/data has **no `src/testFixtures` sources**, so feature tests get only the test-unit bundle and not `BaseTest`, which lives in `src/test`.
 - `:app` reaches core/data transitively through `core:presentation` and feature modules.
 

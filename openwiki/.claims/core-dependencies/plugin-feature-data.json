@@ -1,24 +1,28 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:2313b8ffa8f84c8b445e53b741ebed55b567f47a628e4b20e24b918b798ed775",
+  "pageVersion": "sha256:dfbb448a48bbc672d450324d225dfc2d5a0b10e1a23eb9eb2456983e445c0572",
   "claims": [
     {
       "id": "claim_1108bb3ea4ab4e83bbede3e05314e2cd",
-      "statement": "FeatureDataPlugin applies the Android library, Kotlin serialization, KSP, Hilt and Detekt plugins and configures defaults, build types and packaging without Compose or test JVM configuration.",
+      "statement": "FeatureDataPlugin applies the Android library, Kotlin serialization, KSP, Hilt and Detekt plugins, configures shared Android defaults, build types, packaging and JVM test options, and does not apply Compose.",
       "evidence": [
         {
-          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L22-L48",
-          "version": "repo-lines-v1:sha256:8a57fc8c261d61daf58addfa240d51e4678e54ce1dcaf4ec7a2472a444c75404:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiOTczMmMwY2ExNTk0ZGU0YjY4MzE5ODM2Mjg4MGY4OTUwNzAzZjQxNTdlYTJjZmM0ZjA4YWFmZDAyYWNkYjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxNTk5NjAwYTMzMTY2ZTE1NmJkYTM0YmVkY2E1YTRlNDBjODdlYjJkZWU2Y2U5MmE3NzM0NGE3YjAwNThlZjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRlZjA4NWEwMTEyNTQzODgwMGU1NzQ2MjJkNDU3ODY3ZmVhOTc1ODg2NmNlYWUyZjJhNjJhOWY3ODZhMGNlMTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI5MjA0ZWRlZDY3N2UyNzkwYjEzMDhiY2ZkZDI3ZDAwMzYyNjExOGMxMGVlM2NmMGViMDU2YTY5YThiN2MzNTUifQ"
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L36-L51",
+          "version": "repo-lines-v1:sha256:3e9b2d2d46da1d1a5e9238d6240893937ac93be10ca6d51e9cfa450dd8f8a9e2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5OWVlZjgyYjE0N2YzMzYxYWQzYzRjMWM1YmNmYTFmMWE2N2NhNjU3YzcyNmRiYTk0MzgzMmY3NmExZmNiOTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxNTk5NjAwYTMzMTY2ZTE1NmJkYTM0YmVkY2E1YTRlNDBjODdlYjJkZWU2Y2U5MmE3NzM0NGE3YjAwNThlZjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM0YTM4NjM4NzkwMDk1YjM0Nzk3YWQ1MTJhYzFiZDVlNjg3Yjg5OTgwOWMwMjJmNzI1ODQ5Y2NjNTBmYWQ0MzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI5MjA0ZWRlZDY3N2UyNzkwYjEzMDhiY2ZkZDI3ZDAwMzYyNjExOGMxMGVlM2NmMGViMDU2YTY5YThiN2MzNTUifQ"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt#L137-L154",
+          "version": "repo-lines-v1:sha256:8cb3fac58c280f3b3ce305ebb39c7de7e0b1e4b725aee9689706dcb29b041133:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxMGI1ZDU4YjE0ZTg4NjhjMGRiZTI1MDY0YmVmNGZmY2M4ZTkxMDBiMmZhNDg2Mjk4MTE5M2U4MmJmMjc1MzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM3NTVlYmQ5ZjVjNjU2NDdlMjdjYjNhODM5MDRlMDA4OTA5YjgzZWU2NTI3MjZjZWY0MjM3N2FmMWNkZjIxZDcifQ"
         }
       ]
     },
     {
       "id": "claim_0c1959a392594b708a08ac4f3a4aeeb6",
-      "statement": "FeatureDataPlugin adds core:data as api, Hilt runtime and KSP processors, core:data test fixtures for unit tests, and the ktlint and libraries Detekt rules.",
+      "statement": "FeatureDataPlugin exposes core:data with api, adds Hilt runtime and main/test KSP compilers, adds core:data test fixtures, and applies the ktlint and libraries Detekt rules.",
       "evidence": [
         {
-          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L50-L69",
-          "version": "repo-lines-v1:sha256:123df76247f4393fd6915d7a3b237cb2aa171875e7542fc2825736cd1c99f57c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxYjk5ZmE0MjJmNTc1MTk0MDUzM2MyNTE2OTdkMjNkOTZjMGMzMzE5OGQ1YjM4YjEyMmYxMzE2ZTczYTk5ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YTM2NWE5MGVjMTFlOTA0MzI3NTJjZjkzNzZlYzVlZDM2YjgwYmE1ZThlNjg1NGZjZjk4OTcwZDMwNDQ0NjkifQ"
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L53-L73",
+          "version": "repo-lines-v1:sha256:c45d83de7ed55089a8a6e8dacf94daedd4cddf6ddd232e9c8525cfe4c92e2b66:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxYjk5ZmE0MjJmNTc1MTk0MDUzM2MyNTE2OTdkMjNkOTZjMGMzMzE5OGQ1YjM4YjEyMmYxMzE2ZTczYTk5ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTFkZDc2NGVlOTIzMDY1NDI0YTIwMGY5ZjFkNWMwMTdiYmNlNmU4ZDA1OGM0NWM2YzkxNGUwYzExMWFlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YTM2NWE5MGVjMTFlOTA0MzI3NTJjZjkzNzZlYzVlZDM2YjgwYmE1ZThlNjg1NGZjZjk4OTcwZDMwNDQ0NjkifQ"
         }
       ]
     },
@@ -35,6 +39,6 @@
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T16:41:29.588Z"
+    "at": "2026-11-02T14:42:55.956Z"
   }
 }

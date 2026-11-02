@@ -3,9 +3,6 @@ type: architecture reference
 title: "Base screen architecture: contract, ViewModel, UiResult"
 description: How screens are structured in core/presentation. Covers IBaseContract (ViewState, ViewEvent, ViewEffect), BaseViewModel (StateFlow state, event and effect channels, use case runner), UiResult and its extensions, and the legacy BaseFlow helper, with a full screen template for the Navigation3 stack.
 tags: [core-presentation, mvi, viewmodel, state, uiresult, architecture]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T15:48:49.783Z
 sources:
   - id: openwiki-source-624bcd35dfd907d3ffe26bf6
     resource: repo://core/presentation/src/main/java/com/core/presentation/base/model/UiResult.kt
@@ -20,6 +17,9 @@ sources:
   - id: openwiki-source-3917a7c895954ef50b72f64c
     resource: repo://demo/presentation/src/main/java/com/demo/presentation/navigation/DemoScreenNavGraphEntry.kt
 generated: { by: "claude-code", at: "2026-10-26T15:48:49.783Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-02T14:42:55.956Z
 ---
 
 # Base screen architecture
@@ -216,8 +216,7 @@ See [coroutines](coroutines.md).
 - **`effect` is single-consumer and conflated.** Collect it in exactly one place. Effects emitted while nobody collects are dropped except the latest.
 - `handleUiEvents` runs on the caller's thread (the main thread from Compose). Launch coroutines for work.
 - `UiResult.Loading`/`NoContent` (and core-data `ApiResult.NoContent`) have no structural equality, so compare them with `is`.
-- **Hilt ViewModels with dependencies in Navigation3 graphs:** entries are created with `viewModel(modelClass)` under a
-  graph `ViewModelStoreOwner` that doesn't supply a Hilt factory (see [navigation3](navigation3.md#gotchas-and-constraints)).
+- **Hilt ViewModels with dependencies in Navigation3 graphs:** the graph-scoped owner now exposes the Activity's default factory and creation extras, and `NavigationGraphFactoryImpl` wraps that factory with `HiltViewModelFactory`. This supports Hilt constructor injection while preserving graph-scoped ViewModel storage (see [navigation3](navigation3.md#gotchas-and-constraints)).
 
 ## Related pages
 

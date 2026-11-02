@@ -3,9 +3,6 @@ type: package reference
 title: Legacy Navigation Compose stack
 description: Reference for com.core.presentation.navigation, the older Navigation Compose based stack. Covers graphs, typed entries for screens, dialogs and bottom sheets, the NavigationManager/NavigationIntent direction channel, argument helpers, NavGraphBuilder registration, stability wrappers and the custom Material3 bottom-sheet navigator. Nothing in the app currently uses this stack; BaseActivity runs on navigation3.
 tags: [core-presentation, navigation, navigation-compose, legacy, bottom-sheet, hilt]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T15:48:49.783Z
 sources:
   - id: openwiki-source-a8f6f071ebaabf16a777b580
     resource: repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt

@@ -3,9 +3,6 @@ type: component reference
 title: CoreApp and BaseActivity
 description: Reference for core/presentation's application and activity base classes. CoreApp initializes ActivityProvider. BaseActivity is the single-activity host that sets edge-to-edge and night mode, applies Theme, renders the Navigation3 NavDisplay with bottom-sheet/dialog scenes and graph-scoped ViewModels, shows the floating bottom nav bar, and bridges session commands.
 tags: [core-presentation, activity, application, navigation3, session, edge-to-edge, hilt]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T15:48:49.783Z
 sources:
   - id: openwiki-source-e38439f5bc06bf873d6444ad
     resource: repo://app/src/main/java/com/baseapplication/MainActivity.kt
@@ -14,6 +11,9 @@ sources:
   - id: openwiki-source-7a8a9bf9712d2c5d9bff4f29
     resource: repo://core/presentation/src/main/java/com/core/presentation/CoreApp.kt
 generated: { by: "claude-code", at: "2026-10-26T15:48:49.783Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-02T14:42:55.956Z
 ---
 
 # CoreApp and BaseActivity
@@ -77,8 +77,8 @@ These are `lateinit var` and public, so subclasses can use them (for example `na
        1. **`NavDisplay`** (Navigation3) with
           - `backStack = navigationGraphManager.get().backStack` (a `SnapshotStateList<INavigationDestination>`),
           - `sceneStrategies = listOf(bottomSheetStrategy, dialogStrategy)`. When neither matches, the default single-pane scene is used.
-          - `entryDecorators = listOf(rememberSaveableStateHolderNavEntryDecorator(), rememberSharedViewModelStoreNavEntryDecorator(navigationGraphManager.get(), navigationGraphFactory.get().navigationGraphsWithDestinations))`,
-          - `entryProvider = entryProvider { navigationGraphFactory.get().register(scope = this) }`.
+          - `entryDecorators` preserves saveable state and provides graph-scoped ViewModel owners. `BaseActivity` passes its `defaultViewModelProviderFactory` and `defaultViewModelCreationExtras` to the shared decorator so destination ViewModels retain the host's Hilt factory and creation context.
+          - `entryProvider = entryProvider { navigationGraphFactory.get().register(scope = this) }`; `NavigationGraphFactoryImpl` wraps the owner factory in `HiltViewModelFactory` when creating each entry's ViewModel.
           No `onBack` is passed, so back handling relies on `NavDisplay`'s default behaviour for a mutable back stack. Verify this against the Navigation3 version in use.
        2. **Bottom nav bar**: `AnimatedContent` aligned `BottomCenter`, padded by `WindowInsets.navigationBars` and 16 dp horizontally,
           with `targetState = navigationGraphFactory.get().getNavigationGraphFromDestination(backStack.last())` and a vertical slide transition.

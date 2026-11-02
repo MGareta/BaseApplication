@@ -3,9 +3,6 @@ type: package reference
 title: Navigation 3 (active navigation stack)
 description: Reference for com.core.presentation.navigation3, the Navigation3-based stack BaseActivity uses. Covers destinations (NavKey), entries with Render plus dialog and bottom-sheet variants, graphs (launcher, bottom-nav), feature registration through Hilt @ClassKey multibinding in ActivityRetainedComponent, the factory and back-stack manager, graph-scoped ViewModel stores, the bottom-sheet scene strategy, and known pitfalls.
 tags: [core-presentation, navigation3, navigation, hilt, multibinding, viewmodel, bottom-sheet, dialog]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T15:48:49.783Z
 sources:
   - id: openwiki-source-5f31cbb6e624fb9b0eb9aadc
     resource: repo://core/presentation/src/main/java/com/core/presentation/navigation3/di/NavigationModule.kt

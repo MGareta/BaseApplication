@@ -3,9 +3,6 @@ type: how-to guide
 title: Recipes for feature work on core/data
 description: Step-by-step Kotlin recipes for building features on core/data. Covers adding Retrofit services and handling ApiResult, caching with repositoryPattern, analytics frameworks and events, AES/RSA encryption, session lifecycle and commands, permissions, activity results, downloads and files, environment switching, and notification permission and dismissal.
 tags: [core-data, recipes, how-to, retrofit, cache, session, permissions]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T12:11:14.549Z
 sources:
   - id: openwiki-source-e38439f5bc06bf873d6444ad
     resource: repo://app/src/main/java/com/baseapplication/MainActivity.kt
@@ -20,12 +17,15 @@ sources:
   - id: openwiki-source-a8f6f071ebaabf16a777b580
     resource: repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt
 generated: { by: "claude-code", at: "2026-10-26T12:11:14.549Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-02T14:42:55.956Z
 ---
 
 # Recipes for feature work on core/data
 
 Each recipe assumes a feature data module using the `feature.data` plugin (`FeatureDataPlugin`), which brings
-`api(project(":core:data"))`, Hilt and KSP. All core managers are `@Singleton`s in `SingletonComponent`, so inject the interfaces.
+`api(project(":core:data"))`, Hilt and KSP. The plugin also configures tests with `configureTests()` and adds Hilt's test compiler through `kspTest(...)`. All core managers are `@Singleton`s in `SingletonComponent`, so inject the interfaces.
 
 > **Prerequisite for anything that needs an activity (permissions, activity results, file/notification permission
 > prompts):** `ActivityProvider` tracks **only `FragmentActivity`** instances. In this repo `MainActivity : BaseActivity : ComponentActivity`,

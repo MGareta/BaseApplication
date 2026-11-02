@@ -29,9 +29,6 @@ sources:
   - id: openwiki-source-af3f0101eba467e367f76d65
     resource: repo://core/presentation/src/main/res/values/strings.xml
 generated: { by: "claude-code", at: "2026-10-26T16:41:29.588Z" }
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T16:41:29.588Z
 ---
 
 # core/presentation module overview
