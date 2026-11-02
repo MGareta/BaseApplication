@@ -1,7 +1,10 @@
 package com.core.presentation.navigation3.model.entry.decorators.viewModel
 
+import androidx.lifecycle.HasDefaultViewModelProviderFactory
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.viewmodel.CreationExtras
 
 /**
  * A custom [ViewModelStoreOwner] implementation designed to scope ViewModels to a navigation graph's lifecycle.
@@ -14,9 +17,9 @@ import androidx.lifecycle.ViewModelStoreOwner
  * ### Usage:
  * It is primarily used within [SharedViewModelStoreNavEntryDecorator] to provide a shared
  * [androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner] via [androidx.compose.runtime.CompositionLocalProvider].
- *
- * @param store The [ViewModelStore] that will hold the ViewModels for the associated navigation graph.
  */
-internal class NavigationGraphViewModelStoreOwner(store: ViewModelStore) : ViewModelStoreOwner {
-    override val viewModelStore: ViewModelStore = store
-}
+internal class NavigationGraphViewModelStoreOwner(
+    override val viewModelStore: ViewModelStore,
+    override val defaultViewModelProviderFactory: ViewModelProvider.Factory,
+    override val defaultViewModelCreationExtras: CreationExtras
+) : ViewModelStoreOwner, HasDefaultViewModelProviderFactory
