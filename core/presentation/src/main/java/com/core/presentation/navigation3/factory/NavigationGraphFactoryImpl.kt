@@ -1,7 +1,11 @@
 package com.core.presentation.navigation3.factory
 
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.lifecycle.viewmodel.HiltViewModelFactory
+import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.scene.DialogSceneStrategy
@@ -148,8 +152,18 @@ internal class NavigationGraphFactoryImpl(
                     else -> emptyMap()
                 },
                 content = { destination ->
+                    val owner = checkNotNull(LocalViewModelStoreOwner.current)
+                    val factoryOwner = owner as? HasDefaultViewModelProviderFactory
+                        ?: error("Navigation3 ViewModel owner must provide a default factory")
+
                     val viewModel = viewModel(
-                        modelClass = entry.viewModel.java
+                        modelClass = entry.viewModel.java,
+                        viewModelStoreOwner = owner,
+                        factory = HiltViewModelFactory(
+                            context = LocalContext.current,
+                            delegateFactory = factoryOwner.defaultViewModelProviderFactory
+                        ),
+                        extras = factoryOwner.defaultViewModelCreationExtras
                     )
 
                     entry.Render(
