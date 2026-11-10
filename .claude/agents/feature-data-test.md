@@ -11,11 +11,15 @@ You implement only the `[data-test]` tasks. Use the `wiki-context` skill with ro
 `<feature>/data/src/test/**`.
 
 ## How to test (`openwiki/core-data/testing.md`)
+Base tests on the shared `core` test fixtures and this feature's OpenSpec scenarios. Do not use another feature's source or tests as a baseline; the current feature's approved design and scenarios determine collaborators and assertions.
+
 - One or more tests per scenario of the `<feature>-data` capability. Name each test after the scenario and add KDoc `Scn: <feature>-data/<Scenario title>`.
 - **When prerequisite P2 is in place** (feature plugins call `configureTests()` and `kspTest(hilt-compiler)`): follow the BaseTest pattern
   (Robolectric + `HiltTestApplication` + `HiltAndroidRule`, `UnconfinedTestDispatcher`, `test { }`). If `BaseTest` isn't shared via test fixtures, copy it into
-  `<feature>/data/src/test/java/com/<feature>/data/BaseTest.kt` unchanged in behavior. Replace collaborators with `@UninstallModules` + `@BindValue` mocks or
-  `@TestInstallIn` modules (for example a fake API service replacing `<Feature>NetworkModule`).
+  `<feature>/data/src/test/java/com/<feature>/data/BaseTest.kt` unchanged in behavior. Replace module-provided API services with a test-source
+  `@TestInstallIn` module (for example, a fake API service replacing `<Feature>NetworkModule`) and inject the service into the Hilt test with
+  `@Inject lateinit var`. If the approved Data API surface marks the API as `N/A`, do not add an API fake or replacement module; test the applicable manager behavior using the designed collaborators.
+  Use `@BindValue` for other per-test collaborators when a replacement module is not appropriate.
 - **When P2 is missing** (the coordinator tells you; `eval-mechanical --gate preflight` reports PRE-P2): use the documented "construct the impl directly" pattern
   (`core-data/testing.md` → *Replacing dependencies*). Instantiate `<Feature>ManagerImpl` with MockK fakes and real pure-Kotlin collaborators, and use
   `kotlinx.coroutines.test.runTest`. No `@HiltAndroidTest`, no Robolectric.
