@@ -19,4 +19,4 @@ The allowlist encodes "only technology documented in the wiki" as checkable impo
 5. Keep the file's existing structure and key names; `scripts/orchestrator/eval-mechanical.py` parses this simple YAML subset (top-level section → key → list of strings, or `- pattern:` / `rule:` pairs).
 6. Set `source_wiki_update` to the date in `openwiki/.last-update.json` (`updatedAt`, first 10 characters) and list the pages used under `sources`.
 7. Show the human a diff of `docs/orchestrator/allowlist.yaml` and get approval before committing. Never widen the allowlist to make a failing feature pass: that's a scope change (proposal §3.6).
-8. Sanity-check it: `python3 -I scripts/orchestrator/eval-mechanical.py --change x --feature demo --gate G2` must parse without errors. Findings about the demo module are expected.
+8. Sanity-check it with a known valid feature change: `python3 -I scripts/orchestrator/eval-mechanical.py --change <change-id> --feature <feature> --gate G2` must parse without errors. Findings are specific to that change and feature; they are not requirements for future features.
