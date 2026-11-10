@@ -32,7 +32,7 @@ rules:
   tasks:
     - Use exactly these sections, in order - 0. Module, 1. Data, 2. Presentation, 3. Testing.
     - Every task line starts with one role tag [module], [data], [data-test], [viewmodel], [view], [analytics] or [testing] and never mixes roles.
-    - Every task line ends with "Req: <capability>/<Requirement title>"; test tasks add "Scn: <Scenario title>[, <Scenario title>]".
+    - Every task line ends with "Req':' <capability>/<Requirement title>"; test tasks add "Scn':' <Scenario title>[, <Scenario title>]".
     - Each scenario of <feature>-data has a [data-test] task; each scenario of <feature>-presentation and <feature>-analytics has a [testing] task.
 
 operations:
