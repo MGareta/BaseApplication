@@ -207,7 +207,7 @@ Platform names for the presentation builders: **Android** ViewModel + Compose sc
 
 ### 6.2 Agent definition files (`.claude/agents/<name>.md`)
 
-Every agent file has the same sections. Use this repo's files as templates and replace the paths and wiki pages:
+Every agent file has the same sections. Use existing role-definition files only as format templates; keep reusable implementation guidance grounded in `core/**` and feature-specific guidance in the current approved OpenSpec design:
 
 ```markdown
 ---
@@ -320,7 +320,7 @@ test-weakening detection against `--base` (deleted tests, removed assertions), a
 > Formatters and linters that **rewrite files** (Detekt with `autoCorrect` here; `swiftformat`, `dart fix --apply`, `dart format` elsewhere) must run in a
 > throw-away worktree during a gate, keeping only their report. Otherwise the gate silently changes the code it's judging.
 
-Dry-run the script against an existing module (here `demo/*`) and confirm it reports exactly the issues you already know about.
+Dry-run the script against a known existing module fixture and confirm it reports exactly the issues you already know about. The fixture is for validating the gate, not a feature implementation baseline.
 
 ---
 
@@ -341,7 +341,7 @@ Skills keep agent prompts short: every agent starts with "use `wiki-context` wit
 [`scripts/orchestrator/guard-paths.sh`](../../scripts/orchestrator/guard-paths.sh) is a `PreToolUse` hook. It's active only while
 `.claude/orchestrator-active` exists (the workflow creates it at the start of `implement` and removes it after archive), so normal development is unaffected.
 It blocks (exit 2, message to the agent):
-- edits to core modules, the wiki, `openspec/specs/`, `openspec/config.yaml`, root build files, the orchestrator's own files and demo code;
+- edits to core modules, the wiki, `openspec/specs/`, `openspec/config.yaml`, root build files, the orchestrator's own files and repository-specific protected sample-module paths (guardrails, not implementation baselines);
 - `openspec archive` without `.orchestrator/archive-approved`;
 - `git push`;
 - shell writes (`sed -i`, redirections, `tee`) into read-only zones.
@@ -374,7 +374,7 @@ the hook only enforces the global read-only zones.
 [`.claude/workflows/openspec-feature.js`](../../.claude/workflows/openspec-feature.js) drives everything deterministically. It takes:
 
 ```json
-{ "feature": "orders", "stage": "plan | implement | archive", "request": "<natural-language feature request>",
+{ "feature": "<feature>", "stage": "plan | implement | archive", "request": "<natural-language feature request>",
   "allowMissingPrerequisites": false, "baseRef": "<git sha before implement>" }
 ```
 
@@ -400,11 +400,11 @@ sed 's/^export const meta/const meta/' .claude/workflows/openspec-feature.js > /
 ## 13. Step 11: Run the pilot
 
 ```text
-Workflow openspec-feature  args: {"feature": "orders", "stage": "plan", "request": "<request>"}
-# review: openspec show add-orders-feature   →   touch openspec/changes/add-orders-feature/.orchestrator/plan-approved
-Workflow openspec-feature  args: {"feature": "orders", "stage": "implement", "baseRef": "<sha>"}
-# review the feature                          →   touch openspec/changes/add-orders-feature/.orchestrator/archive-approved
-Workflow openspec-feature  args: {"feature": "orders", "stage": "archive"}
+Workflow openspec-feature  args: {"feature": "<feature>", "stage": "plan", "request": "<request>"}
+# review: openspec show add-<feature>-feature   →   touch openspec/changes/add-<feature>-feature/.orchestrator/plan-approved
+Workflow openspec-feature  args: {"feature": "<feature>", "stage": "implement", "baseRef": "<sha>"}
+# review the feature                           →   touch openspec/changes/add-<feature>-feature/.orchestrator/archive-approved
+Workflow openspec-feature  args: {"feature": "<feature>", "stage": "archive"}
 ```
 
 Interactive alternative without the workflow: `/opsx:propose` (plan), then invoke each `feature-*` agent in phase order, running the gate script between phases,

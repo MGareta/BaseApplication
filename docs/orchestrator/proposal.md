@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Repository | `BaseApplication` (`:app`, `:core:data`, `:core:presentation`, `core/dependencies`, `:demo:*`) |
+| Repository | `BaseApplication` (`:app`, `:core:data`, `:core:presentation`, `core/dependencies`, and feature modules) |
 | Status | Design proposal, not implemented |
 | OpenSpec version assumed | **v1.15.0** (latest release, 2026-10-24), verified against `Fission-AI/OpenSpec` `main` docs (`README.md`, `docs/cli.md`, `docs/commands.md`, `docs/customization.md`, `docs/concepts.md`, `docs/supported-tools.md`, `docs/agent-contract.md`, `docs/writing-specs.md`) |
 | Wiki baseline | `openwiki/` as generated on 2026-10-26 (`quickstart.md`, `core-data/*`, `core-presentation/*`, `core-dependencies/*`) |
@@ -28,7 +28,7 @@ This section supersedes conflicting details in the rest of the document and in t
 |---|---|
 | `openspec/config.yaml` | Project context, artifact rules, apply/archive guidance (§3.4) |
 | `docs/orchestrator/allowlist.yaml` | Allowlist v1 (§7.1) |
-| `scripts/orchestrator/eval-mechanical.py` | Mechanical gate checks `preflight`, `G0a`, `G0c`, `G1`, `G2`, `G3` (§7.3); standard-library Python; dry-run against `demo/*` reports exactly its known issues |
+| `scripts/orchestrator/eval-mechanical.py` | Mechanical gate checks `preflight`, `G0a`, `G0c`, `G1`, `G2`, `G3` (§7.3); standard-library Python; dry-run against a known module fixture reports exactly its known issues |
 | `scripts/orchestrator/guard-paths.sh` | PreToolUse guard (§10.4), active only while `.claude/orchestrator-active` exists |
 | `docs/orchestrator/hooks.settings.json` | Hook registration snippet. **Not installed**: merge it into `.claude/settings.json` yourself (installing persistent hooks needs your explicit approval) |
 | `.claude/agents/feature-*.md` (11) | Role definitions (supersede Appendix A). Phase 0 is a module team: `feature-module` builds, `feature-module-eval` reviews |
@@ -50,18 +50,18 @@ This section supersedes conflicting details in the rest of the document and in t
 
 **How to run**
 ```text
-Workflow openspec-feature  args: {"feature": "orders", "stage": "plan", "request": "<feature request>", "allowMissingPrerequisites": true}
-# review: openspec show add-orders-feature ; then: touch openspec/changes/add-orders-feature/.orchestrator/plan-approved
-Workflow openspec-feature  args: {"feature": "orders", "stage": "implement", "allowMissingPrerequisites": true, "baseRef": "<git sha before implement>"}
-# review the feature; then: touch openspec/changes/add-orders-feature/.orchestrator/archive-approved
-Workflow openspec-feature  args: {"feature": "orders", "stage": "archive", "allowMissingPrerequisites": true}
+Workflow openspec-feature  args: {"feature": "<feature>", "stage": "plan", "request": "<feature request>", "allowMissingPrerequisites": true}
+# review: openspec show add-<feature>-feature ; then: touch openspec/changes/add-<feature>-feature/.orchestrator/plan-approved
+Workflow openspec-feature  args: {"feature": "<feature>", "stage": "implement", "allowMissingPrerequisites": true, "baseRef": "<git sha before implement>"}
+# review the feature; then: touch openspec/changes/add-<feature>-feature/.orchestrator/archive-approved
+Workflow openspec-feature  args: {"feature": "<feature>", "stage": "archive", "allowMissingPrerequisites": true}
 ```
 
 ---
 
 ## 1. Executive summary
 
-A developer describes a feature (for example "orders: list + detail + filter sheet backed by `/orders` endpoints"). A **coordinator** turns that request into an
+A developer describes a feature (for example, a list and detail flow backed by the feature's API). A **coordinator** turns that request into an
 **OpenSpec change** (`openspec/changes/add-<feature>-feature/`) containing a proposal, capability spec deltas (requirements and WHEN/THEN scenarios), a design
 with the inter-team contracts, and a `tasks.md` partitioned per agent. After `openspec validate --strict` and **human approval of the plan**, the coordinator
 drives four phases of specialized agents. Each agent implements only its own tagged tasks, guided by `openspec instructions apply --change <id> --json`,
@@ -139,16 +139,16 @@ openspec/
 ├── config.yaml                                  # project context + rules (§3.4)
 ├── specs/                                       # truth after archive: <feature>-module/, <feature>-data/, ...
 └── changes/
-    └── add-orders-feature/
-        ├── .openspec.yaml                       # schema: spec-driven, x-feature: orders, x-run-id: ...
+    └── add-<feature>-feature/
+        ├── .openspec.yaml                       # schema: spec-driven, x-feature: <feature>, x-run-id: ...
         ├── proposal.md
         ├── design.md                            # includes the handoff contracts (§6)
         ├── tasks.md                             # sections 0–4, role tags (§3.3)
         ├── specs/
-        │   ├── orders-module/spec.md
-        │   ├── orders-data/spec.md
-        │   ├── orders-presentation/spec.md
-        │   └── orders-analytics/spec.md
+        │   ├── <feature>-module/spec.md
+        │   ├── <feature>-data/spec.md
+        │   ├── <feature>-presentation/spec.md
+        │   └── <feature>-analytics/spec.md
         └── .orchestrator/                       # run state (not an OpenSpec artifact)
             ├── leases.json
             ├── verdicts/{module-eval,data-eval,presentation-eval,testing}-<n>.json
@@ -273,7 +273,7 @@ derived artifact. Regenerate it whenever `openwiki/.last-update.json` changes (a
   `Scn: <Scenario title>`.
 - **Code → task:** each new file's KDoc header contains `@see openspec add-<feature>-feature task <n.m>`. KDoc on public classes is already required by Detekt
   (`core-dependencies/code-quality.md`, `UndocumentedPublicClass`), so this costs nothing extra.
-- **Test → scenario:** test function names follow the scenario (`` `WHEN filter applied THEN list shows only matching orders` ``), plus a KDoc line `Scn: <capability>/<scenario>`.
+- **Test → scenario:** test function names follow the scenario (`` `WHEN filter applied THEN list shows only matching items` ``), plus a KDoc line `Scn: <capability>/<scenario>`.
 - **Mechanical check (TR-1):** a script lists every scenario (`openspec show <id> --json --deltas-only`) and fails the gate if a scenario of the phase's capability has no
   test referencing it, or if any new `.kt` file lacks a task reference.
 - **Platform dependencies:** if the request needs permissions, activity results, session UI or a working bottom-nav tab, the coordinator marks the requirement
@@ -360,7 +360,7 @@ The testing team is **one agent** in v1. Splitting it (integration vs. UI) only 
 | `openspec/changes/<id>/**` (except `tasks.md` checkboxes) | coordinator | agents tick only their own checkboxes |
 | `.orchestrator/verdicts/**` | eval agents | — |
 
-The package layout follows `demo/presentation` (`viewModel/`, `view/`, `navigation/`, `model/`, `di/`) and core/data (`api/`, `di/`, `manager/`, `model/`, `repository/`).
+Reusable structure follows the relevant `core/**` contracts and `openwiki/core-dependencies` recipes. Feature-owned path categories are `viewModel/`, `view/`, `navigation/`, `model/`, `di/`, `api/`, `manager/`, and `repository/`; they are not a requirement to create every directory. The current change's approved `design.md` → *Data API surface* component-applicability table determines which feature-specific components and paths exist. Another feature's layout is never a baseline.
 `.orchestrator/leases.json` records which role currently holds which path globs. The PreToolUse hook (§10.4) enforces it.
 
 ### 6.2 Handoff artifacts
@@ -369,7 +369,7 @@ All handoffs live in `design.md` (an OpenSpec artifact, versioned with the chang
 
 | From → To | Artifact | Content |
 |---|---|---|
-| Coordinator → all | `design.md` → *Data API surface* (planned) | interfaces, method signatures, model fields, the Hilt bindings presentation may inject |
+| Coordinator → all | `design.md` → *Data API surface* (planned) | A component-applicability table: each API service, network module, request/response DTO, app-facing model, manager pair, manager module, and repository/cache is `Required` with planned paths/types/signatures or `N/A` with a reason; also record the exact interface methods, model fields and Hilt bindings presentation may inject. |
 | Data → Presentation | `.orchestrator/handoff/data-api-surface.json` (generated after G1 from the real code by the data eval agent) | actual public types; the presentation eval diffs it against the planned surface |
 | Coordinator → ViewModel ∥ View | `design.md` → *Presentation contract* | `UiState`/`Event`/`Effect` types, UI model fields, which events each screen emits |
 | Coordinator → View | `design.md` → *Navigation* | destinations (object/data class + args), entry type (screen/dialog/bottom sheet), graph (launcher? bottom-nav?), effect → navigation mapping |
@@ -380,12 +380,12 @@ All handoffs live in `design.md` (an OpenSpec artifact, versioned with the chang
 `data-api-surface.json` schema:
 ```json
 {
-  "feature": "orders",
-  "managers": [{"interface": "com.orders.data.manager.IOrdersManager",
-                "methods": [{"name": "getOrders", "suspend": true, "params": [{"name": "status", "type": "OrderStatus?"}],
-                             "returns": "ApiResult<List<Order>>"}]}],
-  "models": [{"type": "com.orders.data.model.Order", "fields": [{"name": "id", "type": "String"}]}],
-  "hiltBindings": [{"type": "IOrdersManager", "component": "SingletonComponent", "scope": "Singleton", "module": "com.orders.data.di.OrdersModule"}]
+  "feature": "<feature>",
+  "managers": [{"interface": "com.<feature>.data.manager.I<Feature>Manager",
+                "methods": [{"name": "<operation>", "suspend": true, "params": [{"name": "<parameter>", "type": "<Type>"}],
+                             "returns": "ApiResult<<Model>>"}]}],
+  "models": [{"type": "com.<feature>.data.model.<Model>", "fields": [{"name": "<field>", "type": "<Type>"}]}],
+  "hiltBindings": [{"type": "I<Feature>Manager", "component": "SingletonComponent", "scope": "Singleton", "module": "com.<feature>.data.di.<Feature>Module"}]
 }
 ```
 
@@ -444,19 +444,20 @@ Every rule: **ID · check type (M = mechanical, J = LLM-judged) · source**. Sev
 - M-5 · M · no external dependency added anywhere (dependency diff of `:app:dependencies --configuration debugRuntimeClasspath` before/after, minus project modules)
 - M-6 · J · build files have exactly the recipe shape (`plugins { alias(...) }`, `android { namespace }`, `dependencies {}`); SDK levels, Java/Kotlin targets, build features and test options come from the convention plugin and are never set in the feature (`core-dependencies/recipes.md` §1–2, `config.md`, `plugin-feature-*.md`)
 - M-7 · J · visibility edges are exactly `:app` → `:<f>:presentation` and `:<f>:presentation` → `:<f>:data`, both `implementation` (never `api`); no `:app` → `:<f>:data`, no data → presentation edge (`dependency-visibility.md` → *Gaps and fixes* 1, 3; `recipes.md` §1 step 4)
-- M-8 · J · `settings.gradle.kts` and `app/build.gradle.kts` edits are append-only: existing includes and dependencies (including `:demo:*`) are untouched and keep their order (§6.1; `recipes.md` §2 step 5 applies only when replacing the demo)
-- M-9 · J · module files match the demo shape (empty manifest, `.gitignore`, `.pro` files) and nothing else changed: no Kotlin sources, and no edits under `core/**`, `gradle/**` or `demo/**` (`recipes.md` §1–2; read-only zones §4)
+- M-8 · J · `settings.gradle.kts` and `app/build.gradle.kts` edits are append-only: existing includes and dependencies are untouched and keep their order (§6.1; `core-dependencies/recipes.md` §2 step 5)
+- M-9 · J · module support files follow `core-dependencies/recipes.md` §1–2 (empty manifest, `.gitignore`, `.pro` files); no Kotlin sources are added in the module-only phase, and no edits are made under `core/**`, `gradle/**` or paths outside the current change's ownership
 - M-10 · J (W) · wiki gotchas that need a core change (PRE-P2: no `kspTest`/Robolectric; the Compose BoM gap) are reported with a citation, never worked around in the feature build files (`plugin-feature-data.md`, `plugin-feature-presentation.md`, `version-catalog.md` → *Gotchas*)
 
 **Data (data eval)**
 - D-1 · M · imports ⊆ `allowlist.data.imports_allowed`
-- D-2 · J · API services are Retrofit `suspend` functions returning `ApiResult<T>` and are provided via `RetrofitFactory.create().build(kClass, environment = env.environment, interceptors)` in a `@Singleton` provider (`core-data/network.md` → *Declaring a feature API service*)
-- D-3 · J · managers follow `I<Feature>Manager` + `<Feature>ManagerImpl`, provided in a `@Module @InstallIn(SingletonComponent::class)` object with `@Singleton @Provides` (`core-data/overview.md` → *Architecture conventions*)
-- D-4 · J · all public results are `ApiResult`; `NoContent` is compared with `is` (`core-data/network.md` → *Gotchas*)
-- D-5 · J · DTOs are `@Serializable`; cached values are `@Serializable` classes, with lists wrapped (`core-data/cache.md` → *Gotchas*)
-- D-6 · J · cache usage matches `design.md` → *Cache policy*; `repositoryPattern` is used only with non-suspend sources, otherwise the manual pattern from `core-data/recipes.md` §2
+- D-2 · J · for each API service marked `Required` in `design.md` → *Data API surface*, the Retrofit interface has `suspend` methods returning `ApiResult<T>` and its service is provided through `RetrofitFactory.create().build(kClass, environment = env.environment, interceptors)` in a `@Singleton` provider (`core-data/network.md` → *Declaring a feature API service*); if the API is `N/A`, no feature API service or network binding is added
+- D-3 · J · for each manager marked `Required`, implement `I<Feature>Manager` + `<Feature>ManagerImpl` and bind the interface from the planned `@Module @InstallIn(SingletonComponent::class)` object with `@Singleton @Provides` (`core-data/overview.md` → *Architecture conventions*); if the manager is `N/A`, no manager placeholder or binding is added
+- D-4 · J · all public manager results are `ApiResult`; `NoContent` is compared with `is` (`core-data/network.md` → *Gotchas*)
+- D-5 · J · each required request/response DTO is `@Serializable`; each data-bearing response DTO is mapped to the planned plain app-facing model and never exposed through the manager. Omit DTOs for absent payloads and models for void/no-content-only outcomes. Cached values are `@Serializable` classes, with lists wrapped (`core-data/cache.md` → *Gotchas*)
+- D-6 · J · cache and repository layers match `design.md` → *Cache policy* and the component-applicability table; a repository is added only when the design requires a separate data-source/cache boundary. `repositoryPattern` is used only with non-suspend sources, otherwise use the manual pattern from `core-data/recipes.md` §2
 - D-7 · J · no use of `CipherType.RSA` without a key (`core-data/security.md` → *Gotchas*, shared alias)
 - D-8 · M · no new Detekt findings in the feature module compared with an empty module: `./gradlew :<f>:data:detekt` on a disposable worktree (W only, because the strict config also flags documented patterns; `core-dependencies/code-quality.md`)
+- D-9 · J · `design.md` → *Data API surface* classifies every canonical component (API service, network module, request/response DTOs, app-facing models, manager pair, manager module, repository/cache) as `Required` with planned paths/types/signatures or `N/A` with a reason; all required components match the source, N/A components are absent, and no unplanned public feature API or Hilt binding is added (internal helpers may be added when needed)
 - D-T1 · M · every `<f>-data` scenario has ≥1 test with `Scn:` (§3.5)
 - D-T2 · J · tests use the documented patterns (`@HiltAndroidTest`, `@UninstallModules` + `@BindValue`, `@TestInstallIn`, MockK) (`core-data/testing.md` → *Replacing dependencies*)
 - D-T3 · J · without P3, a local `BaseTest` copy is identical in behavior to `core-data/testing.md` → *BaseTest*
@@ -510,8 +511,8 @@ The judged pass only runs if the mechanical pass has no CRITICAL findings, which
   "findings": [{
     "rule": "D-2", "severity": "CRITICAL",
     "wiki": "openwiki/core-data/network.md#declaring-a-feature-api-service",
-    "requirement": "orders-data/Fetch order list",
-    "location": "orders/data/src/main/java/com/orders/data/di/OrdersNetworkModule.kt:18",
+    "requirement": "<feature>-data/<Requirement title>",
+    "location": "<feature>/data/src/main/java/com/<feature>/data/di/<Feature>NetworkModule.kt:18",
     "evidence": "Retrofit.Builder() created directly instead of RetrofitFactory",
     "owner": "data", "fix_hint": "Inject RetrofitFactory + IEnvironmentManager and call create().build(...)"
   }]
@@ -549,7 +550,8 @@ openspec instructions apply --change add-<f>-feature --json
 
 # Module (G0c, run by the module eval)
 python3 -I scripts/orchestrator/eval-mechanical.py --change add-<f>-feature --feature <f> --gate G0c --gradle   # M-1…M-5 + assemble
-git diff <base-ref> -- settings.gradle.kts app/build.gradle.kts <f>/ core/ demo/ gradle/                         # input to judged M-6…M-10
+git diff --name-status <base-ref>                                                              # full-change ownership review
+git diff <base-ref> -- settings.gradle.kts app/build.gradle.kts <f>/ core/ gradle/             # input to judged M-6…M-10
 ./gradlew :<f>:data:assembleDebug :<f>:presentation:assembleDebug :app:assembleDebug
 ./gradlew :app:dependencies --configuration debugRuntimeClasspath > .orchestrator/deps-after.txt   # diff with deps-before.txt (M-5)
 
@@ -646,7 +648,7 @@ Within a run, agents share the worktree: ownership is disjoint (§6.1), so paral
 ## 12. Rollout plan
 
 1. **Approve and land P1–P3**, install OpenSpec, write `openspec/config.yaml`, the subagents, skills and hooks (one PR).
-2. **Pilot feature:** `orders` (Appendix C), without forms, paging or bottom-nav (to avoid known gaps), with one list, one detail and one bottom-sheet filter.
+2. **Pilot feature:** select a small feature from an approved request, avoiding known gaps (such as forms, paging or bottom-nav) where practical. Derive its components and scenarios from its own approved OpenSpec design; Appendix C is an artifact-format illustration, not a required pilot scope or architecture.
 3. **Metrics** (per run, in `.orchestrator/metrics.json`): gate pass rate on first try; iterations per loop; eval findings by rule ID and category; spec-change requests (count and scope); tokens and wall time per phase; human interventions.
 4. **Iterate:** after the pilot, tighten rules that produced false positives, add mechanical checks for frequent judged findings, and consider a **custom OpenSpec schema** (`openspec schema fork spec-driven`) with a dedicated `contracts` artifact if `design.md` gets overloaded.
 5. **Second feature** with a form (exercising V-K rules) and the expanded P4 tier 2 if approved.
@@ -703,7 +705,7 @@ model: sonnet
 ---
 Implement only tasks tagged [module]. Follow openwiki/core-dependencies/recipes.md §1–2 exactly.
 Create <feature>/data and <feature>/presentation with build.gradle.kts applying coreLibs.plugins.feature.data / feature.presentation,
-android { namespace = "com.<feature>.data|presentation" }, an empty src/main/AndroidManifest.xml, .gitignore, consumer-rules.pro, proguard-rules.pro (as in demo/*).
+android { namespace = "com.<feature>.data|presentation" }, an empty src/main/AndroidManifest.xml, .gitignore, consumer-rules.pro, proguard-rules.pro as specified by openwiki/core-dependencies/recipes.md §1–2.
 Presentation: implementation(project(":<feature>:data")). Append include(...) lines to settings.gradle.kts and implementation(project(":<feature>:presentation")) to app/build.gradle.kts.
 Never add external dependencies. Verify with ./gradlew :<feature>:data:assembleDebug :<feature>:presentation:assembleDebug :app:assembleDebug. Check off your tasks.
 Fix module-eval findings in your owned paths only.
@@ -929,6 +931,8 @@ The system SHALL <one observable behavior>.
 
 ### C.4 Filled-in example: `add-orders-feature`
 
+> This fictional Orders scenario demonstrates artifact format only. Its APIs, requirements, component choices, module layout, tests and task breakdown are not defaults or a template for future features. For each change, derive feature-specific behavior and files from that feature's request and approved OpenSpec design; use `core/**` and the relevant core Wiki pages for reusable contracts.
+
 **proposal.md**
 ```markdown
 # Proposal: Add Orders feature
@@ -1045,10 +1049,19 @@ The app SHALL track order_selected with order_id when an order is tapped, and or
 **design.md (excerpt)**
 ```markdown
 ## Data API surface
-- interface IOrdersManager { suspend fun getOrders(status: OrderStatus?, forceRefresh: Boolean = false): ApiResult<List<Order>>; suspend fun getOrder(id: String): ApiResult<OrderDetail> }
-- models: Order(id, createdAt, total, currency, status), OrderDetail(order, items: List<OrderItem>), enum OrderStatus { PENDING, SHIPPED, DELIVERED, CANCELLED }
-- DTOs (@Serializable): OrderDto, OrdersDto(items: List<OrderDto>), OrderDetailDto
-- DI: OrdersNetworkModule (@Singleton OrdersApiService via RetrofitFactory + IEnvironmentManager), OrdersModule (@Singleton IOrdersManager = OrdersManagerImpl(api, cacheManager))
+| Component | Status | Planned files/types or rationale |
+|---|---|---|
+| API service | Required | `api/OrdersApiService.kt`; `getOrders(status)` and `getOrder(id)` return `ApiResult` |
+| Network module | Required | `di/OrdersNetworkModule.kt`; singleton RetrofitFactory binding for `OrdersApiService` |
+| Request DTOs | N/A | Both operations are GET requests with query/path parameters and no request body |
+| Response DTOs | Required | `model/dto/OrderDto.kt`, `OrdersDto.kt`, `OrderDetailDto.kt` (`@Serializable`) |
+| App-facing models | Required | `model/Order.kt`, `OrderDetail.kt`, `OrderItem.kt`, `OrderStatus.kt`; manager returns these, not DTOs |
+| Manager pair | Required | `manager/IOrdersManager.kt` with `getOrders`/`getOrder`; `manager/OrdersManagerImpl.kt` |
+| Manager Hilt module | Required | `di/OrdersModule.kt`; singleton `IOrdersManager` binding constructed from the API and cache manager |
+| Separate repository | N/A | The manager owns the specified API/cache flow; no additional repository boundary is needed |
+| Cache | Required | See *Cache policy* below |
+
+Only `Required` components are created. Every `N/A` entry includes its reason so the data agent and evaluator can distinguish deliberate omissions from missing work.
 ## Cache policy
 getOrders(null): MEMORY_CACHE, TimeToLiveCacheConfig(key = "orders_all", duration = 5.minutes, bypassCache = forceRefresh); filtered calls are not cached; detail not cached.
 Manual pattern (core-data/recipes.md §2), because the source is a suspend Retrofit call.
@@ -1115,4 +1128,4 @@ See §7.2 (rule IDs M-*, D-*, D-T*, VM-*, V-*, V-N*, V-K*, V-I1, AN-*, TR-*).
 - Repository wiki: `openwiki/quickstart.md`; `openwiki/core-data/{overview,network,cache,analytics,security,testing,recipes,permission,activity-result}.md`;
   `openwiki/core-presentation/{overview,app-and-activity,base-architecture,coroutines,navigation3,theme,theme-tokens,components-*,forms,form-fields,testing,recipes}.md`;
   `openwiki/core-dependencies/{overview,config,dependency-visibility,plugin-feature-data,plugin-feature-presentation,plugin-app,version-catalog,code-quality,recipes}.md`.
-- Reference feature: `demo/data`, `demo/presentation`.
+- Reusable implementation guidance comes from `core/**` and the relevant core Wiki pages; no feature module is a reference implementation.
