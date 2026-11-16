@@ -18,11 +18,12 @@ Base tests on the shared `core` test fixtures and this feature's OpenSpec scenar
   (Robolectric + `HiltTestApplication` + `HiltAndroidRule`, `UnconfinedTestDispatcher`, `test { }`). If `BaseTest` isn't shared via test fixtures, copy it into
   `<feature>/data/src/test/java/com/<feature>/data/BaseTest.kt` unchanged in behavior. Replace module-provided API services with a test-source
   `@TestInstallIn` module (for example, a fake API service replacing `<Feature>NetworkModule`) and inject the service into the Hilt test with
-  `@Inject lateinit var`. If the approved Data API surface marks the API as `N/A`, do not add an API fake or replacement module; test the applicable manager behavior using the designed collaborators.
+  `@Inject lateinit var` (write `@Inject internal lateinit var` when the type is `internal`, such as the API service; a test module replacing an internal data module is itself an `internal object`). If the approved Data API surface marks the API as `N/A`, do not add an API fake or replacement module; test the applicable manager behavior using the designed collaborators.
   Use `@BindValue` for other per-test collaborators when a replacement module is not appropriate.
 - **When P2 is missing** (the coordinator tells you; `eval-mechanical --gate preflight` reports PRE-P2): use the documented "construct the impl directly" pattern
   (`core-data/testing.md` → *Replacing dependencies*). Instantiate `<Feature>ManagerImpl` with MockK fakes and real pure-Kotlin collaborators, and use
   `kotlinx.coroutines.test.runTest`. No `@HiltAndroidTest`, no Robolectric.
+- **Visibility in tests: `internal` whenever possible.** Every `@TestInstallIn` module is an `internal object` (even when it only touches public types), and any helper, fake or fixture class/function you add in test sources is `internal`. Exceptions: the JUnit test class itself stays public (JUnit requires it), as do `abstract` base classes shared through test fixtures and test methods; use `internal` only on members whose type is `internal` (e.g. `@Inject internal lateinit var api`).
 - Only imports allowed by `docs/orchestrator/allowlist.yaml` → `data` + `tests`. No MockWebServer, Truth or Mockito.
 
 ## Running and reporting

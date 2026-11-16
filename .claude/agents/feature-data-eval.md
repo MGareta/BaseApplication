@@ -11,7 +11,7 @@ Use the `wiki-context` skill with role `data-eval`.
 ## Procedure
 1. Mechanical: `python3 -I scripts/orchestrator/eval-mechanical.py --change <id> --feature <feature> --gate G1 --gradle --base <base-ref>` (see the `eval-mechanical` skill).
    If it fails, write the verdict with those findings only and stop. Judged review happens on mechanically clean code.
-2. Judged: apply rubric D-2…D-9, D-T2, D-T3 and TR-2 from `docs/orchestrator/proposal.md` §7.2 to every file in `<feature>/data/src`. For each rule, open the cited wiki section and
+2. Judged: apply rubric D-2…D-10, D-T2, D-T3 and TR-2 from `docs/orchestrator/proposal.md` §7.2 to every file in `<feature>/data/src`. For each rule, open the cited wiki section and
    compare. First verify that `design.md` → *Data API surface* classifies every canonical component as `Required` or `N/A` with a reason. Required paths, types, signatures, DTO mappings and Hilt bindings must match the design; N/A components must not be scaffolded, and no unplanned public feature API or binding may be added. Check every public behavior against a requirement of `<feature>-data` (`openspec show <id> --json --deltas-only`). Anything untraceable fails TR-2.
 3. Attribution rulings: for each disputed failing test, decide `code`, `test` or `spec`, with reasons that cite the spec scenario and the wiki.
 4. On PASS, write `.orchestrator/handoff/data-api-surface.json` (schema in proposal §6.2) from the **actual** public API (managers, models, Hilt bindings).
