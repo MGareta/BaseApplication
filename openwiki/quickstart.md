@@ -8,8 +8,14 @@ sources:
     resource: repo://app/src/main/java/com/baseapplication/App.kt
   - id: openwiki-source-e38439f5bc06bf873d6444ad
     resource: repo://app/src/main/java/com/baseapplication/MainActivity.kt
+  - id: openwiki-source-3118d53a07141851841743f5
+    resource: repo://core/dependencies/src/main/java/com/core/dependencies/config/Config.kt
   - id: openwiki-source-6e98d638297776b5f81f559d
     resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/AppPlugin.kt
+  - id: openwiki-source-ca878af941a44f593f84eec4
+    resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CoreDataPlugin.kt
+  - id: openwiki-source-b93e89ddcc6bb7ffc877b9e1
+    resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CorePresentationPlugin.kt
   - id: openwiki-source-ebbe359b8fc397d0e2f617b5
     resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt
   - id: openwiki-source-1f78a6fb10e2b39879415b1c
@@ -26,9 +32,16 @@ sources:
     resource: repo://demo/presentation/build.gradle.kts
   - id: openwiki-source-dc2f4215d060ab5729f6cb69
     resource: repo://demo/presentation/src/main/java/com/demo/presentation/di/DemoScreenModule.kt
+  - id: openwiki-source-18004d7f627db083d489bc78
+    resource: repo://login/data/build.gradle.kts
+  - id: openwiki-source-06e0b2c5eb0f49f9782454e5
+    resource: repo://login/presentation/build.gradle.kts
   - id: openwiki-source-e620d7484b72a53c7fa812cd
     resource: repo://settings.gradle.kts
-generated: { by: "claude-code", at: "2026-10-26T16:41:29.588Z" }
+generated: { by: "claude-code", at: "2026-11-09T17:58:52.508Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-09T17:58:52.508Z
 ---
 
 # Quickstart
@@ -43,12 +56,13 @@ generated: { by: "claude-code", at: "2026-10-26T16:41:29.588Z" }
 | `:core:data` | Shared data and platform services (network, cache, security, session, permissions, files, ...). Documented under `core-data/`. |
 | `:core:presentation` | Compose UI base: `CoreApp`, `BaseActivity`, MVI `BaseViewModel`, Navigation3 integration, design system and components. Depends on `:core:data`. Documented under `core-presentation/`. |
 | `core/dependencies` | Included build with convention plugins (`core.data`, `core.presentation`, `feature.data`, `feature.presentation`, `app`) and the `coreLibs` version catalog. |
-| `:demo:data`, `:demo:presentation` | Sample feature modules (`demo:data` currently has no main sources). |
+| `:demo:data`, `:demo:presentation` | Sample feature modules (`:demo:data` currently has no main sources); both declare explicit namespaces. |
+| `:login:data`, `:login:presentation` | Login feature modules; both declare explicit namespaces, and `:login:presentation` depends on `:login:data`. |
 
-Feature data modules apply the `feature.data` plugin, which adds `api(project(":core:data"))`. Inject the core
+Feature data modules apply the `feature.data` plugin, which adds `api(project(":core:data"))` and the core:data test fixtures for JVM tests. Inject the core
 `I*Manager` interfaces with Hilt. Every core manager is a `@Singleton` in `SingletonComponent`.
-Feature presentation modules apply `feature.presentation` (`implementation(project(":core:presentation"))`) and contribute Navigation3 graphs and entries
-in `ActivityRetainedComponent`.
+Feature presentation modules apply `feature.presentation` (`implementation(project(":core:presentation"))`), receive the core:presentation test fixtures, and contribute Navigation3 graphs and entries
+in `ActivityRetainedComponent`. Core and feature convention plugins configure JVM tests and Hilt test code generation; see [build recipes](core-dependencies/recipes.md#8-enable-tests-for-a-module-type).
 
 ## Where to read for each task
 
@@ -102,7 +116,7 @@ in `ActivityRetainedComponent`.
 | Download a remote file | [core-data/download](core-data/download.md) |
 | Track screens or events, add an analytics SDK | [core-data/analytics](core-data/analytics.md) |
 | Notification permission or dismiss a notification | [core-data/notifications](core-data/notifications.md) |
-| Copy-paste working code for common feature tasks | [core-data/recipes](core-data/recipes.md) |
+| See working examples for common data-layer operations | [core-data/recipes](core-data/recipes.md) |
 | Write unit tests (Robolectric + Hilt + MockK) | [core-data/testing](core-data/testing.md) |
 
 ## Known pitfalls to check before building
@@ -113,8 +127,8 @@ in `ActivityRetainedComponent`.
 3. The session inactivity timeout is hard-coded to 5 s ([session](core-data/session.md)).
 4. AES and RSA share the Keystore alias `"alias"`. Device-bound RSA would replace the AES key used by the disk cache ([security](core-data/security.md)).
 5. `ApiResult.NoContent` isn't a data class, so compare it with `is` ([network](core-data/network.md)).
-6. Navigation3 creates ViewModels with `viewModel(modelClass)` under a graph store owner without a Hilt factory, so ViewModels with injected dependencies may fail.
-   It also never calls `loadInitData()` ([navigation3](core-presentation/navigation3.md)).
+6. Navigation3 graph-scoped ViewModels use a `HiltViewModelFactory` built from the graph owner’s default factory and creation extras, so Hilt constructor injection is supported.
+   Navigation3 still never calls `loadInitData()`; entries must call it themselves ([navigation3](core-presentation/navigation3.md)).
 7. `MainActivity.onSessionWarning()`/`onSessionTimeout()` are `TODO()`, and bottom-nav tab taps aren't wired ([app-and-activity](core-presentation/app-and-activity.md)).
 8. `CheckboxComponent`/`ToggleComponent` don't change state unless you pass `onValueChange`. Date fields don't display validation errors. `CurrencyType.Symbol` crashes
    `AmountFieldComponent` ([form-fields](core-presentation/form-fields.md)).
@@ -122,10 +136,10 @@ in `ActivityRetainedComponent`.
 10. `ContainerComponent`, `PagingComponent` and the list Loading/Error helpers are commented out ([components-layout](core-presentation/components-layout.md)).
 11. `Theme` forces `fontScale = 1f`, which ignores the user's font size ([theme](core-presentation/theme.md)).
 12. Import from `com.core.presentation.navigation3`, not the legacy `com.core.presentation.navigation` (same type names).
-13. **Always set `android { namespace = "..." }` in new modules.** The plugins default every module to `com.base.application`, and `:demo:*` currently share it with `:app`
-    ([config](core-dependencies/config.md)).
+13. **Set a unique `android { namespace = "..." }` in every new library module.** Convention plugins default namespaces to `com.base.application`; current `:demo:*` and `:login:*` feature modules override it with unique values
+    ([config](core-dependencies/config.md), [dependency visibility](core-dependencies/dependency-visibility.md)).
 14. Feature presentation modules and `:app` can't see core/data types (`ApiResult`, managers) unless they depend on a feature data module or core:data
     ([dependency-visibility](core-dependencies/dependency-visibility.md)).
-15. Only `core.data` configures Robolectric unit tests. Feature plugins have no `kspTest` for Hilt, and nothing provides Compose UI test artifacts ([recipes](core-dependencies/recipes.md#8-enable-tests-for-a-module-type)).
+15. Core and feature convention plugins configure Robolectric JVM tests and Hilt `kspTest` processing; feature data and presentation tests receive their respective shared BaseTest fixtures. Compose UI test artifacts (`ui-test-junit4`/`ui-test-manifest`) are not configured by these plugins ([recipes](core-dependencies/recipes.md#8-enable-tests-for-a-module-type), [core-presentation testing](core-presentation/testing.md)).
 16. Release builds are signed with the debug key, minified, and have no keep rules. The Crashlytics and Google Services plugins aren't applied ([plugin-app](core-dependencies/plugin-app.md)).
 17. Detekt runs with `autoCorrect = true` (it rewrites sources) on a 2.0 alpha with strict rules ([code-quality](core-dependencies/code-quality.md)).

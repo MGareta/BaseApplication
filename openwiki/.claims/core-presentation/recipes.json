@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:b6481212a3fc33078c6624bd99038759d7f9eb0a65e266503d8d3fc2277bce0b",
+  "pageVersion": "sha256:c7b192652a00280c14c34b83769ceb5f22436b1caa1e82c50ed70842b99fc06f",
   "claims": [
     {
       "id": "claim_c35c8e22c61241a8b85d8cc541a1a53f",
@@ -49,10 +49,24 @@
           "version": "repo-file-v1:sha256:4e3b73134151661e4d479cb9b5dfe23205e273e8c772981f72244a2743dcf81a"
         }
       ]
+    },
+    {
+      "id": "claim_924a54a7fbb14725b99fe4e129ee5e0c",
+      "statement": "The presentation recipes declare dialog and sheet entries and the navigation graph as internal classes, as login's entry and graph are.",
+      "evidence": [
+        {
+          "resource": "repo://login/presentation/src/main/java/com/login/presentation/navigation/LoginEntry.kt#L22-L22",
+          "version": "repo-lines-v1:sha256:1e0e0e52412a8662b1fec5689bddc4ef6fc49ad703b52b7e4795b79b58efc953:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWUwZTBlNTI0MTJhODY2MmIxZmVjNTY4OWJkZGM0ZWY2ZmM0OWFkNzAzYjUyYjdlNDc5NWI3OWI1OGVmYzk1MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWUwZTBlNTI0MTJhODY2MmIxZmVjNTY4OWJkZGM0ZWY2ZmM0OWFkNzAzYjUyYjdlNDc5NWI3OWI1OGVmYzk1MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNkMTU5ZmM0MTU3OTA0MjJiMTYzZjFlMzc0N2JlZDFjNWY1ZjIxZDJkMWRmYmY0ZjY2MmY4ODQ2YmFhNjhkMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGRmN2QzNTA2ZjRlNzU4ZjQ0NmI5MDc2MTM0M2Q3MWY0YTk0NTZhMzQ4NjlmZGYxYTVkOTQwMTA5YmYyNDY2ZiJ9"
+        },
+        {
+          "resource": "repo://login/presentation/src/main/java/com/login/presentation/navigation/LoginNavGraph.kt#L11-L11",
+          "version": "repo-lines-v1:sha256:8d6d13a11dfde714dae78a576eacf0ab60ae8b39323e4b54cfaeaafe4c634915:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGQ2ZDEzYTExZGZkZTcxNGRhZTc4YTU3NmVhY2YwYWI2MGFlOGIzOTMyM2U0YjU0Y2ZhZWFhZmU0YzYzNDkxNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGQ2ZDEzYTExZGZkZTcxNGRhZTc4YTU3NmVhY2YwYWI2MGFlOGIzOTMyM2U0YjU0Y2ZhZWFhZmU0YzYzNDkxNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmYxOTVlNGRmMzA2ZmI2ZTVhMDRmMmMxYWE4MzE4OWYyMDgyNThlZWNjYTkzMDQzYTQ4NWVjNWM1NDI3NTE0ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T15:48:49.783Z"
+    "at": "2026-11-16T11:21:00.506Z"
   }
 }

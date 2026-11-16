@@ -27,6 +27,9 @@ sources:
   - id: openwiki-source-d502552da26384e7c0195b9e
     resource: repo://core/presentation/src/main/java/com/core/presentation/navigation/model/utils/StabilityWrappers.kt
 generated: { by: "claude-code", at: "2026-10-26T15:48:49.783Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-02T14:42:55.956Z
 ---
 
 # Legacy Navigation Compose stack (`com.core.presentation.navigation`)

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:dfbb448a48bbc672d450324d225dfc2d5a0b10e1a23eb9eb2456983e445c0572",
+  "pageVersion": "sha256:70215f06841c5f8cb8f3d2b8b66622b9d6f9db7919b9fafea5054eeab88e0fbb",
   "claims": [
     {
       "id": "claim_1108bb3ea4ab4e83bbede3e05314e2cd",
@@ -28,11 +28,37 @@
     },
     {
       "id": "claim_38cb6494c2114b13ba4a3899034f4179",
-      "statement": "demo:data applies the feature.data plugin with an empty android block and no namespace override.",
+      "statement": "FeatureDataPlugin applies the shared com.base.application namespace as the default, but :demo:data and :login:data override it with com.demo.data and com.login.data.",
       "evidence": [
         {
-          "resource": "repo://demo/data/build.gradle.kts",
-          "version": "repo-file-v1:sha256:3ee06e3079bf6ae42ef0f455dfb4315763aaac442de3c97d36d9e3bdf166e1db"
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L44-L49",
+          "version": "repo-lines-v1:sha256:47ae6f8d5ae7f2e569d7a3aa9016959bdaffef36ba5a9fa67ebd9609842decbc:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWJmM2UxYjFmMzVhMWZmYzAwNjkwZWNjMmQ4NzY4MGYzZjI2ZmM2MjU0ZTJhMjhjY2E2MDlmMThhYTkxMDdjNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTUyMmM0MmNkMTljNmQwM2Q4MDhjNDUyNzIwNTUyODI1YjdlYTFjNWI0OTFiMjE4NTExY2FjNzQxNWNmOWQ5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjQ3MTIwMTc0OWZmZDBiNmM5ZWIxY2E4YmQ5YWY4OTFiNzM0NGVlNWE3YTVmZGVmNzJmNjVjMzFiODQyYjRiMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTQ1MWRkNzY0ZWU5MjMwNjU0MjRhMjAwZjlmMWQ1YzAxN2JiY2U2ZThkMDU4YzQ1YzZjOTE0ZTBjMTExYWU4NCJ9"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt#L52-L77",
+          "version": "repo-lines-v1:sha256:d69cbd1cfcf4dec317a2f3bd732c29c9b6d337886c51870272d768602e9bd99f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVmYzFmMDc5ZWRhYTlhZjFjYzg1YmZiOWNhYTk3MTBmM2I0MDJjMTU1ZGEwZGI5YzI3Njc0OTYwYzU3ZTA3MjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmOTJmMzFjMjEwN2U0NTY3ZjM0ZGYxMzU4ODY4OTViNGU1OWY4MmNlZWQ0NmRmMjBjOTZlNzlkYzc5YWZiNjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM2ZDMzNDQzMTQ3OGJiMDQ1Yjk5YTU5NWRmZmU5MGMxMjBkMmJiODMzNzNlNzRiM2Q1NzczYWM3N2VkMmU5NzkifQ"
+        },
+        {
+          "resource": "repo://demo/data/build.gradle.kts#L1-L7",
+          "version": "repo-lines-v1:sha256:86c1ed2481eff522b036880035c216e27549eec188681fb49996181753aacb70:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDQwNDAxMDMxNWJkYmIwZmVhMGZkNmZmMDIxNGQ4YmM5MjFjZTI4MzZkMWNjNmJjYjg4NDlmMzU3NmNmNWE2NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmUxZGI2OTYwNTJkYzNiNzQ2MDI2Njk5ZGM0NmIzNGU2MTA3ODJlOGI4OTJjNjRjNzdkOWI0ZDhkODc5NDgyZCJ9"
+        },
+        {
+          "resource": "repo://login/data/build.gradle.kts#L1-L7",
+          "version": "repo-lines-v1:sha256:26fd434db30ce46e6e2a955c693f0f481c96304d3f63c1ec4dd3f48c9fadaabc:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDQwNDAxMDMxNWJkYmIwZmVhMGZkNmZmMDIxNGQ4YmM5MjFjZTI4MzZkMWNjNmJjYjg4NDlmMzU3NmNmNWE2NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmUxZGI2OTYwNTJkYzNiNzQ2MDI2Njk5ZGM0NmIzNGU2MTA3ODJlOGI4OTJjNjRjNzdkOWI0ZDhkODc5NDgyZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_fbca98af968b4215a5eae4becbba04e2",
+      "statement": "Feature-data tests receive the shared com.core.data.BaseTest through the testFixtures dependency added by FeatureDataPlugin.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/testFixtures/java/com/core/data/BaseTest.kt#L26-L65",
+          "version": "repo-lines-v1:sha256:50eb231879a4e2e81fb3fe0be05ab378d4f2e2395d227a91c4f405d8a18bfeff:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1YzYyYTIwOWVmMmRhY2ViMDQ2ZDUxOGRlYWU1Y2MwOTk1YWIwMWJjYzNjNDc1NWQwODhkODBmMGI3ZDI4NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NGNjMmMxMjUyOWJkYjdkMDc0Zjc1MTU5ZDU0MDZiOGJkMmJiMzQ4YWIzNTMyMTUzZjE0Y2QyN2M4ZDYwNDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L64-L68",
+          "version": "repo-lines-v1:sha256:dc41fac78396216634196b0a85e159c2e162fda449809ae61194721cac60f4b1:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk4MjQ3MWE0OTkxMDBkMDdiZTJlZDIwZWIxMTM3ZmZhZTkxZGIzMDc5NWMxNzRjN2YwZDJiMjcwZGUxNjJkZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODIwZDgwNmFhZDYxZDE0YmQ1MjYyM2MxZmQ4YWVkNTE1ZGViZmU0YzVjNmMxZDM4YTkxZDE4ZmI0ZGM4YWIxMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOThkNTMzZjY5MzJhMTliZDNhOWU0YWFiNDc4ZjNhMzNkMDY2MTI4ZDFkMzFiMTFhZjYzMjI4NTlhZmM1ODE2ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTkxOGIyYzE2MzM0ZmI1N2JiMzZjMDNhZjAzZWExMTU2YWEyOTg4MmYzNjU3MmI3ZDJkMzBiMzQyOGM3YzdiZCJ9"
         }
       ]
     }

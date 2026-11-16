@@ -35,7 +35,7 @@ sources:
     resource: repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt
   - id: openwiki-source-7a8a9bf9712d2c5d9bff4f29
     resource: repo://core/presentation/src/main/java/com/core/presentation/CoreApp.kt
-generated: { by: "claude-code", at: "2026-10-26T16:41:29.588Z" }
+generated: { by: "claude-code", at: "2026-11-02T14:42:55.956Z" }
 ---
 
 # core/data module overview

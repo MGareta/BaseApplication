@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:f43bf374441e2cffdaeef9ca59cb20a85a8d51e51380c4701c2b7997eb70e0e9",
+  "pageVersion": "sha256:c2edcea501ead44ac49d79282df3bd198a665a416ae0931d3b7c254f8db4706b",
   "claims": [
     {
       "id": "claim_d2c83449e0144178953092b286fc4c9b",
       "statement": "BaseTest runs tests with Robolectric and HiltTestApplication, installs an UnconfinedTestDispatcher as Main, injects via HiltAndroidRule, initializes ActivityProvider with the application, then calls the abstract initDependencies, and exposes a test{} helper using runTest.",
       "evidence": [
         {
-          "resource": "repo://core/data/src/test/java/com/core/data/BaseTest.kt#L26-L65",
+          "resource": "repo://core/data/src/testFixtures/java/com/core/data/BaseTest.kt#L26-L65",
           "version": "repo-lines-v1:sha256:50eb231879a4e2e81fb3fe0be05ab378d4f2e2395d227a91c4f405d8a18bfeff:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1YzYyYTIwOWVmMmRhY2ViMDQ2ZDUxOGRlYWU1Y2MwOTk1YWIwMWJjYzNjNDc1NWQwODhkODBmMGI3ZDI4NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NGNjMmMxMjUyOWJkYjdkMDc0Zjc1MTU5ZDU0MDZiOGJkMmJiMzQ4YWIzNTMyMTUzZjE0Y2QyN2M4ZDYwNDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
@@ -79,10 +79,32 @@
           "version": "repo-file-v1:sha256:f491316b94dc7532aebb342a551926c3bd6cf488032bbce4f76d12c40483b7a3"
         }
       ]
+    },
+    {
+      "id": "claim_6b839ed043444cc99b0ec5cc84a0785e",
+      "statement": "In feature modules every @TestInstallIn replacement module and test helper is internal and only JUnit test classes and abstract bases stay public; fields typed with an internal type are declared `@Inject internal lateinit var`, and the eval-mechanical gates (TR-6) fail other public test declarations.",
+      "evidence": [
+        {
+          "resource": "repo://login/data/src/test/java/com/login/data/di/LoginNetworkModuleTest.kt#L21-L25",
+          "version": "repo-lines-v1:sha256:eda5c51d55f39322308b393604a5fc25423d829d5475f9e8d2ad7f9ff3729836:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDhkZjVmMzU0YWM3NTk3NmY3OGRjMDdiNzY5NDVlNGM3NGNlMzFiODEzNTM2MGFhNGJhN2VmZjJmMmRkMWMwZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjk4NjliMzAyNGZjMTE2OTk5NjM1ZmI0NjIyY2RlYmNiMjc1YzJmMDY4N2ZhN2M3YTFiZDA4NDcxMGE2MTkwMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://login/data/src/test/java/com/login/data/di/SessionModuleTest.kt#L22-L22",
+          "version": "repo-lines-v1:sha256:879d89aae4faf10c3bf41d53ac73c3673a381303ce4b993934fc17041d6391c0:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODc5ZDg5YWFlNGZhZjEwYzNiZjQxZDUzYWM3M2MzNjczYTM4MTMwM2NlNGI5OTM5MzRmYzE3MDQxZDYzOTFjMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODc5ZDg5YWFlNGZhZjEwYzNiZjQxZDUzYWM3M2MzNjczYTM4MTMwM2NlNGI5OTM5MzRmYzE3MDQxZDYzOTFjMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDIzZDhmMDJkMzAzMmE5YmVkMWZlOTJmZjgyYmE4ZjVhODYwMzg3ZDg4MzM2NjNhZWU2YTRkNDUwNjA0ZmE2NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWUzZTg0NmNhNDA2ZTc4NDUyOWFjODRkNGFkNzFlNjFlZWI1OTQ0OWU0NzllOTc3MjFlMWUzYTIwYzY4NmQxNSJ9"
+        },
+        {
+          "resource": "repo://login/data/src/test/java/com/login/data/manager/LoginManagerTest.kt#L29-L33",
+          "version": "repo-lines-v1:sha256:a6c38d82e897cf7c45d4da06f6959d56b20bd7e80414880afc595a41e6c41def:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGVkMmY3YTIxYjI5OWEwZTFjNjNjNGQ4YWY0NjY4ODdmNzI3NzFlODVmNTE1OTQwMzdmM2VlYjgzOWM2NGMyNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzMwMGI0YjM3YmZmZTkzYzRlZDY0NTI4ZjQxNDMwNzVkZGY0MTQzZmEwNjk4YzkxOWU0M2VjNmQzOWJiMGZjOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDQ1MjMwMjJkZmFjOGE0MGQzMTMzMDBkMWY2MDYwMjFkYWE1YTk0NWQwMDAxYzE3NDEzNjBjZjMwMzdiYzMzYyJ9"
+        },
+        {
+          "resource": "repo://scripts/orchestrator/eval-mechanical.py#L246-L260",
+          "version": "repo-lines-v1:sha256:4196a2a8e10218947b4f1d727126efd45288a21c74ed09075ba89ee31d9c87e4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4M2Q0MDM3NWU1NjZiMjI2NTg2MmYyN2M2YTc3MGQ4ZWRmMWU2MmQ1Yjg2ZWFhYTEzNGYxOTliNDY0MGZhNGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYjEwMjhiNDEwZDM0ZGYxOGU1OTEwMjVhMGVhZjAxNTM5OGUxZTM2MDc5Mzc1MTc0OWU2MWM2OWUzNzE0MmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYyMDU4ODYwY2MxOGRhZjI0NzNlNjU3OWY3NDhlYzc1ZDMxMjRkNDIzNTk4NGQyOGI2ZTI1MTAwZGEzMDI3MWQifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T12:11:14.549Z"
+    "at": "2026-11-16T11:13:17.657Z"
   }
 }

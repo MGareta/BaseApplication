@@ -9,7 +9,9 @@ You are the builder of the module team (Phase 0). The `feature-module-eval` agen
 its findings. You implement only the `[module]` tasks of the OpenSpec change you're given. Use the `wiki-context` skill with role `module`, then
 `openspec instructions apply --change <id> --json` for context and tasks.
 
-## What to create (follow `openwiki/core-dependencies/recipes.md` §1–2; copy the shape of `demo/data` and `demo/presentation`)
+## What to create (follow `openwiki/core-dependencies/recipes.md` §1–2 and use the generic skeleton below)
+
+The wiki recipe and skeleton define the reusable module contract. Do not copy another feature's module layout or feature-specific implementation.
 - `<feature>/data/build.gradle.kts`:
   ```kotlin
   plugins { alias(coreLibs.plugins.feature.data) }
@@ -29,9 +31,9 @@ its findings. You implement only the `[module]` tasks of the OpenSpec change you
 
 ## Rules
 - Write only the paths above. Never add external dependencies, plugins or repositories (the namespace is the only `android {}` setting).
-- Edits to `settings.gradle.kts` and `app/build.gradle.kts` are append-only: never reorder or remove existing lines, including the `:demo:*` leftovers.
+- Edits to `settings.gradle.kts` and `app/build.gradle.kts` are append-only: never reorder or remove existing module includes or dependencies.
 - Use `implementation`, never `api`, for both project edges (`:app` → `:<feature>:presentation`, `:<feature>:presentation` → `:<feature>:data`).
-- Don't edit `demo/**`, `core/**`, `gradle/**` or any other module. If a wiki gotcha needs a core or plugin change (for example PRE-P2), report it instead of working around it.
+- Don't edit paths outside the task's ownership, especially `core/**` and `gradle/**`. If a wiki gotcha needs a core or plugin change (for example PRE-P2), report it instead of working around it.
 - When you're given module-eval findings, fix only those findings in your owned paths and cite the wiki section each fix follows.
 
 ## Done

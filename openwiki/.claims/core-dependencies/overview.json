@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:2fae34890ba85ffbeacb2ad55654506b49b97e016945c3452763b88e86a02a4a",
+  "pageVersion": "sha256:af4543b394a7b424655c6c9c80744a4a1c31e8c9d666538934a142a2968cb4b0",
   "claims": [
     {
       "id": "claim_cacb9a77525a44a8b71f3e3c0c2d46d0",
@@ -24,11 +24,11 @@
     },
     {
       "id": "claim_7bf46f4a8d554713a734cdaffdde620e",
-      "statement": "The root settings include core/dependencies via pluginManagement, enforce FAIL_ON_PROJECT_REPOS with google and mavenCentral, create the coreLibs catalog from core/dependencies/gradle/libs.versions.toml, and include app, core:data, core:presentation, demo:presentation and demo:data.",
+      "statement": "The root settings include core/dependencies via pluginManagement, enforce FAIL_ON_PROJECT_REPOS with google and mavenCentral, create the coreLibs catalog from core/dependencies/gradle/libs.versions.toml, and include app, core:data, core:presentation, demo:presentation, demo:data, login:data and login:presentation.",
       "evidence": [
         {
           "resource": "repo://settings.gradle.kts",
-          "version": "repo-file-v1:sha256:91c189c3148ea02850f1229dc54a209c3ef5395b985139066d33286c1a834f25"
+          "version": "repo-file-v1:sha256:d758495e1bc889f335e183a07bf2e846668843af852ce1ccb1f0090656902284"
         }
       ]
     },
@@ -65,10 +65,24 @@
           "version": "repo-file-v1:sha256:5c3b50941ee0e053fe8d58914e5aec6315c0704a306364ff04335e333d69226c"
         }
       ]
+    },
+    {
+      "id": "claim_586d38560703477fa2f7558871b638ac",
+      "statement": "The app includes demo:presentation and login:presentation, and login:presentation depends on login:data, connecting the login data and presentation modules to the app graph.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L7-L10",
+          "version": "repo-lines-v1:sha256:e605827dcc8c59aa06fd8d383d19bc3eb486f6bd146ccac0dc47614543a7aa15:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2JhMzE0NWFlZTBkYTA1OTI0ZDNhZDBiMWVlYjRhZGU3NzYxYjY2N2Q4YTk2MTQ2ZGVlZjM5YWJkMWNlNDhjYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzQ3ODlkOWIyZDNjNzJlMTY1NWNhMzcyZGI5NjU4ZDQzMTliYWU3NTYzNjliYmMzMDQzZjU4MWVmN2I2Y2M2NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://login/presentation/build.gradle.kts#L1-L11",
+          "version": "repo-lines-v1:sha256:bc29b6067a82bd6cad8e5136ecef64619f28afec85c7f1dc815c2085c58651b9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0MDQwMTAzMTViZGJiMGZlYTBmZDZmZjAyMTRkOGJjOTIxY2UyODM2ZDFjYzZiY2I4ODQ5ZjM1NzZjZjVhNjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T16:41:29.588Z"
+    "at": "2026-11-02T14:42:55.956Z"
   }
 }

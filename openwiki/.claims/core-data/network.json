@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:a2edf11a5ea33377c505fd371639746c172b9140f1c7a8a3c5418344c2c0921c",
+  "pageVersion": "sha256:a6f353a94213c966023c99d3db94897de21de925d3b40a58eeb4ea0c07fd7f3a",
   "claims": [
     {
       "id": "claim_ce6d45c71f9b442bb087ee384a20a76c",
@@ -101,10 +101,24 @@
           "version": "repo-file-v1:sha256:0f97fd16813435d2b9193d738aaddb3663d3b6c98c19dd0133f5d215e3508c70"
         }
       ]
+    },
+    {
+      "id": "claim_efd7816d1700400181072aaaffd6f788",
+      "statement": "In a feature data module the Retrofit API service interface and its network Hilt module are declared internal.",
+      "evidence": [
+        {
+          "resource": "repo://login/data/src/main/java/com/login/data/api/LoginApiService.kt#L14-L14",
+          "version": "repo-lines-v1:sha256:d928258cff9ce0c40ee39ef5c32c6019297efb15acc8352d98c67be1d82190a4:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDkyODI1OGNmZjljZTBjNDBlZTM5ZWY1YzMyYzYwMTkyOTdlZmIxNWFjYzgzNTJkOThjNjdiZTFkODIxOTBhNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDkyODI1OGNmZjljZTBjNDBlZTM5ZWY1YzMyYzYwMTkyOTdlZmIxNWFjYzgzNTJkOThjNjdiZTFkODIxOTBhNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmFkMDgyNGNiOWYzNjgxMDI0NjI2YjJkZjU3NDAzNDVmZjZjZTNmYjg0MGUyZThmOTQ5ODczYmQzMjFlNmVmMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTJkMDY5ODgxYzJjYzc5OGFlNTBiOTU5YWYwMjQxMmE2NmRkOGNjN2U4YmM3ZDM1NTdhZTAwMWE5OTFiMzY0NCJ9"
+        },
+        {
+          "resource": "repo://login/data/src/main/java/com/login/data/di/LoginNetworkModule.kt#L19-L19",
+          "version": "repo-lines-v1:sha256:69f8d4c2253ac7b328d466d04b1801bcca5edc167e2239560f0aa45ec9483285:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjlmOGQ0YzIyNTNhYzdiMzI4ZDQ2NmQwNGIxODAxYmNjYTVlZGMxNjdlMjIzOTU2MGYwYWE0NWVjOTQ4MzI4NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjlmOGQ0YzIyNTNhYzdiMzI4ZDQ2NmQwNGIxODAxYmNjYTVlZGMxNjdlMjIzOTU2MGYwYWE0NWVjOTQ4MzI4NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmY3NWI4ZTYzNGQyMDM1NjQxMGI2ZWI4YjczMzY0OTM1Y2I5YjhhNTU0NDMyNTZhMWRjYTJhOTMwZDJiYzc5YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2E1MDFlYzFiZjczNDUyNThlODk0NjJmZGEzODBiOTQ5ZGEwNDNhZWQxYzUxNTc2NTA4Zjg0Mjg1ZjIyMTRhNiJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T12:11:14.549Z"
+    "at": "2026-11-16T11:21:00.506Z"
   }
 }

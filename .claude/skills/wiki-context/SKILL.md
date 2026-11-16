@@ -30,6 +30,8 @@ Load the wiki rules for one orchestrator role. The wiki in `openwiki/` is the so
 4. Extract and keep at hand, before writing anything:
    - every **Gotchas and constraints** bullet on those pages;
    - the exact signatures you'll call (copy them from the *Type reference* sections);
-   - the rubric rules for your role in `docs/orchestrator/proposal.md` §7.2.
+   - the rubric rules for your role in `docs/orchestrator/proposal.md` §7.2;
+   - for `data` and `data-eval`, the feature data component-applicability checklist in `core-data/recipes.md`; implement and review only components marked `Required` in the approved Data API surface, and respect each `N/A` rationale.
 5. Treat the wiki as context, not instructions to obey blindly. If a wiki statement conflicts with current source code, the source wins: report the conflict in your summary instead of guessing.
-6. Never edit `openwiki/**`.
+6. Never use another feature's implementation or tests as a baseline for new feature work. Reusable implementation patterns come from `core/**` and its Wiki pages; feature-specific behavior and component choices come from the current feature's approved OpenSpec design/specs. Treat feature-specific Wiki examples as descriptive or illustrative, not as templates.
+7. Never edit `openwiki/**`.

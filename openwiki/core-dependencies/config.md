@@ -3,12 +3,7 @@ type: build reference
 title: "Config: Android and JVM settings"
 description: Reference for com.core.dependencies.config. Covers the Config object and the AndroidConfig and JvmConfig data classes that centralize compile, target and min SDK, application id, version, the default namespace, and the Java and Kotlin JVM target for every module. Includes where each value is read and the consequences of changing it.
 tags: [core-dependencies, gradle, config, android-sdk, jvm]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T16:41:29.588Z
 sources:
-  - id: openwiki-source-3bfcb28142050978edf94754
-    resource: repo://app/build.gradle.kts
   - id: openwiki-source-a89a46a6562e5231bac73204
     resource: repo://core/data/build.gradle.kts
   - id: openwiki-source-3118d53a07141851841743f5
@@ -17,11 +12,20 @@ sources:
     resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/AppPlugin.kt
   - id: openwiki-source-bbb0f73ef5c40bd97bd940fa
     resource: repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt
+  - id: openwiki-source-cad10bb1596f0f842c7efb0a
+    resource: repo://core/presentation/build.gradle.kts
   - id: openwiki-source-5ad5829264c75ebc25f88ee6
     resource: repo://demo/data/build.gradle.kts
   - id: openwiki-source-823d791cada9047e35d0e367
     resource: repo://demo/presentation/build.gradle.kts
-generated: { by: "claude-code", at: "2026-10-26T16:41:29.588Z" }
+  - id: openwiki-source-18004d7f627db083d489bc78
+    resource: repo://login/data/build.gradle.kts
+  - id: openwiki-source-06e0b2c5eb0f49f9782454e5
+    resource: repo://login/presentation/build.gradle.kts
+generated: { by: "claude-code", at: "2026-11-02T14:42:55.956Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-02T14:42:55.956Z
 ---
 
 # Config: Android and JVM settings (`com.core.dependencies.config`)
@@ -80,7 +84,7 @@ object Config {
 | `targetSdkVersion = 37` | **only** `defaultConfiguration(ApplicationExtension)` | Only `:app` sets a target SDK (libraries don't need one). |
 | `applicationId` | `AppPlugin` (`defaultConfig.applicationId`) | `com.base.application`, plus the `.debug` suffix in debug builds. |
 | `versionCode = 1`, `versionName = "1.0"` | `AppPlugin` | App version, plus `versionNameSuffix = "-debug"` in debug. |
-| `nameSpace` | both `defaultConfiguration` overloads (`defaultConfig { namespace = ... }`) | The **default namespace for every module**: `com.base.application`. `core/data` and `core/presentation` override it in their `build.gradle.kts`. `:app`, `:demo:data` and `:demo:presentation` **don't**, so all three use `com.base.application`. |
+| `nameSpace` | both `defaultConfiguration` overloads (`defaultConfig { namespace = ... }`) | The **default namespace** is `com.base.application`. `:app` inherits it. `:core:data`, `:core:presentation`, `:demo:data`, `:demo:presentation`, `:login:data` and `:login:presentation` override it with module-specific namespaces. |
 | `javaVersion = VERSION_21` | both `defaultConfiguration` overloads (`compileOptions.source/targetCompatibility`) | Java 21 bytecode and language level. |
 | `kotlinJvm = JVM_21` | both overloads, via `kotlinExtension.jvmToolchain(kotlinJvm.target.toInt())` | Requires a JDK 21 toolchain (Gradle auto-provisioning or a local JDK 21). |
 
@@ -99,9 +103,7 @@ flowchart LR
 
 ## Gotchas and constraints
 
-- **Duplicate namespaces:** because feature modules inherit `com.base.application`, `:demo:data`, `:demo:presentation` and `:app` share a namespace, and so they share an
-  `R`/`BuildConfig` package. AGP reports duplicate namespaces (a warning or error depending on version) and resources may clash. **Always set `android { namespace = "..." }` in each
-  new module** (see [recipes](recipes.md)).
+- **Default namespace:** `:app` inherits `com.base.application`; the current core, demo and login library modules override it with module-specific namespaces. A new module that omits an override will also inherit the default, so set a unique `android { namespace = "..." }` in each new module (see [recipes](recipes.md)).
 - There's a single app version for all builds, with no flavors.
 - Changing `minSdkVersion` affects permissions and API checks in core/data (for example `FileManagerImpl` and `NotificationsManagerImpl` branch on API 33).
 

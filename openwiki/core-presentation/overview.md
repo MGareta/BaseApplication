@@ -28,7 +28,12 @@ sources:
     resource: repo://core/presentation/src/main/res/values/preloaded_fonts.xml
   - id: openwiki-source-af3f0101eba467e367f76d65
     resource: repo://core/presentation/src/main/res/values/strings.xml
-generated: { by: "claude-code", at: "2026-10-26T16:41:29.588Z" }
+  - id: openwiki-source-7e3d591f8636cbc331831be8
+    resource: repo://core/presentation/src/testFixtures/java/com/core/presentation/BaseTest.kt
+generated: { by: "claude-code", at: "2026-11-02T14:42:55.956Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-02T14:42:55.956Z
 ---
 
 # core/presentation module overview
@@ -70,7 +75,7 @@ Feature presentation modules build screens on top of it. The app module only sub
 ```mermaid
 flowchart LR
     app[":app (App, MainActivity)"] --> pres[":core:presentation"]
-    feat[":demo:presentation / feature presentation"] --> pres
+    feat[":demo:presentation, :login:presentation / feature presentation"] --> pres
     pres --> data[":core:data"]
     featdata[":feature data modules"] -->|api| data
     pres -.uses.-> AP[ActivityProvider]
@@ -89,7 +94,7 @@ The plugin is `com.core.dependencies.plugins.CorePresentationPlugin` (included b
 
 **Plugins:** `android-library`, `kotlin-compose`, `kotlin-serializable`, `google-ksp`, `google-hilt`, `detekt`.
 **Android:** `defaultConfiguration` (compileSdk 37, minSdk 26, Java 21, `testFixtures.enable = true`), `configureBuildTypes` (minified release with `proguard-rules.pro`),
-`configurePackaging`, and `buildFeatures.compose = true`. Unlike core/data, `configureTests()` **isn't** applied (no Robolectric JVM-args or resource configuration).
+`configurePackaging`, `configureTests()` (Android resources and JDK module-open JVM arguments), and `buildFeatures.compose = true`. Its `src/testFixtures` contains `com.core.presentation.BaseTest`.
 
 **Dependencies:**
 
@@ -101,6 +106,7 @@ The plugin is `com.core.dependencies.plugins.CorePresentationPlugin` (included b
 | `debugImplementation` (`debugApi` helper) | `compose-preview-debug` (ui-tooling) |
 | `ksp` | `kotlin-metadata`, `hilt-compiler` |
 | `testFixturesApi` | bundle `test-unit` (coroutines-test, Robolectric, hilt-testing, mockk) |
+| `testFixturesApi` | `project(":core:data")` test fixtures used by core:presentation's BaseTest |
 | `kspTest` | `hilt-compiler` |
 | `detektPlugins` | `detekt-ktlint`, `detekt-library` |
 
@@ -108,11 +114,11 @@ Exact versions are in `core/dependencies/gradle/libs.versions.toml`.
 
 ## How other modules consume it
 
-- **`FeaturePresentationPlugin`** (feature presentation modules such as `:demo:presentation`): `implementation(project(":core:presentation"))`, Hilt + KSP, Compose, and
-  `testImplementation(testFixtures(project(":core:presentation")))`. Because core/presentation only `implementation`s core/data, **feature presentation modules don't see
-  core/data types** (`ApiResult`, `ISessionManager`, …) unless they also depend on a feature data module (which `api`s core/data) or on core/data directly. All `api` libraries above
+- **`FeaturePresentationPlugin`** (feature presentation modules such as `:demo:presentation` and `:login:presentation`): `implementation(project(":core:presentation"))`, Hilt + KSP, Compose, and
+  `testImplementation(testFixtures(project(":core:presentation")))`. Feature-presentation tests inherit `com.core.presentation.BaseTest`; the core:presentation fixture also exposes core:data test fixtures. Because core/presentation only `implementation`s core:data in the main source set, **feature presentation production code doesn't see
+  core/data types** (`ApiResult`, `ISessionManager`, …) unless it also depends on a feature data module (which `api`s core/data) or on core/data directly. All `api` libraries above
   (Material3, Navigation3, Paging, serialization, …) are visible to features.
-- **`AppPlugin`** (`:app`): `implementation(project(":core:presentation"))` + Hilt. The app provides `App : CoreApp()` (`@HiltAndroidApp`) and `MainActivity : BaseActivity()`.
+- **`AppPlugin`** (`:app`): `implementation(project(":core:presentation"))` + Hilt. The app provides `App : CoreApp()` (`@HiltAndroidApp`) and `MainActivity : BaseActivity()`. The app build also includes demo and login presentation modules.
 
 ## Manifest and resources
 
@@ -137,8 +143,8 @@ Exact versions are in `core/dependencies/gradle/libs.versions.toml`.
 ## Known issues summary
 
 See the individual pages. Highlights: `BaseActivity` isn't a `FragmentActivity` (core/data activity results and permissions don't work), bottom-nav tab taps aren't wired,
-Navigation3 ViewModels are created without a Hilt factory, `loadInitData` isn't called by Navigation3, Checkbox/Toggle ignore taps without `onValueChange`, date fields don't
-show validation errors, `CurrencyType.Symbol` crashes `AmountFieldComponent`, three layout files are commented out, and `Theme` disables system font scaling.
+Navigation3 doesn't call `loadInitData`, Checkbox/Toggle ignore taps without `onValueChange`, date fields don't show validation errors, `CurrencyType.Symbol` crashes
+`AmountFieldComponent`, three layout files are commented out, and `Theme` disables system font scaling.
 
 ## Related pages
 

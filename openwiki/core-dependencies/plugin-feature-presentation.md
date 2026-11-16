@@ -6,9 +6,15 @@ tags: [core-dependencies, gradle, convention-plugin, feature-module, compose, pr
 sources:
   - id: openwiki-source-1f78a6fb10e2b39879415b1c
     resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt
+  - id: openwiki-source-bbb0f73ef5c40bd97bd940fa
+    resource: repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt
+  - id: openwiki-source-7e3d591f8636cbc331831be8
+    resource: repo://core/presentation/src/testFixtures/java/com/core/presentation/BaseTest.kt
   - id: openwiki-source-823d791cada9047e35d0e367
     resource: repo://demo/presentation/build.gradle.kts
-generated: { by: "claude-code", at: "2026-10-26T16:41:29.588Z" }
+  - id: openwiki-source-06e0b2c5eb0f49f9782454e5
+    resource: repo://login/presentation/build.gradle.kts
+generated: { by: "claude-code", at: "2026-11-02T14:42:55.956Z" }
 verified:
   - by: openwiki/0.7.2
     at: 2026-11-02T14:42:55.956Z
@@ -26,6 +32,7 @@ Use it for a feature's **UI module**: screens, contracts, ViewModels, Navigation
 ```
 core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt
 demo/presentation/build.gradle.kts
+login/presentation/build.gradle.kts
 ```
 
 ## What `apply(target)` does
@@ -41,7 +48,7 @@ demo/presentation/build.gradle.kts
 | `implementation` | `project(":core:presentation")`, which exposes Compose, Material3, Navigation3, Paging Compose, lifecycle-viewmodel-compose, hilt-navigation-compose, browser and serialization via `api` |
 | `ksp` | `kotlin-metadata-jvm`, `hilt-android-compiler` |
 | `implementation` | `hilt-android` |
-| `testImplementation` | `testFixtures(project(":core:presentation"))`, which gives the test-unit bundle |
+| `testImplementation` | `testFixtures(project(":core:presentation"))`, which provides the test-unit bundle and shared `com.core.presentation.BaseTest` |
 | `kspTest` | `hilt-android-compiler` for test-source Hilt component generation |
 | `detektPlugins` | `detekt-rules-ktlint-wrapper`, `detekt-rules-libraries` |
 
@@ -67,8 +74,8 @@ Register it in `settings.gradle.kts` and add `implementation(project(":orders:pr
 
 - **No core/data on the classpath.** `ApiResult`, `ISessionManager`, etc. aren't visible unless you add the feature data module (or core:data). `BaseViewModel`'s use-case helpers
   use `ApiResult`, so most ViewModels need it ([dependency-visibility](dependency-visibility.md#gaps-and-fixes)).
-- `:demo:presentation` sets no namespace, so it collides with `:app`.
-- Unit tests are configured with `configureTests()` and `kspTest(hilt-compiler)`. No Compose UI test artifacts are added ([core-presentation testing](../core-presentation/testing.md)).
+- **Namespace:** the plugin's default is `com.base.application`; current feature modules override it (`:demo:presentation` uses `com.demo.presentation`; `:login:presentation` uses `com.login.presentation`). Set a unique namespace in each new module.
+- Unit tests are configured with `configureTests()` and `kspTest(hilt-compiler)`. They inherit `com.core.presentation.BaseTest` from the core:presentation test fixtures. No Compose UI test artifacts are added ([core-presentation testing](../core-presentation/testing.md)).
 - The Compose BoM isn't applied in this module. Versionless Compose artifacts rely on transitive versions (see [plugin-core-presentation](plugin-core-presentation.md#gotchas)).
 
 ## Related pages

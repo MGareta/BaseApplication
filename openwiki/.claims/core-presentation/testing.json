@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:30dab8cfe639683c8157370ef42dcebf89c2e1a14b07c7c660f9c91556ed6348",
+  "pageVersion": "sha256:7e61eac759d072bb4f4f7c33fc3d1dfeab60e2cee5454c24e62f7e747d343af9",
   "claims": [
     {
       "id": "claim_a1f96efef13946a39a0e0382aabe5171",
@@ -28,11 +28,11 @@
     },
     {
       "id": "claim_016336d739534e3e81a1737ecf2c62b8",
-      "statement": "CorePresentationPlugin only adds the test-unit bundle via testFixturesApi and the Hilt compiler via kspTest for tests, does not apply configureTests, and adds no Compose UI test dependencies.",
+      "statement": "CorePresentationPlugin configures JVM tests, exposes the test-unit bundle and core:data test fixtures via testFixturesApi, adds the Hilt compiler to kspTest, and does not add Compose UI test dependencies.",
       "evidence": [
         {
           "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CorePresentationPlugin.kt",
-          "version": "repo-file-v1:sha256:6e00421372a973445cadcc8449e4e824250e37c19689043d1b4c6b763ec37779"
+          "version": "repo-file-v1:sha256:648c9c75330e589bcffda4fab0cb35a13194ccd1d3841a0ad89d781cd51d34ea"
         }
       ]
     },
@@ -42,13 +42,13 @@
       "evidence": [
         {
           "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt",
-          "version": "repo-file-v1:sha256:2f1a3cf4d138bc897d602f95568838a1c9709a01f848ea0522dcbe4981e64e3f"
+          "version": "repo-file-v1:sha256:269b2e9d9f6b3dd68df8f989f471a9f77920c0ba240e0fd707db8860575864b0"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T15:48:49.783Z"
+    "at": "2026-11-02T14:42:55.956Z"
   }
 }

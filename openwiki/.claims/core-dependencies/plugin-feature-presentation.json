@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:36ad53bc9fc18fdacb63817bfa414ee5e3c60af2ffb2b96ae85b12d2dfac8d6a",
+  "pageVersion": "sha256:8efa68f866912619062aca05b6fd5d9add7923b9d5a3ec994a80f1f6fff4daf8",
   "claims": [
     {
       "id": "claim_19e885b0b5f64e2d9969af4c57abc2c3",
@@ -28,11 +28,37 @@
     },
     {
       "id": "claim_c23a2ecc6dfc43f7a0e0bd5e7afd5abf",
-      "statement": "demo:presentation applies the feature.presentation plugin with an empty android block and no namespace override.",
+      "statement": "FeaturePresentationPlugin supplies com.base.application as the default namespace, but :demo:presentation and :login:presentation override it with com.demo.presentation and com.login.presentation.",
       "evidence": [
         {
-          "resource": "repo://demo/presentation/build.gradle.kts",
-          "version": "repo-file-v1:sha256:9ed2bd449ef55866be7981c241460e9a5c028665bee920ef2b89b31d654a7db6"
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt#L45-L53",
+          "version": "repo-lines-v1:sha256:3004ef9e486e640a667430522351aecd0e0a21599d5decd370f21d75d0fc6675:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWJmM2UxYjFmMzVhMWZmYzAwNjkwZWNjMmQ4NzY4MGYzZjI2ZmM2MjU0ZTJhMjhjY2E2MDlmMThhYTkxMDdjNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGM2NDc5Y2MyMzA0NDBmZDQxZTgyMjQyMTg2Nzk2OTg1NTlkMjg5M2JkNjdiNDM4MGFmYWI4MTFiMzhhNTVhYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjQ3MTIwMTc0OWZmZDBiNmM5ZWIxY2E4YmQ5YWY4OTFiNzM0NGVlNWE3YTVmZGVmNzJmNjVjMzFiODQyYjRiMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjA1MWUxZDkxZmI1YmNmZWNiMjgzYTVhNmIwYjkyNDA3MmNlNWRjMDU2ZTYxYjE4MDFmMzZiZDJhZjY5ZjZjOSJ9"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt#L52-L77",
+          "version": "repo-lines-v1:sha256:d69cbd1cfcf4dec317a2f3bd732c29c9b6d337886c51870272d768602e9bd99f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVmYzFmMDc5ZWRhYTlhZjFjYzg1YmZiOWNhYTk3MTBmM2I0MDJjMTU1ZGEwZGI5YzI3Njc0OTYwYzU3ZTA3MjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmOTJmMzFjMjEwN2U0NTY3ZjM0ZGYxMzU4ODY4OTViNGU1OWY4MmNlZWQ0NmRmMjBjOTZlNzlkYzc5YWZiNjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM2ZDMzNDQzMTQ3OGJiMDQ1Yjk5YTU5NWRmZmU5MGMxMjBkMmJiODMzNzNlNzRiM2Q1NzczYWM3N2VkMmU5NzkifQ"
+        },
+        {
+          "resource": "repo://demo/presentation/build.gradle.kts#L1-L7",
+          "version": "repo-lines-v1:sha256:e1421d27bac35336aa48ab1d1b234c7c7b5082b297723b283e05796006a24c60:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDQwNDAxMDMxNWJkYmIwZmVhMGZkNmZmMDIxNGQ4YmM5MjFjZTI4MzZkMWNjNmJjYjg4NDlmMzU3NmNmNWE2NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmUxZGI2OTYwNTJkYzNiNzQ2MDI2Njk5ZGM0NmIzNGU2MTA3ODJlOGI4OTJjNjRjNzdkOWI0ZDhkODc5NDgyZCJ9"
+        },
+        {
+          "resource": "repo://login/presentation/build.gradle.kts#L1-L7",
+          "version": "repo-lines-v1:sha256:8e6911b94f02d6ece71327b14d66dbc602d0c66ce7e88f9f78f27cf7a63c6539:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDQwNDAxMDMxNWJkYmIwZmVhMGZkNmZmMDIxNGQ4YmM5MjFjZTI4MzZkMWNjNmJjYjg4NDlmMzU3NmNmNWE2NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTZmYjVlZWRiY2YxZWMzMDFiNGIxNWM4ZWNmMWIxNmYwZmVjZWRhNjdkNzE3Mjk5OTBjN2IwYWZlZDZiZmE0NCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_329f73337f9f4961abc740e5cbe23a2b",
+      "statement": "Feature-presentation tests receive the shared com.core.presentation.BaseTest through FeaturePresentationPlugin's core:presentation test-fixture dependency.",
+      "evidence": [
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt#L69-L73",
+          "version": "repo-lines-v1:sha256:5953ca496037fbaa0090557aefc9d9628472b19824daff5142d649c72f288f82:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk4MjQ3MWE0OTkxMDBkMDdiZTJlZDIwZWIxMTM3ZmZhZTkxZGIzMDc5NWMxNzRjN2YwZDJiMjcwZGUxNjJkZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODIwZDgwNmFhZDYxZDE0YmQ1MjYyM2MxZmQ4YWVkNTE1ZGViZmU0YzVjNmMxZDM4YTkxZDE4ZmI0ZGM4YWIxMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOThkNTMzZjY5MzJhMTliZDNhOWU0YWFiNDc4ZjNhMzNkMDY2MTI4ZDFkMzFiMTFhZjYzMjI4NTlhZmM1ODE2ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTkxOGIyYzE2MzM0ZmI1N2JiMzZjMDNhZjAzZWExMTU2YWEyOTg4MmYzNjU3MmI3ZDJkMzBiMzQyOGM3YzdiZCJ9"
+        },
+        {
+          "resource": "repo://core/presentation/src/testFixtures/java/com/core/presentation/BaseTest.kt#L26-L65",
+          "version": "repo-lines-v1:sha256:50eb231879a4e2e81fb3fe0be05ab378d4f2e2395d227a91c4f405d8a18bfeff:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1YzYyYTIwOWVmMmRhY2ViMDQ2ZDUxOGRlYWU1Y2MwOTk1YWIwMWJjYzNjNDc1NWQwODhkODBmMGI3ZDI4NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NGNjMmMxMjUyOWJkYjdkMDc0Zjc1MTU5ZDU0MDZiOGJkMmJiMzQ4YWIzNTMyMTUzZjE0Y2QyN2M4ZDYwNDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     }

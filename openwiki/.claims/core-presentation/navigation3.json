@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:60c0d9d5930efbea2060c3a51ea4add7f2970a98a3c176245a8c2a284971cf2a",
+  "pageVersion": "sha256:c9af254a04c4964e5a4a39bb281ce9d3af32558435cbee577ed3469e81aefe3f",
   "claims": [
     {
       "id": "claim_3b860ea09af540dc900889a4f19f4e0a",
@@ -14,11 +14,15 @@
     },
     {
       "id": "claim_aa3311e2938e449fa101490dfdd3eb8d",
-      "statement": "Features register a graph by contributing, under the same @ClassKey in ActivityRetainedComponent, an INavigationGraph map entry and a Set<INavigationEntry<INavigationDestination, ViewModel>> map entry.",
+      "statement": "The core Navigation3 factory joins graph and entry-set maps by matching class keys and discards incomplete pairs; NavigationModule provides those maps from the ActivityRetainedComponent graph.",
       "evidence": [
         {
-          "resource": "repo://demo/presentation/src/main/java/com/demo/presentation/di/DemoScreenModule.kt",
-          "version": "repo-file-v1:sha256:1d86d514d05bc299109c256de409c982bf2ce69d3354bc6bbf35c6c6d7a59592"
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/di/NavigationModule.kt#L24-L32",
+          "version": "repo-lines-v1:sha256:0121237d8f8a6746f1652f34e8d21c99f26e5447dd770b559199843cbb3f322b:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTAwM2NkOTg5YzZiODM5NmJkYWExM2M1MzE0MDc0MWJmNDc0NzEyZGNkMjhlOGUzYjE2Yjg4NDI2ZGMwOTgxOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzBjMWYxODhmMTQyZWQ3YTgyNDY4MGIyMDcxNzJjNTUxOWJjNjE0YTQ4ZmRhN2NmMTY3ZWRiOGRkZjc5OTU2YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjlmYjUyZWY5YzU3M2MzYTAzY2IyNDhlOTQxZWZhNDZmNzgwMmJlZDg4NGUyMTlhOWM1NzE3ZmE5ZDg2ZDAyOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTNlOTlkMmRmNGIzYjRhMWE4NzgyZDBjZjI3NWQwNGIxZGMxM2ZiZDBhYTE4YTk1NTRkNGQwMzM4Yjg5Y2YzNyJ9"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt#L62-L75",
+          "version": "repo-lines-v1:sha256:89a2842064dcd5932b855f57a0338546e6b62cc1d6f84aa8b6dcace60efa06b3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4NjVmZWY1OTZkNTRjOTFhNWFkYzFkYjdmMjFmYzdiNWQxNzAyZDZkODdkNWYyZGRiYzNhZDI3YTM4MmYxNTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczN2M3ZmU0MWVkZDk3YzdjZTkyOGM4ZTM2N2Q0MTEzZTYxYTFkODk3NDdhYjcyNWU0ZTA4YjE5NWViNmVkMzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM4NTQ1Nzg3N2RmMDgxMWQ1YTViN2ZjODg0MDM1YmY1MzI4MzI5OGVjZWUzMDFjOTgyZDFkNDEzMTM2N2VhYTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDcifQ"
         }
       ]
     },
@@ -27,18 +31,18 @@
       "statement": "NavigationGraphFactoryImpl keeps only graphs that have both a graph and an entry set for the same key and requires exactly one INavigationGraphLauncher, throwing IllegalStateException otherwise.",
       "evidence": [
         {
-          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt#L58-L111",
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt#L62-L115",
           "version": "repo-lines-v1:sha256:46580a95f299f707a9f7e278032db5d729f14fc14542ad4392f045812e65658e:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4NjVmZWY1OTZkNTRjOTFhNWFkYzFkYjdmMjFmYzdiNWQxNzAyZDZkODdkNWYyZGRiYzNhZDI3YTM4MmYxNTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM4NTQ1Nzg3N2RmMDgxMWQ1YTViN2ZjODg0MDM1YmY1MzI4MzI5OGVjZWUzMDFjOTgyZDFkNDEzMTM2N2VhYTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFlODY4MzQ3ZjY1Nzk3MzU3YzE5NTJhNjM1NzI1NTY0OWQzNGRmN2IxYTEzYmVmYzBhNmY2ZDgzZmQwMTMzODAifQ"
         }
       ]
     },
     {
       "id": "claim_66aacd00a7554195a0be2c9f42952243",
-      "statement": "register adds an entry provider per entry keyed by the destination class qualified name, attaches bottom-sheet or dialog scene metadata for the specialized entry types, and renders by creating the ViewModel with viewModel(modelClass) and calling Render; getNavigationGraphFromDestination throws IllegalArgumentException for unknown destinations.",
+      "statement": "register adds an entry provider per entry keyed by the destination class qualified name, attaches bottom-sheet or dialog scene metadata for specialized entries, and renders using a HiltViewModelFactory built from LocalContext and the owner's default factory plus its creation extras before calling Render; getNavigationGraphFromDestination throws IllegalArgumentException for unknown destinations.",
       "evidence": [
         {
-          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt#L133-L172",
-          "version": "repo-lines-v1:sha256:45f98392bd54ccd314a343f79a089a5c8e3d0ecaadd68b9016714edbac71dea4:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2YmE0ZjY1OWVhMGRiYzJkY2ZjNDdlMjQ2OTcwNzliOTk0Zjg5OGNjMGIxODMyNDBlNTlmYzFiY2M1OTAwZTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdiNGE4OTdlZDAyNzRmMTg2ODA5ODdiYTQ3NjE5OWMyY2NmZTRkMTZhNDA5MTljZjhhMTFmNWY2MTJhNDg5MzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt#L137-L185",
+          "version": "repo-lines-v1:sha256:a4ea2be1d83492669634e0e6fbc5c2ab3d30577ab0dc4c3eaca2be30e82fbdf7:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2YmE0ZjY1OWVhMGRiYzJkY2ZjNDdlMjQ2OTcwNzliOTk0Zjg5OGNjMGIxODMyNDBlNTlmYzFiY2M1OTAwZTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM0MzU3NzlmN2U4YmNmZjY3MzFjNzc3Y2M2ZDgwZDQxNzhlOTY5YzJkMDVhMGMwYWE0YzgyZjZhMmU2YjJhYWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdiNGE4OTdlZDAyNzRmMTg2ODA5ODdiYTQ3NjE5OWMyY2NmZTRkMTZhNDA5MTljZjhhMTFmNWY2MTJhNDg5MzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3OTRkMDJhODEyMTk0NGQxNzZkMjY1ZTliYjljYzU5ZjZhYjg5MGJjYWRmOGFlZmRlYmRiYmI0ZjJlYTg0NDQifQ"
         }
       ]
     },
@@ -54,15 +58,19 @@
     },
     {
       "id": "claim_3fdf7f1e11434910bac07971180572c2",
-      "statement": "SharedViewModelStoreNavEntryDecorator provides the owning graph's ViewModelStore as LocalViewModelStoreOwner through a plain ViewModelStoreOwner without a default factory, and forwards onPop to the manager.",
+      "statement": "SharedViewModelStoreNavEntryDecorator provides the owning graph's ViewModelStore through NavigationGraphViewModelStoreOwner, which implements HasDefaultViewModelProviderFactory and carries the activity's default factory and creation extras; the decorator forwards onPop to the graph listener.",
       "evidence": [
         {
-          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/decorators/viewModel/NavigationGraphViewModelStoreOwner.kt",
-          "version": "repo-file-v1:sha256:80b1aaf95e51a1766c781ac765392eae98d96f4eb3df09c7b18aa34026f0055b"
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L121-L128",
+          "version": "repo-lines-v1:sha256:c2bc04c824fab8814a2215e367f0fa76a862e467ce0f3fe6273e31a838bf0821:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZjMGEyYmUyNjAxMWYyM2ZiMjAzMDg1MDQ4MTZiZTcxNThhYWY5ODBmYjkxMDFjYmIzZDkwNTY5NzU5YTUzZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmRmMTA0NzhiMzA4NmMyZDM0ZjBlNWJlMWUxODUxNzllZTQ4ODM1OGQ1MGY5OTQ5OTZmNDE4ZThmMGNlMmFhZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmYyZDk5YjZlMThjNjFmN2E4ZjFiOWEyZjkwM2ExMThmYTgxYWU3YTY2YTA5YTYyZThjN2YzMWVkYTc4Yzg4NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzU0NWE3ODBlNmE3ZDgyOTQ1ZTlkMTJkMjRjY2Y1OGY4MjU5OTE5NzljNDNmZTU5YjhhZTg3ZmRhNDRhYzRmNSJ9"
         },
         {
-          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/decorators/viewModel/SharedViewModelStoreNavEntryDecorator.kt#L64-L92",
-          "version": "repo-lines-v1:sha256:acbac5b8ac616bccaaebdf71896fdde47f34ba018229233d16e9d9e71e64743b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzYTVhYWRkN2M5YTJhZjNiMDM0OTlkYzE5OGE0YTY2ZjI1NmNlNDdlNzVkOTZjYzhkMDhhYmE0NjQ1M2U3MTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwMGYxNjU4ZDVmNDYwZWVlM2JiMzhjNzQ4NjJmYjc3NTE3NWUwODkyYjUzZGVmYTAyMjdhZjVlZDg2ZDNjYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/decorators/viewModel/NavigationGraphViewModelStoreOwner.kt",
+          "version": "repo-file-v1:sha256:78446cb6b00f10e8cee4cf655d6234630315f1b0aacff7cb1af1b63a92113056"
+        },
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/decorators/viewModel/SharedViewModelStoreNavEntryDecorator.kt#L72-L105",
+          "version": "repo-lines-v1:sha256:f791064599fa82330e41343064c85c526e2b6f57d569bdad857d52ce888658a2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzYTVhYWRkN2M5YTJhZjNiMDM0OTlkYzE5OGE0YTY2ZjI1NmNlNDdlNzVkOTZjYzhkMDhhYmE0NjQ1M2U3MTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwMGYxNjU4ZDVmNDYwZWVlM2JiMzhjNzQ4NjJmYjc3NTE3NWUwODkyYjUzZGVmYTAyMjdhZjVlZDg2ZDNjYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgifQ"
         }
       ]
     },
@@ -85,10 +93,56 @@
           "version": "repo-lines-v1:sha256:545ed0bc20225ef0cbaa3cd211146fdea827e479b4de290176a94c3395d6791b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIxNTljZGE3ZTc2ZjhmOWJiNGUwMzcwZTRjZGZlNTM5ZDIyNjJjY2Y2ZGNlMGViNDhlZmUyZjBlN2NkYmU0NTU3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJkMTBiMzZhYTc0YTU5YmNmNGE4ODE4NTgzN2Y2NThhZmFmMzY0NmVmZjJiYjE2YzM5MjhkMGU5MzM1ZTk0NWQyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI5ZTI1MDk0NTU3ZDk4MDlkZGMzYWJiODM2ZDQ0NmYzZGRhNjIxMjkwYjE2M2UzMGYwZGNlNzZlMjMxNDVhNzIzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
         }
       ]
+    },
+    {
+      "id": "claim_b9d5c1a0ee7a48ebab588a891b7483b6",
+      "statement": "Feature-specific Wiki examples are illustrative, not templates; feature-specific structure is determined by the approved design while reusable patterns come from core modules.",
+      "evidence": [
+        {
+          "resource": "repo://.claude/skills/wiki-context/SKILL.md#L36-L36",
+          "version": "repo-lines-v1:sha256:e9b7966b80c558daae834894d017ce2f1548fcb9132387e7a5fd695d1d31096c:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTliNzk2NmI4MGM1NThkYWFlODM0ODk0ZDAxN2NlMmYxNTQ4ZmNiOTEzMjM4N2U3YTVmZDY5NWQxZDMxMDk2YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTliNzk2NmI4MGM1NThkYWFlODM0ODk0ZDAxN2NlMmYxNTQ4ZmNiOTEzMjM4N2U3YTVmZDY5NWQxZDMxMDk2YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjc0YTdkZjM2OTg0ODQ0NWE1MjE5ZWEwNjYzMDdjNWE3MGJkNmJjNDU0MDgyZWI0ZDc5ZGU1N2Q3NjAwNWJhYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTU2MDJmZDA0MGJlYzExYThmYTdiMDUwNzliMGRmYjJhZTQzMDJmMDY3MmViMjIwNzFjZTVkYmQwNjBhM2VjMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a1d321aae3ff494d818012b63386859b",
+      "statement": "Feature navigation types (destination, entry, graph, navigation module) are internal: :app only receives the @IntoMap bindings typed with the public INavigationGraph and Set<INavigationEntry<INavigationDestination, ViewModel>>, and INavigationEntry resolves its destination and ViewModel classes by reflection over generic type arguments, which works for internal classes.",
+      "evidence": [
+        {
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/INavigationEntry.kt#L108-L125",
+          "version": "repo-lines-v1:sha256:0637c88440622c53fe01075b6bf7c05108749f4a0af2919fa59d6e3001283a7f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYyYzE0YmFkNzMyNzAwM2RiNTEyYTgyYWRiZGFkM2Q2NmRhNTE4ZDUyNGE5Y2ZjYThjZTQ5NDQ3ZDBjNzY0NjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlkOTE0ZjgyYWNlNDM3OTUwM2U0N2IyYmFiYTNlODY2MTUzOGRlNTJmNWVhNmRhZjM2MzYzODNkNjkwYzlhZTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmZGJjMzg2M2M5NzZiMjdiNjE0ZTI5ZDU1MWE5NzUxMTYwM2Q0MzZkOTFiYjM3M2YwMDAyOTcxMzllOTllZDUifQ"
+        },
+        {
+          "resource": "repo://login/presentation/src/main/java/com/login/presentation/di/LoginNavigationModule.kt#L21-L38",
+          "version": "repo-lines-v1:sha256:5c257b9ae27eb0f72a7c61310f26aabed0d26111096716e5853b09897fa3546a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NTVmNTFkN2UyOTIxN2MxMTk0NmJhMDA4NWNlYTVkYmZlOTAxZmE3MWU2ZmM5NjIxN2JlN2Q3OTllYTkzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmMTk1ZTRkZjMwNmZiNmU1YTA0ZjJjMWFhODMxODlmMjA4MjU4ZWVjY2E5MzA0M2E0ODVlYzVjNTQyNzUxNGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://login/presentation/src/main/java/com/login/presentation/navigation/LoginEntry.kt#L22-L24",
+          "version": "repo-lines-v1:sha256:41e94cdf1fc221a8fe00b625985c7644e02726f91133d584c6b881119d87e98f:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWUwZTBlNTI0MTJhODY2MmIxZmVjNTY4OWJkZGM0ZWY2ZmM0OWFkNzAzYjUyYjdlNDc5NWI3OWI1OGVmYzk1MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzMwNWQ0NzEzMTUxMTU3NmI4OTAxYjcwOTEyYWExYmYyNWVjZTFmOTNkNmU1NzI2NzdiYzAwNGY4M2Y4YjllNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNkMTU5ZmM0MTU3OTA0MjJiMTYzZjFlMzc0N2JlZDFjNWY1ZjIxZDJkMWRmYmY0ZjY2MmY4ODQ2YmFhNjhkMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjAxY2QxMjA3NGVlZDk1ZWE0ZGJkY2RjNDdjMzI5OGFjMWQzYjVmM2I2ZDcyNWNhMzIyYWZjZWQwNWRmYWM2YyJ9"
+        },
+        {
+          "resource": "repo://login/presentation/src/main/java/com/login/presentation/navigation/LoginNavGraph.kt#L11-L11",
+          "version": "repo-lines-v1:sha256:8d6d13a11dfde714dae78a576eacf0ab60ae8b39323e4b54cfaeaafe4c634915:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGQ2ZDEzYTExZGZkZTcxNGRhZTc4YTU3NmVhY2YwYWI2MGFlOGIzOTMyM2U0YjU0Y2ZhZWFhZmU0YzYzNDkxNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGQ2ZDEzYTExZGZkZTcxNGRhZTc4YTU3NmVhY2YwYWI2MGFlOGIzOTMyM2U0YjU0Y2ZhZWFhZmU0YzYzNDkxNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmYxOTVlNGRmMzA2ZmI2ZTVhMDRmMmMxYWE4MzE4OWYyMDgyNThlZWNjYTkzMDQzYTQ4NWVjNWM1NDI3NTE0ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_af5a9e54d53e4241b99e560af4e315c0",
+      "statement": "The Navigation3 registration examples declare destinations, graph, entries and the navigation module as internal, matching the login feature's declarations.",
+      "evidence": [
+        {
+          "resource": "repo://login/presentation/src/main/java/com/login/presentation/di/LoginNavigationModule.kt#L21-L23",
+          "version": "repo-lines-v1:sha256:071c46d8240e24ee1f36a757dd79e844dc383eba630ebe93166fa7b200b51d4c:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTk1NWY1MWQ3ZTI5MjE3YzExOTQ2YmEwMDg1Y2VhNWRiZmU5MDFmYTcxZTZmYzk2MjE3YmU3ZDc5OWVhOTNmMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjhlNDgwYzg3NDFiNTJkODNlYmNlYmQwNjcxYmQwMWI0ZTFkZGU0MjIxNjYzMDcyOTc5MTQ4ZTk5YWYxYmZjNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmYxOTVlNGRmMzA2ZmI2ZTVhMDRmMmMxYWE4MzE4OWYyMDgyNThlZWNjYTkzMDQzYTQ4NWVjNWM1NDI3NTE0ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGMzZTA0N2MyMThkMWYxZWNjNTc3ZDE3NTFkMzIzODU1NThkYmM3NmNiOGVkYzIyZjAyZDA1ZjhkMTZiNGNlZSJ9"
+        },
+        {
+          "resource": "repo://login/presentation/src/main/java/com/login/presentation/model/destination/LoginDestination.kt#L11-L12",
+          "version": "repo-lines-v1:sha256:4758824a76358c4dc5bfd2b22de786270be669b813d1fa8b0703a226cd89a02e:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzJmODI0YjUwMmUwZmYwMTE4ODU4OWQzN2Q5MjBiODFhMjI4ZjkyOTQ2ZmRkMGNjNjE0ZjE0MDJhYjg3MWQwYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDA2NzRkYTZlMjBlZmNmNWE3N2RiYTM1ODIyOTQyOTA2MzFkODgxMjg5M2ExZjQ1ZGM5ZWQ0MjliOGU2MDQzNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmYxOTVlNGRmMzA2ZmI2ZTVhMDRmMmMxYWE4MzE4OWYyMDgyNThlZWNjYTkzMDQzYTQ4NWVjNWM1NDI3NTE0ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T15:48:49.783Z"
+    "at": "2026-11-16T11:21:00.506Z"
   }
 }

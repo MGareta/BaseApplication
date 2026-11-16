@@ -3,15 +3,15 @@ type: build reference
 title: "Plugin: app"
 description: Reference for AppPlugin (plugin id app), the convention plugin for the :app application module. Covers the Gradle plugins it applies, ApplicationExtension configuration (application id, version, debug suffixes, release shrinking signed with the debug key), Compose, its dependencies, and what the app module can and can't see.
 tags: [core-dependencies, gradle, convention-plugin, android-application, app]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T16:41:29.588Z
 sources:
   - id: openwiki-source-3bfcb28142050978edf94754
     resource: repo://app/build.gradle.kts
   - id: openwiki-source-6e98d638297776b5f81f559d
     resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/AppPlugin.kt
-generated: { by: "claude-code", at: "2026-10-26T16:41:29.588Z" }
+generated: { by: "claude-code", at: "2026-11-02T14:42:55.956Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-02T14:42:55.956Z
 ---
 
 # Plugin: `app` (`com.core.dependencies.plugins.AppPlugin`)
@@ -51,7 +51,7 @@ app/build.gradle.kts
    | `implementation` | `hilt-android` (2.60.1) |
    | `detektPlugins` | `detekt-rules-ktlint-wrapper` |
 
-`app/build.gradle.kts` adds `implementation(project(":demo:presentation"))` and an empty `android {}`. No namespace override, so it stays `com.base.application`.
+`app/build.gradle.kts` adds `implementation(project(":demo:presentation"))` and `implementation(project(":login:presentation"))`, plus an empty `android {}`. No namespace override, so it stays `com.base.application`.
 
 ## Visibility consequences
 

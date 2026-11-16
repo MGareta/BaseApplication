@@ -3,25 +3,37 @@ type: how-to guide
 title: Build recipes
 description: Step-by-step Gradle recipes for BaseApplication. Covers creating and wiring feature data and presentation modules, adding or upgrading libraries and plugins in the coreLibs catalog, adding bundles, writing a new convention plugin, bumping SDK and JVM levels, enabling unit or Compose UI tests for a module type, and the commands to build and verify.
 tags: [core-dependencies, gradle, recipes, how-to, modules, version-catalog]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T16:41:29.588Z
 sources:
   - id: openwiki-source-3bfcb28142050978edf94754
     resource: repo://app/build.gradle.kts
   - id: openwiki-source-2a9daaac1604f238ef4c63fb
     resource: repo://build.gradle.kts
+  - id: openwiki-source-f9a7de034d8728b3e7dd333d
+    resource: repo://core/data/src/testFixtures/java/com/core/data/BaseTest.kt
   - id: openwiki-source-e109b62d9d6821d541faa04b
     resource: repo://core/dependencies/build.gradle.kts
   - id: openwiki-source-4a1624a1ef947742c273fc18
     resource: repo://core/dependencies/gradle/libs.versions.toml
+  - id: openwiki-source-b93e89ddcc6bb7ffc877b9e1
+    resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CorePresentationPlugin.kt
+  - id: openwiki-source-ebbe359b8fc397d0e2f617b5
+    resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt
+  - id: openwiki-source-1f78a6fb10e2b39879415b1c
+    resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt
+  - id: openwiki-source-7e3d591f8636cbc331831be8
+    resource: repo://core/presentation/src/testFixtures/java/com/core/presentation/BaseTest.kt
   - id: openwiki-source-823d791cada9047e35d0e367
     resource: repo://demo/presentation/build.gradle.kts
   - id: openwiki-source-b68c69ba290f0fee793ec69b
     resource: repo://gradle.properties
+  - id: openwiki-source-06e0b2c5eb0f49f9782454e5
+    resource: repo://login/presentation/build.gradle.kts
   - id: openwiki-source-e620d7484b72a53c7fa812cd
     resource: repo://settings.gradle.kts
-generated: { by: "claude-code", at: "2026-10-26T16:41:29.588Z" }
+generated: { by: "claude-code", at: "2026-11-02T14:42:55.956Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-02T14:42:55.956Z
 ---
 
 # Build recipes
@@ -56,7 +68,7 @@ All build logic lives in `core/dependencies` (plugins, `Config`, `Extensions.kt`
 3. `app/build.gradle.kts`: `implementation(project(":orders:presentation"))`.
 4. Add Navigation3 destinations, entries, a graph and a `@Module @InstallIn(ActivityRetainedComponent::class)` with `@IntoMap @ClassKey` providers
    ([core-presentation recipes](../core-presentation/recipes.md#1-new-feature-screen-navigation3)).
-5. Fix the demo leftovers if you replace them: give `:demo:*` namespaces or remove them from `settings.gradle.kts` and `app/build.gradle.kts`.
+5. The demo modules now declare explicit namespaces. `:app` still includes `:demo:presentation`, while `:demo:data` is not depended on; remove unused demo modules from settings and app wiring if replacing them.
 
 ## 3. Add or upgrade a library
 
@@ -116,9 +128,11 @@ toolchain is available.
 
 ## 8. Enable tests for a module type
 
-- **Robolectric unit tests in feature modules:** in `FeatureDataPlugin`/`FeaturePresentationPlugin`, call `configureTests()` inside the `LibraryExtension` block and add
-  `kspTest(dependencyNotation = hiltCompilerDependency)`. To share a `BaseTest`, move core/data's `BaseTest` to `core/data/src/testFixtures/java/...` (Kotlin test fixtures are enabled
-  via `android.experimental.enableTestFixturesKotlinSupport`). Feature modules then get it through `testFixtures(project(":core:data"))`.
+- **Robolectric unit tests in feature modules:** `FeatureDataPlugin` and `FeaturePresentationPlugin` already call `configureTests()` and add
+  `kspTest(dependencyNotation = hiltCompilerDependency)`. `:core:data` provides `com.core.data.BaseTest` in `core/data/src/testFixtures`, and `FeatureDataPlugin`
+  supplies it through `testFixtures(project(":core:data"))`. `:core:presentation` provides its own `com.core.presentation.BaseTest` in its test fixtures and exposes
+  the core:data fixture dependency; `FeaturePresentationPlugin` supplies the presentation fixtures through `testFixtures(project(":core:presentation"))`.
+  Kotlin test fixture sources are enabled via `android.experimental.enableTestFixturesKotlinSupport`.
 - **Compose UI tests (JVM):** add catalog entries `androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }` and
   `androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }`, then in `CorePresentationPlugin`/`FeaturePresentationPlugin` add
   `testImplementation(platform(composeBom))`, `testImplementation(uiTestJunit4)`, `debugApi(uiTestManifest)` (adds `debugImplementation`) and `configureTests()`.

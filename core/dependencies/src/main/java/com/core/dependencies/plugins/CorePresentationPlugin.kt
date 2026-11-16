@@ -5,6 +5,7 @@ import com.core.dependencies.utils.api
 import com.core.dependencies.utils.configureBuildTypes
 import com.core.dependencies.utils.configureDetekt
 import com.core.dependencies.utils.configurePackaging
+import com.core.dependencies.utils.configureTests
 import com.core.dependencies.utils.coreLibs
 import com.core.dependencies.utils.debugApi
 import com.core.dependencies.utils.defaultConfiguration
@@ -63,6 +64,7 @@ class CorePresentationPlugin : Plugin<Project> {
                 defaultConfiguration(extension = this)
                 configureBuildTypes()
                 configurePackaging()
+                configureTests()
 
                 buildFeatures {
                     compose = true
@@ -99,6 +101,7 @@ class CorePresentationPlugin : Plugin<Project> {
 
                 // Test
                 testFixturesApi(dependencyNotation = testUnitBundle)
+                testFixturesApi(dependencyNotation = project(":core:data"))
                 kspTest(dependencyNotation = hiltCompilerDependency)
 
                 // Detekt
