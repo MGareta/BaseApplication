@@ -221,6 +221,44 @@ def gate_g0c(args):
     gradle(args, [f":{f}:data:assembleDebug", f":{f}:presentation:assembleDebug", ":app:assembleDebug"], "M-1", "module")
 
 
+def check_data_visibility(f, main):
+    manager_module = f[:1].upper() + f[1:] + "Module"
+    """D-10: public API of the data module = I<Feature>Manager, model/ classes (not model/dto/) and the <Feature>Module object."""
+    decl = re.compile(r"^(?P<mods>(?:\w+\s+)*?)(?P<kind>class|interface|object|typealias)\s+(?P<name>\w+)", re.M)
+    for path in main:
+        p = path.replace(os.sep, "/")
+        src = read(path)
+        is_di, is_dto = "/data/di/" in p, "/data/model/dto/" in p
+        allowed = ("/data/model/" in p and not is_dto) or (re.search(r"/data/manager/I\w+Manager\.kt$", p) is not None)
+        for match in decl.finditer(src):
+            mods = match.group("mods").split()
+            if "internal" in mods or "private" in mods or allowed or (is_di and match.group("name") == manager_module):
+                continue
+            line = src.count("\n", 0, match.start()) + 1
+            add("D-10", "CRITICAL", f"{rel(path)}:{line}", f"{match.group('kind')} {match.group('name')} must be internal", "data")
+        if is_di and re.search(rf"^(?:(?!internal|private)\w+\s+)*object\s+{manager_module}\b", src, re.M):
+            for match in re.finditer(r"(@Provides|@Binds)[^\n]*\n(?:\s*@\w+[^\n]*\n)*\s*(?P<mods>(?:\w+\s+)*?)fun\s+(?P<name>\w+)", src):
+                if "internal" not in match.group("mods").split() and "private" not in match.group("mods").split():
+                    line = src.count("\n", 0, match.start()) + 1
+                    add("D-10", "CRITICAL", f"{rel(path)}:{line}", f"@Provides function {match.group('name')} must be internal", "data")
+
+
+def check_internal(files, rule, owner_of, allow_test_classes=False):
+    """VIS-1 / TR-6: every top-level declaration is internal (or private).
+    In test sources a class holding @Test and abstract base classes may stay public (JUnit needs it)."""
+    decl = re.compile(r"^(?P<mods>(?:[a-z]+\s+)*?)(?P<kind>class|interface|object|typealias|fun|val|var)\s+(?P<name>[\w<>.]+)", re.M)
+    for path in files:
+        src = read(path)
+        for match in decl.finditer(src):
+            mods = match.group("mods").split()
+            if "internal" in mods or "private" in mods:
+                continue
+            if allow_test_classes and match.group("kind") == "class" and ("abstract" in mods or "@Test" in src):
+                continue
+            line = src.count("\n", 0, match.start()) + 1
+            add(rule, "CRITICAL", f"{rel(path)}:{line}", f"{match.group('kind')} {match.group('name')} must be internal", owner_of(path))
+
+
 def gate_g1(args):
     f, allow = args.feature, load_allowlist()
     main = kotlin_files(os.path.join(ROOT, f, "data/src/main"))
@@ -229,9 +267,132 @@ def gate_g1(args):
     check_imports(tests, allow["data"]["imports_allowed"] + allow["tests"]["imports_allowed"],
                   allow["tests"]["forbidden_imports"], "D-T2", lambda p: "data-test", f)
     check_task_refs(main, args.change, lambda p: "data")
+    check_data_visibility(f, main)
+    check_internal(tests, "TR-6", lambda p: "data-test", allow_test_classes=True)
     check_scenario_tests(args.change, f"{f}-data", tests, "data-test")
     check_test_weakening(args, os.path.join(f, "data/src/test"), "data-test")
     gradle(args, [f":{f}:data:testDebugUnitTest"], "D-T1", "data")
+
+
+def check_presentation_structure(f, main):
+    """S-1: src/main layout of docs/orchestrator/proposal.md section 6.1.1 (mirrors login/presentation)."""
+    base = os.path.join(ROOT, f, "presentation/src/main/java/com", f, "presentation")
+    cap = f[:1].upper() + f[1:]
+    owners = {"viewModel": "viewmodel", "model": "view", "navigation": "view", "view": "view", "di": "view", "analytics": "analytics"}
+    exact = {  # directory -> exact file names; (suffix tuples for the rest) -> (suffixes, owner)
+        "viewModel": ({f"{cap}Contract.kt", f"{cap}ViewModel.kt"}, "viewmodel"),
+        "di": ({f"{cap}NavigationModule.kt"}, "view"),
+        "analytics": ({f"{cap}Analytics.kt"}, "analytics"),
+    }
+    suffixes = {
+        "navigation": (("Entry.kt", f"{cap}NavGraph.kt"), "view"),
+        "model/destination": (("Destination.kt",), "view"),
+        "view": (("Screen.kt",), "view"),
+        "analytics/events": (("Event.kt",), "analytics"),
+        "analytics/views": (("View.kt",), "analytics"),
+    }
+    for path in main:
+        sub = os.path.relpath(os.path.dirname(path), base).replace(os.sep, "/")
+        name = os.path.basename(path)
+        top = sub.split("/")[0]
+        if sub == "." or top not in owners:
+            add("S-1", "CRITICAL", rel(path), "file at the package root or in a directory outside viewModel/view/navigation/model/di/analytics", "view")
+        elif sub in exact and name not in exact[sub][0]:
+            add("S-1", "CRITICAL", rel(path), f"{sub}/ may only contain {', '.join(sorted(exact[sub][0]))}", exact[sub][1])
+        elif sub in suffixes and not name.endswith(suffixes[sub][0]):
+            add("S-1", "CRITICAL", rel(path), f"files in {sub}/ must end with {' or '.join(suffixes[sub][0])}", suffixes[sub][1])
+        elif top == "view" and sub != "view" and not sub.startswith("view/components"):
+            add("S-1", "CRITICAL", rel(path), "view/ may only contain *Screen.kt in its root and extra composables in view/components/", "view")
+        elif top == "model" and sub != "model/destination" and not (sub == "model/ui" or sub.startswith("model/ui/")):
+            add("S-1", "CRITICAL", rel(path), "model/ may only contain destination/ and ui/", "view")
+        elif top == "analytics" and sub not in ("analytics", "analytics/events", "analytics/views"):
+            add("S-1", "CRITICAL", rel(path), "analytics/ may only contain events/ and views/", "analytics")
+
+    def names(folder, suffix):
+        d = os.path.join(base, folder)
+        return {n[:-len(suffix)] for n in os.listdir(d) if n.endswith(suffix)} if os.path.isdir(d) else set()
+
+    for folder, fname in (("viewModel", f"{cap}Contract.kt"), ("viewModel", f"{cap}ViewModel.kt"), ("navigation", f"{cap}NavGraph.kt"),
+                          ("di", f"{cap}NavigationModule.kt"), ("analytics", f"{cap}Analytics.kt")):
+        if not os.path.isfile(os.path.join(base, folder, fname)):
+            add("S-1", "CRITICAL", rel(os.path.join(base, folder)), f"missing {fname}", owners[folder])
+    entries, screens = names("navigation", "Entry.kt"), names("view", "Screen.kt")
+    destinations, ui_models = names("model/destination", "Destination.kt"), names("model/ui", "UiModel.kt")
+    if not entries:
+        add("S-1", "CRITICAL", rel(os.path.join(base, "navigation")), "missing at least one <Screen>Entry.kt", "view")
+    for label, found in (("view/<Screen>Screen.kt", screens), ("model/destination/<Screen>Destination.kt", destinations), ("model/ui/<Screen>UiModel.kt", ui_models)):
+        if found != entries:
+            add("S-1", "CRITICAL", rel(base), f"{label} must match the navigation entries one to one (entries={sorted(entries)}, found={sorted(found)})", "view")
+    contract = os.path.join(base, "viewModel", f"{cap}Contract.kt")
+    if os.path.isfile(contract):
+        src = read(contract)
+        for screen in sorted(ui_models):
+            if f"{screen}UiModel" not in src:
+                add("S-1", "CRITICAL", rel(contract), f"UiState must keep a {screen}UiModel instance", "viewmodel")
+
+
+def check_test_structure(f, tests):
+    """S-2: one <Screen>FeatureTest.kt per navigation entry, <Feature>NavigationRegistrationTest.kt, di/*ModuleTest.kt only."""
+    pres = os.path.join(ROOT, f, "presentation/src")
+    base = os.path.join(pres, "test/java/com", f, "presentation")
+    nav = os.path.join(pres, "main/java/com", f, "presentation/navigation")
+    cap = f[:1].upper() + f[1:]
+    screens = {n[:-len("Entry.kt")] for n in os.listdir(nav) if n.endswith("Entry.kt")} if os.path.isdir(nav) else set()
+    found = []
+    for path in tests:
+        sub = os.path.relpath(os.path.dirname(path), base).replace(os.sep, "/")
+        name = os.path.basename(path)
+        if sub == "." and name.endswith("FeatureTest.kt"):
+            found.append(name[:-len("FeatureTest.kt")])
+        elif not ((sub == "." and name == f"{cap}NavigationRegistrationTest.kt") or (sub == "di" and name.endswith("ModuleTest.kt"))):
+            add("S-2", "CRITICAL", rel(path), "presentation tests: only <Screen>FeatureTest.kt and <Feature>NavigationRegistrationTest.kt at the root and di/*ModuleTest.kt", "testing")
+    if sorted(found) != sorted(screens):
+        add("S-2", "CRITICAL", rel(base), f"exactly one <Screen>FeatureTest.kt per navigation entry is required (screens={sorted(screens)}, tests={sorted(found)})", "testing")
+    if not any(os.path.basename(p) == f"{cap}NavigationRegistrationTest.kt" for p in tests):
+        add("S-2", "CRITICAL", rel(base), f"missing {cap}NavigationRegistrationTest.kt", "testing")
+
+
+def check_analytics_scaffold(f, main):
+    """AN-5/AN-6: analytics/<Feature>Analytics.kt + events/ + views/, ViewModels only use <Feature>Analytics."""
+    base = os.path.join(ROOT, f, "presentation/src/main/java/com", f, "presentation/analytics")
+    facade = os.path.join(base, f[:1].upper() + f[1:] + "Analytics.kt")
+    if not os.path.isfile(facade):
+        add("AN-5", "CRITICAL", rel(base), f"missing analytics facade {rel(facade)}", "analytics")
+    for path in kotlin_files(base):
+        if path != facade and os.path.basename(os.path.dirname(path)) not in ("events", "views"):
+            add("AN-5", "CRITICAL", rel(path), "analytics classes must live in analytics/events/ or analytics/views/", "analytics")
+        elif path != facade:
+            src, folder = read(path), os.path.basename(os.path.dirname(path))
+            wanted = "BaseFirebaseTrackEvent" if folder == "events" else "BaseFirebaseTrackView"
+            if wanted not in src:
+                add("AN-5", "CRITICAL", rel(path), f"classes in analytics/{folder}/ must extend {wanted}", "analytics")
+    for path in main:
+        src = read(path)
+        if "/analytics/" not in path:
+            for match in re.finditer(r"\b(\w*ApiService|\w*NetworkModule|\w+ManagerImpl)\b", src):
+                line = src.count("\n", 0, match.start()) + 1
+                add("L-1", "CRITICAL", f"{rel(path)}:{line}", f"'{match.group(0)}': presentation must reach data only through I<Feature>Manager", presentation_owner(path))
+            if "/viewModel/" not in path and re.search(r"\b(IAnalyticsManager|AnalyticsFramework)\b", src):
+                add("L-1", "CRITICAL", rel(path), "only analytics/ classes may use IAnalyticsManager", presentation_owner(path))
+        if "/viewModel/" in path:
+            for symbol in ("IAnalyticsManager", "AnalyticsFramework", "BaseFirebaseTrack", "presentation.analytics.events", "presentation.analytics.views"):
+                if symbol in src:
+                    add("AN-6", "CRITICAL", rel(path), f"ViewModel must use only {f[:1].upper() + f[1:]}Analytics, found '{symbol}'", "analytics")
+
+
+def check_form_placement(main):
+    """VM-6/V-F1: field states live in model/ui/<Screen>UiModel; the view builds FormState inside remember."""
+    for path in main:
+        src = read(path)
+        if "/viewModel/" in path:
+            for match in re.finditer(r"\b(?:\w+FieldState|FormState)\s*(?:<[^(]*>)?\(", src):
+                line = src.count("\n", 0, match.start()) + 1
+                add("VM-6", "CRITICAL", f"{rel(path)}:{line}", f"'{match.group(0)}' belongs in a model/ui/<Screen>UiModel (fields) or the view (FormState)", "viewmodel")
+        if "/view/" in path or "/navigation/" in path:
+            for match in re.finditer(r"\bFormState\s*(?:<[^(]*>)?\(", src):
+                if "remember" not in src[max(0, match.start() - 160):match.start()]:
+                    line = src.count("\n", 0, match.start()) + 1
+                    add("V-F1", "CRITICAL", f"{rel(path)}:{line}", "FormState must be created inside remember(<fields>) { ... }", "view")
 
 
 def gate_g2(args):
@@ -240,6 +401,10 @@ def gate_g2(args):
     pres = allow["presentation"]
     check_imports(main, pres["imports_allowed"], pres["forbidden_imports"], "VM-1", presentation_owner, f)
     check_task_refs(main, args.change, presentation_owner)
+    check_internal(main, "VIS-1", presentation_owner)
+    check_presentation_structure(f, main)
+    check_analytics_scaffold(f, main)
+    check_form_placement(main)
     for path in main:
         src = read(path)
         for entry in pres.get("forbidden_symbols", []):
@@ -262,6 +427,16 @@ def gate_g3(args):
     tests = kotlin_files(os.path.join(ROOT, f, "presentation/src/test"))
     check_imports(tests, allow["presentation"]["imports_allowed"] + allow["data"]["imports_allowed"] + allow["tests"]["imports_allowed"],
                   allow["tests"]["forbidden_imports"], "TR-2", lambda p: "testing", f)
+    check_test_structure(f, tests)
+    check_internal(tests, "TR-6", lambda p: "testing", allow_test_classes=True)
+    for path in tests:
+        for match in re.finditer(r"@(UninstallModules|BindValue)\b", read(path)):
+            line = read(path).count("\n", 0, match.start()) + 1
+            add("TR-4", "CRITICAL", f"{rel(path)}:{line}", f"'{match.group(0)}' is not allowed; replace bindings with a @TestInstallIn module in presentation/di/", "testing")
+    for path in tests:
+        for match in re.finditer(rf"\b(\w*ApiService|\w*NetworkModule|\w+ManagerImpl)\b|{f}\.data\.model\.dto\.", read(path)):
+            line = read(path).count("\n", 0, match.start()) + 1
+            add("TR-5", "CRITICAL", f"{rel(path)}:{line}", f"'{match.group(0)}': presentation tests must only mock the I<Feature>Manager surface", "testing")
     check_scenario_tests(args.change, f"{f}-presentation", tests, "testing")
     check_scenario_tests(args.change, f"{f}-analytics", tests, "testing")
     check_test_weakening(args, os.path.join(f, "presentation/src/test"), "testing")
