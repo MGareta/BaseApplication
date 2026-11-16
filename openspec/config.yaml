@@ -28,6 +28,8 @@ rules:
     - Every requirement has at least one WHEN/THEN scenario that a JVM unit or integration test can assert; scenario titles are unique within a capability.
   design:
     - Include the sections Data API surface, Cache policy, Presentation contract, Navigation, Analytics map and Test plan (format in docs/orchestrator/proposal.md Appendix C.4).
+    - In Analytics map, list per entry the event/view class, its <Feature>Analytics method and the ViewModel hook (scaffold in docs/orchestrator/proposal.md section 4, row 4).
+    - In Presentation contract, declare one <Screen>UiModel per screen (holding its form fields, which are BaseFieldState subclasses) kept by the single <Feature>Contract.UiState, with the FormState owned by the view (rubric VM-6, V-F1 in docs/orchestrator/proposal.md section 7.2).
     - Reference wiki pages for every technical decision; do not introduce libraries or patterns absent from the wiki.
   tasks:
     - Use exactly these sections, in order - 0. Module, 1. Data, 2. Presentation, 3. Testing.
