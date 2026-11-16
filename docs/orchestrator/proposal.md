@@ -250,7 +250,7 @@ rules:
   design:
     - Contain the sections "Data API surface", "Presentation contract", "Navigation", "Analytics map", "Cache policy", "Test plan", each in the template format.
   tasks:
-    - Every task starts with a role tag [module|data|data-test|viewmodel|view|analytics|testing] and ends with "Req: <capability>/<requirement>" (and "Scn: <scenario>" for tests).
+    - Every task starts with a role tag [module|data|data-test|viewmodel|view|analytics|testing] and ends with "Req':' <capability>/<requirement>" (and "Scn':' <scenario>" for tests).
     - Sections: 0 Module, 1 Data, 2 Presentation, 3 Testing. Never mix roles in one task.
 operations:
   apply:
@@ -297,7 +297,8 @@ derived artifact. Regenerate it whenever `openwiki/.last-update.json` changes (a
 | 1 | Feature presentation can't see core/data types (`core-dependencies/dependency-visibility.md`) | Module agent | `:<feature>:presentation` gets `implementation(project(":<feature>:data"))`. Rubric M-3. |
 | 2 | Default namespace `com.base.application` (`core-dependencies/config.md`) | Module agent | `android { namespace = "com.<feature>.data" }` / `"com.<feature>.presentation"`. Rubric M-2. |
 | 3 | Hilt/Navigation3 reachability (`core-dependencies/plugin-app.md`) | Module agent | `app/build.gradle.kts`: `implementation(project(":<feature>:presentation"))` (data comes transitively at runtime). Rubric M-4. |
-| 4 | Analytics lives in `:core:data` (`core-data/analytics.md`) | Analytics agent; checked by **presentation eval** | Event/view classes extending `BaseFirebaseTrackEvent`/`BaseFirebaseTrackView` live in `com.<feature>.presentation.analytics` (visible through the data dependency). Tracking calls `analyticsManager.trackView/trackEvent(AnalyticsFramework.FIREBASE, …)` are added to the ViewModel. Governed by `core-data/analytics.md` (types, FIREBASE pairing rule) + `core-presentation/base-architecture.md` (where calls go). `initialize()` isn't the feature's job (app-level, flagged). |
+| 4 | Analytics lives in `:core:data` (`core-data/analytics.md`) | Analytics agent; checked by **presentation eval** | Scaffold in `com.<feature>.presentation.analytics`: `<Feature>Analytics` (injectable class wrapping `IAnalyticsManager`, one `track<Name>` method per map entry), `events/<Name>Event` (extends `BaseFirebaseTrackEvent`) and `views/<Name>View` (extends `BaseFirebaseTrackView`); visible through the data dependency. The ViewModel injects only `<Feature>Analytics` and calls its `track*` methods; only `<Feature>Analytics` calls `analyticsManager.trackView/trackEvent(AnalyticsFramework.FIREBASE, …)`. Governed by `core-data/analytics.md` (types, FIREBASE pairing rule) + `core-presentation/base-architecture.md` (where calls go). `initialize()` isn't the feature's job (app-level, flagged). |
+| 4b | Layering presentation → data | Everyone; checked by **presentation eval** | The ViewModel is the only presentation type that calls the data layer, and only through `I<Feature>Manager`; the API service, DTOs and `ManagerImpl` stay behind it. The one exception is `<Feature>Analytics` → `IAnalyticsManager`. Rubric L-1 (allowlist `presentation`). |
 | 5 | Navigation3 ViewModel factory; `loadInitData()` not called (`core-presentation/navigation3.md`) | Human (P1); ViewModel and view agents | P1 is **blocking**. After P1: ViewModels are `@HiltViewModel` with `@Inject constructor(...)`. The **view agent** calls `LaunchedEffect(Unit) { viewModel.loadInitData() }` in every `Render`. Rubric V-N3. ViewModels must not read subclass properties in `setInitialState()` (rubric VM-4). |
 | 6 | Known component bugs (`core-presentation/form-fields.md`, `components-layout.md`, `forms.md`) | View agent; checked by presentation eval | Rules V-K1…K5 (§7.2): explicit `onValueChange` for Checkbox/Toggle; date fields need a separate error text from state; no `CurrencyType.Symbol` in `AmountFieldComponent`; no `PagingComponent`/`ContainerComponent` (commented out); `Validators.Required` first. |
 | 7 | Test infrastructure gaps (`core-dependencies/dependency-visibility.md`, `core-presentation/testing.md`) | Human (P2–P4); testing team | "End-to-end" is defined as **JVM feature-integration tests** (§4.1). Device/UI E2E is out of scope until P4 plus an instrumented setup exist. |
@@ -308,10 +309,8 @@ derived artifact. Regenerate it whenever `openwiki/.last-update.json` changes (a
 
 There's no instrumented-test infrastructure and no Compose UI test artifacts. A true on-device E2E isn't possible without new dependencies. The testing team delivers:
 
-- **Tier 1 (mandatory): feature-integration tests** in `:<feature>:presentation/src/test`, `@HiltAndroidTest` + Robolectric (requires P2), wiring the **real** ViewModel → real
-  `I<Feature>Manager` → real cache scope → a **fake API service** bound with `@TestInstallIn(replaces = [<Feature>NetworkModule::class])`, which is the documented pattern from
-  `DownloadNetworkModuleTest` (`core-data/testing.md`). `ISecurityManager` is replaced with an identity mock if `DISK_CACHE` is used (as in `CacheManagerTest`). The tests assert
-  `viewState` transitions, effects, `INavigationGraphManager.backStack` changes, and `IAnalyticsManager` calls (MockK `@BindValue`). They also include a **registration test**: the
+- **Tier 1 (mandatory): feature-integration tests** in `:<feature>:presentation/src/test`, `@HiltAndroidTest` + Robolectric (requires P2), wiring the **real** ViewModel → a **mocked `I<Feature>Manager`** provided by a `@TestInstallIn` module replacing the feature's manager Hilt module (`<Feature>Module`) in `src/test/.../presentation/di/` (pattern of `DownloadNetworkModuleTest`, `core-data/testing.md`, and the feature data tests in `login/data/src/test/.../di/`). Presentation tests depend only on the manager surface of `data-api-surface.json`; the API service, DTOs, `<Feature>ManagerImpl` and cache are covered by the data tests. The tests assert
+  `viewState` transitions, effects, `INavigationGraphManager.backStack` changes, and `IAnalyticsManager` calls (a `mockk(relaxed = true)` provided by a `@TestInstallIn` module replacing `AnalyticsModule`; presentation tests never use `@UninstallModules`/`@BindValue`). They also include a **registration test**: the
   feature graph and its entries are present in `INavigationGraphFactory.navigationGraphsWithDestinations`.
 - **Tier 2 (only if P4 is approved):** Robolectric Compose UI tests of the screens inside `Theme { }`, driving them through the entry `Render`.
 - **Out of scope:** network against a real backend, device tests, screenshot tests. `MockWebServer` isn't in the catalog, so it isn't allowed.
@@ -355,12 +354,52 @@ The testing team is **one agent** in v1. Splitting it (integration vs. UI) only 
 | `<f>/data/src/test/**` | data-test | testing may add `fake/**` |
 | `presentation/viewModel/**`, `presentation/model/ui/**` | viewmodel | analytics: insert-only lease after viewmodel is done |
 | `presentation/view/**`, `presentation/navigation/**`, `presentation/model/destination/**`, `presentation/di/**` | view | — |
-| `presentation/analytics/**` | analytics | — |
+| `presentation/analytics/**` (`<Feature>Analytics.kt`, `events/`, `views/`) | analytics | — |
 | `<f>/presentation/src/test/**` | testing | — |
 | `openspec/changes/<id>/**` (except `tasks.md` checkboxes) | coordinator | agents tick only their own checkboxes |
 | `.orchestrator/verdicts/**` | eval agents | — |
 
-Reusable structure follows the relevant `core/**` contracts and `openwiki/core-dependencies` recipes. Feature-owned path categories are `viewModel/`, `view/`, `navigation/`, `model/`, `di/`, `api/`, `manager/`, and `repository/`; they are not a requirement to create every directory. The current change's approved `design.md` → *Data API surface* component-applicability table determines which feature-specific components and paths exist. Another feature's layout is never a baseline.
+### 6.1.1 Canonical presentation structure (rubrics S-1, S-2)
+
+Every feature presentation module has exactly the layout of `:login:presentation` (the reference implementation for presentation; the data layout stays design-driven):
+
+```
+<f>/presentation/src/main/java/com/<f>/presentation/
+├── analytics/
+│   ├── <Feature>Analytics.kt
+│   ├── events/<Name>Event.kt
+│   └── views/<Name>View.kt
+├── di/<Feature>NavigationModule.kt
+├── model/
+│   ├── destination/<Name>Destination.kt
+│   └── ui/<Screen>UiModel.kt       # one data class per screen (+ optional item models/mappers)
+├── navigation/
+│   ├── <Feature>NavGraph.kt
+│   └── <Screen>Entry.kt            # one per destination
+├── view/
+│   ├── <Screen>Screen.kt           # one per entry, always in the root of view/
+│   └── components/                 # optional: custom or complex composables
+└── viewModel/
+    ├── <Feature>Contract.kt        # exactly one per feature
+    └── <Feature>ViewModel.kt       # exactly one per feature
+<f>/presentation/src/test/java/com/<f>/presentation/
+├── <Screen>FeatureTest.kt          # exactly one per screen (as many as navigation entries): that screen's presentation + analytics scenarios
+├── <Feature>NavigationRegistrationTest.kt
+└── di/<ReplacedModule>Test.kt      # @TestInstallIn modules only (rubric TR-4/TR-5)
+```
+
+- Directory names are fixed (`viewModel` is camelCase). `view/components/` is the only optional directory; every other directory exists in every feature. No `.kt` file sits at the package root or in a directory not listed.
+- File names carry their role suffix (`*Contract`, `*ViewModel`, `*Screen`, `*UiModel`, `*Entry`, `*NavGraph`, `*Destination`, `*Event`, `*View`, `*FeatureTest`, `*ModuleTest`).
+- **One ViewModel and one Contract per feature, always** (`<Feature>Contract.kt`, `<Feature>ViewModel.kt`), whether the feature has one screen or many. Every entry of the feature uses that ViewModel.
+- **One screen = one destination = one entry = one `<Screen>UiModel`:** `navigation/<Screen>Entry.kt`, `view/<Screen>Screen.kt`, `model/destination/<Screen>Destination.kt` and `model/ui/<Screen>UiModel.kt` share the `<Screen>` name
+  (for a single-screen feature `<Screen>` equals `<Feature>`). The number of `*Screen.kt` files in the root of `view/` equals the number of `*Entry.kt` files.
+- **Screen state:** `<Screen>UiModel` is a `data class` holding everything that screen shows (form fields, loading flag, messages, lists). `<Feature>Contract.UiState` is a `data class` with one property per screen
+  (`val <screen>: <Screen>UiModel = <Screen>UiModel()`); the ViewModel updates it with `setState { copy(<screen> = <screen>.copy(...)) }`. The stateless `<Screen>Screen` takes its `<Screen>UiModel` (not the whole `UiState`) and `onEvent`;
+  the entry passes `state.<screen>`. One `Event` and one `Effect` hierarchy serves all screens.
+- `view/` root contains only `*Screen.kt`; extra composables (custom or complex components) go in `view/components/`.
+- Tests: `<Feature>NavigationRegistrationTest` is mandatory; there is **exactly one `<Screen>FeatureTest.kt` per screen** (a feature with 5 screens has 5, named after the entries; for a single-screen feature `<Screen>` equals `<Feature>`), holding the presentation and analytics scenarios of that screen, driven through the feature's single ViewModel; the `di/` test modules follow TR-4/TR-5. No other test directory exists (no `fake/`, no fixtures).
+
+Reusable structure follows the relevant `core/**` contracts and `openwiki/core-dependencies` recipes. Feature-owned path categories are `viewModel/`, `view/`, `navigation/`, `model/`, `di/`, `api/`, `manager/`, and `repository/`; they are not a requirement to create every directory. The current change's approved `design.md` → *Data API surface* component-applicability table determines which feature-specific components and paths exist. For the data layer another feature's layout is never a baseline; the presentation layout is the fixed one above.
 `.orchestrator/leases.json` records which role currently holds which path globs. The PreToolUse hook (§10.4) enforces it.
 
 ### 6.2 Handoff artifacts
@@ -371,7 +410,7 @@ All handoffs live in `design.md` (an OpenSpec artifact, versioned with the chang
 |---|---|---|
 | Coordinator → all | `design.md` → *Data API surface* (planned) | A component-applicability table: each API service, network module, request/response DTO, app-facing model, manager pair, manager module, and repository/cache is `Required` with planned paths/types/signatures or `N/A` with a reason; also record the exact interface methods, model fields and Hilt bindings presentation may inject. |
 | Data → Presentation | `.orchestrator/handoff/data-api-surface.json` (generated after G1 from the real code by the data eval agent) | actual public types; the presentation eval diffs it against the planned surface |
-| Coordinator → ViewModel ∥ View | `design.md` → *Presentation contract* | `UiState`/`Event`/`Effect` types, UI model fields, which events each screen emits |
+| Coordinator → ViewModel ∥ View | `design.md` → *Presentation contract* | `UiState` (including form field states)/`Event`/`Effect` types, UI model fields, which events each screen emits |
 | Coordinator → View | `design.md` → *Navigation* | destinations (object/data class + args), entry type (screen/dialog/bottom sheet), graph (launcher? bottom-nav?), effect → navigation mapping |
 | Coordinator → Analytics | `design.md` → *Analytics map* | view/event class names, Firebase keys/params, the ViewModel hook (which event/state transition triggers it) |
 | Coordinator → Testing | `design.md` → *Test plan* | scenario → test class mapping, fakes, Hilt replacements |
@@ -456,6 +495,7 @@ Every rule: **ID · check type (M = mechanical, J = LLM-judged) · source**. Sev
 - D-5 · J · each required request/response DTO is `@Serializable`; each data-bearing response DTO is mapped to the planned plain app-facing model and never exposed through the manager. Omit DTOs for absent payloads and models for void/no-content-only outcomes. Cached values are `@Serializable` classes, with lists wrapped (`core-data/cache.md` → *Gotchas*)
 - D-6 · J · cache and repository layers match `design.md` → *Cache policy* and the component-applicability table; a repository is added only when the design requires a separate data-source/cache boundary. `repositoryPattern` is used only with non-suspend sources, otherwise use the manual pattern from `core-data/recipes.md` §2
 - D-7 · J · no use of `CipherType.RSA` without a key (`core-data/security.md` → *Gotchas*, shared alias)
+- D-10 · M · visibility: in `<f>/data/src/main` only `I<Feature>Manager`, `model/` classes (not `model/dto/`) and the `<Feature>Module` object (replaced by presentation tests) are public; API service, DTOs, `ManagerImpl`, other Hilt modules (e.g. `<Feature>NetworkModule`) and everything else are `internal`, and the `@Provides` functions of the public `<Feature>Module` are `internal` (enforces L-1 at compile time)
 - D-8 · M · no new Detekt findings in the feature module compared with an empty module: `./gradlew :<f>:data:detekt` on a disposable worktree (W only, because the strict config also flags documented patterns; `core-dependencies/code-quality.md`)
 - D-9 · J · `design.md` → *Data API surface* classifies every canonical component (API service, network module, request/response DTOs, app-facing models, manager pair, manager module, repository/cache) as `Required` with planned paths/types/signatures or `N/A` with a reason; all required components match the source, N/A components are absent, and no unplanned public feature API or Hilt binding is added (internal helpers may be added when needed)
 - D-T1 · M · every `<f>-data` scenario has ≥1 test with `Scn:` (§3.5)
@@ -469,6 +509,11 @@ Every rule: **ID · check type (M = mechanical, J = LLM-judged) · source**. Sev
 - VM-3 · J · data calls use `withUseCaseScope`/`withUseCaseScopeLazily`, and blocks don't throw (`core-presentation/coroutines.md` → *Exception caveat*)
 - VM-4 · J · `setInitialState()` returns constants or constructor-derived values only (`base-architecture.md` → *Gotchas*)
 - VM-5 · J · the contract equals `design.md` → *Presentation contract*
+- VIS-1 · M · visibility: in `<f>/presentation/src/main` every class, object, interface, function and Hilt module is `internal` (destination, entry, nav graph, `<Feature>NavigationModule`, contract, ViewModel, UI models, screens, analytics classes, events, views); `:app` consumes the feature only through the `@IntoMap` bindings typed with the public core types `INavigationGraph`/`INavigationEntry`, so nothing needs to be public; widening a type only to make code compile is a finding
+- L-1 · M · layering: presentation reaches data only via ViewModel → `I<Feature>Manager` (+ `data.model` domain types); no `*ApiService`, `data.model.dto`, `data.di`, `*ManagerImpl` in `src/main`; `IAnalyticsManager`/`AnalyticsFramework` only in `analytics/` (§4, row 4)
+- S-1 · M · presentation `src/main` matches §6.1.1: fixed directories, role-suffixed names, exactly one `<Feature>Contract`/`<Feature>ViewModel`, #`*Screen.kt` = #`*Entry.kt` = #`*Destination.kt`, a `<Screen>UiModel` per screen referenced by `UiState`, no stray files
+- S-2 · M · presentation `src/test` matches §6.1.1: exactly one `<Screen>FeatureTest.kt` per navigation entry, `<Feature>NavigationRegistrationTest.kt`, `di/*ModuleTest.kt` only
+- VM-6 · M · every `BaseFieldState` subclass is a property of a `<Screen>UiModel` in `model/ui/` (kept by `<Feature>Contract.UiState`); ViewModels declare no field and no `FormState` (`core-presentation/forms.md`, `form-fields.md`)
 
 **View (presentation eval)**
 - V-1 · M · no hard-coded colours (`Color(0x…)`, `Color.Red`, …) or `MaterialTheme.colorScheme`; colours come from `LocalPalette`, spacing from `LocalDimensions`, text from `LocalTypographies` (`core-presentation/theme.md`, `theme-tokens.md`)
@@ -481,6 +526,7 @@ Every rule: **ID · check type (M = mechanical, J = LLM-judged) · source**. Sev
 - V-K2 · J · date fields show validation errors through separate UI (`form-fields.md`)
 - V-K3 · M · `AmountFieldComponent` isn't used with `CurrencyType.Symbol` (`form-fields.md`)
 - V-K4 · M · no reference to `PagingComponent`/`ContainerComponent`/list `Loading`/`Error` (`components-layout.md`)
+- V-F1 · M · the screen builds `FormState` from its `<Screen>UiModel` fields inside `remember(<fields>)`, validates before emitting the submit event, and entries/screens don't take fields as separate parameters (`forms.md`)
 - V-K5 · J · `Validators.Required` comes first in every `TextFieldState` validator list (`forms.md` → *Crash gotcha*)
 - V-I1 · J · screens in bottom-nav graphs use `nestedScroll(LocalBottomNavBarScrollConnection.current)` + `bottomNavBarPadding()`; edge-to-edge insets are handled (`components-navigation.md`, `app-and-activity.md`)
 
@@ -489,17 +535,22 @@ Every rule: **ID · check type (M = mechanical, J = LLM-judged) · source**. Sev
 - AN-2 · J · bundle values are `bundleOf`-compatible (`analytics.md` → *Type reference*)
 - AN-3 · M · every entry of `design.md` → *Analytics map* has a class and a call site; no extra events
 - AN-4 · M · analytics edits to the ViewModel are insert-only (diff contains no deletions outside the constructor line)
+- AN-5 · M · scaffold: `analytics/<Feature>Analytics.kt` exists, event classes live in `analytics/events/`, view classes in `analytics/views/`, and `<Feature>Analytics` has one method per map entry
+- AN-6 · M · ViewModels depend on `<Feature>Analytics` only: no `IAnalyticsManager`, `AnalyticsFramework` or event/view class in `viewModel/**`
 
 **Traceability (all evals)**
 - TR-1 · M · scenario coverage and file → task references (§3.5)
 - TR-2 · J · no behavior implemented without a requirement (compare public API and UI flows to the spec; for the module eval, the build files against `<f>-module`)
+- TR-6 · M · test visibility: in `<f>/data/src/test` and `<f>/presentation/src/test` every `@TestInstallIn` module object and every helper/fake/fixture declaration is `internal`; only JUnit test classes (and shared `abstract` base classes) are public
+- TR-5 · M · presentation tests reference only the `I<Feature>Manager` surface and its domain models: no `<Feature>ApiService`, `.dto.` types, `<Feature>NetworkModule` or `<Feature>ManagerImpl` in `<f>/presentation/src/test`
+- TR-4 · M · presentation tests replace Hilt bindings only through `@TestInstallIn` modules in `src/test/.../presentation/di/`; no `@UninstallModules` or `@BindValue` in `<f>/presentation/src/test`
 - TR-3 · M · `openspec validate <id> --strict` exit 0; only owned task checkboxes changed by each role (git diff of `tasks.md`)
 
 ### 7.3 Mechanical vs. judged
 
 | Mechanical (script/skill `eval-mechanical`, deterministic, runs first) | Judged (eval agent) |
 |---|---|
-| Gradle assemble/compile/test, module build-file checks (M-1…M-4), `openspec validate --strict --json`, `openspec status --json`, import scan vs. allowlist, forbidden-symbol grep (V-1, V-K1, V-K3, V-K4), dependency diff (M-5), scenario coverage (TR-1), diff-shape checks (D-T4, AN-4, TR-3), Detekt delta (W) | architecture conformance (D-2…D-7, VM-2…VM-5, V-2, V-N1/N2/N4, V-K2/K5, AN-1/AN-2, TR-2), using the wiki section cited by each rule, `/opsx:verify` output (completeness/correctness/coherence) as input |
+| Gradle assemble/compile/test, module build-file checks (M-1…M-4), `openspec validate --strict --json`, `openspec status --json`, import scan vs. allowlist, forbidden-symbol grep (V-1, V-K1, V-K3, V-K4), visibility scan (VIS-1, TR-6; D-10 for data main), dependency diff (M-5), scenario coverage (TR-1), diff-shape checks (D-T4, AN-4, TR-3), Detekt delta (W) | architecture conformance (D-2…D-7, VM-2…VM-5, V-2, V-N1/N2/N4, V-K2/K5, AN-1/AN-2, TR-2), using the wiki section cited by each rule, `/opsx:verify` output (completeness/correctness/coherence) as input |
 
 The judged pass only runs if the mechanical pass has no CRITICAL findings, which saves tokens.
 
@@ -749,6 +800,7 @@ Implement only [data-test] tasks; write only under <feature>/data/src/test.
 Follow openwiki/core-data/testing.md: BaseTest pattern (Robolectric + HiltTestApplication + HiltAndroidRule), @HiltAndroidTest,
 @UninstallModules + @BindValue mocks or @TestInstallIn replacements, MockK, test { } helper. One or more tests per `<feature>-data` scenario;
 name tests after the scenario and add KDoc `Scn: <capability>/<scenario>`.
+Visibility (TR-6): `@TestInstallIn` modules and any helper/fake are `internal`; only JUnit test classes stay public.
 Run ./gradlew :<feature>:data:testDebugUnitTest. For each failure, report {test, scenario, failure output, attribution: code|test|spec} to the coordinator.
 Never weaken, @Ignore or delete a test; change a test only if the data eval rules attribution=test.
 ```
@@ -774,10 +826,10 @@ tools: Read, Grep, Glob, Write, Edit, Bash
 model: sonnet
 ---
 Implement only [viewmodel] tasks; write only under .../presentation/{viewModel,model/ui}.
-Follow openwiki/core-presentation/base-architecture.md and coroutines.md: <Feature>Contract (ViewState/ViewEvent/ViewEffect), BaseViewModel,
+Follow openwiki/core-presentation/base-architecture.md and coroutines.md: <Feature>Contract (ViewState/ViewEvent/ViewEffect; form BaseFieldState fields live in per-screen UiModels kept by UiState), BaseViewModel,
 setState only, setInitialState returns constants, withUseCaseScope / withUseCaseScopeLazily with non-throwing blocks, UiResult mapping.
 Inject managers from .orchestrator/handoff/data-api-surface.json only. The contract must equal design.md "Presentation contract".
-Leave analytics calls to the analytics agent. Verify with ./gradlew :<feature>:presentation:compileDebugKotlin.
+Visibility (VIS-1): every declaration is `internal`. Leave analytics calls to the analytics agent. Verify with ./gradlew :<feature>:presentation:compileDebugKotlin.
 ```
 
 ```markdown
@@ -792,7 +844,7 @@ Follow openwiki/core-presentation/navigation3.md (destinations: @Serializable, I
 @Inject constructor(override val navigator: dagger.Lazy<INavigationGraphManager>); graph + entry Set bound with the same @ClassKey in an
 @InstallIn(ActivityRetainedComponent::class) module), theme.md/theme-tokens.md (only LocalPalette/LocalDimensions/LocalTypographies), components-*.md, form-fields.md.
 Every Render: collect viewState with collectAsStateWithLifecycle, call LaunchedEffect(Unit){ viewModel.loadInitData() }, collect effect once.
-Mandatory workarounds: V-K1..K5 in proposal §7.2. Never import com.core.presentation.navigation.* (legacy).
+Visibility (VIS-1): destinations, entries, graph, navigation module and screens are all `internal`; `:app` only sees the `@IntoMap` bindings typed with public `INavigationGraph`/`INavigationEntry`. Mandatory workarounds: V-K1..K5 in proposal §7.2. Never import com.core.presentation.navigation.* (legacy).
 ```
 
 ```markdown
@@ -802,10 +854,10 @@ description: Adds analytics views/events and tracking calls for a feature using 
 tools: Read, Grep, Glob, Write, Edit, Bash
 model: sonnet
 ---
-Implement only [analytics] tasks. Create classes under .../presentation/analytics extending BaseFirebaseTrackView / BaseFirebaseTrackEvent
-(openwiki/core-data/analytics.md). With the ViewModel lease: insert-only edits to add `private val analyticsManager: IAnalyticsManager` to the
-constructor and `analyticsManager.trackView/trackEvent(AnalyticsFramework.FIREBASE, ...)` at the hooks in design.md "Analytics map". Do not change other logic.
-Values must be bundleOf-compatible. Every map entry must exist exactly once.
+Implement only [analytics] tasks. Under .../presentation/analytics create `<Feature>Analytics` (injectable class wrapping IAnalyticsManager, one track<Name> method per map entry),
+events/<Name>Event extending BaseFirebaseTrackEvent and views/<Name>View extending BaseFirebaseTrackView (openwiki/core-data/analytics.md). With the ViewModel lease:
+insert-only edits to add `private val analytics: <Feature>Analytics` to the constructor and `analytics.track<Name>(...)` at the hooks in design.md "Analytics map". Never inject IAnalyticsManager in a ViewModel. Do not change other logic.
+Visibility (VIS-1): `<Feature>Analytics`, events and views are `internal`. Values must be bundleOf-compatible. Every map entry must exist exactly once.
 ```
 
 ```markdown
@@ -827,9 +879,10 @@ tools: Read, Grep, Glob, Write, Edit, Bash
 model: sonnet
 ---
 Implement only [testing] tasks under <feature>/presentation/src/test (shared fakes may go under <feature>/data/src/test/.../fake).
-Tier 1 (proposal §4.1): @HiltAndroidTest + Robolectric; real ViewModel → real manager → fake API via @TestInstallIn(replaces = [<Feature>NetworkModule::class]);
-@BindValue mocks for IAnalyticsManager (verify calls) and, if DISK_CACHE, an identity ISecurityManager. Assert viewState, effects, INavigationGraphManager.backStack,
+Tier 1 (proposal §4.1): @HiltAndroidTest + Robolectric; real ViewModel → mocked I<Feature>Manager via @TestInstallIn(replaces = [<Feature>Module::class]) (never the API service/DTOs);
+mockk IAnalyticsManager (verify calls) and, if DISK_CACHE, an identity ISecurityManager, each provided by a @TestInstallIn module under src/test/.../presentation/di/ (never @UninstallModules/@BindValue). Assert viewState, effects, INavigationGraphManager.backStack,
 and that the feature graph and entries are registered. One test per presentation/analytics scenario (Scn: KDoc).
+Visibility (TR-6): `@TestInstallIn` modules and any helper are `internal`; only JUnit test classes stay public.
 Run all feature tests and `/opsx:verify <id>`; report defects with the failing layer so the coordinator can route them.
 ```
 
@@ -1066,22 +1119,23 @@ Only `Required` components are created. Every `N/A` entry includes its reason so
 getOrders(null): MEMORY_CACHE, TimeToLiveCacheConfig(key = "orders_all", duration = 5.minutes, bypassCache = forceRefresh); filtered calls are not cached; detail not cached.
 Manual pattern (core-data/recipes.md §2), because the source is a suspend Retrofit call.
 ## Presentation contract
-OrdersContract.UiState(isLoading, orders: List<OrderUi>, error: String?, selectedStatus: OrderStatus?)
-Event: Retry, OrderClicked(id), FilterClicked, FilterApplied(status)
+OrdersContract.UiState(ordersList: OrdersListUiModel, orderDetail: OrderDetailUiModel, ordersFilter: OrdersFilterUiModel)  (one OrdersViewModel for the feature)
+OrdersListUiModel(isLoading, orders: List<OrderUi>, error: String?, selectedStatus: OrderStatus?); OrderDetailUiModel(isLoading, detail: OrderDetailUi?, error: String?); OrdersFilterUiModel(selectedStatus: OrderStatus?)
+Event: Retry, OrderClicked(id), FilterClicked, FilterApplied(status), LoadDetail(id)
 Effect: OpenDetail(id), OpenFilter
-OrderDetailContract.UiState(isLoading, detail: OrderDetailUi?, error: String?)
 ## Navigation
 graph OrdersNavGraph : INavigationGraph (not launcher, not bottom-nav)
 OrdersListDestination (data object) → OrdersListEntry : INavigationEntry<OrdersListDestination, OrdersViewModel>
-OrderDetailDestination(orderId: String) → OrderDetailEntry : INavigationEntry<OrderDetailDestination, OrderDetailViewModel>
-OrdersFilterDestination (data object) → OrdersFilterSheetEntry : INavigationEntryBottomSheet<OrdersFilterDestination, OrdersViewModel> (shares OrdersViewModel)
+OrderDetailDestination(orderId: String) → OrderDetailEntry : INavigationEntry<OrderDetailDestination, OrdersViewModel>
+OrdersFilterDestination (data object) → OrdersFilterEntry : INavigationEntryBottomSheet<OrdersFilterDestination, OrdersViewModel>
 Entry point for other features: goToDestination(OrdersListDestination)
 ## Analytics map
-OrdersViewModel.loadInitData success → OrdersListView; OrderClicked → OrderSelectedEvent(id); FilterApplied → OrdersFilterAppliedEvent(status)
-OrderDetailViewModel.loadInitData success → OrderDetailView
+OrdersAnalytics (analytics/OrdersAnalytics.kt): trackOrdersListView(), trackOrderDetailView(), trackOrderSelected(id), trackOrdersFilterApplied(status)
+OrdersViewModel.loadInitData success → trackOrdersListView() (views/OrdersListView); OrderClicked → trackOrderSelected(id) (events/OrderSelectedEvent); FilterApplied → trackOrdersFilterApplied(status) (events/OrdersFilterAppliedEvent)
+OrdersViewModel on LoadDetail success → trackOrderDetailView() (views/OrderDetailView)
 ## Test plan
 Data: OrdersManagerTest (fake OrdersApiService via @TestInstallIn replacing OrdersNetworkModule; identity ISecurityManager not needed for MEMORY_CACHE)
-Integration: OrdersFeatureTest (real OrdersViewModel/OrdersManagerImpl/cache; fake API; @BindValue IAnalyticsManager; assert backStack via INavigationGraphManager)
+Integration: OrdersListFeatureTest, OrderDetailFeatureTest, OrdersFilterFeatureTest, one per screen (real OrdersViewModel; mocked IOrdersManager via @TestInstallIn replacing OrdersModule; @TestInstallIn IAnalyticsManager mock; assert backStack via INavigationGraphManager)
 ```
 
 **tasks.md (excerpt)**
@@ -1099,15 +1153,14 @@ Integration: OrdersFeatureTest (real OrdersViewModel/OrdersManagerImpl/cache; fa
 - [ ] 1.6 [data-test] Cached second call / forced refresh — Req: orders-data/Cache order list Scn: Cached second call, Forced refresh
 - [ ] 1.7 [data-test] Detail found — Req: orders-data/Fetch order detail Scn: Detail found
 ## 2. Presentation
-- [ ] 2.1 [viewmodel] OrdersContract + OrdersViewModel + OrderUi mapper — Req: orders-presentation/Orders list screen
-- [ ] 2.2 [viewmodel] OrderDetailContract + OrderDetailViewModel — Req: orders-presentation/Order detail navigation
+- [ ] 2.1 [viewmodel] OrdersContract + OrdersViewModel + OrdersListUiModel/OrderDetailUiModel/OrdersFilterUiModel + OrderUi mapper — Req: orders-presentation/Orders list screen, Order detail navigation
 - [ ] 2.3 [view] Destinations, entries (list, detail, filter sheet), OrdersNavGraph, OrdersNavigationModule — Req: orders-presentation/Order detail navigation
-- [ ] 2.4 [view] OrdersListScreen, OrderDetailScreen, OrdersFilterSheet — Req: orders-presentation/Orders list screen, Status filter
+- [ ] 2.4 [view] OrdersListScreen, OrderDetailScreen, OrdersFilterScreen — Req: orders-presentation/Orders list screen, Status filter
 - [ ] 2.5 [analytics] Views/events + tracking calls — Req: orders-analytics/Screen views, Order events
 ## 3. Testing
-- [ ] 3.1 [testing] OrdersFeatureTest list/error/retry — Req: orders-presentation/Orders list screen Scn: List loads, Load error
-- [ ] 3.2 [testing] Navigation to detail + registration — Req: orders-presentation/Order detail navigation Scn: Tap order
-- [ ] 3.3 [testing] Filter flow — Req: orders-presentation/Status filter Scn: Apply filter
+- [ ] 3.1 [testing] OrdersListFeatureTest list/error/retry — Req: orders-presentation/Orders list screen Scn: List loads, Load error
+- [ ] 3.2 [testing] OrderDetailFeatureTest navigation to detail + OrdersNavigationRegistrationTest — Req: orders-presentation/Order detail navigation Scn: Tap order
+- [ ] 3.3 [testing] OrdersFilterFeatureTest filter flow — Req: orders-presentation/Status filter Scn: Apply filter
 - [ ] 3.4 [testing] Analytics calls — Req: orders-analytics/Screen views, Order events Scn: List view tracked, Order selected tracked
 ```
 

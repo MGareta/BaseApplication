@@ -4,7 +4,7 @@
 # Prefix matching: an import is allowed when it starts with one of the listed prefixes.
 # <feature> is substituted at check time.
 
-source_wiki_update: "2026-10-26"
+source_wiki_update: "2026-11-16"
 sources:
   - openwiki/core-dependencies/dependency-visibility.md#compile-time-visibility-main-source-set
   - openwiki/core-dependencies/version-catalog.md
@@ -55,7 +55,8 @@ presentation:                           # :<feature>:presentation src/main
     - "com.core.data.network.model."
     - "com.core.data.network.utils."
     - "com.<feature>.presentation."
-    - "com.<feature>.data."
+    - "com.<feature>.data.manager."        # layering L-1: data is reached only through I<Feature>Manager and its domain models
+    - "com.<feature>.data.model."
     - "androidx.compose.foundation."
     - "androidx.compose.runtime."
     - "androidx.compose.ui."
@@ -79,6 +80,9 @@ presentation:                           # :<feature>:presentation src/main
     - "com.core.presentation.ui.components.container."   # commented out (components-layout.md)
     - "com.core.presentation.ui.components.list.PagingComponent"
     - "com.core.presentation.ui.components.list.utils."
+    - "com.<feature>.data.api."                      # L-1: no API service in presentation
+    - "com.<feature>.data.model.dto."                # L-1: no DTOs in presentation
+    - "com.<feature>.data.di."                       # L-1: no data Hilt modules in presentation
     - "retrofit2."                                   # presentation never talks to the network directly
     - "okhttp3."
     - "com.google.firebase."
