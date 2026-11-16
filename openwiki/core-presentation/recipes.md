@@ -3,9 +3,6 @@ type: how-to guide
 title: Recipes for feature screens
 description: Step-by-step Kotlin and Compose recipes for building features on core/presentation. Covers a complete Navigation3 screen, dialog and bottom-sheet destinations, bottom-nav tabs, validated forms, loading data into UiResult, paged lists, collapsing toolbars, session-warning handling, and adding design tokens or component styles, with the workarounds the current code requires.
 tags: [core-presentation, recipes, how-to, navigation3, forms, paging, toolbar, design-system]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T15:48:49.783Z
 sources:
   - id: openwiki-source-e38439f5bc06bf873d6444ad
     resource: repo://app/src/main/java/com/baseapplication/MainActivity.kt
@@ -19,7 +16,14 @@ sources:
     resource: repo://demo/presentation/src/main/java/com/demo/presentation/navigation/DemoScreenNavGraphEntry.kt
   - id: openwiki-source-90b8a1933f23cdd6d93ec1c8
     resource: repo://demo/presentation/src/main/java/com/demo/presentation/view/DemoScreen.kt
-generated: { by: "claude-code", at: "2026-10-26T15:48:49.783Z" }
+  - id: openwiki-source-3d81ea9a2f39ace049ef5bdb
+    resource: repo://login/presentation/src/main/java/com/login/presentation/navigation/LoginEntry.kt
+  - id: openwiki-source-a26ab395010ddf1d5412cc1f
+    resource: repo://login/presentation/src/main/java/com/login/presentation/navigation/LoginNavGraph.kt
+generated: { by: "claude-code", at: "2026-11-16T11:21:00.506Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-16T11:21:00.506Z
 ---
 
 # Recipes for feature screens
@@ -121,7 +125,7 @@ The demo's `DemoScreenNavGraph` is currently the launcher, so remove that role f
 ## 3. Dialog and bottom-sheet destinations
 
 ```kotlin
-class ConfirmDeleteEntry @Inject constructor(override val navigator: dagger.Lazy<INavigationGraphManager>) :
+internal class ConfirmDeleteEntry @Inject constructor(override val navigator: dagger.Lazy<INavigationGraphManager>) :
     INavigationEntryDialog<ConfirmDeleteDestination, CatalogViewModel>() {
     override val dialogProperties = DialogProperties(dismissOnClickOutside = true)
     @Composable override fun Render(params: ConfirmDeleteDestination, viewModel: CatalogViewModel) {
@@ -129,7 +133,7 @@ class ConfirmDeleteEntry @Inject constructor(override val navigator: dagger.Lazy
     }
 }
 
-class SortSheetEntry @Inject constructor(override val navigator: dagger.Lazy<INavigationGraphManager>) :
+internal class SortSheetEntry @Inject constructor(override val navigator: dagger.Lazy<INavigationGraphManager>) :
     INavigationEntryBottomSheet<SortSheetDestination, CatalogViewModel>() {
     @OptIn(ExperimentalMaterial3Api::class)
     override val modalBottomSheetProperties = ModalBottomSheetProperties()
@@ -143,7 +147,7 @@ Using the same ViewModel class as the screen (in the same graph) shares the inst
 
 Make the graph implement `INavigationGraphBottomNavBar`:
 ```kotlin
-class ProfileNavGraph @Inject constructor() : INavigationGraph(), INavigationGraphBottomNavBar {
+internal class ProfileNavGraph @Inject constructor() : INavigationGraph(), INavigationGraphBottomNavBar {
     override val order = 2
     override val icon = R.drawable.ic_profile
     override val label = "Profile"

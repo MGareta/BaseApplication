@@ -5,7 +5,7 @@ description: Reference for com.core.data.network. Covers the ApiResult sealed re
 tags: [core-data, network, retrofit, okhttp, apiresult, ssl, hilt]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-26T12:11:14.549Z
+    at: 2026-11-16T11:21:00.506Z
 sources:
   - id: openwiki-source-a56635df0f53aef410e3990b
     resource: repo://core/data/src/main/AndroidManifest.xml
@@ -33,7 +33,11 @@ sources:
     resource: repo://core/data/src/main/res/xml/network_config.xml
   - id: openwiki-source-a857b13092a243f1d1148bc2
     resource: repo://core/data/src/test/java/com/core/data/network/SSLPinningTest.kt
-generated: { by: "claude-code", at: "2026-10-26T12:11:14.549Z" }
+  - id: openwiki-source-c55c28cd02b3694b7cc5ed20
+    resource: repo://login/data/src/main/java/com/login/data/api/LoginApiService.kt
+  - id: openwiki-source-bca8019d4930801ea2c9fd1b
+    resource: repo://login/data/src/main/java/com/login/data/di/LoginNetworkModule.kt
+generated: { by: "claude-code", at: "2026-11-16T11:21:00.506Z" }
 ---
 
 # Network (`com.core.data.network`)
@@ -90,10 +94,10 @@ Assisted injection:
 - `RetrofitBuilder @AssistedInject constructor(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient)`. It has no `@Assisted` parameters.
 - `@AssistedFactory fun interface RetrofitFactory { fun create(): RetrofitBuilder }` is what features inject.
 
-**Declaring a feature API service** (pattern from `DownloadNetworkModule`):
+**Declaring a feature API service** (pattern from `DownloadNetworkModule`; in a feature data module the service, its DTOs and the network module are `internal`, as shown below):
 
 ```kotlin
-interface OrdersApiService {
+internal interface OrdersApiService {
     @GET("orders") suspend fun getOrders(@Query("page") page: Int): ApiResult<OrdersDto>
     @POST("orders") suspend fun createOrder(@Body body: CreateOrderDto): ApiResult<OrderDto>
     @DELETE("orders/{id}") suspend fun deleteOrder(@Path("id") id: String): ApiResult<Unit>
@@ -101,7 +105,7 @@ interface OrdersApiService {
 
 @Module
 @InstallIn(SingletonComponent::class)
-object OrdersNetworkModule {
+internal object OrdersNetworkModule {
     @Singleton
     @Provides
     fun providesOrdersApiService(
@@ -221,7 +225,7 @@ sequenceDiagram
 ## Usage examples
 
 ```kotlin
-class OrdersRepository @Inject constructor(
+internal class OrdersRepository @Inject constructor(
     private val api: OrdersApiService,
     private val cacheManager: ICacheManager,
 ) {

@@ -14,12 +14,20 @@ sources:
     resource: repo://core/presentation/src/main/java/com/core/presentation/base/viewmodel/BaseViewModel.kt
   - id: openwiki-source-f96123c650a78c26f62af83d
     resource: repo://core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt
+  - id: openwiki-source-e8b13a3752a96095685bba51
+    resource: repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/decorators/viewModel/NavigationGraphViewModelStoreOwner.kt
   - id: openwiki-source-3917a7c895954ef50b72f64c
     resource: repo://demo/presentation/src/main/java/com/demo/presentation/navigation/DemoScreenNavGraphEntry.kt
-generated: { by: "claude-code", at: "2026-10-26T15:48:49.783Z" }
+  - id: openwiki-source-3d81ea9a2f39ace049ef5bdb
+    resource: repo://login/presentation/src/main/java/com/login/presentation/navigation/LoginEntry.kt
+  - id: openwiki-source-d6dace19f552fba3d9b93352
+    resource: repo://login/presentation/src/main/java/com/login/presentation/viewModel/LoginContract.kt
+  - id: openwiki-source-fcae1cef16ee40b1defb756b
+    resource: repo://login/presentation/src/main/java/com/login/presentation/viewModel/LoginViewModel.kt
+generated: { by: "claude-code", at: "2026-11-16T11:21:00.506Z" }
 verified:
   - by: openwiki/0.7.2
-    at: 2026-11-02T14:42:55.956Z
+    at: 2026-11-16T11:21:00.506Z
 ---
 
 # Base screen architecture
@@ -138,8 +146,8 @@ sequenceDiagram
 ## Full screen template (Navigation3)
 
 ```kotlin
-// Contract
-class ProfileContract {
+// Contract (feature declarations are `internal`: nothing outside the module needs them)
+internal class ProfileContract {
     data class UiState(val isLoading: Boolean = false, val name: String = "", val error: String? = null) : IBaseContract.ViewState
     sealed interface Event : IBaseContract.ViewEvent {
         data object Refresh : Event
@@ -152,7 +160,7 @@ class ProfileContract {
 
 // ViewModel
 @HiltViewModel
-class ProfileViewModel @Inject constructor(
+internal class ProfileViewModel @Inject constructor(
     private val getProfile: GetProfileUseCase,
 ) : BaseViewModel<ProfileContract.UiState, ProfileContract.Event, ProfileContract.Effect>() {
 
@@ -175,7 +183,7 @@ class ProfileViewModel @Inject constructor(
 }
 
 // Navigation3 entry (see navigation3.md for destination, graph and Hilt module)
-class ProfileEntry @Inject constructor(
+internal class ProfileEntry @Inject constructor(
     override val navigator: Lazy<INavigationGraphManager>,
 ) : INavigationEntry<ProfileDestination, ProfileViewModel>() {
 

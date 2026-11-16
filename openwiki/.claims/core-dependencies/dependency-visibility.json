@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:968502ed43ce1bc8405971b49c266f991df25d5185995e6d8c163eb66e0bb7fb",
+  "pageVersion": "sha256:4d61a163226b9b27029fa171754e59fc47c3790853067f72c042f39a5f2fd766",
   "claims": [
     {
       "id": "claim_c95b4bfdb1ad4e958d56c6e4ca8d634f",
@@ -8,7 +8,7 @@
       "evidence": [
         {
           "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CorePresentationPlugin.kt",
-          "version": "repo-file-v1:sha256:6e00421372a973445cadcc8449e4e824250e37c19689043d1b4c6b763ec37779"
+          "version": "repo-file-v1:sha256:648c9c75330e589bcffda4fab0cb35a13194ccd1d3841a0ad89d781cd51d34ea"
         },
         {
           "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt#L58-L72",
@@ -42,11 +42,11 @@
     },
     {
       "id": "claim_5700831238a3405bb8b7773280c443e9",
-      "statement": "The app module depends on core:presentation and demo:presentation with implementation and declares no test dependencies or dependency on demo:data.",
+      "statement": "The app module uses the app convention plugin for its core:presentation dependency, adds demo:presentation and login:presentation in app/build.gradle.kts, and has no test dependencies or direct dependency on demo:data.",
       "evidence": [
         {
-          "resource": "repo://app/build.gradle.kts",
-          "version": "repo-file-v1:sha256:a297709c30b110427d3eaa506ef5a3054afa308cff627aca1e0ce6713fc5a511"
+          "resource": "repo://app/build.gradle.kts#L1-L10",
+          "version": "repo-lines-v1:sha256:96d297b653da7198e8cb9b358f9758fe16c1169301a083bd26ad61b1d656b4b7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0MDQwMTAzMTViZGJiMGZlYTBmZDZmZjAyMTRkOGJjOTIxY2UyODM2ZDFjYzZiY2I4ODQ5ZjM1NzZjZjVhNjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/AppPlugin.kt#L72-L85",
@@ -71,6 +71,32 @@
         {
           "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt#L45-L73",
           "version": "repo-lines-v1:sha256:c7c1a15da5c3345d10424012fdb8dd3b9f118cf37e3e65734170566a554fb920:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiZjNlMWIxZjM1YTFmZmMwMDY5MGVjYzJkODc2ODBmM2YyNmZjNjI1NGUyYTI4Y2NhNjA5ZjE4YWE5MTA3YzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyMGQ4MDZhYWQ2MWQxNGJkNTI2MjNjMWZkOGFlZDUxNWRlYmZlNGM1YzZjMWQzOGE5MWQxOGZiNGRjOGFiMTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI0NzEyMDE3NDlmZmQwYjZjOWViMWNhOGJkOWFmODkxYjczNDRlZTVhN2E1ZmRlZjcyZjY1YzMxYjg0MmI0YjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5MThiMmMxNjMzNGZiNTdiYjM2YzAzYWYwM2VhMTE1NmFhMjk4ODJmMzY1NzJiN2QyZDMwYjM0MjhjN2M3YmQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fbbe637b2672429d95f208e5b41139d4",
+      "statement": "core:data and core:presentation publish separate BaseTest classes from testFixtures; FeatureDataPlugin supplies the core:data fixture, while FeaturePresentationPlugin supplies the core:presentation fixture, which also exposes core:data test fixtures.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/testFixtures/java/com/core/data/BaseTest.kt#L26-L65",
+          "version": "repo-lines-v1:sha256:50eb231879a4e2e81fb3fe0be05ab378d4f2e2395d227a91c4f405d8a18bfeff:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1YzYyYTIwOWVmMmRhY2ViMDQ2ZDUxOGRlYWU1Y2MwOTk1YWIwMWJjYzNjNDc1NWQwODhkODBmMGI3ZDI4NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NGNjMmMxMjUyOWJkYjdkMDc0Zjc1MTU5ZDU0MDZiOGJkMmJiMzQ4YWIzNTMyMTUzZjE0Y2QyN2M4ZDYwNDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/CorePresentationPlugin.kt#L102-L105",
+          "version": "repo-lines-v1:sha256:082215f4e5177ca1598c8e1a9ce67713bdc5e677b3ab51c1d1c2333a2089cc77:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk4MjQ3MWE0OTkxMDBkMDdiZTJlZDIwZWIxMTM3ZmZhZTkxZGIzMDc5NWMxNzRjN2YwZDJiMjcwZGUxNjJkZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODIwZDgwNmFhZDYxZDE0YmQ1MjYyM2MxZmQ4YWVkNTE1ZGViZmU0YzVjNmMxZDM4YTkxZDE4ZmI0ZGM4YWIxMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOThkNTMzZjY5MzJhMTliZDNhOWU0YWFiNDc4ZjNhMzNkMDY2MTI4ZDFkMzFiMTFhZjYzMjI4NTlhZmM1ODE2ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTkxOGIyYzE2MzM0ZmI1N2JiMzZjMDNhZjAzZWExMTU2YWEyOTg4MmYzNjU3MmI3ZDJkMzBiMzQyOGM3YzdiZCJ9"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L64-L68",
+          "version": "repo-lines-v1:sha256:dc41fac78396216634196b0a85e159c2e162fda449809ae61194721cac60f4b1:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk4MjQ3MWE0OTkxMDBkMDdiZTJlZDIwZWIxMTM3ZmZhZTkxZGIzMDc5NWMxNzRjN2YwZDJiMjcwZGUxNjJkZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODIwZDgwNmFhZDYxZDE0YmQ1MjYyM2MxZmQ4YWVkNTE1ZGViZmU0YzVjNmMxZDM4YTkxZDE4ZmI0ZGM4YWIxMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOThkNTMzZjY5MzJhMTliZDNhOWU0YWFiNDc4ZjNhMzNkMDY2MTI4ZDFkMzFiMTFhZjYzMjI4NTlhZmM1ODE2ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTkxOGIyYzE2MzM0ZmI1N2JiMzZjMDNhZjAzZWExMTU2YWEyOTg4MmYzNjU3MmI3ZDJkMzBiMzQyOGM3YzdiZCJ9"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeaturePresentationPlugin.kt#L69-L73",
+          "version": "repo-lines-v1:sha256:5953ca496037fbaa0090557aefc9d9628472b19824daff5142d649c72f288f82:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk4MjQ3MWE0OTkxMDBkMDdiZTJlZDIwZWIxMTM3ZmZhZTkxZGIzMDc5NWMxNzRjN2YwZDJiMjcwZGUxNjJkZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODIwZDgwNmFhZDYxZDE0YmQ1MjYyM2MxZmQ4YWVkNTE1ZGViZmU0YzVjNmMxZDM4YTkxZDE4ZmI0ZGM4YWIxMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOThkNTMzZjY5MzJhMTliZDNhOWU0YWFiNDc4ZjNhMzNkMDY2MTI4ZDFkMzFiMTFhZjYzMjI4NTlhZmM1ODE2ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTkxOGIyYzE2MzM0ZmI1N2JiMzZjMDNhZjAzZWExMTU2YWEyOTg4MmYzNjU3MmI3ZDJkMzBiMzQyOGM3YzdiZCJ9"
+        },
+        {
+          "resource": "repo://core/presentation/src/testFixtures/java/com/core/presentation/BaseTest.kt#L26-L65",
+          "version": "repo-lines-v1:sha256:50eb231879a4e2e81fb3fe0be05ab378d4f2e2395d227a91c4f405d8a18bfeff:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1YzYyYTIwOWVmMmRhY2ViMDQ2ZDUxOGRlYWU1Y2MwOTk1YWIwMWJjYzNjNDc1NWQwODhkODBmMGI3ZDI4NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NGNjMmMxMjUyOWJkYjdkMDc0Zjc1MTU5ZDU0MDZiOGJkMmJiMzQ4YWIzNTMyMTUzZjE0Y2QyN2M4ZDYwNDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     }

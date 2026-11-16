@@ -1,7 +1,7 @@
 ---
 type: testing guide
 title: Testing core/presentation
-description: The current test setup of core/presentation (an androidTest BaseTest and DefaultTestRunner left over after instrumented-test configuration was removed, and no src/test), what the Gradle plugins provide, and templates for unit-testing BaseViewModels and form states and for Compose UI tests once the missing dependencies are added.
+description: The core/presentation JVM test setup, including its shared Robolectric/Hilt BaseTest fixture, dependencies exposed to feature-presentation tests, and unconfigured legacy androidTest classes. Includes templates for BaseViewModel, form-state, and Compose UI tests.
 tags: [core-presentation, testing, robolectric, compose-test, hilt, coroutines]
 sources:
   - id: openwiki-source-b93e89ddcc6bb7ffc877b9e1
@@ -14,7 +14,10 @@ sources:
     resource: repo://core/presentation/src/androidTest/java/com/core/presentation/BaseTest.kt
   - id: openwiki-source-f5bda66bca2d92811ddac55d
     resource: repo://core/presentation/src/androidTest/java/com/core/presentation/DefaultTestRunner.kt
-generated: { by: "claude-code", at: "2026-10-26T15:48:49.783Z" }
+generated: { by: "claude-code", at: "2026-11-02T14:42:55.956Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-02T14:42:55.956Z
 ---
 
 # Testing core/presentation
@@ -23,17 +26,21 @@ generated: { by: "claude-code", at: "2026-10-26T15:48:49.783Z" }
 
 | Source set | Contents | Status |
 |---|---|---|
-| `src/test` | none | No unit tests exist for core/presentation. |
-| `src/androidTest/java/com/core/presentation/BaseTest.kt` | Instrumented base class | **Stale.** No `androidTest*` dependencies are configured and `testInstrumentationRunner` isn't set. |
-| `src/androidTest/java/com/core/presentation/DefaultTestRunner.kt` | Hilt `AndroidJUnitRunner` | **Stale**, for the same reason. |
+| `src/test` | none | No core/presentation-owned JVM unit tests currently exist. |
+| `src/testFixtures/java/com/core/presentation/BaseTest.kt` | Shared Robolectric/Hilt base class | Published for reuse by feature-presentation tests. |
+| `src/androidTest/java/com/core/presentation/BaseTest.kt` | Legacy instrumented base class | Still present, but no `androidTest*` dependencies or `testInstrumentationRunner` are configured. |
+| `src/androidTest/java/com/core/presentation/DefaultTestRunner.kt` | Legacy Hilt `AndroidJUnitRunner` | Still present, but not configured as the instrumentation runner. |
 
-The convention plugins were changed to remove instrumented-test configuration (commit `eea7f1f`: "Update test dependencies and remove instrumented test configurations in Gradle plugins").
-`CorePresentationPlugin` now only adds `testFixturesApi(test-unit bundle)` (kotlinx-coroutines-test, Robolectric, hilt-android-testing, mockk-android) and
-`kspTest(hilt-compiler)`. It does **not** call `configureTests()` (unlike core/data: no `isIncludeAndroidResources`, no `--add-opens` JVM args) and adds **no Compose UI test
-artifacts** (`ui-test-junit4`/`ui-test-manifest`). Feature presentation modules get `testImplementation(testFixtures(project(":core:presentation")))`, which provides the same bundle
-but not the base classes, since there are no `testFixtures` sources.
+`CorePresentationPlugin` calls `configureTests()`, exposing Android resources and JDK module-open JVM arguments for Robolectric tests. It publishes the `test-unit` bundle
+(kotlinx-coroutines-test, Robolectric, hilt-android-testing, mockk-android) and `:core:data` test fixtures through `testFixturesApi`, and adds `kspTest(hilt-compiler)`.
+It does **not** add Compose UI test artifacts (`ui-test-junit4`/`ui-test-manifest`). `FeaturePresentationPlugin` adds `testImplementation(testFixtures(project(":core:presentation")))`,
+so feature-presentation tests can reuse `com.core.presentation.BaseTest` and the test libraries. The core/presentation fixture also depends on the core/data fixtures.
 
-### `BaseTest` (androidTest)
+### Shared `BaseTest` (testFixtures)
+`com.core.presentation.BaseTest` runs with `RobolectricTestRunner` and `HiltTestApplication`, injects its Hilt rule and application context, initializes `ActivityProvider`,
+and calls an abstract `initDependencies()` hook. Feature-presentation test classes can extend it and implement that hook for their test dependencies.
+
+### Legacy `BaseTest` (androidTest)
 ```kotlin
 @OptIn(ExperimentalCoroutinesApi::class)
 abstract class BaseTest {

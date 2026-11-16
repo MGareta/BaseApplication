@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:2783ba673972370ae43995bc67f580e10abfa73469cbb6f82a10ea72abdeea8c",
+  "pageVersion": "sha256:116c24077302f57c24fc383c1a586b447e4ac7f2ccf1149b20c852159eb668fa",
   "claims": [
     {
       "id": "claim_4f4c82b2fbee4ff4947cf84877f864cf",
       "statement": "The legacy navigation package is not wired into BaseActivity, which uses Navigation3; outside its own package only BaseFlow references it.",
       "evidence": [
         {
-          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L81-L133",
-          "version": "repo-lines-v1:sha256:139d85cf57f322a5cc5549303f5de4df6dfa5ef2dffc2e056d955114f6e6dec6:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmMzJlNzU1MDgyNDA0ZDE3NGZjNGIxZGJlYzgwOGJmNmRhYjdmYWUxMGUyMzNjOTkyZjhjM2M1YTdhMzk5NTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhZDZjOGVhYTg1M2RmYjcwNzIwNTFhNWY1OTYyOWJiNzZmMDJkMTMzMDQyZjY0MTQzNDNmYTAxOWFiOGU2ZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZjNDdhNDQyMGVhM2M0MWNiZmEyMDAyMWIzY2UyMjc3MGI4M2VlNWRkMzg0YjBiZDg0MDFjZjMyN2ZlMmU1MTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ2MTc3NWIyN2VkMmNlY2NiOTAyMDI4YmFlNzc0Mjc5Mzg5ZjY3ODRhZmM0YzZmM2FmOWZlNWVhMDQ5ZjY0NTIifQ"
+          "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt#L81-L135",
+          "version": "repo-lines-v1:sha256:196a72acb713245e332fe4d4be7e10fe4d83d9c0186c0eeb21bb179b12da46bf:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmMzJlNzU1MDgyNDA0ZDE3NGZjNGIxZGJlYzgwOGJmNmRhYjdmYWUxMGUyMzNjOTkyZjhjM2M1YTdhMzk5NTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhZDZjOGVhYTg1M2RmYjcwNzIwNTFhNWY1OTYyOWJiNzZmMDJkMTMzMDQyZjY0MTQzNDNmYTAxOWFiOGU2ZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZjNDdhNDQyMGVhM2M0MWNiZmEyMDAyMWIzY2UyMjc3MGI4M2VlNWRkMzg0YjBiZDg0MDFjZjMyN2ZlMmU1MTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ2MTc3NWIyN2VkMmNlY2NiOTAyMDI4YmFlNzc0Mjc5Mzg5ZjY3ODRhZmM0YzZmM2FmOWZlNWVhMDQ5ZjY0NTIifQ"
         },
         {
           "resource": "repo://core/presentation/src/main/java/com/core/presentation/base/screen/BaseFlow.kt",
@@ -91,6 +91,6 @@
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T15:48:49.783Z"
+    "at": "2026-11-02T14:42:55.956Z"
   }
 }

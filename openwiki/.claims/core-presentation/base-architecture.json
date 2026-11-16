@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:08dcabac89e51005a35698d531e1b34697213d56ff144be211eb98c4f42c5f47",
+  "pageVersion": "sha256:ea327f0972b0d829c298bc38fde76a5f99fa1db104011e141c4a145c6f1eaeb4",
   "claims": [
     {
       "id": "claim_91464a61af184e1ba18b8694b7ea7bd4",
@@ -75,10 +75,28 @@
           "version": "repo-file-v1:sha256:1b714a503e940ceb91b465e621bbb9c9c7d9b40c9ec5811585c2b9ab51cc776d"
         }
       ]
+    },
+    {
+      "id": "claim_989d13d2fca646098e755f1bf7630533",
+      "statement": "A feature presentation module declares its contract, @HiltViewModel ViewModel and navigation entry as internal, as the login feature does.",
+      "evidence": [
+        {
+          "resource": "repo://login/presentation/src/main/java/com/login/presentation/navigation/LoginEntry.kt#L22-L22",
+          "version": "repo-lines-v1:sha256:1e0e0e52412a8662b1fec5689bddc4ef6fc49ad703b52b7e4795b79b58efc953:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWUwZTBlNTI0MTJhODY2MmIxZmVjNTY4OWJkZGM0ZWY2ZmM0OWFkNzAzYjUyYjdlNDc5NWI3OWI1OGVmYzk1MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWUwZTBlNTI0MTJhODY2MmIxZmVjNTY4OWJkZGM0ZWY2ZmM0OWFkNzAzYjUyYjdlNDc5NWI3OWI1OGVmYzk1MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNkMTU5ZmM0MTU3OTA0MjJiMTYzZjFlMzc0N2JlZDFjNWY1ZjIxZDJkMWRmYmY0ZjY2MmY4ODQ2YmFhNjhkMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGRmN2QzNTA2ZjRlNzU4ZjQ0NmI5MDc2MTM0M2Q3MWY0YTk0NTZhMzQ4NjlmZGYxYTVkOTQwMTA5YmYyNDY2ZiJ9"
+        },
+        {
+          "resource": "repo://login/presentation/src/main/java/com/login/presentation/viewModel/LoginContract.kt#L11-L11",
+          "version": "repo-lines-v1:sha256:b5f0301e4d2e4034473cb274e5b9056b75a68c51d810bdcb9dc1660ab200477c:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjVmMDMwMWU0ZDJlNDAzNDQ3M2NiMjc0ZTViOTA1NmI3NWE2OGM1MWQ4MTBiZGNiOWRjMTY2MGFiMjAwNDc3YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjVmMDMwMWU0ZDJlNDAzNDQ3M2NiMjc0ZTViOTA1NmI3NWE2OGM1MWQ4MTBiZGNiOWRjMTY2MGFiMjAwNDc3YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTllZDEzMTRiYTI3ZWEzZWI5YjU5MDczYTA0NjQyMTM3MTU3MDQxYmU2MzNkMDIyN2NlYWI1ZWQzNWJjY2NhOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGZhMzA0NDEzNGIwZDA4YzhlYmY2MWE5OGI1YmRhYjNjYjdkOWNlNjgyYzMxMmExYTMyZmIxOTAyZjU1MjY1ZSJ9"
+        },
+        {
+          "resource": "repo://login/presentation/src/main/java/com/login/presentation/viewModel/LoginViewModel.kt#L25-L26",
+          "version": "repo-lines-v1:sha256:1bf86c40034aa7680f12809e0cdc02131b13be0e0e8f706e4141f8806bd8bf83:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWJmYzNjMTlhNTU4OWI5ZTJmMTA2MTFlMWRmNzA0OWUxZDA2MGZiZWY4OGQ2ZDk0NDllZjNjNWM0OGIxNWFmMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTAwNTIyZmZkNTg5MzQyNGIxNTc3YTYzNTQ3YjM0ZmEyZWIxZmQwMjQ4YTFkYmE0ZDA0ZTk5NDU0MmFhOGY0NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzA1ZjA5YzAyOTIzZTNiMTNjNWJlMjI0NDE5MTNlODliOTJjZDI5MDZhMDg1ZGRiNjNkZmYxZTMxMzIxNjI1NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODE2ODhkMzgzNzVkYzU2Nzk0ZGNkYmVhNjZkZmJkOGM0NTE1MDBjYWQ4YzQxNTFmODRjYjM3MjQ0ZmVjMjRiOSJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-11-02T14:42:55.956Z"
+    "at": "2026-11-16T11:21:00.506Z"
   }
 }

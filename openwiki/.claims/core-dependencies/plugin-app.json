@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:a9fcf6914a12f8c166ab2c90fb7530f45d4ab263ca3d9e9213e76bde28de63ba",
+  "pageVersion": "sha256:b697a8eaf1bd582db3e3ce6ca4d23dd53e94ac56db077042d44e37c353a3590a",
   "claims": [
     {
       "id": "claim_5ab93db8630b4af18327107ac7488f3b",
@@ -24,11 +24,11 @@
     },
     {
       "id": "claim_460cd11616194121b2567ac381c12553",
-      "statement": "The app module depends on core:presentation (from AppPlugin) and demo:presentation (from its build file) with implementation, plus Hilt runtime, KSP processors and the ktlint Detekt rules.",
+      "statement": "The app module depends on core:presentation through AppPlugin and on demo:presentation and login:presentation through app/build.gradle.kts, with Hilt runtime, KSP processors and the ktlint Detekt rules.",
       "evidence": [
         {
-          "resource": "repo://app/build.gradle.kts",
-          "version": "repo-file-v1:sha256:a297709c30b110427d3eaa506ef5a3054afa308cff627aca1e0ce6713fc5a511"
+          "resource": "repo://app/build.gradle.kts#L7-L10",
+          "version": "repo-lines-v1:sha256:e605827dcc8c59aa06fd8d383d19bc3eb486f6bd146ccac0dc47614543a7aa15:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2JhMzE0NWFlZTBkYTA1OTI0ZDNhZDBiMWVlYjRhZGU3NzYxYjY2N2Q4YTk2MTQ2ZGVlZjM5YWJkMWNlNDhjYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzQ3ODlkOWIyZDNjNzJlMTY1NWNhMzcyZGI5NjU4ZDQzMTliYWU3NTYzNjliYmMzMDQzZjU4MWVmN2I2Y2M2NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
         },
         {
           "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/AppPlugin.kt#L72-L85",
@@ -39,6 +39,6 @@
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-26T16:41:29.588Z"
+    "at": "2026-11-02T14:42:55.956Z"
   }
 }

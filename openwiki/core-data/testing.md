@@ -3,9 +3,6 @@ type: testing guide
 title: Testing core/data
 description: How core/data is unit-tested with Robolectric, Hilt testing and MockK. Covers BaseTest, Gradle test configuration, the android.util.Base64 JVM shadow, every test helper, what each test class covers, how modules are replaced, and a template for testing a new manager.
 tags: [core-data, testing, robolectric, hilt, mockk, coroutines]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-26T12:11:14.549Z
 sources:
   - id: openwiki-source-13737e88f2a6a241f01d8d16
     resource: repo://core/data/src/test/java/android/util/Base64.kt
@@ -13,8 +10,6 @@ sources:
     resource: repo://core/data/src/test/java/com/core/data/activityProvider/ActivityProviderTest.kt
   - id: openwiki-source-ca352994d2ef5b7d33bfbfd9
     resource: repo://core/data/src/test/java/com/core/data/analytics/di/AnalyticsFrameworkModuleTest.kt
-  - id: openwiki-source-8a48a6b773cfb4e26c406cac
-    resource: repo://core/data/src/test/java/com/core/data/BaseTest.kt
   - id: openwiki-source-eee561e0d5bee780221fa873
     resource: repo://core/data/src/test/java/com/core/data/download/di/DownloadNetworkModuleTest.kt
   - id: openwiki-source-bb634ffb0abb10ecf525150c
@@ -23,9 +18,22 @@ sources:
     resource: repo://core/data/src/test/java/com/core/data/network/utils/Utils.kt
   - id: openwiki-source-fc86a44df0595077f3cd60f7
     resource: repo://core/data/src/test/java/com/core/data/utils/Utils.kt
+  - id: openwiki-source-f9a7de034d8728b3e7dd333d
+    resource: repo://core/data/src/testFixtures/java/com/core/data/BaseTest.kt
   - id: openwiki-source-bbb0f73ef5c40bd97bd940fa
     resource: repo://core/dependencies/src/main/java/com/core/dependencies/utils/Extensions.kt
-generated: { by: "claude-code", at: "2026-10-26T12:11:14.549Z" }
+  - id: openwiki-source-2c1925fd404a066ae2ee0e8f
+    resource: repo://login/data/src/test/java/com/login/data/di/LoginNetworkModuleTest.kt
+  - id: openwiki-source-fe3d415ac856524c0fa6a9ec
+    resource: repo://login/data/src/test/java/com/login/data/di/SessionModuleTest.kt
+  - id: openwiki-source-49754ac1510e463ce60bc60d
+    resource: repo://login/data/src/test/java/com/login/data/manager/LoginManagerTest.kt
+  - id: openwiki-source-5f1294fe084f0032a88a82c9
+    resource: repo://scripts/orchestrator/eval-mechanical.py
+generated: { by: "claude-code", at: "2026-11-16T11:13:17.657Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-16T11:13:17.657Z
 ---
 
 # Testing core/data
@@ -47,10 +55,10 @@ From `CoreDataPlugin` and `core/dependencies/.../utils/Extensions.kt`:
 - `configureTests()`: `unitTests.isIncludeAndroidResources = true` (needed for the manifest `FileProvider` and `provider_paths.xml`) and
   JVM args `--add-opens` for `java.lang`, `java.util`, `java.io`, `java.net`, `java.security`, `java.text`, `jdk.internal.access`,
   `java.awt.font` and `jdk.compiler/com.sun.tools.javac.api` (Robolectric/MockK reflection on JDK 21).
-- Feature modules get `testImplementation(testFixtures(project(":core:data")))` through `FeatureDataPlugin`. That provides the libraries but **not**
-  `BaseTest` or the helpers, which live in `src/test` and not `src/testFixtures`.
+- `BaseTest` lives in `src/testFixtures`. Feature modules get `testImplementation(testFixtures(project(":core:data")))` through
+  `FeatureDataPlugin`, which shares the base class and test libraries with feature-data tests. Other support helpers listed below remain in `src/test`. 
 
-## `BaseTest` (`com.core.data.BaseTest`)
+## `BaseTest` (`com.core.data.BaseTest`, `src/testFixtures`)
 
 ```kotlin
 @RunWith(RobolectricTestRunner::class)
@@ -91,6 +99,8 @@ Three patterns are used:
 | `@TestInstallIn(components = [SingletonComponent::class], replaces = [X::class])` module in `src/test` | `AnalyticsFrameworkModuleTest`, `DownloadNetworkModuleTest` | Global replacement for **all** tests in the module (Firebase and network are never real in tests). |
 | Construct the impl directly | `SecurityManagerTest` builds `SecurityManagerImpl(mapOf(AES to mockk()))` | Unit-level checks without Hilt. |
 
+**Visibility in feature tests.** In feature modules (`:login:data`, `:login:presentation`) every `@TestInstallIn` replacement module and test helper is an `internal object`/declaration, because Kotlin test sources see the module's `internal` types and a public module providing an `internal` type such as `LoginApiService` would not compile. Only JUnit test classes (and shared `abstract` bases) stay public; a field of an `internal` type is marked `@Inject internal lateinit var`. Examples: `LoginNetworkModuleTest`, `SessionModuleTest`, `LoginManagerTest`.
+
 Robolectric helpers in use: `shadowOf(context as Application).grantPermissions(...)`, `Robolectric.buildActivity(...).setup()`,
 `shadowOf(getMainLooper()).idleFor(Duration)` (session timer), and `@Config(sdk = [...])` per class or method.
 
@@ -99,7 +109,7 @@ Robolectric helpers in use: `shadowOf(context as Application).grantPermissions(.
 | File | Purpose |
 |---|---|
 | `android/util/Base64.kt` | `object android.util.Base64` with `@JvmStatic encodeToString(ByteArray?, Int)` / `decode(String?, Int)` backed by `java.util.Base64` (flags ignored). It shadows the Android class on the test classpath so crypto code produces plain Base64 on the JVM. |
-| `com/core/data/BaseTest.kt` | Base class (above). |
+| `src/testFixtures/java/com/core/data/BaseTest.kt` | Shared base class (above), consumed by core:data and feature-data tests. |
 | `com/core/data/utils/Utils.kt` | `internal fun clearFileProviderCache()` clears `FileProvider`'s private static `sCache` through reflection, so each test re-reads provider paths and authorities. Call it in `initDependencies()` for file/download tests. |
 | `com/core/data/network/utils/ImmediateCall.kt` | `internal class ImmediateCall<T : Any>(response: Response<T>? = null, failure: Throwable? = null) : Call<T>`. A synchronous fake Retrofit `Call`: `enqueue` immediately calls `onFailure(failure)` or `onResponse(response)`, `execute` returns or throws, `request()` is `https://example.test/`, and it tracks the executed/canceled flags. |
 | `com/core/data/network/utils/NetworkService.kt` | `internal interface NetworkService { fun result(): Call<ApiResult<String>>; fun raw(): Call<String> }`. Its reflective return types are used to test `NetworkResultCallAdapterFactory` type filtering. |

@@ -4,6 +4,10 @@ title: Navigation 3 (active navigation stack)
 description: Reference for com.core.presentation.navigation3, the Navigation3-based stack BaseActivity uses. Covers destinations (NavKey), entries with Render plus dialog and bottom-sheet variants, graphs (launcher, bottom-nav), feature registration through Hilt @ClassKey multibinding in ActivityRetainedComponent, the factory and back-stack manager, graph-scoped ViewModel stores, the bottom-sheet scene strategy, and known pitfalls.
 tags: [core-presentation, navigation3, navigation, hilt, multibinding, viewmodel, bottom-sheet, dialog]
 sources:
+  - id: openwiki-source-bf3f24298a1cbf4d07ff2872
+    resource: repo://.claude/skills/wiki-context/SKILL.md
+  - id: openwiki-source-a8f6f071ebaabf16a777b580
+    resource: repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt
   - id: openwiki-source-5f31cbb6e624fb9b0eb9aadc
     resource: repo://core/presentation/src/main/java/com/core/presentation/navigation3/di/NavigationModule.kt
   - id: openwiki-source-f96123c650a78c26f62af83d
@@ -18,9 +22,18 @@ sources:
     resource: repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/INavigationEntry.kt
   - id: openwiki-source-ea052543c1f7bb3f0c11e875
     resource: repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/scenes/BottomSheetSceneStrategy.kt
-  - id: openwiki-source-dc2f4215d060ab5729f6cb69
-    resource: repo://demo/presentation/src/main/java/com/demo/presentation/di/DemoScreenModule.kt
-generated: { by: "claude-code", at: "2026-10-26T15:48:49.783Z" }
+  - id: openwiki-source-fa1d9c4027b1b13f8543e591
+    resource: repo://login/presentation/src/main/java/com/login/presentation/di/LoginNavigationModule.kt
+  - id: openwiki-source-0a99751a4aaebc09c898f153
+    resource: repo://login/presentation/src/main/java/com/login/presentation/model/destination/LoginDestination.kt
+  - id: openwiki-source-3d81ea9a2f39ace049ef5bdb
+    resource: repo://login/presentation/src/main/java/com/login/presentation/navigation/LoginEntry.kt
+  - id: openwiki-source-a26ab395010ddf1d5412cc1f
+    resource: repo://login/presentation/src/main/java/com/login/presentation/navigation/LoginNavGraph.kt
+generated: { by: "claude-code", at: "2026-11-16T11:21:00.506Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-16T11:21:00.506Z
 ---
 
 # Navigation 3 (`com.core.presentation.navigation3`)
@@ -80,13 +93,13 @@ the arguments can't be resolved (for example when they're generic type parameter
 | `provideNavigationScope()` | `CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)`, an **unqualified** `CoroutineScope` binding in this component |
 | `providesNavigationGraphManager(scope, navigationGraphFactory)` | `INavigationGraphManager` (`NavigationGraphManagerImpl`) |
 
-### Feature registration (pattern from `demo/presentation/.../di/DemoScreenModule.kt`)
-Each feature graph contributes **two map entries under the same `@ClassKey`**: the graph instance and the **set** of its entries.
+### Feature registration contract
+The core factory consumes a graph map and an entry-set map keyed by graph class, then joins only matching pairs. Each participating feature graph therefore needs both contributions under the same key: the graph instance and the **set** of its entries. The illustrative Hilt module below shows one way to provide them; its names and layout are not a feature template.
 
 ```kotlin
 @Module
 @InstallIn(ActivityRetainedComponent::class)
-class OrdersNavigationModule {
+internal class OrdersNavigationModule {
 
     @Provides @IntoMap @ClassKey(OrdersNavGraph::class)
     fun providesOrdersGraph(graph: OrdersNavGraph): INavigationGraph = graph
@@ -104,6 +117,7 @@ class OrdersNavigationModule {
 - A graph without an entry set (or the reverse) is **silently dropped** by the factory join.
 - One `@ClassKey` per map, so put all entries of a graph in one set provider (two providers with the same key fail with a Dagger duplicate-key error).
 - Entries and graphs are normal `@Inject constructor` classes. Entries receive `override val navigator: dagger.Lazy<INavigationGraphManager>`.
+- **Feature navigation types should be `internal`.** Destinations, entries, the graph, the navigation module and screens in a feature presentation module (for example `LoginEntry`, `LoginNavGraph`, `LoginNavigationModule`, `LoginDestination`) are all `internal`; the examples on this page use it too. This is safe because `:app` never references feature types: it only receives the `@IntoMap` bindings, whose value types are the public `INavigationGraph` and `Set<INavigationEntry<INavigationDestination, ViewModel>>`, and `INavigationEntry` resolves its destination and ViewModel classes by reflection over generic type arguments, which works on `internal` classes because Kotlin `internal` is public in bytecode. Never widen a feature type to public just to make it compile.
 
 ## Factory: `INavigationGraphFactory`
 
@@ -112,7 +126,7 @@ class OrdersNavigationModule {
 | `navigationGraphsWithDestinations: Map<INavigationGraph, Set<INavigationEntry<...>>>` | `by lazy` join of `graphs` and `destinations` by class key, keeping only complete pairs. |
 | `navigationGraphLauncher: Map.Entry<INavigationGraph, Set<...>>` | The pair whose graph `is INavigationGraphLauncher`. It throws `IllegalStateException` if there are none ("Launcher navigation graph is not set...") or more than one. |
 | `navigationGraphBottomNavBar: Set<INavigationGraphBottomNavBar>` | Graphs implementing the bottom-nav interface. |
-| `fun register(scope: EntryProviderScope<INavigationDestination>)` | For every entry: `scope.addEntryProvider(clazz = entry.destination, clazzContentKey = { it::class.qualifiedName.toString() }, metadata = ...)`. Metadata is `BottomSheetSceneStrategy.bottomSheet(entry.modalBottomSheetProperties)` for bottom-sheet entries, `DialogSceneStrategy.dialog(entry.dialogProperties)` for dialog entries, else empty. Content runs `val vm = viewModel(modelClass = entry.viewModel.java)` then `entry.Render(params = destination, viewModel = vm)`. |
+| `fun register(scope: EntryProviderScope<INavigationDestination>)` | For every entry: `scope.addEntryProvider(clazz = entry.destination, clazzContentKey = { it::class.qualifiedName.toString() }, metadata = ...)`. Metadata is `BottomSheetSceneStrategy.bottomSheet(entry.modalBottomSheetProperties)` for bottom-sheet entries, `DialogSceneStrategy.dialog(entry.dialogProperties)` for dialog entries, else empty. Content requires a `LocalViewModelStoreOwner` implementing `HasDefaultViewModelProviderFactory`, then calls `viewModel()` with a `HiltViewModelFactory` built from `LocalContext`, the owner's default factory and creation extras, before calling `entry.Render(params = destination, viewModel = viewModel)`. |
 | `fun getNavigationGraphFromDestination(destination): INavigationGraph` | The first graph whose entries include `destination::class`. It throws `IllegalArgumentException("Invalid destination")` otherwise. |
 
 ## Manager: `INavigationGraphManager`
@@ -131,9 +145,9 @@ All operations mutate Compose snapshot state. Call them from the main thread (fo
 
 ## Graph-scoped ViewModels (entry decorator)
 
-`BaseActivity` adds `rememberSharedViewModelStoreNavEntryDecorator(navigationGraphManager, graphs)` (internal, `remember`ed by `graphs`). For each `NavEntry`:
+`BaseActivity` adds `rememberSharedViewModelStoreNavEntryDecorator(navigationGraphManager, graphs, defaultViewModelProviderFactory, defaultViewModelCreationExtras)` (internal, remembered by the graph registry and factory inputs). For each `NavEntry`:
 1. It finds the graph containing an entry whose `destination.qualifiedName == entry.contentKey`.
-2. If found, it provides `LocalViewModelStoreOwner = NavigationGraphViewModelStoreOwner(manager.getViewModelStore(graph))`. Otherwise it renders unchanged.
+2. If found, it provides `LocalViewModelStoreOwner = NavigationGraphViewModelStoreOwner(graphStore, defaultFactory, creationExtras)`. This owner implements `HasDefaultViewModelProviderFactory`; otherwise the entry renders unchanged.
 3. Its `onPop` forwards to `INavigationGraphListener.onPop()`.
 
 Consequences:
@@ -167,16 +181,18 @@ sequenceDiagram
     F->>E: Render(params = OrderDetail(id), viewModel)
 ```
 
-## Complete feature example
+## Illustrative Navigation3 composition
+
+The Orders-named classes below illustrate how destinations, a graph, and entries fit together. They are not a required feature structure; each feature adds only the elements its approved design needs.
 
 ```kotlin
 // Destinations
-@Serializable data object OrdersListDestination : INavigationDestination()
-@Serializable data class OrderDetailDestination(val orderId: String) : INavigationDestination()
-@Serializable data object OrderFiltersDestination : INavigationDestination()
+@Serializable internal data object OrdersListDestination : INavigationDestination()
+@Serializable internal data class OrderDetailDestination(val orderId: String) : INavigationDestination()
+@Serializable internal data object OrderFiltersDestination : INavigationDestination()
 
 // Graph (launcher + bottom-nav tab in this example)
-class OrdersNavGraph @Inject constructor() : INavigationGraphLauncher(), INavigationGraphBottomNavBar {
+internal class OrdersNavGraph @Inject constructor() : INavigationGraphLauncher(), INavigationGraphBottomNavBar {
     override val order = 0
     override val icon = R.drawable.ic_orders
     override val label = "Orders"
@@ -185,7 +201,7 @@ class OrdersNavGraph @Inject constructor() : INavigationGraphLauncher(), INaviga
 }
 
 // Screen entry
-class OrdersListEntry @Inject constructor(
+internal class OrdersListEntry @Inject constructor(
     override val navigator: Lazy<INavigationGraphManager>,        // dagger.Lazy
 ) : INavigationEntry<OrdersListDestination, OrdersViewModel>() {
     @Composable
@@ -201,7 +217,7 @@ class OrdersListEntry @Inject constructor(
 }
 
 // Bottom sheet entry sharing the same ViewModel (same graph, same VM class -> same instance)
-class OrderFiltersSheetEntry @Inject constructor(
+internal class OrderFiltersSheetEntry @Inject constructor(
     override val navigator: Lazy<INavigationGraphManager>,
 ) : INavigationEntryBottomSheet<OrderFiltersDestination, OrdersViewModel>() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -213,16 +229,11 @@ class OrderFiltersSheetEntry @Inject constructor(
     }
 }
 ```
-Plus the Hilt module shown in *Feature registration*. Put `OrdersListEntry` **first** in the set if this is the launcher graph, because the start destination is the set's
-first entry and must be an `object`.
+Register the graph and its entry set under matching keys as described in *Feature registration contract*. Put the launcher's initial entry **first** in its set, because the start destination is the set's first entry and must be an `object`.
 
 ## Gotchas and constraints
 
-- **Hilt ViewModels with constructor dependencies.** `register()` calls `viewModel(modelClass)` under `NavigationGraphViewModelStoreOwner`, which isn't a
-  `HasDefaultViewModelProviderFactory`. That means no Hilt factory is supplied, and `viewModel()` falls back to a no-arg instantiation factory. A `@HiltViewModel` with `@Inject constructor(dep: X)`
-  will most likely fail with "Cannot create an instance of class ...". The demo works only because `DemoViewModel` has an empty constructor. To support injected ViewModels,
-  make the owner provide a `HiltViewModelFactory` (for example implement `HasDefaultViewModelProviderFactory` with `HiltViewModelFactory(context, activity.defaultViewModelProviderFactory)`),
-  or use `hiltViewModel()` with an explicit owner. Verify on a device before relying on injected ViewModels.
+- **Hilt ViewModels with constructor dependencies:** `NavigationGraphViewModelStoreOwner` implements `HasDefaultViewModelProviderFactory` and carries the activity's default factory and creation extras. `register()` builds a `HiltViewModelFactory` from the current context and that owner, then supplies the factory and extras to `viewModel()`, so graph-scoped `@HiltViewModel` entries can resolve injected constructor dependencies through Hilt.
 - **`loadInitData()` isn't called** for Navigation3 entries. Call it yourself.
 - **Content keys are class names.** `clazzContentKey = qualifiedName`, so two back-stack instances of the same destination class (for example two `OrderDetailDestination`s with different ids)
   share saveable state and the ViewModel. Avoid stacking the same destination twice, or include the args in a distinct class.

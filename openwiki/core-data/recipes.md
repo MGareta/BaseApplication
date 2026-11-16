@@ -4,6 +4,14 @@ title: Recipes for feature work on core/data
 description: Step-by-step Kotlin recipes for building features on core/data. Covers adding Retrofit services and handling ApiResult, caching with repositoryPattern, analytics frameworks and events, AES/RSA encryption, session lifecycle and commands, permissions, activity results, downloads and files, environment switching, and notification permission and dismissal.
 tags: [core-data, recipes, how-to, retrofit, cache, session, permissions]
 sources:
+  - id: openwiki-source-2d0c3fc71cb26ec23555ef3a
+    resource: repo://.claude/agents/feature-coordinator.md
+  - id: openwiki-source-ba85436cec977ac5f7cd8188
+    resource: repo://.claude/agents/feature-data-test.md
+  - id: openwiki-source-ff72d56f0466a98a50ae53ca
+    resource: repo://.claude/agents/feature-data.md
+  - id: openwiki-source-bf3f24298a1cbf4d07ff2872
+    resource: repo://.claude/skills/wiki-context/SKILL.md
   - id: openwiki-source-e38439f5bc06bf873d6444ad
     resource: repo://app/src/main/java/com/baseapplication/MainActivity.kt
   - id: openwiki-source-dbb674f973430ce943e15269
@@ -12,14 +20,26 @@ sources:
     resource: repo://core/data/src/main/java/com/core/data/network/di/builder/RetrofitBuilder.kt
   - id: openwiki-source-f657300c43b408062c1260b1
     resource: repo://core/data/src/main/java/com/core/data/utils/ActivityProvider.kt
+  - id: openwiki-source-f9a7de034d8728b3e7dd333d
+    resource: repo://core/data/src/testFixtures/java/com/core/data/BaseTest.kt
   - id: openwiki-source-ebbe359b8fc397d0e2f617b5
     resource: repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt
   - id: openwiki-source-a8f6f071ebaabf16a777b580
     resource: repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt
-generated: { by: "claude-code", at: "2026-10-26T12:11:14.549Z" }
+  - id: openwiki-source-c55c28cd02b3694b7cc5ed20
+    resource: repo://login/data/src/main/java/com/login/data/api/LoginApiService.kt
+  - id: openwiki-source-623161631b21b411e490dc52
+    resource: repo://login/data/src/main/java/com/login/data/di/LoginModule.kt
+  - id: openwiki-source-bca8019d4930801ea2c9fd1b
+    resource: repo://login/data/src/main/java/com/login/data/di/LoginNetworkModule.kt
+  - id: openwiki-source-c6af2e92dca1bc3f08670dbe
+    resource: repo://login/data/src/main/java/com/login/data/manager/LoginManagerImpl.kt
+  - id: openwiki-source-5f1294fe084f0032a88a82c9
+    resource: repo://scripts/orchestrator/eval-mechanical.py
+generated: { by: "claude-code", at: "2026-11-16T11:21:00.506Z" }
 verified:
   - by: openwiki/0.7.2
-    at: 2026-11-02T14:42:55.956Z
+    at: 2026-11-16T11:21:00.506Z
 ---
 
 # Recipes for feature work on core/data
@@ -41,17 +61,35 @@ Each recipe assumes a feature data module using the `feature.data` plugin (`Feat
 3. Provide it with `RetrofitFactory` in a feature Hilt module.
 4. Map `ApiResult` in the repository or use case, and hand it to `CoroutinesUseCaseRunner.withUseCaseScopeLazily` in presentation.
 
-```kotlin
-@Serializable data class OrderDto(val id: String, val total: Double)
-@Serializable data class OrdersDto(val items: List<OrderDto>)
+### Apply the feature data structure selectively
 
-interface OrdersApiService {
+Treat the approved OpenSpec design's **Data API surface** as the component contract. Before implementation, mark each row `Required` with its planned paths and public types/signatures (and DTO fields), or `N/A` with a reason. Implement the Required components as designed; omit N/A components without empty or placeholder files. If a needed component is missing or incorrectly marked N/A, request a spec change rather than inventing an API or binding.
+
+**Keep everything `internal` that can be.** In a feature data module only `I<Feature>Manager`, the `model/` domain classes (not `model/dto/`) and the `<Feature>Module` object are public; the API service, DTOs, the manager implementation and other Hilt modules (such as `<Feature>NetworkModule`) are `internal`, and so are the `@Provides` functions of the public module. Test-source Hilt replacement modules and helpers are `internal` too; only JUnit test classes stay public (see [Data testing](testing.md)).
+
+| Component | Include when the design requires it |
+|---|---|
+| API service | A backend API is needed: `api/<Feature>ApiService.kt`, a Retrofit interface with `suspend` methods returning `ApiResult<T>`. |
+| Network module | An API service is needed: `di/<Feature>NetworkModule.kt` provides it through `RetrofitFactory`. |
+| Request/response DTOs | Each endpoint has a non-empty request or response body: add the corresponding `model/dto/<Operation>RequestDto.kt` or `<Operation>ResponseDto.kt`; omit the DTO for a direction with no payload. |
+| App-facing models | Data crosses the data-layer boundary: define plain models under `model/` with fields the app needs, map response DTOs, and do not expose DTOs or mirror every wire field automatically. Omit models for void/no-content-only outcomes. |
+| Manager interface and implementation | The feature exposes a data operation to presentation/app: add `manager/I<Feature>Manager.kt` and `manager/<Feature>ManagerImpl.kt`. |
+| Manager Hilt module | A manager is required: add `di/<Feature>Module.kt` to provide its interface binding. |
+| Repository/cache | A separate data-source or cache boundary is part of the design; neither a repository class nor directory is mandatory otherwise. Follow the [cache recipe](cache.md) when caching applies. |
+
+The code examples below illustrate individual operations, not a feature-wide implementation or test template. Choose components and test cases from the current feature's approved OpenSpec design and the relevant `core` guidance.
+
+```kotlin
+@Serializable internal data class OrderDto(val id: String, val total: Double)
+@Serializable internal data class OrdersDto(val items: List<OrderDto>)
+
+internal interface OrdersApiService {
     @GET("orders") suspend fun getOrders(): ApiResult<OrdersDto>
     @GET("orders/{id}") suspend fun getOrder(@Path("id") id: String): ApiResult<OrderDto>
 }
 
 @Module @InstallIn(SingletonComponent::class)
-object OrdersNetworkModule {
+internal object OrdersNetworkModule {
     @Singleton @Provides
     fun providesOrdersApiService(factory: RetrofitFactory, env: IEnvironmentManager): OrdersApiService =
         factory.create().build(
@@ -61,7 +99,7 @@ object OrdersNetworkModule {
         )
 }
 
-class OrdersRepository @Inject constructor(private val api: OrdersApiService) {
+internal class OrdersRepository @Inject constructor(private val api: OrdersApiService) {
     suspend fun firstOrder(): ApiResult<OrderDto> =
         api.getOrders().map { orders ->
             orders.items.firstOrNull()?.let { api.getOrder(it.id) } ?: ApiResult.NoContent()
@@ -254,9 +292,10 @@ See [notifications](notifications.md).
 
 ## Writing the tests for any of the above
 
-Extend `BaseTest` (Robolectric + Hilt), annotate with `@HiltAndroidTest`, replace collaborators with
+Extend the shared `com.core.data.BaseTest` (Robolectric + Hilt), annotate with `@HiltAndroidTest`, replace collaborators with
 `@UninstallModules(XModule::class)` + `@BindValue` mocks, or `@TestInstallIn` modules, and wrap bodies in `test { }`.
-Feature modules don't get `BaseTest` through test fixtures, so copy the pattern. See [testing](testing.md).
+`FeatureDataPlugin` adds `testFixtures(project(":core:data"))`, so feature-data tests inherit this fixture and should not copy the base class.
+See [testing](testing.md).
 
 ## Related pages
 

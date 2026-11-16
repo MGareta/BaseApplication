@@ -10,7 +10,11 @@ sources:
     resource: repo://core/presentation/src/main/java/com/core/presentation/base/activity/BaseActivity.kt
   - id: openwiki-source-7a8a9bf9712d2c5d9bff4f29
     resource: repo://core/presentation/src/main/java/com/core/presentation/CoreApp.kt
-generated: { by: "claude-code", at: "2026-10-26T15:48:49.783Z" }
+  - id: openwiki-source-f96123c650a78c26f62af83d
+    resource: repo://core/presentation/src/main/java/com/core/presentation/navigation3/factory/NavigationGraphFactoryImpl.kt
+  - id: openwiki-source-c612bea63c86a3798eafddc8
+    resource: repo://core/presentation/src/main/java/com/core/presentation/navigation3/model/entry/decorators/viewModel/SharedViewModelStoreNavEntryDecorator.kt
+generated: { by: "claude-code", at: "2026-11-02T14:42:55.956Z" }
 verified:
   - by: openwiki/0.7.2
     at: 2026-11-02T14:42:55.956Z

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:cefae1312231dbc05a90518a5294d32789ef1d303476a69f130474f9a502d8e8",
+  "pageVersion": "sha256:a495585b6c35bdbd6eb321a668245d6763cb691f689e5e2e16d2d43889a4b0fc",
   "claims": [
     {
       "id": "claim_a3e41a1c5a794a4e8f949f4f4af5ae64",
@@ -67,10 +67,84 @@
           "version": "repo-lines-v1:sha256:9a360aeaa68bb75f8800dd62f7fdcc30309e63544e40eab8bde7b246d559c1c6:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiZjNlMWIxZjM1YTFmZmMwMDY5MGVjYzJkODc2ODBmM2YyNmZjNjI1NGUyYTI4Y2NhNjA5ZjE4YWE5MTA3YzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyMGQ4MDZhYWQ2MWQxNGJkNTI2MjNjMWZkOGFlZDUxNWRlYmZlNGM1YzZjMWQzOGE5MWQxOGZiNGRjOGFiMTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI0NzEyMDE3NDlmZmQwYjZjOWViMWNhOGJkOWFmODkxYjczNDRlZTVhN2E1ZmRlZjcyZjY1YzMxYjg0MmI0YjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5MThiMmMxNjMzNGZiNTdiYjM2YzAzYWYwM2VhMTE1NmFhMjk4ODJmMzY1NzJiN2QyZDMwYjM0MjhjN2M3YmQifQ"
         }
       ]
+    },
+    {
+      "id": "claim_a7087f3be98a4e37b4f24116abb12cb4",
+      "statement": "Feature data modules consume the shared core:data BaseTest from testFixtures through FeatureDataPlugin rather than copying the base class into their own test sources.",
+      "evidence": [
+        {
+          "resource": "repo://core/data/src/testFixtures/java/com/core/data/BaseTest.kt#L26-L65",
+          "version": "repo-lines-v1:sha256:50eb231879a4e2e81fb3fe0be05ab378d4f2e2395d227a91c4f405d8a18bfeff:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1YzYyYTIwOWVmMmRhY2ViMDQ2ZDUxOGRlYWU1Y2MwOTk1YWIwMWJjYzNjNDc1NWQwODhkODBmMGI3ZDI4NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NGNjMmMxMjUyOWJkYjdkMDc0Zjc1MTU5ZDU0MDZiOGJkMmJiMzQ4YWIzNTMyMTUzZjE0Y2QyN2M4ZDYwNDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://core/dependencies/src/main/java/com/core/dependencies/plugins/FeatureDataPlugin.kt#L64-L68",
+          "version": "repo-lines-v1:sha256:dc41fac78396216634196b0a85e159c2e162fda449809ae61194721cac60f4b1:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk4MjQ3MWE0OTkxMDBkMDdiZTJlZDIwZWIxMTM3ZmZhZTkxZGIzMDc5NWMxNzRjN2YwZDJiMjcwZGUxNjJkZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODIwZDgwNmFhZDYxZDE0YmQ1MjYyM2MxZmQ4YWVkNTE1ZGViZmU0YzVjNmMxZDM4YTkxZDE4ZmI0ZGM4YWIxMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOThkNTMzZjY5MzJhMTliZDNhOWU0YWFiNDc4ZjNhMzNkMDY2MTI4ZDFkMzFiMTFhZjYzMjI4NTlhZmM1ODE2ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTkxOGIyYzE2MzM0ZmI1N2JiMzZjMDNhZjAzZWExMTU2YWEyOTg4MmYzNjU3MmI3ZDJkMzBiMzQyOGM3YzdiZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_af7c0c90120a44019bcfd789e0bc9958",
+      "statement": "Feature data modules follow the approved Data API surface as a component contract: each applicable API service, network module, request/response DTO, app-facing model, manager, Hilt binding, and repository/cache is implemented at its planned path and API shape, while N/A components are omitted; applicability depends on the designed backend, payloads, exposed operations, and data/cache boundaries.",
+      "evidence": [
+        {
+          "resource": "repo://.claude/agents/feature-coordinator.md#L21-L22",
+          "version": "repo-lines-v1:sha256:36a55b704a00e23e92c0a02486cdfc8e2bb8826a82fc9313de3f3c92164803de:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGUxYmNmNjM3ZjA5YWVmZTRjMTlhYmYyZGIzOGJlMTdiM2ZmY2IxNmE1ODU1YzE3M2U5ZTliZGQ2OTlkYTliOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmM1MTdhZDhlZGNiYzBjMGQ4MTcyMmEwNmQwMmQxZmM0Mjc2NjhjZDQ1NDRkYmM3NjlhNmY4NGY1MDUyZGY2ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmM3MjQ5MDg3MzRhMmQ1YWIyNDEyNzMyMGRhZjExMmUzMzY3ZDQ1ZWNjODM3YzI3Nzg2MTFjNzVjZDYwNDMzOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDA0ZDU1NDE2NjQ3YjE2MzliOTdiYjNiYWVmODc2YWUxM2VkMDQ5ZWI4NDhhN2NiMzhhOTgzYWQ1MDc5M2Y3ZCJ9"
+        },
+        {
+          "resource": "repo://.claude/agents/feature-data.md#L15-L21",
+          "version": "repo-lines-v1:sha256:ea9eb23e1226239c683c45ee11fe9036061d0715cc521825103026481dab9c34:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTQ3MzQzNTk0NTNmNmVhOTczOThlOTM3MTU4MDJlMDQ5MGRjMjAwMjg2NTc0ZmMzOThiYWE0NGFhZTBiNGFjZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjFmNzdlYzk3NzJmNmZlYWMyZDVkOTVmZDg4NmVhMTBiZTZiY2Q5YmUwN2QwMDRkZTU1MTM1ZGY3Mjc0MGQzNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDM0N2I3NGYyODIyY2M3ZDRkYmI0OTY0ZDA0ZjExNmQyZWZjNDAxMjQxMzM1NTA3MjcwYmIyY2RkMjllYmY4YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDM5NDliM2M1ZTYyZjg5MDZlMjNlYzRmNWM0MTMzNzhlYWY0NjkyOTE0YWFkOTMwMzlhNTk4MDI0ZjcwODEzZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_214dbf5c6a454ca9a63df71d1d252da2",
+      "statement": "Feature-specific examples are illustrative rather than templates; shared patterns come from core guidance, while each feature's implementation choices and tests derive from its own approved OpenSpec design and scenarios.",
+      "evidence": [
+        {
+          "resource": "repo://.claude/agents/feature-data-test.md#L13-L20",
+          "version": "repo-lines-v1:sha256:08a560248f7507e715649185aa06b88a45fbafb7c5e915af45bfe1cb82a4bbcb:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjdlNDdmMzA3NGMzZjJmOWMyNDlmZTJjNTFmMjRlZjA1YzhmMmU5MmM2ODYwMDc5OTM2NzgzMGE0NTVlYWJlOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDY3NjFkYTVlZTY0NGFkOTVlMjA5Y2QyZjA2ZGRhYTAxY2QxOTI5MDRkNGM2NzAyM2QzMDE4Njc3Y2RlNTY3ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDJiMDI0Y2IxMjliYjg4OGZiZTk2ODQwZGMwOWVkMjkxOTczNGNmMDFiMGYyMWI3YzViMDFmZjcyYTRmYTU4NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGI3ZmRmYTk4YWQzMzI0YjJmYjc0YTMzOTJlOTBkMTgxMjEyN2NiMGZmNjE2ZjZmMzNiZDE4YTE3ZGRiMDRmZCJ9"
+        },
+        {
+          "resource": "repo://.claude/skills/wiki-context/SKILL.md#L35-L36",
+          "version": "repo-lines-v1:sha256:ba9aca3eb05c2368e3622dd98ef1707f891a4de1d37a096e1529bc9e5f934703:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWY5NDRlMmEyYjBmMTY1MmY0M2ZhMDE1NTVhZjQ1ZGJiMzI1MTM4MmIwYWNiODdkZjBhNTM4YjM1MjkyYTc3YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTliNzk2NmI4MGM1NThkYWFlODM0ODk0ZDAxN2NlMmYxNTQ4ZmNiOTEzMjM4N2U3YTVmZDY5NWQxZDMxMDk2YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2Y2NWIzNWJiZDk2NDE1M2Q1NDZhYzk3NDRhNTkxYzgzZmEwNmQxN2IyYzMzY2ZlYTU2YmQyNjRjOTRiZTcwYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTU2MDJmZDA0MGJlYzExYThmYTdiMDUwNzliMGRmYjJhZTQzMDJmMDY3MmViMjIwNzFjZTVkYmQwNjBhM2VjMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_f4ab13d1cda44b4a8beafab9d8101d6e",
+      "statement": "In a feature data module only I<Feature>Manager, the model/ domain classes (not model/dto/) and the <Feature>Module object are public; the API service, DTOs, manager implementation, other Hilt modules and the @Provides functions of the public module are internal, and the eval-mechanical G1 gate (rule D-10) fails any other public declaration.",
+      "evidence": [
+        {
+          "resource": "repo://login/data/src/main/java/com/login/data/di/LoginModule.kt#L23-L23",
+          "version": "repo-lines-v1:sha256:98b2229299e721521d822521b187ddd0087adb67071a595aeb280178108362be:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOThiMjIyOTI5OWU3MjE1MjFkODIyNTIxYjE4N2RkZDAwODdhZGI2NzA3MWE1OTVhZWIyODAxNzgxMDgzNjJiZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOThiMjIyOTI5OWU3MjE1MjFkODIyNTIxYjE4N2RkZDAwODdhZGI2NzA3MWE1OTVhZWIyODAxNzgxMDgzNjJiZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTVmMGNiNTU5ZDcwMTc1N2QwZTg5ODMxNGJkZjk4ZDZjMzBlMjE3MGM0ZmIyZDBjNTk4MjJkZDI2NDg0YmEyMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        },
+        {
+          "resource": "repo://login/data/src/main/java/com/login/data/manager/LoginManagerImpl.kt#L14-L14",
+          "version": "repo-lines-v1:sha256:a3e8da4afefec4cec95c952cc1ccb795c1b3fbeeee177ffa7723469fc162e80b:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTNlOGRhNGFmZWZlYzRjZWM5NWM5NTJjYzFjY2I3OTVjMWIzZmJlZWVlMTc3ZmZhNzcyMzQ2OWZjMTYyZTgwYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTNlOGRhNGFmZWZlYzRjZWM5NWM5NTJjYzFjY2I3OTVjMWIzZmJlZWVlMTc3ZmZhNzcyMzQ2OWZjMTYyZTgwYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDkwNzVkNTFkNGY4NTc2MDQ4ODVlNWJjNWQxNTE5MjM3NmM2N2FkYzdjNzVlYzNiNGQzZDU0NTE1ODdiZmNiYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWJjYThhOGE5OWRjODkyYjY2MDliYTE0ZTQ5NzZmYjc0ZWQyNzA5MmEwZjZhYzhkZDQ4NmVkODY3ZWQ2OTE0OSJ9"
+        },
+        {
+          "resource": "repo://scripts/orchestrator/eval-mechanical.py#L224-L243",
+          "version": "repo-lines-v1:sha256:88cb9c38fa624955d9becd2d2b8cecf5554c6436cb1cdcfeb662341018ff05e9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJkMjYyYjg2NDQ0OTQ2ZGZlODI0MGY4NGFkOWM5N2NmMjhiNjU2ODY4ZmMxNjI4OTJiYzE2NWQxMWRhZDQ5NjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkZWJkMWY2OTI3NDg4NDdjNmE5NDI4NzgwYWUwZTM1NTFiOTQyMmM4YjA3Y2QyNThhMzNlNmI4YjgyNzIwNjIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM2YTdkNTUxYWEwMGNlZGU4NmNlNWM3NzIyOGQ0ZTdiYmZlODg1YjhjMzkzNmJkODJmNGI3MGQ5MTFhODM1ZGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMyMTAzYzc3NzFkODA2YjQ3ZjIxZGM1MmJiN2FlMzUyMDZiOTZjZjIyOTM5NDQ3YWEyMGNiZWU3MjIyY2ZkMGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_605b6426cb554301865d196f38c53f52",
+      "statement": "The feature data recipe declares the DTOs, API service, network module and repository as internal, matching how login's data module declares its API service and network module.",
+      "evidence": [
+        {
+          "resource": "repo://login/data/src/main/java/com/login/data/api/LoginApiService.kt#L14-L14",
+          "version": "repo-lines-v1:sha256:d928258cff9ce0c40ee39ef5c32c6019297efb15acc8352d98c67be1d82190a4:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDkyODI1OGNmZjljZTBjNDBlZTM5ZWY1YzMyYzYwMTkyOTdlZmIxNWFjYzgzNTJkOThjNjdiZTFkODIxOTBhNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDkyODI1OGNmZjljZTBjNDBlZTM5ZWY1YzMyYzYwMTkyOTdlZmIxNWFjYzgzNTJkOThjNjdiZTFkODIxOTBhNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmFkMDgyNGNiOWYzNjgxMDI0NjI2YjJkZjU3NDAzNDVmZjZjZTNmYjg0MGUyZThmOTQ5ODczYmQzMjFlNmVmMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTJkMDY5ODgxYzJjYzc5OGFlNTBiOTU5YWYwMjQxMmE2NmRkOGNjN2U4YmM3ZDM1NTdhZTAwMWE5OTFiMzY0NCJ9"
+        },
+        {
+          "resource": "repo://login/data/src/main/java/com/login/data/di/LoginNetworkModule.kt#L19-L19",
+          "version": "repo-lines-v1:sha256:69f8d4c2253ac7b328d466d04b1801bcca5edc167e2239560f0aa45ec9483285:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjlmOGQ0YzIyNTNhYzdiMzI4ZDQ2NmQwNGIxODAxYmNjYTVlZGMxNjdlMjIzOTU2MGYwYWE0NWVjOTQ4MzI4NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjlmOGQ0YzIyNTNhYzdiMzI4ZDQ2NmQwNGIxODAxYmNjYTVlZGMxNjdlMjIzOTU2MGYwYWE0NWVjOTQ4MzI4NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmY3NWI4ZTYzNGQyMDM1NjQxMGI2ZWI4YjczMzY0OTM1Y2I5YjhhNTU0NDMyNTZhMWRjYTJhOTMwZDJiYzc5YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2E1MDFlYzFiZjczNDUyNThlODk0NjJmZGEzODBiOTQ5ZGEwNDNhZWQxYzUxNTc2NTA4Zjg0Mjg1ZjIyMTRhNiJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-11-02T14:42:55.956Z"
+    "at": "2026-11-16T11:21:00.506Z"
   }
 }
