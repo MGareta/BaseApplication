@@ -63,7 +63,7 @@ verified:
 Feature data modules apply the `feature.data` plugin, which adds `api(project(":core:data"))` and the core:data test fixtures for JVM tests. Inject the core
 `I*Manager` interfaces with Hilt. Every core manager is a `@Singleton` in `SingletonComponent`.
 Feature presentation modules apply `feature.presentation` (`implementation(project(":core:presentation"))`), receive the core:presentation test fixtures, and contribute Navigation3 graphs and entries
-in `ActivityRetainedComponent`; their destinations live in `:common:navigation` and each feature presentation module declares `implementation(project(":common:navigation"))`. Core and feature convention plugins configure JVM tests and Hilt test code generation; see [build recipes](core-dependencies/recipes.md#8-enable-tests-for-a-module-type).
+in `ActivityRetainedComponent`; their destinations live in `:common:navigation` and the `feature.presentation` plugin adds `implementation(project(":common:navigation"))` to every feature presentation module, and `AppPlugin` adds it to `:app`. Core and feature convention plugins configure JVM tests and Hilt test code generation; see [build recipes](core-dependencies/recipes.md#8-enable-tests-for-a-module-type).
 
 ## Where to read for each task
 

@@ -128,7 +128,7 @@ class MainActivity : BaseActivity() {
 
     override fun onSessionTimeout() {
         super.onSessionTimeout()                                                  // invalidates the session
-        navigationGraphManager.get().goToDestination(LoginScreenNavDestination)   // import com.common.navigation.destination.login.LoginScreenNavDestination (:app must declare implementation(project(":common:navigation")))
+        navigationGraphManager.get().goToDestination(LoginScreenNavDestination)   // import com.common.navigation.destination.login.LoginScreenNavDestination (AppPlugin adds :common:navigation to :app)
     }
 }
 ```

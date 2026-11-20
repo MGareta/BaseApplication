@@ -47,6 +47,7 @@ app/build.gradle.kts
    | Configuration | Dependency |
    |---|---|
    | `implementation` | `project(":core:presentation")` |
+   | `implementation` | `project(":common:navigation")` (shared destinations, so `:app` can navigate to e.g. `LoginScreenNavDestination`) |
    | `ksp` | `kotlin-metadata-jvm` (Kotlin 2.4.21), `hilt-android-compiler` (2.60.1) |
    | `implementation` | `hilt-android` (2.60.1) |
    | `detektPlugins` | `detekt-rules-ktlint-wrapper` |
@@ -55,7 +56,7 @@ app/build.gradle.kts
 
 ## Visibility consequences
 
-- `:app` sees core/presentation and its `api` libraries (Compose, Material3, Navigation3, Paging, …). It **doesn't** see core/data (`IEnvironmentManager`, `ApiResult`) because core:presentation
+- `:app` sees core/presentation and its `api` libraries (Compose, Material3, Navigation3, Paging, …), and the destinations in `:common:navigation` (`com.common.navigation.destination.<feature>`). It **doesn't** see core/data (`IEnvironmentManager`, `ApiResult`) because core:presentation
   uses `implementation`. To configure the environment in `App.onCreate`, add `implementation(project(":core:data"))`.
 - Hilt aggregates `@Module`/`@InstallIn` from every module on the runtime classpath, so feature modules must be reachable from `:app` (`:demo:data` currently isn't).
 - No test dependencies or `kspTest` are configured for the app.

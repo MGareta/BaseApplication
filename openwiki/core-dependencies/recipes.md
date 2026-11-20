@@ -56,12 +56,11 @@ All build logic lives in `core/dependencies` (plugins, `Config`, `Extensions.kt`
 
 ## 2. Create a feature presentation module
 
-1. `orders/presentation/build.gradle.kts`:
+1. `orders/presentation/build.gradle.kts` (the plugin already adds `implementation(project(":common:navigation"))`; do not repeat it):
    ```kotlin
    plugins { alias(coreLibs.plugins.feature.presentation) }
    android { namespace = "com.orders.presentation" }
    dependencies {
-       implementation(project(":common:navigation"))   // shared destinations
        implementation(project(":orders:data"))
    }
    ```

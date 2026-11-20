@@ -58,7 +58,7 @@ core/dependencies/
 | `core.data` | `coreLibs.plugins.core.data` | `CoreDataPlugin` | `:core:data` | [plugin-core-data](plugin-core-data.md) |
 | `core.presentation` | `coreLibs.plugins.core.presentation` | `CorePresentationPlugin` | `:core:presentation` | [plugin-core-presentation](plugin-core-presentation.md) |
 | `feature.data` | `coreLibs.plugins.feature.data` | `FeatureDataPlugin` | `:demo:data`, `:login:data` (and new feature data modules) | [plugin-feature-data](plugin-feature-data.md) |
-| `feature.presentation` | `coreLibs.plugins.feature.presentation` | `FeaturePresentationPlugin` | `:common:navigation`, `:demo:presentation`, `:login:presentation` (and new feature presentation modules) | [plugin-feature-presentation](plugin-feature-presentation.md) |
+| `feature.presentation` | `coreLibs.plugins.feature.presentation` | `FeaturePresentationPlugin` | `:common:navigation`, `:demo:presentation`, `:login:presentation` (and new feature presentation modules); adds `:core:presentation` and, except for `:common:navigation` itself, `:common:navigation` | [plugin-feature-presentation](plugin-feature-presentation.md) |
 
 The catalog's `[plugins]` declares these ids with `version = "unspecified"` so modules can use `alias(...)`. The ids are resolved from the included build through `pluginManagement`.
 
@@ -105,9 +105,9 @@ The catalog's `[plugins]` declares these ids with `version = "unspecified"` so m
 | `:core:presentation` | `alias(coreLibs.plugins.core.presentation)`, `namespace = "com.core.presentation"` |
 | `:common:navigation` | `alias(coreLibs.plugins.feature.presentation)`, `namespace = "com.common.navigation"`, no project dependencies beyond what the plugin adds (`:core:presentation`) |
 | `:demo:data` | `alias(coreLibs.plugins.feature.data)`, `namespace = "com.demo.data"` |
-| `:demo:presentation` | `alias(coreLibs.plugins.feature.presentation)`, `namespace = "com.demo.presentation"`, implementation of `:common:navigation` |
+| `:demo:presentation` | `alias(coreLibs.plugins.feature.presentation)`, `namespace = "com.demo.presentation"` (`:common:navigation` dependency comes from the plugin) |
 | `:login:data` | `alias(coreLibs.plugins.feature.data)`, `namespace = "com.login.data"` |
-| `:login:presentation` | `alias(coreLibs.plugins.feature.presentation)`, `namespace = "com.login.presentation"`, implementations of `:common:navigation` and `:login:data` |
+| `:login:presentation` | `alias(coreLibs.plugins.feature.presentation)`, `namespace = "com.login.presentation"`, implementation of `:login:data` (`:common:navigation` dependency comes from the plugin) |
 
 ## Module graph
 

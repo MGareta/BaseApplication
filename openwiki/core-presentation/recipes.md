@@ -42,7 +42,7 @@ core/data types (`ApiResult`, managers), also depend on the feature's data modul
 ## 1. New feature screen (Navigation3)
 
 1. **Destination** (route + args), in the shared module `:common:navigation` at `common/navigation/src/main/java/com/common/navigation/destination/catalog/CatalogScreenNavDestination.kt`
-   (package `com.common.navigation.destination.catalog`; public, primitive/ID args only; see [navigation3](navigation3.md#where-destinations-live)). The feature declares `implementation(project(":common:navigation"))` and imports it:
+   (package `com.common.navigation.destination.catalog`; public, primitive/ID args only; see [navigation3](navigation3.md#where-destinations-live)). The `feature.presentation` plugin already adds `implementation(project(":common:navigation"))` to the feature, so the feature only imports it (no build-file line):
    ```kotlin
    @Serializable data object CatalogScreenNavDestination : INavigationDestination()
    @Serializable data class ProductScreenNavDestination(val productId: String) : INavigationDestination()
@@ -244,7 +244,7 @@ Implement the hooks in the app's `MainActivity` (they're `TODO()` today):
 override fun onSessionWarning() {
     navigationGraphManager.get().goToDestination(SessionWarningScreenNavDestination)   // e.g. an INavigationEntryDialog with "Stay signed in"
 }
-// import com.common.navigation.destination.login.LoginScreenNavDestination   (:app must declare implementation(project(":common:navigation")))
+// import com.common.navigation.destination.login.LoginScreenNavDestination   (AppPlugin adds :common:navigation to :app)
 override fun onSessionTimeout() {
     super.onSessionTimeout()                                                  // invalidates the session
     navigationGraphManager.get().goToDestination(LoginScreenNavDestination)

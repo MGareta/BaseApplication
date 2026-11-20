@@ -46,6 +46,7 @@ login/presentation/build.gradle.kts
 | Configuration | Dependency |
 |---|---|
 | `implementation` | `project(":core:presentation")`, which exposes Compose, Material3, Navigation3, Paging Compose, lifecycle-viewmodel-compose, hilt-navigation-compose, browser and serialization via `api` |
+| `implementation` | `project(":common:navigation")` (shared destinations), added only when the module path is not `:common:navigation` |
 | `ksp` | `kotlin-metadata-jvm`, `hilt-android-compiler` |
 | `implementation` | `hilt-android` |
 | `testImplementation` | `testFixtures(project(":core:presentation"))`, which provides the test-unit bundle and shared `com.core.presentation.BaseTest` |
@@ -65,7 +66,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":common:navigation"))   // destinations: com.common.navigation.destination.orders.*
+    // :common:navigation (destinations: com.common.navigation.destination.orders.*) is added by the plugin
     implementation(project(":orders:data"))   // needed to see ApiResult / core-data types and the feature's repositories
 }
 ```
@@ -73,6 +74,7 @@ Register it in `settings.gradle.kts` and add `implementation(project(":orders:pr
 
 ## Gotchas
 
+- **Do not declare `:common:navigation` in the feature build file.** The plugin adds it. The plugin skips it via `if (path != ":common:navigation")` because `:common:navigation` also applies `feature.presentation`; without the guard it would depend on itself and fail with a circular task dependency. `:app` gets it from `AppPlugin`, and `:core:presentation` (`CorePresentationPlugin`) must never depend on it (circular with `:common:navigation`).
 - **No core/data on the classpath.** `ApiResult`, `ISessionManager`, etc. aren't visible unless you add the feature data module (or core:data). `BaseViewModel`'s use-case helpers
   use `ApiResult`, so most ViewModels need it ([dependency-visibility](dependency-visibility.md#gaps-and-fixes)).
 - **Namespace:** the plugin's default is `com.base.application`; current feature modules override it (`:demo:presentation` uses `com.demo.presentation`; `:login:presentation` uses `com.login.presentation`; `:common:navigation` uses `com.common.navigation`). Set a unique namespace in each new module.
