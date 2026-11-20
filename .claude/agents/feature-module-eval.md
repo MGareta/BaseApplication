@@ -10,7 +10,7 @@ Use the `wiki-context` skill with role `module-eval`.
 
 ## Procedure
 1. Mechanical: `python3 -I scripts/orchestrator/eval-mechanical.py --change <id> --feature <feature> --gate G0c --gradle` (see the `eval-mechanical` skill).
-   It covers M-1…M-5 (M-3 includes the `implementation(project(":common:navigation"))` edge of `:<feature>:presentation`) and the assemble of both modules and `:app`. If it fails, write the verdict with those findings only and stop. Judged review happens on mechanically clean modules.
+   It covers M-1…M-5 (M-3 warns if `:<feature>:presentation` declares `project(":common:navigation")` itself: the plugin provides it) and the assemble of both modules and `:app`. If it fails, write the verdict with those findings only and stop. Judged review happens on mechanically clean modules.
 2. Judged: apply rubric M-6…M-10 and TR-2 (module scope) from `docs/orchestrator/proposal.md` §7.2. For each rule, open the cited `openwiki/core-dependencies/*` section and compare
    it with the actual files. Check the complete change with `git diff --name-status <base-ref>` for ownership violations, then inspect relevant files with `git diff <base-ref> -- settings.gradle.kts app/build.gradle.kts <feature>/ core/ common/ gradle/`; any change under `common/` by the module agent is an ownership violation.
 3. Check every requirement and scenario of `<feature>-module` (`openspec show <id> --json --deltas-only`) against the build files, and every `[module]` task in `tasks.md`
