@@ -10,15 +10,16 @@ You never edit source code. You may only write `openspec/changes/<id>/.orchestra
 ## Procedure
 1. Mechanical: `python3 -I scripts/orchestrator/eval-mechanical.py --change <id> --feature <feature> --gate G2 --gradle` (see the `eval-mechanical` skill). If it fails, write the
    verdict with those findings and stop.
-2. Judged: apply VIS-1 (every declaration in `<feature>/presentation/src/main` and `src/test` that can be `internal` is; nothing public that `:app` doesn't need; confirm it by `grep -rnE '^(data |sealed |abstract )?(class|object|interface|fun) ' <path>` and checking the app wiring still compiles), VM-2…VM-6, V-2, V-N1, V-N2, V-N4, V-K2, V-K5, V-F1, V-I1, L-1, S-1, AN-1…AN-6 and TR-2 from `docs/orchestrator/proposal.md` §7.2 to every file in `<feature>/presentation/src/main`.
+2. Judged: apply VIS-1 (every declaration in `<feature>/presentation/src/main` and `src/test` that can be `internal` is, except the destinations in `:common:navigation`, which must be public; nothing public that `:app` doesn't need; confirm it by `grep -rnE '^(data |sealed |abstract )?(class|object|interface|fun) ' <path>` and checking the app wiring still compiles), VM-2…VM-6, V-2, V-N1, V-N2, V-N4, CN-1, V-K2, V-K5, V-F1, V-I1, L-1, S-1, AN-1…AN-6 and TR-2 from `docs/orchestrator/proposal.md` §7.2 to every file in `<feature>/presentation/src/main`.
    Open the cited wiki section for each rule and compare.
-   - Structure: one Contract and one ViewModel per feature; each screen has Entry, Screen, Destination and UiModel; screens are in the root of `view/`, extra composables in `view/components/` (S-1).
+   - Structure: one Contract and one ViewModel per feature; each screen has Entry, Screen and UiModel in the feature and a `<Screen>ScreenNavDestination` in `common/navigation/src/main/java/com/common/navigation/destination/<feature>/`; screens are in the root of `view/`, extra composables in `view/components/`, and there is no `model/destination/` (S-1, CN-1).
+   - Destinations (CN-1, V-N1, V-N4): public `@Serializable` classes extending `INavigationDestination()`, primitive/ID arguments only, used by exactly one entry of the feature. Cross-feature navigation imports only another feature's `<Screen>ScreenNavDestination`, nothing else from it. Check with `git diff --name-status <base-ref>` that the run changed `common/navigation/` only inside `destination/<feature>/`.
    - Compare the implemented contract with `design.md` → *Presentation contract* (VM-5), and the navigation registration with *Navigation*.
    - L-1: ViewModels call only `I<Feature>Manager` for data; no `<Feature>ApiService`, DTO, `ManagerImpl` or data Hilt module anywhere in `src/main`; only `analytics/` classes use `IAnalyticsManager`.
    - Diff injected data types against `.orchestrator/handoff/data-api-surface.json`: anything not in the surface fails TR-2.
    - Analytics: every *Analytics map* entry has exactly one class (in `analytics/events/` or `analytics/views/`), one `<Feature>Analytics` method and one call site in a ViewModel; the ViewModels only use `<Feature>Analytics` (AN-5, AN-6); check the ViewModel diff for non-insert edits by the analytics agent (AN-4,
      `git diff <base-ref> -- <path>`).
-3. Assign each finding's owner from the file path (`viewModel/`, `model/ui/` → viewmodel; `view/`, `navigation/`, `model/destination/`, `di/` → view; `analytics/` and
+3. Assign each finding's owner from the file path (`viewModel/`, `model/ui/` → viewmodel; `view/`, `navigation/`, `di/` and `common/navigation/.../destination/<feature>/` → view; `analytics/` and
    analytics call sites → analytics).
 
 ## Verdict

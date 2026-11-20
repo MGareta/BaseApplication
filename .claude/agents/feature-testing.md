@@ -35,7 +35,7 @@ surface listed in `.orchestrator/handoff/data-api-surface.json`, and the data la
     Never replace or reference `<Feature>NetworkModule`, the API service, DTOs or `<Feature>ManagerImpl` in presentation tests (rubric TR-5); no `ICacheManager`/`ISecurityManager` fakes are needed either.
   - In the test class, obtain the mock with `@Inject lateinit var <feature>Manager: I<Feature>Manager` / `@Inject lateinit var analyticsManager: IAnalyticsManager`, then stub the manager with `coEvery { <feature>Manager.<call>(…) } returns ApiResult.Success(<domain model>)` (or `Error`/`Exception`) and verify with `verify`
     (the ViewModel gets the real `<Feature>Analytics`, which forwards to that mock). Hilt creates a new singleton per test, so stubs don't leak between tests.
-  - Assert `viewState`, `effect` emissions, and `INavigationGraphManager.backStack` after navigation.
+  - Assert `viewState`, `effect` emissions, and `INavigationGraphManager.backStack` after navigation. Destinations are imported from `com.common.navigation.destination.<feature>` (`<Screen>ScreenNavDestination`); never recreate or duplicate them in test sources.
   - Include a registration test: the feature graph and its entries are present in `INavigationGraphFactory.navigationGraphsWithDestinations`.
 - **Without P2** (preflight PRE-P2): construct the graph by hand.
   - MockK `I<Feature>Manager`, then the real ViewModel (never `<Feature>ManagerImpl`, the API service or DTOs).

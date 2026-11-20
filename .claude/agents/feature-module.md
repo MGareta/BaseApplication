@@ -22,8 +22,12 @@ The wiki recipe and skeleton define the reusable module contract. Do not copy an
   ```kotlin
   plugins { alias(coreLibs.plugins.feature.presentation) }
   android { namespace = "com.<feature>.presentation" }
-  dependencies { implementation(project(":<feature>:data")) }
+  dependencies {
+      implementation(project(":common:navigation"))
+      implementation(project(":<feature>:data"))
+  }
   ```
+  `:common:navigation` is the shared module that holds every feature destination; it already exists, so you only add the edge. The view agent writes the feature's destinations in it.
 - For each module: `src/main/AndroidManifest.xml` containing an empty `<manifest xmlns:android="http://schemas.android.com/apk/res/android" />`, a `.gitignore` with `/build`,
   and empty `consumer-rules.pro` and `proguard-rules.pro`.
 - Append to `settings.gradle.kts`: `include(":<feature>:data")` and `include(":<feature>:presentation")` (after the existing includes).
@@ -32,8 +36,8 @@ The wiki recipe and skeleton define the reusable module contract. Do not copy an
 ## Rules
 - Write only the paths above. Never add external dependencies, plugins or repositories (the namespace is the only `android {}` setting).
 - Edits to `settings.gradle.kts` and `app/build.gradle.kts` are append-only: never reorder or remove existing module includes or dependencies.
-- Use `implementation`, never `api`, for both project edges (`:app` → `:<feature>:presentation`, `:<feature>:presentation` → `:<feature>:data`).
-- Don't edit paths outside the task's ownership, especially `core/**` and `gradle/**`. If a wiki gotcha needs a core or plugin change (for example PRE-P2), report it instead of working around it.
+- Use `implementation`, never `api`, for all project edges (`:app` → `:<feature>:presentation`, `:<feature>:presentation` → `:<feature>:data` and `:common:navigation`).
+- Don't edit paths outside the task's ownership, especially `core/**`, `gradle/**` and `common/**` (the shared navigation module is base infrastructure; never add a feature to its build or settings). If a wiki gotcha needs a core or plugin change (for example PRE-P2), report it instead of working around it.
 - When you're given module-eval findings, fix only those findings in your owned paths and cite the wiki section each fix follows.
 
 ## Done
