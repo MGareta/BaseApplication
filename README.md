@@ -84,12 +84,17 @@ To add a new feature, you can follow the structure of the `demo` module:
     @Serializable
     class LoginNavGraph @Inject constructor() : INavigationGraph {
         override val startingDestination: KClass<out INavigationDestination>
-            get() = LoginNavDestination::class
+            get() = LoginScreenNavDestination::class
         // ...
     }
     ```
 3.  **Define Destinations and Entries**:
-    -   Create serializable data classes that implement `INavigationDestination`.
+    -   Create destinations in the shared `:common:navigation` module, at `common/navigation/src/main/java/com/common/navigation/destination/<feature>/<Screen>ScreenNavDestination.kt` (package `com.common.navigation.destination.<feature>`). They are public `@Serializable` objects/data classes that extend `INavigationDestination()`, and your feature's `presentation` module needs `implementation(project(":common:navigation"))`:
+        ```kotlin
+        @Serializable
+        data object LoginScreenNavDestination : INavigationDestination()
+        ```
+        To open another feature's screen, import its `<Screen>ScreenNavDestination` and call `navigator.get().goToDestination(...)`.
     -   Create classes that implement `INavigationGraphScreenEntry` (or Dialog/BottomSheet) for each screen.
 4.  **Create ViewModel and View**:
     -   Implement your `ViewModel` by extending `BaseViewModel`.
