@@ -220,8 +220,8 @@ def gate_g0c(args):
             add("M-5", "CRITICAL", rel(build), f"external dependencies are not allowed: {external}", "module")
         if module == "presentation" and f'project(":{f}:data")' not in src:
             add("M-3", "CRITICAL", rel(build), f'missing implementation(project(":{f}:data"))', "module")
-        if module == "presentation" and 'project(":common:navigation")' not in src:
-            add("M-3", "CRITICAL", rel(build), 'missing implementation(project(":common:navigation")): destinations live in the shared module', "module")
+        if module == "presentation" and 'project(":common:navigation")' in src:
+            add("M-3", "WARNING", rel(build), 'redundant project(":common:navigation"): FeaturePresentationPlugin already adds it', "module")
     settings = read(os.path.join(ROOT, "settings.gradle.kts"))
     for module in ("data", "presentation"):
         if f'":{f}:{module}"' not in settings:

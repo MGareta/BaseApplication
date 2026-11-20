@@ -89,7 +89,7 @@ To add a new feature, you can follow the structure of the `demo` module:
     }
     ```
 3.  **Define Destinations and Entries**:
-    -   Create destinations in the shared `:common:navigation` module, at `common/navigation/src/main/java/com/common/navigation/destination/<feature>/<Screen>ScreenNavDestination.kt` (package `com.common.navigation.destination.<feature>`). They are public `@Serializable` objects/data classes that extend `INavigationDestination()`, and your feature's `presentation` module needs `implementation(project(":common:navigation"))`:
+    -   Create destinations in the shared `:common:navigation` module, at `common/navigation/src/main/java/com/common/navigation/destination/<feature>/<Screen>ScreenNavDestination.kt` (package `com.common.navigation.destination.<feature>`). They are public `@Serializable` objects/data classes that extend `INavigationDestination()`. The `feature.presentation` plugin already adds `implementation(project(":common:navigation"))` to your presentation module, so do not declare it yourself (`AppPlugin` adds it to `:app` too):
         ```kotlin
         @Serializable
         data object LoginScreenNavDestination : INavigationDestination()
