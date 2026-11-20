@@ -213,7 +213,7 @@ flowchart TD
 |---|---|---|
 | G0a | Planning artifacts written | `openspec validate <id> --strict` exit 0; `openspec status --change <id> --json` → `isPlanningComplete: true`; every task has a role tag and a `Req:` reference (§3.5) |
 | G0b | G0a | Human approval recorded in `.orchestrator/leases.json` (`"planApprovedBy"`) |
-| G0c | Section 0 tasks checked | `./gradlew :<feature>:data:assembleDebug :<feature>:presentation:assembleDebug :app:assembleDebug` succeeds; mechanical M-1…M-5 pass (M-3 includes the `:common:navigation` edge); module-eval verdict `PASS` (judged M-6…M-10 against `openwiki/core-dependencies`) |
+| G0c | Section 0 tasks checked | `./gradlew :<feature>:data:assembleDebug :<feature>:presentation:assembleDebug :app:assembleDebug` succeeds; mechanical M-1…M-5 pass; module-eval verdict `PASS` (judged M-6…M-10 against `openwiki/core-dependencies`) |
 | G1 | Section 1 tasks checked | `:<feature>:data:testDebugUnitTest` green; every `<feature>-data` scenario has ≥1 test; data-eval verdict `PASS` |
 | G2 | Section 2 tasks checked | `:<feature>:presentation:compileDebugKotlin` + `:app:assembleDebug` green; mechanical S-1/VIS-1/CN-1 pass; presentation-eval verdict `PASS` |
 | G3 | Section 3 tasks checked | all feature unit/integration tests green; `/opsx:verify` reports 0 CRITICAL; `openspec validate <id> --strict` still green |
@@ -349,7 +349,7 @@ The testing team is **one agent** in v1. Splitting it (integration vs. UI) only 
 | Path | Owner | Others |
 |---|---|---|
 | `settings.gradle.kts`, `app/build.gradle.kts` | module | append-only, Phase 0 only |
-| `<f>/data/build.gradle.kts`, `<f>/presentation/build.gradle.kts` (incl. the `implementation(project(":common:navigation"))` edge), manifests, `.pro`, `.gitignore` | module | module eval reads only |
+| `<f>/data/build.gradle.kts`, `<f>/presentation/build.gradle.kts`, manifests, `.pro`, `.gitignore` | module | module eval reads only |
 | `data/api/**`, `data/model/**`, `data/manager/**`, `data/repository/**`, `data/di/**` | data | — |
 | `<f>/data/src/test/**` | data-test | testing may add `fake/**` |
 | `presentation/viewModel/**`, `presentation/model/ui/**` | viewmodel | analytics: insert-only lease after viewmodel is done |
@@ -395,7 +395,7 @@ Every feature presentation module has exactly the layout of `:login:presentation
   (for a single-screen feature `<Screen>` equals `<Feature>`). The number of `*Screen.kt` files in the root of `view/` equals the number of `*Entry.kt` files and of `*ScreenNavDestination.kt` files the feature owns in the shared module.
 - **Destinations live in the shared module `:common:navigation`** (namespace `com.common.navigation`, plugin `feature.presentation`, depends only on `:core:presentation`), not in the feature:
   `common/navigation/src/main/java/com/common/navigation/destination/<f>/<Screen>ScreenNavDestination.kt`, package `com.common.navigation.destination.<f>`. Each is a **public** `@Serializable` `data object`/`data class` extending `INavigationDestination()` (`com.core.presentation.navigation3.model.destination`) with KDoc `@see openspec <change-id> task <n.m>`.
-  The module cannot depend on features, so arguments are primitives/IDs or types from `core`/`:common:navigation`. `<f>:presentation` declares `implementation(project(":common:navigation"))` (M-3); entries, graph, navigation module and screens stay `internal` and import the destination from `com.common.navigation.destination.<f>`.
+  The module cannot depend on features, so arguments are primitives/IDs or types from `core`/`:common:navigation`. the `feature.presentation` plugin (`FeaturePresentationPlugin`) adds `implementation(project(":common:navigation"))` to every module that applies it (skipping `:common:navigation` itself), so feature build files do not declare it (`AppPlugin` adds it to `:app` too); entries, graph, navigation module and screens stay `internal` and import the destination from `com.common.navigation.destination.<f>`.
   Navigating to another feature = import that feature's `<Screen>ScreenNavDestination` and call `navigator.get().goToDestination(...)`; no other cross-feature import is allowed. The feature has no `model/destination/` directory.
 - **Design decision: why destinations are centralised.** Features stay decoupled (feature A reaches feature B by a destination, never by depending on B's presentation module) and `core` stays generic (it holds the `INavigationDestination` base, not any feature's screens). Trade-offs: every screen is reachable by every feature; each new screen edits two modules (the feature and `:common:navigation`, the latter only in its `destination/<f>/` folder); and `:common:navigation` must stay pure (destinations only, no feature dependency, no logic), enforced by CN-1.
 - **Screen state:** `<Screen>UiModel` is a `data class` holding everything that screen shows (form fields, loading flag, messages, lists). `<Feature>Contract.UiState` is a `data class` with one property per screen
@@ -483,7 +483,7 @@ Every rule: **ID · check type (M = mechanical, J = LLM-judged) · source**. Sev
 **Module (module eval, G0c)**
 - M-1 · M · feature build files apply only `coreLibs.plugins.feature.data` / `feature.presentation` (`core-dependencies/plugin-feature-*.md`)
 - M-2 · M · unique `namespace = "com.<f>.data"` / `"com.<f>.presentation"` (`core-dependencies/config.md` → *Gotchas*)
-- M-3 · M · `<f>/presentation/build.gradle.kts` declares `implementation(project(":<f>:data"))` (`dependency-visibility.md` → *Gaps and fixes* 1) and `implementation(project(":common:navigation"))` (shared destinations, §6.1.1)
+- M-3 · M · `<f>/presentation/build.gradle.kts` declares `implementation(project(":<f>:data"))` (`dependency-visibility.md` → *Gaps and fixes* 1)
 - M-4 · M · `app/build.gradle.kts` depends on `:<f>:presentation`, and both modules are included in `settings.gradle.kts` (`core-dependencies/recipes.md` §1–2)
 - M-5 · M · no external dependency added anywhere (dependency diff of `:app:dependencies --configuration debugRuntimeClasspath` before/after, minus project modules)
 - M-6 · J · build files have exactly the recipe shape (`plugins { alias(...) }`, `android { namespace }`, `dependencies {}`); SDK levels, Java/Kotlin targets, build features and test options come from the convention plugin and are never set in the feature (`core-dependencies/recipes.md` §1–2, `config.md`, `plugin-feature-*.md`)
@@ -1149,8 +1149,8 @@ Integration: OrdersListFeatureTest, OrderDetailFeatureTest, OrdersFilterFeatureT
 ```markdown
 ## 0. Module
 - [ ] 0.1 [module] Create :orders:data (feature.data, namespace com.orders.data) — Req: orders-module/Feature modules
-- [ ] 0.2 [module] Create :orders:presentation (feature.presentation, namespace com.orders.presentation, depends on :orders:data and :common:navigation) — Req: orders-module/Feature modules
-- [ ] 0.3 [module] Include both modules in settings.gradle.kts and add :orders:presentation to :app (and implementation(project(":common:navigation")) to :orders:presentation) — Req: orders-module/Feature modules
+- [ ] 0.2 [module] Create :orders:presentation (feature.presentation, namespace com.orders.presentation, depends on :orders:data; the feature.presentation plugin provides the :common:navigation dependency) — Req: orders-module/Feature modules
+- [ ] 0.3 [module] Include both modules in settings.gradle.kts and add :orders:presentation to :app — Req: orders-module/Feature modules
 ## 1. Data
 - [ ] 1.1 [data] OrdersApiService + DTOs — Req: orders-data/Fetch order list
 - [ ] 1.2 [data] IOrdersManager/OrdersManagerImpl with cache policy — Req: orders-data/Cache order list

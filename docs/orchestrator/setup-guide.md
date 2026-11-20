@@ -78,7 +78,7 @@ The orchestrator relies on a codebase that already has **core modules** (shared 
 
 Rules that carry over to every platform:
 
-- A feature is **two modules** (data, presentation). The presentation module depends on the data module, and the app depends on the presentation module. Navigation destinations are the exception: they live in one shared module (`:common:navigation`, `<feature>/<Screen>ScreenNavDestination.kt`), which every feature presentation module depends on, so features can open each other's screens without depending on each other.
+- A feature is **two modules** (data, presentation). The presentation module depends on the data module, and the app depends on the presentation module. Navigation destinations are the exception: they live in one shared module (`:common:navigation`, `<feature>/<Screen>ScreenNavDestination.kt`), which every feature presentation module depends on (the `feature.presentation` plugin adds the dependency, so build files do not declare it), so features can open each other's screens without depending on each other.
 - Core modules and build configuration are **read-only** during feature work. If a feature needs a core change, the run stops and a human decides.
 - Each feature module has a **unique identity**. On Android that's the `namespace`; on iOS the product/target name and bundle ID prefix;
   on Flutter the package name.
