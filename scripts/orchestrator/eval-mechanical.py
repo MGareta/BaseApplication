@@ -74,10 +74,18 @@ def kotlin_files(base):
 
 def presentation_owner(path):
     for folder, owner in (("/viewModel/", "viewmodel"), ("/model/ui/", "viewmodel"), ("/analytics/", "analytics"),
-                          ("/view/", "view"), ("/navigation/", "view"), ("/model/destination/", "view"), ("/di/", "view")):
+                          ("/view/", "view"), ("/navigation/", "view"), ("/common/navigation/", "view"), ("/di/", "view")):
         if folder in path:
             return owner
     return "view"
+
+
+COMMON_DESTINATIONS = "common/navigation/src/main/java/com/common/navigation/destination"
+
+
+def common_destination_dir(feature):
+    """Shared-module folder that holds every destination of a feature (convention: <feature>/<Screen>ScreenNavDestination.kt)."""
+    return os.path.join(ROOT, COMMON_DESTINATIONS, feature)
 
 
 def check_imports(files, allowed, forbidden, rule, owner_of, feature):
@@ -212,6 +220,8 @@ def gate_g0c(args):
             add("M-5", "CRITICAL", rel(build), f"external dependencies are not allowed: {external}", "module")
         if module == "presentation" and f'project(":{f}:data")' not in src:
             add("M-3", "CRITICAL", rel(build), f'missing implementation(project(":{f}:data"))', "module")
+        if module == "presentation" and 'project(":common:navigation")' not in src:
+            add("M-3", "CRITICAL", rel(build), 'missing implementation(project(":common:navigation")): destinations live in the shared module', "module")
     settings = read(os.path.join(ROOT, "settings.gradle.kts"))
     for module in ("data", "presentation"):
         if f'":{f}:{module}"' not in settings:
@@ -286,7 +296,6 @@ def check_presentation_structure(f, main):
     }
     suffixes = {
         "navigation": (("Entry.kt", f"{cap}NavGraph.kt"), "view"),
-        "model/destination": (("Destination.kt",), "view"),
         "view": (("Screen.kt",), "view"),
         "analytics/events": (("Event.kt",), "analytics"),
         "analytics/views": (("View.kt",), "analytics"),
@@ -303,8 +312,8 @@ def check_presentation_structure(f, main):
             add("S-1", "CRITICAL", rel(path), f"files in {sub}/ must end with {' or '.join(suffixes[sub][0])}", suffixes[sub][1])
         elif top == "view" and sub != "view" and not sub.startswith("view/components"):
             add("S-1", "CRITICAL", rel(path), "view/ may only contain *Screen.kt in its root and extra composables in view/components/", "view")
-        elif top == "model" and sub != "model/destination" and not (sub == "model/ui" or sub.startswith("model/ui/")):
-            add("S-1", "CRITICAL", rel(path), "model/ may only contain destination/ and ui/", "view")
+        elif top == "model" and not (sub == "model/ui" or sub.startswith("model/ui/")):
+            add("S-1", "CRITICAL", rel(path), "model/ may only contain ui/ (destinations live in :common:navigation)", "view")
         elif top == "analytics" and sub not in ("analytics", "analytics/events", "analytics/views"):
             add("S-1", "CRITICAL", rel(path), "analytics/ may only contain events/ and views/", "analytics")
 
@@ -317,10 +326,12 @@ def check_presentation_structure(f, main):
         if not os.path.isfile(os.path.join(base, folder, fname)):
             add("S-1", "CRITICAL", rel(os.path.join(base, folder)), f"missing {fname}", owners[folder])
     entries, screens = names("navigation", "Entry.kt"), names("view", "Screen.kt")
-    destinations, ui_models = names("model/destination", "Destination.kt"), names("model/ui", "UiModel.kt")
+    dest_dir = common_destination_dir(f)
+    destinations = {n[:-len("ScreenNavDestination.kt")] for n in os.listdir(dest_dir) if n.endswith("ScreenNavDestination.kt")} if os.path.isdir(dest_dir) else set()
+    ui_models = names("model/ui", "UiModel.kt")
     if not entries:
         add("S-1", "CRITICAL", rel(os.path.join(base, "navigation")), "missing at least one <Screen>Entry.kt", "view")
-    for label, found in (("view/<Screen>Screen.kt", screens), ("model/destination/<Screen>Destination.kt", destinations), ("model/ui/<Screen>UiModel.kt", ui_models)):
+    for label, found in (("view/<Screen>Screen.kt", screens), (f"{COMMON_DESTINATIONS}/{f}/<Screen>ScreenNavDestination.kt", destinations), ("model/ui/<Screen>UiModel.kt", ui_models)):
         if found != entries:
             add("S-1", "CRITICAL", rel(base), f"{label} must match the navigation entries one to one (entries={sorted(entries)}, found={sorted(found)})", "view")
     contract = os.path.join(base, "viewModel", f"{cap}Contract.kt")
@@ -329,6 +340,34 @@ def check_presentation_structure(f, main):
         for screen in sorted(ui_models):
             if f"{screen}UiModel" not in src:
                 add("S-1", "CRITICAL", rel(contract), f"UiState must keep a {screen}UiModel instance", "viewmodel")
+
+
+def check_common_destinations(f, allow, change):
+    """CN-1: destinations of the feature live in :common:navigation as public @Serializable <Screen>ScreenNavDestination classes."""
+    folder = common_destination_dir(f)
+    files = kotlin_files(folder)
+    if not files:
+        add("CN-1", "CRITICAL", rel(folder), f"missing destinations: create {COMMON_DESTINATIONS}/{f}/<Screen>ScreenNavDestination.kt", "view")
+        return
+    owner = lambda p: "view"
+    check_imports(files, allow["common_navigation"]["imports_allowed"], [], "CN-1", owner, f)
+    check_task_refs(files, change, owner)
+    decl = re.compile(r"^(?P<mods>(?:[a-z]+\s+)*?)(?P<kind>class|interface|object|typealias|fun|val|var)\s+(?P<name>\w+)", re.M)
+    for path in files:
+        name, src = os.path.basename(path), read(path)
+        if not name.endswith("ScreenNavDestination.kt"):
+            add("CN-1", "CRITICAL", rel(path), "files in destination/<feature>/ must be named <Screen>ScreenNavDestination.kt", "view")
+        if not re.search(rf"^package com\.common\.navigation\.destination\.{re.escape(f)}\s*$", src, re.M):
+            add("CN-1", "CRITICAL", rel(path), f"package must be com.common.navigation.destination.{f}", "view")
+        tops = list(decl.finditer(src))
+        if len(tops) != 1 or tops[0].group("kind") not in ("class", "object") or tops[0].group("name") != name[:-len(".kt")]:
+            add("CN-1", "CRITICAL", rel(path), "exactly one top-level class/object, named like the file", "view")
+        for match in tops:
+            if {"internal", "private"} & set(match.group("mods").split()):
+                line = src.count("\n", 0, match.start()) + 1
+                add("CN-1", "CRITICAL", f"{rel(path)}:{line}", f"{match.group('name')} must be public: other modules navigate to it", "view")
+        if "@Serializable" not in src or not re.search(r":\s*INavigationDestination\(\)", src):
+            add("CN-1", "CRITICAL", rel(path), "must be a @Serializable class/object extending INavigationDestination()", "view")
 
 
 def check_test_structure(f, tests):
@@ -403,6 +442,7 @@ def gate_g2(args):
     check_task_refs(main, args.change, presentation_owner)
     check_internal(main, "VIS-1", presentation_owner)
     check_presentation_structure(f, main)
+    check_common_destinations(f, allow, args.change)
     check_analytics_scaffold(f, main)
     check_form_placement(main)
     for path in main:
@@ -419,7 +459,7 @@ def gate_g2(args):
                     add("V-K1", "CRITICAL", f"{rel(path)}:{line}", f"{comp} without explicit onValueChange", presentation_owner(path))
         if re.search(r"override\s+fun\s+Render\(", src) and "loadInitData()" not in src:
             add("V-N3", "CRITICAL", rel(path), "Render does not call viewModel.loadInitData() in a LaunchedEffect", "view")
-    gradle(args, [f":{f}:presentation:compileDebugKotlin", ":app:assembleDebug"], "VM-1", "viewmodel")
+    gradle(args, [":common:navigation:compileDebugKotlin", f":{f}:presentation:compileDebugKotlin", ":app:assembleDebug"], "VM-1", "viewmodel")
 
 
 def gate_g3(args):
