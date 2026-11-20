@@ -58,7 +58,7 @@ core/dependencies/
 | `core.data` | `coreLibs.plugins.core.data` | `CoreDataPlugin` | `:core:data` | [plugin-core-data](plugin-core-data.md) |
 | `core.presentation` | `coreLibs.plugins.core.presentation` | `CorePresentationPlugin` | `:core:presentation` | [plugin-core-presentation](plugin-core-presentation.md) |
 | `feature.data` | `coreLibs.plugins.feature.data` | `FeatureDataPlugin` | `:demo:data`, `:login:data` (and new feature data modules) | [plugin-feature-data](plugin-feature-data.md) |
-| `feature.presentation` | `coreLibs.plugins.feature.presentation` | `FeaturePresentationPlugin` | `:demo:presentation`, `:login:presentation` (and new feature presentation modules) | [plugin-feature-presentation](plugin-feature-presentation.md) |
+| `feature.presentation` | `coreLibs.plugins.feature.presentation` | `FeaturePresentationPlugin` | `:common:navigation`, `:demo:presentation`, `:login:presentation` (and new feature presentation modules) | [plugin-feature-presentation](plugin-feature-presentation.md) |
 
 The catalog's `[plugins]` declares these ids with `version = "unspecified"` so modules can use `alias(...)`. The ids are resolved from the included build through `pluginManagement`.
 
@@ -83,7 +83,7 @@ The catalog's `[plugins]` declares these ids with `version = "unspecified"` so m
 - `pluginManagement { includeBuild("core/dependencies"); repositories { google { content { com.android.*, com.google.*, androidx.* } }; mavenCentral(); gradlePluginPortal() } }`
 - `dependencyResolutionManagement { repositoriesMode = FAIL_ON_PROJECT_REPOS; repositories { google(); mavenCentral() }; versionCatalogs { create("coreLibs") { from(files("core/dependencies/gradle/libs.versions.toml")) } } }`.
   **Modules can't declare their own repositories**, so add any new repository here.
-- `rootProject.name = "BaseApplication"`, with `include(":app", ":core:data", ":core:presentation", ":demo:presentation", ":demo:data", ":login:data", ":login:presentation")`.
+- `rootProject.name = "BaseApplication"`, with `include(":app", ":core:data", ":core:presentation", ":common:navigation", ":demo:presentation", ":demo:data", ":login:data", ":login:presentation")`.
 
 **Root `build.gradle.kts`** declares, with `apply false`, `android.application`, `android.library`, `kotlin.compose`, `kotlin.serializable`, `google.ksp`, `google.hilt`, `google.crashlytics`,
 `dokka` and `detekt`. This puts the plugin artifacts (with versions) on the build classpath once so the convention plugins can apply them by id.
@@ -103,10 +103,11 @@ The catalog's `[plugins]` declares these ids with `version = "unspecified"` so m
 | `:app` | `alias(coreLibs.plugins.app)`, `android {}`, implementations of `:demo:presentation` and `:login:presentation` |
 | `:core:data` | `alias(coreLibs.plugins.core.data)`, `namespace = "com.core.data"`, `testInstrumentationRunner = "com.core.data.DefaultTestRunner"` (class doesn't exist) |
 | `:core:presentation` | `alias(coreLibs.plugins.core.presentation)`, `namespace = "com.core.presentation"` |
+| `:common:navigation` | `alias(coreLibs.plugins.feature.presentation)`, `namespace = "com.common.navigation"`, no project dependencies beyond what the plugin adds (`:core:presentation`) |
 | `:demo:data` | `alias(coreLibs.plugins.feature.data)`, `namespace = "com.demo.data"` |
-| `:demo:presentation` | `alias(coreLibs.plugins.feature.presentation)`, `namespace = "com.demo.presentation"` |
+| `:demo:presentation` | `alias(coreLibs.plugins.feature.presentation)`, `namespace = "com.demo.presentation"`, implementation of `:common:navigation` |
 | `:login:data` | `alias(coreLibs.plugins.feature.data)`, `namespace = "com.login.data"` |
-| `:login:presentation` | `alias(coreLibs.plugins.feature.presentation)`, `namespace = "com.login.presentation"`, implementation of `:login:data` |
+| `:login:presentation` | `alias(coreLibs.plugins.feature.presentation)`, `namespace = "com.login.presentation"`, implementations of `:common:navigation` and `:login:data` |
 
 ## Module graph
 
@@ -117,7 +118,10 @@ flowchart BT
     pres[":core:presentation<br/>core.presentation"] -->|implementation| data
     ddata[":demo:data<br/>feature.data"] -->|api| data
     ldata[":login:data<br/>feature.data"] -->|api| data
+    nav[":common:navigation<br/>feature.presentation"] -->|implementation| pres
     dpres[":demo:presentation<br/>feature.presentation"] -->|implementation| pres
+    dpres -->|implementation| nav
+    lpres -->|implementation| nav
     lpres[":login:presentation<br/>feature.presentation"] -->|implementation| pres
     lpres -->|implementation| ldata
     app[":app<br/>app"] -->|implementation| pres

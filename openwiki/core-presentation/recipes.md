@@ -41,10 +41,11 @@ core/data types (`ApiResult`, managers), also depend on the feature's data modul
 
 ## 1. New feature screen (Navigation3)
 
-1. **Destination** (route + args):
+1. **Destination** (route + args), in the shared module `:common:navigation` at `common/navigation/src/main/java/com/common/navigation/destination/catalog/CatalogScreenNavDestination.kt`
+   (package `com.common.navigation.destination.catalog`; public, primitive/ID args only; see [navigation3](navigation3.md#where-destinations-live)). The feature declares `implementation(project(":common:navigation"))` and imports it:
    ```kotlin
-   @Serializable data object CatalogDestination : INavigationDestination()
-   @Serializable data class ProductDestination(val productId: String) : INavigationDestination()
+   @Serializable data object CatalogScreenNavDestination : INavigationDestination()
+   @Serializable data class ProductScreenNavDestination(val productId: String) : INavigationDestination()
    ```
 2. **Contract**:
    ```kotlin
@@ -86,14 +87,14 @@ core/data types (`ApiResult`, managers), also depend on the feature's data modul
    ```kotlin
    class CatalogEntry @Inject constructor(
        override val navigator: dagger.Lazy<INavigationGraphManager>,
-   ) : INavigationEntry<CatalogDestination, CatalogViewModel>() {
+   ) : INavigationEntry<CatalogScreenNavDestination, CatalogViewModel>() {
        @Composable
-       override fun Render(params: CatalogDestination, viewModel: CatalogViewModel) {
+       override fun Render(params: CatalogScreenNavDestination, viewModel: CatalogViewModel) {
            val state by viewModel.viewState.collectAsStateWithLifecycle()
            LaunchedEffect(Unit) { viewModel.loadInitData() }
            LaunchedEffect(Unit) {
                viewModel.effect.collect {
-                   when (it) { is CatalogContract.Effect.OpenProduct -> navigator.get().goToDestination(ProductDestination(it.id)) }
+                   when (it) { is CatalogContract.Effect.OpenProduct -> navigator.get().goToDestination(ProductScreenNavDestination(it.id)) }
                }
            }
            CatalogScreen(state = state, onEvent = viewModel::handleUiEvents)
@@ -113,9 +114,9 @@ core/data types (`ApiResult`, managers), also depend on the feature's data modul
        fun entries(catalog: CatalogEntry, product: ProductEntry): Set<INavigationEntry<INavigationDestination, ViewModel>> = setOf(catalog, product)
    }
    ```
-7. **Navigate** from anywhere with access to the manager: `navigator.get().goToDestination(CatalogDestination)`, and `goBack()`.
+7. **Navigate** from anywhere with access to the manager: `navigator.get().goToDestination(CatalogScreenNavDestination)`, and `goBack()`.
 
-Checklist: imports come from `navigation3` (not `navigation`), the destination class is used by exactly one entry, and the entry is in its graph's set.
+Checklist: destinations live in `:common:navigation` (not in the feature) and the entry imports them from `com.common.navigation.destination.<feature>`, imports come from `navigation3` (not `navigation`), the destination class is used by exactly one entry, and the entry is in its graph's set.
 
 ## 2. Make a graph the app's start graph
 
@@ -126,18 +127,18 @@ The demo's `DemoScreenNavGraph` is currently the launcher, so remove that role f
 
 ```kotlin
 internal class ConfirmDeleteEntry @Inject constructor(override val navigator: dagger.Lazy<INavigationGraphManager>) :
-    INavigationEntryDialog<ConfirmDeleteDestination, CatalogViewModel>() {
+    INavigationEntryDialog<ConfirmDeleteScreenNavDestination, CatalogViewModel>() {
     override val dialogProperties = DialogProperties(dismissOnClickOutside = true)
-    @Composable override fun Render(params: ConfirmDeleteDestination, viewModel: CatalogViewModel) {
+    @Composable override fun Render(params: ConfirmDeleteScreenNavDestination, viewModel: CatalogViewModel) {
         AlertComponent(/* ... */ alertFamilyType = AlertFamilyType.Message(trailingComponent = null), /* ... */)
     }
 }
 
 internal class SortSheetEntry @Inject constructor(override val navigator: dagger.Lazy<INavigationGraphManager>) :
-    INavigationEntryBottomSheet<SortSheetDestination, CatalogViewModel>() {
+    INavigationEntryBottomSheet<SortSheetScreenNavDestination, CatalogViewModel>() {
     @OptIn(ExperimentalMaterial3Api::class)
     override val modalBottomSheetProperties = ModalBottomSheetProperties()
-    @Composable override fun Render(params: SortSheetDestination, viewModel: CatalogViewModel) { SortOptions(onPick = { /* ... */ navigator.get().goBack() }) }
+    @Composable override fun Render(params: SortSheetScreenNavDestination, viewModel: CatalogViewModel) { SortOptions(onPick = { /* ... */ navigator.get().goBack() }) }
 }
 ```
 Using the same ViewModel class as the screen (in the same graph) shares the instance. For a transient status sheet owned by a single screen, use
@@ -241,11 +242,12 @@ Details: [components-navigation](components-navigation.md#toolbarcomponent-colla
 Implement the hooks in the app's `MainActivity` (they're `TODO()` today):
 ```kotlin
 override fun onSessionWarning() {
-    navigationGraphManager.get().goToDestination(SessionWarningDestination)   // e.g. an INavigationEntryDialog with "Stay signed in"
+    navigationGraphManager.get().goToDestination(SessionWarningScreenNavDestination)   // e.g. an INavigationEntryDialog with "Stay signed in"
 }
+// import com.common.navigation.destination.login.LoginScreenNavDestination   (:app must declare implementation(project(":common:navigation")))
 override fun onSessionTimeout() {
     super.onSessionTimeout()                                                  // invalidates the session
-    navigationGraphManager.get().goToDestination(LoginDestination)
+    navigationGraphManager.get().goToDestination(LoginScreenNavDestination)
 }
 ```
 "Stay signed in" should call `sessionManager.restartSessionTimeout()`. Any touch already does via `onUserInteraction`. See [core-data session](../core-data/session.md).

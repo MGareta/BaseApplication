@@ -123,12 +123,12 @@ class App : CoreApp()
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
     override fun onSessionWarning() {
-        navigationGraphManager.get().goToDestination(SessionWarningDestination)   // e.g. an INavigationEntryDialog
+        navigationGraphManager.get().goToDestination(SessionWarningScreenNavDestination)   // e.g. an INavigationEntryDialog
     }
 
     override fun onSessionTimeout() {
         super.onSessionTimeout()                                                  // invalidates the session
-        navigationGraphManager.get().goToDestination(LoginDestination)
+        navigationGraphManager.get().goToDestination(LoginScreenNavDestination)   // import com.common.navigation.destination.login.LoginScreenNavDestination (:app must declare implementation(project(":common:navigation")))
     }
 }
 ```

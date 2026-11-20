@@ -182,20 +182,21 @@ internal class ProfileViewModel @Inject constructor(
     )
 }
 
-// Navigation3 entry (see navigation3.md for destination, graph and Hilt module)
+// Navigation3 entry (see navigation3.md for destination, graph and Hilt module).
+// Destinations come from the shared module: import com.common.navigation.destination.profile.ProfileScreenNavDestination (and EditProfileScreenNavDestination)
 internal class ProfileEntry @Inject constructor(
     override val navigator: Lazy<INavigationGraphManager>,
-) : INavigationEntry<ProfileDestination, ProfileViewModel>() {
+) : INavigationEntry<ProfileScreenNavDestination, ProfileViewModel>() {
 
     @Composable
-    override fun Render(params: ProfileDestination, viewModel: ProfileViewModel) {
+    override fun Render(params: ProfileScreenNavDestination, viewModel: ProfileViewModel) {
         val state by viewModel.viewState.collectAsStateWithLifecycle()
 
         LaunchedEffect(Unit) { viewModel.loadInitData() }          // Navigation3 doesn't call it for you
         LaunchedEffect(Unit) {
             viewModel.effect.collect { effect ->
                 when (effect) {
-                    is ProfileContract.Effect.OpenEditor -> navigator.get().goToDestination(EditProfileDestination(effect.id))
+                    is ProfileContract.Effect.OpenEditor -> navigator.get().goToDestination(EditProfileScreenNavDestination(effect.id))
                 }
             }
         }

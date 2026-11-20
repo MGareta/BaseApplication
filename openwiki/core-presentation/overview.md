@@ -76,6 +76,8 @@ Feature presentation modules build screens on top of it. The app module only sub
 flowchart LR
     app[":app (App, MainActivity)"] --> pres[":core:presentation"]
     feat[":demo:presentation, :login:presentation / feature presentation"] --> pres
+    nav[":common:navigation (destinations)"] --> pres
+    feat --> nav
     pres --> data[":core:data"]
     featdata[":feature data modules"] -->|api| data
     pres -.uses.-> AP[ActivityProvider]
@@ -114,11 +116,12 @@ Exact versions are in `core/dependencies/gradle/libs.versions.toml`.
 
 ## How other modules consume it
 
-- **`FeaturePresentationPlugin`** (feature presentation modules such as `:demo:presentation` and `:login:presentation`): `implementation(project(":core:presentation"))`, Hilt + KSP, Compose, and
+- **`FeaturePresentationPlugin`** (feature presentation modules such as `:demo:presentation` and `:login:presentation`, and the shared `:common:navigation`): `implementation(project(":core:presentation"))`, Hilt + KSP, Compose, and
   `testImplementation(testFixtures(project(":core:presentation")))`. Feature-presentation tests inherit `com.core.presentation.BaseTest`; the core:presentation fixture also exposes core:data test fixtures. Because core/presentation only `implementation`s core:data in the main source set, **feature presentation production code doesn't see
   core/data types** (`ApiResult`, `ISessionManager`, …) unless it also depends on a feature data module (which `api`s core/data) or on core/data directly. All `api` libraries above
   (Material3, Navigation3, Paging, serialization, …) are visible to features.
 - **`AppPlugin`** (`:app`): `implementation(project(":core:presentation"))` + Hilt. The app provides `App : CoreApp()` (`@HiltAndroidApp`) and `MainActivity : BaseActivity()`. The app build also includes demo and login presentation modules.
+- **`:common:navigation`** (also `feature.presentation`, depends only on `:core:presentation`): holds every feature's public `<Screen>ScreenNavDestination` (package `com.common.navigation.destination.<feature>`). Feature presentation modules add `implementation(project(":common:navigation"))` to import destinations; see [navigation3](navigation3.md#where-destinations-live).
 
 ## Manifest and resources
 

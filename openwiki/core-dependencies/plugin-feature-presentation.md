@@ -24,7 +24,7 @@ verified:
 
 ## Purpose
 
-Use it for a feature's **UI module**: screens, contracts, ViewModels, Navigation3 destinations, entries and graphs, and their Hilt navigation module (see
+Use it for a feature's **UI module**: screens, contracts, ViewModels, Navigation3 entries and graphs, and their Hilt navigation module (destinations live in the shared `:common:navigation` module, which also applies this plugin; see
 [core-presentation recipes](../core-presentation/recipes.md)).
 
 ## File layout
@@ -65,6 +65,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":common:navigation"))   // destinations: com.common.navigation.destination.orders.*
     implementation(project(":orders:data"))   // needed to see ApiResult / core-data types and the feature's repositories
 }
 ```
@@ -74,7 +75,7 @@ Register it in `settings.gradle.kts` and add `implementation(project(":orders:pr
 
 - **No core/data on the classpath.** `ApiResult`, `ISessionManager`, etc. aren't visible unless you add the feature data module (or core:data). `BaseViewModel`'s use-case helpers
   use `ApiResult`, so most ViewModels need it ([dependency-visibility](dependency-visibility.md#gaps-and-fixes)).
-- **Namespace:** the plugin's default is `com.base.application`; current feature modules override it (`:demo:presentation` uses `com.demo.presentation`; `:login:presentation` uses `com.login.presentation`). Set a unique namespace in each new module.
+- **Namespace:** the plugin's default is `com.base.application`; current feature modules override it (`:demo:presentation` uses `com.demo.presentation`; `:login:presentation` uses `com.login.presentation`; `:common:navigation` uses `com.common.navigation`). Set a unique namespace in each new module.
 - Unit tests are configured with `configureTests()` and `kspTest(hilt-compiler)`. They inherit `com.core.presentation.BaseTest` from the core:presentation test fixtures. No Compose UI test artifacts are added ([core-presentation testing](../core-presentation/testing.md)).
 - The Compose BoM isn't applied in this module. Versionless Compose artifacts rely on transitive versions (see [plugin-core-presentation](plugin-core-presentation.md#gotchas)).
 

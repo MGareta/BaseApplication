@@ -56,13 +56,14 @@ verified:
 | `:core:data` | Shared data and platform services (network, cache, security, session, permissions, files, ...). Documented under `core-data/`. |
 | `:core:presentation` | Compose UI base: `CoreApp`, `BaseActivity`, MVI `BaseViewModel`, Navigation3 integration, design system and components. Depends on `:core:data`. Documented under `core-presentation/`. |
 | `core/dependencies` | Included build with convention plugins (`core.data`, `core.presentation`, `feature.data`, `feature.presentation`, `app`) and the `coreLibs` version catalog. |
+| `:common:navigation` | Shared module holding every feature's public Navigation3 destination (`com.common.navigation.destination.<feature>.<Screen>ScreenNavDestination`). Applies `feature.presentation`, depends only on `:core:presentation`, and contains destination classes only (no logic). Features and `:app` import destinations from it to navigate. See [navigation3](core-presentation/navigation3.md#where-destinations-live). |
 | `:demo:data`, `:demo:presentation` | Sample feature modules (`:demo:data` currently has no main sources); both declare explicit namespaces. |
 | `:login:data`, `:login:presentation` | Login feature modules; both declare explicit namespaces, and `:login:presentation` depends on `:login:data`. |
 
 Feature data modules apply the `feature.data` plugin, which adds `api(project(":core:data"))` and the core:data test fixtures for JVM tests. Inject the core
 `I*Manager` interfaces with Hilt. Every core manager is a `@Singleton` in `SingletonComponent`.
 Feature presentation modules apply `feature.presentation` (`implementation(project(":core:presentation"))`), receive the core:presentation test fixtures, and contribute Navigation3 graphs and entries
-in `ActivityRetainedComponent`. Core and feature convention plugins configure JVM tests and Hilt test code generation; see [build recipes](core-dependencies/recipes.md#8-enable-tests-for-a-module-type).
+in `ActivityRetainedComponent`; their destinations live in `:common:navigation` and each feature presentation module declares `implementation(project(":common:navigation"))`. Core and feature convention plugins configure JVM tests and Hilt test code generation; see [build recipes](core-dependencies/recipes.md#8-enable-tests-for-a-module-type).
 
 ## Where to read for each task
 

@@ -61,12 +61,13 @@ All build logic lives in `core/dependencies` (plugins, `Config`, `Extensions.kt`
    plugins { alias(coreLibs.plugins.feature.presentation) }
    android { namespace = "com.orders.presentation" }
    dependencies {
+       implementation(project(":common:navigation"))   // shared destinations
        implementation(project(":orders:data"))
    }
    ```
 2. `include(":orders:presentation")` in `settings.gradle.kts`.
 3. `app/build.gradle.kts`: `implementation(project(":orders:presentation"))`.
-4. Add Navigation3 destinations, entries, a graph and a `@Module @InstallIn(ActivityRetainedComponent::class)` with `@IntoMap @ClassKey` providers
+4. Add the screen destination `OrdersListScreenNavDestination` to `:common:navigation` (`common/navigation/src/main/java/com/common/navigation/destination/orders/`, package `com.common.navigation.destination.orders`, public), then add Navigation3 entries, a graph and a `@Module @InstallIn(ActivityRetainedComponent::class)` with `@IntoMap @ClassKey` providers
    ([core-presentation recipes](../core-presentation/recipes.md#1-new-feature-screen-navigation3)).
 5. The demo modules now declare explicit namespaces. `:app` still includes `:demo:presentation`, while `:demo:data` is not depended on; remove unused demo modules from settings and app wiring if replacing them.
 

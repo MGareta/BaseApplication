@@ -25,7 +25,7 @@ sources:
   - id: openwiki-source-fa1d9c4027b1b13f8543e591
     resource: repo://login/presentation/src/main/java/com/login/presentation/di/LoginNavigationModule.kt
   - id: openwiki-source-0a99751a4aaebc09c898f153
-    resource: repo://login/presentation/src/main/java/com/login/presentation/model/destination/LoginDestination.kt
+    resource: repo://common/navigation/src/main/java/com/common/navigation/destination/login/LoginScreenNavDestination.kt
   - id: openwiki-source-3d81ea9a2f39ace049ef5bdb
     resource: repo://login/presentation/src/main/java/com/login/presentation/navigation/LoginEntry.kt
   - id: openwiki-source-a26ab395010ddf1d5412cc1f
@@ -117,7 +117,24 @@ internal class OrdersNavigationModule {
 - A graph without an entry set (or the reverse) is **silently dropped** by the factory join.
 - One `@ClassKey` per map, so put all entries of a graph in one set provider (two providers with the same key fail with a Dagger duplicate-key error).
 - Entries and graphs are normal `@Inject constructor` classes. Entries receive `override val navigator: dagger.Lazy<INavigationGraphManager>`.
-- **Feature navigation types should be `internal`.** Destinations, entries, the graph, the navigation module and screens in a feature presentation module (for example `LoginEntry`, `LoginNavGraph`, `LoginNavigationModule`, `LoginDestination`) are all `internal`; the examples on this page use it too. This is safe because `:app` never references feature types: it only receives the `@IntoMap` bindings, whose value types are the public `INavigationGraph` and `Set<INavigationEntry<INavigationDestination, ViewModel>>`, and `INavigationEntry` resolves its destination and ViewModel classes by reflection over generic type arguments, which works on `internal` classes because Kotlin `internal` is public in bytecode. Never widen a feature type to public just to make it compile.
+- **Feature navigation types should be `internal`, except destinations.** Entries, the graph, the navigation module and screens in a feature presentation module (for example `LoginEntry`, `LoginNavGraph`, `LoginNavigationModule`) are `internal`; the examples on this page use it too. Destinations are the exception: they are public and live in `:common:navigation` (see [Where destinations live](#where-destinations-live)). This is safe because `:app` never references feature entries or graphs: it only receives the `@IntoMap` bindings, whose value types are the public `INavigationGraph` and `Set<INavigationEntry<INavigationDestination, ViewModel>>`, and `INavigationEntry` resolves its destination and ViewModel classes by reflection over generic type arguments, which works on `internal` classes because Kotlin `internal` is public in bytecode. Never widen a feature entry, graph or screen to public just to make it compile.
+
+### Where destinations live
+
+Every feature's navigation destination lives in the shared module `:common:navigation` (namespace `com.common.navigation`, plugin `feature.presentation`, depends only on `:core:presentation`), not in the feature:
+
+```
+common/navigation/src/main/java/com/common/navigation/destination/<feature>/<Screen>ScreenNavDestination.kt
+package com.common.navigation.destination.<feature>
+e.g. .../destination/login/LoginScreenNavDestination.kt, .../destination/demo/DemoScreenNavDestination.kt
+```
+
+- The class is named `<Screen>ScreenNavDestination` and is a **public** `@Serializable data object` (no args) or `data class` (args as fields) extending `INavigationDestination()`.
+- Feature presentation modules have no `model/destination/` package (`model/` holds only `ui/`) and declare `implementation(project(":common:navigation"))`. Their entries, graph, navigation module and screens stay `internal` and import the destination from `com.common.navigation.destination.<feature>`.
+- To navigate to another feature, import that feature's `<Screen>ScreenNavDestination` from the shared module and call `navigator.get().goToDestination(...)`; nothing else of the other feature is imported. `:app` can reference destinations the same way once it declares `implementation(project(":common:navigation"))`, for example `LoginScreenNavDestination` on session timeout.
+- Because `:common:navigation` cannot depend on features, destination arguments must be primitives/IDs or types from `core` or `:common:navigation` itself.
+- **Why:** one place knows every route, so features navigate to each other without depending on each other, and `core` stays generic (it only has `INavigationDestination`).
+- **Trade-offs:** every screen's route becomes public and reachable; adding a screen edits two modules (the destination here, the entry in the feature); the module must stay pure (destination classes only, no logic).
 
 ## Factory: `INavigationGraphFactory`
 
@@ -187,9 +204,13 @@ The Orders-named classes below illustrate how destinations, a graph, and entries
 
 ```kotlin
 // Destinations
-@Serializable internal data object OrdersListDestination : INavigationDestination()
-@Serializable internal data class OrderDetailDestination(val orderId: String) : INavigationDestination()
-@Serializable internal data object OrderFiltersDestination : INavigationDestination()
+// common/navigation/.../destination/orders/ (package com.common.navigation.destination.orders), public
+@Serializable data object OrdersListScreenNavDestination : INavigationDestination()
+@Serializable data class OrderDetailScreenNavDestination(val orderId: String) : INavigationDestination()
+@Serializable data object OrderFiltersScreenNavDestination : INavigationDestination()
+
+// Below: feature code in :orders:presentation, which imports them
+// import com.common.navigation.destination.orders.OrdersListScreenNavDestination (and the other two)
 
 // Graph (launcher + bottom-nav tab in this example)
 internal class OrdersNavGraph @Inject constructor() : INavigationGraphLauncher(), INavigationGraphBottomNavBar {
@@ -203,15 +224,15 @@ internal class OrdersNavGraph @Inject constructor() : INavigationGraphLauncher()
 // Screen entry
 internal class OrdersListEntry @Inject constructor(
     override val navigator: Lazy<INavigationGraphManager>,        // dagger.Lazy
-) : INavigationEntry<OrdersListDestination, OrdersViewModel>() {
+) : INavigationEntry<OrdersListScreenNavDestination, OrdersViewModel>() {
     @Composable
-    override fun Render(params: OrdersListDestination, viewModel: OrdersViewModel) {
+    override fun Render(params: OrdersListScreenNavDestination, viewModel: OrdersViewModel) {
         val state by viewModel.viewState.collectAsStateWithLifecycle()
         LaunchedEffect(Unit) { viewModel.loadInitData() }
         OrdersListScreen(
             state = state,
-            onOrderClick = { navigator.get().goToDestination(OrderDetailDestination(it)) },
-            onFilters = { navigator.get().goToDestination(OrderFiltersDestination) },
+            onOrderClick = { navigator.get().goToDestination(OrderDetailScreenNavDestination(it)) },
+            onFilters = { navigator.get().goToDestination(OrderFiltersScreenNavDestination) },
         )
     }
 }
@@ -219,12 +240,12 @@ internal class OrdersListEntry @Inject constructor(
 // Bottom sheet entry sharing the same ViewModel (same graph, same VM class -> same instance)
 internal class OrderFiltersSheetEntry @Inject constructor(
     override val navigator: Lazy<INavigationGraphManager>,
-) : INavigationEntryBottomSheet<OrderFiltersDestination, OrdersViewModel>() {
+) : INavigationEntryBottomSheet<OrderFiltersScreenNavDestination, OrdersViewModel>() {
     @OptIn(ExperimentalMaterial3Api::class)
     override val modalBottomSheetProperties = ModalBottomSheetProperties()
 
     @Composable
-    override fun Render(params: OrderFiltersDestination, viewModel: OrdersViewModel) {
+    override fun Render(params: OrderFiltersScreenNavDestination, viewModel: OrdersViewModel) {
         FiltersSheet(onApply = { viewModel.handleUiEvents(OrdersContract.Event.ApplyFilters(it)); navigator.get().goBack() })
     }
 }
@@ -235,7 +256,7 @@ Register the graph and its entry set under matching keys as described in *Featur
 
 - **Hilt ViewModels with constructor dependencies:** `NavigationGraphViewModelStoreOwner` implements `HasDefaultViewModelProviderFactory` and carries the activity's default factory and creation extras. `register()` builds a `HiltViewModelFactory` from the current context and that owner, then supplies the factory and extras to `viewModel()`, so graph-scoped `@HiltViewModel` entries can resolve injected constructor dependencies through Hilt.
 - **`loadInitData()` isn't called** for Navigation3 entries. Call it yourself.
-- **Content keys are class names.** `clazzContentKey = qualifiedName`, so two back-stack instances of the same destination class (for example two `OrderDetailDestination`s with different ids)
+- **Content keys are class names.** `clazzContentKey = qualifiedName`, so two back-stack instances of the same destination class (for example two `OrderDetailScreenNavDestination`s with different ids)
   share saveable state and the ViewModel. Avoid stacking the same destination twice, or include the args in a distinct class.
 - **Start destination:** the launcher graph's first set entry must be an `object` destination, with exactly one launcher graph.
 - **Unregistered destination on top crashes** `BaseActivity` (`getNavigationGraphFromDestination` throws).
