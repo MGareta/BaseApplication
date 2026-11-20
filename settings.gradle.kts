@@ -37,5 +37,7 @@ include(":app")
 include(":core:data")
 include(":core:presentation")
 
+include(":common:navigation")
+
 include(":demo:presentation")
 include(":demo:data")
