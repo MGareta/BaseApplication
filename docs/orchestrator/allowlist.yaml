@@ -48,6 +48,11 @@ data:                                   # :<feature>:data src/main
                 "@GET", "@POST", "@PUT", "@PATCH", "@DELETE", "@Path", "@Query", "@Body", "@Header", "@HeaderMap", "@Url"]
   hilt_components: ["SingletonComponent"]
 
+common_navigation:                      # common/navigation/src/main/.../destination/<feature>/ (rule CN-1; convention from proposal §6.1.1, not derived from the wiki)
+  imports_allowed:
+    - "com.core.presentation.navigation3.model.destination."
+    - "kotlinx.serialization."
+
 presentation:                           # :<feature>:presentation src/main
   imports_allowed:
     - "com.core.presentation."
@@ -55,6 +60,7 @@ presentation:                           # :<feature>:presentation src/main
     - "com.core.data.network.model."
     - "com.core.data.network.utils."
     - "com.<feature>.presentation."
+    - "com.common.navigation.destination."   # shared destinations (own and other features'): navigate with goToDestination; no other cross-feature import
     - "com.<feature>.data.manager."        # layering L-1: data is reached only through I<Feature>Manager and its domain models
     - "com.<feature>.data.model."
     - "androidx.compose.foundation."

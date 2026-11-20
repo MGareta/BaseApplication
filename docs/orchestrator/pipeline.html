@@ -362,7 +362,7 @@
     viewmodel: { wiki: 'openwiki/core-presentation: base-architecture, coroutines, forms', phase: '2 Presentation', team: 'p', name: 'feature-viewmodel', def: '.claude/agents/feature-viewmodel.md',
       out: 'presentation/{viewModel,model/ui}', gate: 'Parallel with view; contract from design.md' },
     view: { wiki: 'openwiki/core-presentation: navigation3, theme, components-*, form-fields', phase: '2 Presentation', team: 'p', name: 'feature-view', def: '.claude/agents/feature-view.md',
-      out: 'presentation/{view,navigation,model/destination,di}', gate: 'Parallel with ViewModel; V-K known-bug rules' },
+      out: 'presentation/{view,navigation,di} + common/navigation/.../destination/<feature>/', gate: 'Parallel with ViewModel; V-K known-bug rules' },
     analytics: { wiki: 'openwiki/core-data/analytics + core-presentation/base-architecture', phase: '2 Presentation', team: 'p', name: 'feature-analytics', def: '.claude/agents/feature-analytics.md',
       out: 'presentation/analytics + insert-only ViewModel calls', gate: 'AN-1…AN-4' },
     preseval: { wiki: 'openwiki/core-presentation + core-data/analytics', phase: '2 Presentation', team: 'p', name: 'feature-presentation-eval', def: '.claude/agents/feature-presentation-eval.md',

@@ -213,9 +213,9 @@ flowchart TD
 |---|---|---|
 | G0a | Planning artifacts written | `openspec validate <id> --strict` exit 0; `openspec status --change <id> --json` → `isPlanningComplete: true`; every task has a role tag and a `Req:` reference (§3.5) |
 | G0b | G0a | Human approval recorded in `.orchestrator/leases.json` (`"planApprovedBy"`) |
-| G0c | Section 0 tasks checked | `./gradlew :<feature>:data:assembleDebug :<feature>:presentation:assembleDebug :app:assembleDebug` succeeds; mechanical M-1…M-5 pass; module-eval verdict `PASS` (judged M-6…M-10 against `openwiki/core-dependencies`) |
+| G0c | Section 0 tasks checked | `./gradlew :<feature>:data:assembleDebug :<feature>:presentation:assembleDebug :app:assembleDebug` succeeds; mechanical M-1…M-5 pass (M-3 includes the `:common:navigation` edge); module-eval verdict `PASS` (judged M-6…M-10 against `openwiki/core-dependencies`) |
 | G1 | Section 1 tasks checked | `:<feature>:data:testDebugUnitTest` green; every `<feature>-data` scenario has ≥1 test; data-eval verdict `PASS` |
-| G2 | Section 2 tasks checked | `:<feature>:presentation:compileDebugKotlin` + `:app:assembleDebug` green; presentation-eval verdict `PASS` |
+| G2 | Section 2 tasks checked | `:<feature>:presentation:compileDebugKotlin` + `:app:assembleDebug` green; mechanical S-1/VIS-1/CN-1 pass; presentation-eval verdict `PASS` |
 | G3 | Section 3 tasks checked | all feature unit/integration tests green; `/opsx:verify` reports 0 CRITICAL; `openspec validate <id> --strict` still green |
 | G4 | G3 | Human approval → `openspec archive <id> --yes` |
 
@@ -333,7 +333,7 @@ deleting or skipping tests, checking tasks they don't own, and touching other fe
 | **Data test (1.2)** | Scenario-mapped unit tests | `[data-test]` tasks | `core-data/testing.md`, the pages of the code under test | `<feature>/data/src/test/**` | Read, Write, Edit, Bash (gradle test) | every `<feature>-data` scenario covered; failures reported with attribution |
 | **Data eval (1.3)** | Strict wiki compliance of Phase 1 | runs `/opsx:verify` (scoped) + checks | `core-data/*`, allowlist, rubric D-*/TR-* | `.orchestrator/verdicts/data-eval-<n>.json` | Read, Grep, Glob, Bash (read-only gradle, check scripts) | verdict written |
 | **ViewModel (2.1)** | Contract, ViewModel, UI models/mappers | `[viewmodel]` tasks | `core-presentation/base-architecture.md`, `coroutines.md`, `forms.md` (if forms), `core-dependencies/dependency-visibility.md` | `.../presentation/viewModel/**`, `.../presentation/model/ui/**` | Read, Write, Edit, Bash (compile) | compiles against the data API surface; contract matches `design.md` |
-| **View (2.2)** | Screens, destinations, entries, graph, Hilt navigation module | `[view]` tasks | `core-presentation/navigation3.md`, `app-and-activity.md`, `theme.md`, `theme-tokens.md`, `components-*.md`, `form-fields.md`, `ui-utils.md`, `recipes.md` | `.../presentation/view/**`, `.../presentation/navigation/**`, `.../presentation/model/destination/**`, `.../presentation/di/**` | Read, Write, Edit, Bash (compile) | compiles; registration matches `design.md` → *Navigation* |
+| **View (2.2)** | Screens, destinations, entries, graph, Hilt navigation module | `[view]` tasks | `core-presentation/navigation3.md`, `app-and-activity.md`, `theme.md`, `theme-tokens.md`, `components-*.md`, `form-fields.md`, `ui-utils.md`, `recipes.md` | `.../presentation/view/**`, `.../presentation/navigation/**`, `.../presentation/di/**`, and `common/navigation/src/main/java/com/common/navigation/destination/<f>/**` (shared module, only that folder) | Read, Write, Edit, Bash (compile) | compiles; registration matches `design.md` → *Navigation* |
 | **Analytics (2.3)** | Views, events and tracking calls | `[analytics]` tasks; sequential edit lease on ViewModel files | `core-data/analytics.md`, `core-presentation/base-architecture.md` | `.../presentation/analytics/**` + **lease**: insert-only edits in `.../viewModel/*ViewModel.kt` (tracking calls and the constructor parameter) | Read, Write, Edit, Bash (compile) | every event/view in `design.md` → *Analytics map* exists and is called |
 | **Presentation eval (2.4)** | Strict wiki compliance of Phase 2 (incl. analytics) | `/opsx:verify` (scoped) + checks | `core-presentation/*`, `core-data/analytics.md`, allowlist, rubric VM-*/V-*/AN-*/TR-* | `.orchestrator/verdicts/presentation-eval-<n>.json` | Read, Grep, Glob, Bash (read-only) | verdict written |
 | **Testing team (3)** | Feature-integration tests + final verify | `[testing]` tasks; runs `/opsx:verify <id>` | `core-data/testing.md`, `core-presentation/testing.md`, `navigation3.md`, `analytics.md` | `<feature>/presentation/src/test/**` (and `<feature>/data/src/test/**` only for shared fakes under `.../fake/`) | Read, Write, Edit, Bash (gradle test) | G3 |
@@ -349,11 +349,12 @@ The testing team is **one agent** in v1. Splitting it (integration vs. UI) only 
 | Path | Owner | Others |
 |---|---|---|
 | `settings.gradle.kts`, `app/build.gradle.kts` | module | append-only, Phase 0 only |
-| `<f>/data/build.gradle.kts`, `<f>/presentation/build.gradle.kts`, manifests, `.pro`, `.gitignore` | module | module eval reads only |
+| `<f>/data/build.gradle.kts`, `<f>/presentation/build.gradle.kts` (incl. the `implementation(project(":common:navigation"))` edge), manifests, `.pro`, `.gitignore` | module | module eval reads only |
 | `data/api/**`, `data/model/**`, `data/manager/**`, `data/repository/**`, `data/di/**` | data | — |
 | `<f>/data/src/test/**` | data-test | testing may add `fake/**` |
 | `presentation/viewModel/**`, `presentation/model/ui/**` | viewmodel | analytics: insert-only lease after viewmodel is done |
-| `presentation/view/**`, `presentation/navigation/**`, `presentation/model/destination/**`, `presentation/di/**` | view | — |
+| `presentation/view/**`, `presentation/navigation/**`, `presentation/di/**` | view | — |
+| `common/navigation/src/main/java/com/common/navigation/destination/<f>/**` (the feature's `<Screen>ScreenNavDestination.kt` files, §6.1.1) | view | no other agent edits this folder; the `:common:navigation` build files are base infrastructure, read-only for feature runs |
 | `presentation/analytics/**` (`<Feature>Analytics.kt`, `events/`, `views/`) | analytics | — |
 | `<f>/presentation/src/test/**` | testing | — |
 | `openspec/changes/<id>/**` (except `tasks.md` checkboxes) | coordinator | agents tick only their own checkboxes |
@@ -371,7 +372,6 @@ Every feature presentation module has exactly the layout of `:login:presentation
 │   └── views/<Name>View.kt
 ├── di/<Feature>NavigationModule.kt
 ├── model/
-│   ├── destination/<Name>Destination.kt
 │   └── ui/<Screen>UiModel.kt       # one data class per screen (+ optional item models/mappers)
 ├── navigation/
 │   ├── <Feature>NavGraph.kt
@@ -389,10 +389,15 @@ Every feature presentation module has exactly the layout of `:login:presentation
 ```
 
 - Directory names are fixed (`viewModel` is camelCase). `view/components/` is the only optional directory; every other directory exists in every feature. No `.kt` file sits at the package root or in a directory not listed.
-- File names carry their role suffix (`*Contract`, `*ViewModel`, `*Screen`, `*UiModel`, `*Entry`, `*NavGraph`, `*Destination`, `*Event`, `*View`, `*FeatureTest`, `*ModuleTest`).
+- File names carry their role suffix (`*Contract`, `*ViewModel`, `*Screen`, `*UiModel`, `*Entry`, `*NavGraph`, `*ScreenNavDestination` (shared module), `*Event`, `*View`, `*FeatureTest`, `*ModuleTest`).
 - **One ViewModel and one Contract per feature, always** (`<Feature>Contract.kt`, `<Feature>ViewModel.kt`), whether the feature has one screen or many. Every entry of the feature uses that ViewModel.
-- **One screen = one destination = one entry = one `<Screen>UiModel`:** `navigation/<Screen>Entry.kt`, `view/<Screen>Screen.kt`, `model/destination/<Screen>Destination.kt` and `model/ui/<Screen>UiModel.kt` share the `<Screen>` name
-  (for a single-screen feature `<Screen>` equals `<Feature>`). The number of `*Screen.kt` files in the root of `view/` equals the number of `*Entry.kt` files.
+- **One screen = one destination = one entry = one `<Screen>UiModel`:** `navigation/<Screen>Entry.kt`, `view/<Screen>Screen.kt`, `model/ui/<Screen>UiModel.kt` and the shared-module `<Screen>ScreenNavDestination.kt` (see below) share the `<Screen>` name
+  (for a single-screen feature `<Screen>` equals `<Feature>`). The number of `*Screen.kt` files in the root of `view/` equals the number of `*Entry.kt` files and of `*ScreenNavDestination.kt` files the feature owns in the shared module.
+- **Destinations live in the shared module `:common:navigation`** (namespace `com.common.navigation`, plugin `feature.presentation`, depends only on `:core:presentation`), not in the feature:
+  `common/navigation/src/main/java/com/common/navigation/destination/<f>/<Screen>ScreenNavDestination.kt`, package `com.common.navigation.destination.<f>`. Each is a **public** `@Serializable` `data object`/`data class` extending `INavigationDestination()` (`com.core.presentation.navigation3.model.destination`) with KDoc `@see openspec <change-id> task <n.m>`.
+  The module cannot depend on features, so arguments are primitives/IDs or types from `core`/`:common:navigation`. `<f>:presentation` declares `implementation(project(":common:navigation"))` (M-3); entries, graph, navigation module and screens stay `internal` and import the destination from `com.common.navigation.destination.<f>`.
+  Navigating to another feature = import that feature's `<Screen>ScreenNavDestination` and call `navigator.get().goToDestination(...)`; no other cross-feature import is allowed. The feature has no `model/destination/` directory.
+- **Design decision: why destinations are centralised.** Features stay decoupled (feature A reaches feature B by a destination, never by depending on B's presentation module) and `core` stays generic (it holds the `INavigationDestination` base, not any feature's screens). Trade-offs: every screen is reachable by every feature; each new screen edits two modules (the feature and `:common:navigation`, the latter only in its `destination/<f>/` folder); and `:common:navigation` must stay pure (destinations only, no feature dependency, no logic), enforced by CN-1.
 - **Screen state:** `<Screen>UiModel` is a `data class` holding everything that screen shows (form fields, loading flag, messages, lists). `<Feature>Contract.UiState` is a `data class` with one property per screen
   (`val <screen>: <Screen>UiModel = <Screen>UiModel()`); the ViewModel updates it with `setState { copy(<screen> = <screen>.copy(...)) }`. The stateless `<Screen>Screen` takes its `<Screen>UiModel` (not the whole `UiState`) and `onEvent`;
   the entry passes `state.<screen>`. One `Event` and one `Effect` hierarchy serves all screens.
@@ -450,7 +455,7 @@ data:                         # :<feature>:data main
   annotations: [ "@Module", "@InstallIn(SingletonComponent::class)", "@Provides", "@Singleton", "@Inject", "@Serializable",
                  "@GET", "@POST", "@PUT", "@DELETE", "@Path", "@Query", "@Body", "@Header", "@HeaderMap", "@Url" ]
 presentation:                 # :<feature>:presentation main
-  imports_allowed: [ "com.core.presentation.", "com.core.data.analytics.", "com.core.data.network.model.ApiResult",
+  imports_allowed: [ "com.core.presentation.", "com.common.navigation.destination.", "com.core.data.analytics.", "com.core.data.network.model.ApiResult",
                      "com.core.data.network.utils.", "com.<feature>.presentation.", "com.<feature>.data.",
                      "androidx.compose.foundation.", "androidx.compose.runtime.", "androidx.compose.ui.",
                      "androidx.compose.material3.", "androidx.lifecycle.", "androidx.navigation3.", "androidx.hilt.",
@@ -478,7 +483,7 @@ Every rule: **ID · check type (M = mechanical, J = LLM-judged) · source**. Sev
 **Module (module eval, G0c)**
 - M-1 · M · feature build files apply only `coreLibs.plugins.feature.data` / `feature.presentation` (`core-dependencies/plugin-feature-*.md`)
 - M-2 · M · unique `namespace = "com.<f>.data"` / `"com.<f>.presentation"` (`core-dependencies/config.md` → *Gotchas*)
-- M-3 · M · presentation depends on `project(":<f>:data")` (`dependency-visibility.md` → *Gaps and fixes* 1)
+- M-3 · M · `<f>/presentation/build.gradle.kts` declares `implementation(project(":<f>:data"))` (`dependency-visibility.md` → *Gaps and fixes* 1) and `implementation(project(":common:navigation"))` (shared destinations, §6.1.1)
 - M-4 · M · `app/build.gradle.kts` depends on `:<f>:presentation`, and both modules are included in `settings.gradle.kts` (`core-dependencies/recipes.md` §1–2)
 - M-5 · M · no external dependency added anywhere (dependency diff of `:app:dependencies --configuration debugRuntimeClasspath` before/after, minus project modules)
 - M-6 · J · build files have exactly the recipe shape (`plugins { alias(...) }`, `android { namespace }`, `dependencies {}`); SDK levels, Java/Kotlin targets, build features and test options come from the convention plugin and are never set in the feature (`core-dependencies/recipes.md` §1–2, `config.md`, `plugin-feature-*.md`)
@@ -509,19 +514,20 @@ Every rule: **ID · check type (M = mechanical, J = LLM-judged) · source**. Sev
 - VM-3 · J · data calls use `withUseCaseScope`/`withUseCaseScopeLazily`, and blocks don't throw (`core-presentation/coroutines.md` → *Exception caveat*)
 - VM-4 · J · `setInitialState()` returns constants or constructor-derived values only (`base-architecture.md` → *Gotchas*)
 - VM-5 · J · the contract equals `design.md` → *Presentation contract*
-- VIS-1 · M · visibility: in `<f>/presentation/src/main` every class, object, interface, function and Hilt module is `internal` (destination, entry, nav graph, `<Feature>NavigationModule`, contract, ViewModel, UI models, screens, analytics classes, events, views); `:app` consumes the feature only through the `@IntoMap` bindings typed with the public core types `INavigationGraph`/`INavigationEntry`, so nothing needs to be public; widening a type only to make code compile is a finding
+- VIS-1 · M · visibility: in `<f>/presentation/src/main` every class, object, interface, function and Hilt module is `internal` (entry, nav graph, `<Feature>NavigationModule`, contract, ViewModel, UI models, screens, analytics classes, events, views); `:app` consumes the feature only through the `@IntoMap` bindings typed with the public core types `INavigationGraph`/`INavigationEntry`, so nothing needs to be public; the only exemption is the destinations, which are public by design because they live outside `<f>/presentation/src/main`, in `:common:navigation` (rule CN-1); widening a type only to make code compile is a finding
 - L-1 · M · layering: presentation reaches data only via ViewModel → `I<Feature>Manager` (+ `data.model` domain types); no `*ApiService`, `data.model.dto`, `data.di`, `*ManagerImpl` in `src/main`; `IAnalyticsManager`/`AnalyticsFramework` only in `analytics/` (§4, row 4)
-- S-1 · M · presentation `src/main` matches §6.1.1: fixed directories, role-suffixed names, exactly one `<Feature>Contract`/`<Feature>ViewModel`, #`*Screen.kt` = #`*Entry.kt` = #`*Destination.kt`, a `<Screen>UiModel` per screen referenced by `UiState`, no stray files
+- S-1 · M · presentation `src/main` matches §6.1.1: fixed directories, role-suffixed names, exactly one `<Feature>Contract`/`<Feature>ViewModel`, `<Screen>Entry` / `<Screen>Screen` / `<Screen>UiModel` in the feature and `<Screen>ScreenNavDestination.kt` in `common/navigation/.../destination/<f>/` match one to one, no `model/destination/` directory, a `<Screen>UiModel` per screen referenced by `UiState`, no stray files
 - S-2 · M · presentation `src/test` matches §6.1.1: exactly one `<Screen>FeatureTest.kt` per navigation entry, `<Feature>NavigationRegistrationTest.kt`, `di/*ModuleTest.kt` only
 - VM-6 · M · every `BaseFieldState` subclass is a property of a `<Screen>UiModel` in `model/ui/` (kept by `<Feature>Contract.UiState`); ViewModels declare no field and no `FormState` (`core-presentation/forms.md`, `form-fields.md`)
 
 **View (presentation eval)**
 - V-1 · M · no hard-coded colours (`Color(0x…)`, `Color.Red`, …) or `MaterialTheme.colorScheme`; colours come from `LocalPalette`, spacing from `LocalDimensions`, text from `LocalTypographies` (`core-presentation/theme.md`, `theme-tokens.md`)
 - V-2 · J · UI uses design-system components where one exists (`components-*.md`, `form-fields.md`)
-- V-N1 · J · destinations are `@Serializable` `data object`/`data class` extending navigation3 `INavigationDestination` (`navigation3.md`)
+- V-N1 · J · destinations live in `:common:navigation` (`com.common.navigation.destination.<f>`), are named `<Screen>ScreenNavDestination`, and are `@Serializable` `data object`/`data class` extending navigation3 `INavigationDestination` with primitive/ID (or core/shared-module) arguments only (`navigation3.md`)
 - V-N2 · J · entries extend `INavigationEntry`/`INavigationEntryDialog`/`INavigationEntryBottomSheet` with `@Inject constructor(override val navigator: dagger.Lazy<INavigationGraphManager>)`; the graph and entry set are bound with the same `@ClassKey` in an `ActivityRetainedComponent` module (`navigation3.md` → *Feature registration*)
 - V-N3 · M · every `Render` calls `viewModel.loadInitData()` in a `LaunchedEffect` and collects `effect` in exactly one place (`base-architecture.md`, `navigation3.md`)
-- V-N4 · J · a destination class is used by exactly one entry; the launcher graph only if the spec says so, with an `object` first entry (`navigation3.md` → *Gotchas*)
+- V-N4 · J · a `<Screen>ScreenNavDestination` is used by exactly one entry of its own feature (other features only navigate to it via `goToDestination`); the launcher graph only if the spec says so, with an `object` first entry (`navigation3.md` → *Gotchas*)
+- CN-1 · M · every file in `common/navigation/.../destination/<f>/` is named `*ScreenNavDestination.kt`, declares a public `@Serializable` class/object extending `INavigationDestination()`, carries the `@see openspec` KDoc, and imports only `com.core.presentation.navigation3.model.destination.` and `kotlinx.serialization.` (nothing from any feature) (§6.1.1)
 - V-K1 · M · every `CheckboxComponent`/`ToggleComponent` call passes `onValueChange` (`form-fields.md`)
 - V-K2 · J · date fields show validation errors through separate UI (`form-fields.md`)
 - V-K3 · M · `AmountFieldComponent` isn't used with `CurrencyType.Symbol` (`form-fields.md`)
@@ -550,7 +556,7 @@ Every rule: **ID · check type (M = mechanical, J = LLM-judged) · source**. Sev
 
 | Mechanical (script/skill `eval-mechanical`, deterministic, runs first) | Judged (eval agent) |
 |---|---|
-| Gradle assemble/compile/test, module build-file checks (M-1…M-4), `openspec validate --strict --json`, `openspec status --json`, import scan vs. allowlist, forbidden-symbol grep (V-1, V-K1, V-K3, V-K4), visibility scan (VIS-1, TR-6; D-10 for data main), dependency diff (M-5), scenario coverage (TR-1), diff-shape checks (D-T4, AN-4, TR-3), Detekt delta (W) | architecture conformance (D-2…D-7, VM-2…VM-5, V-2, V-N1/N2/N4, V-K2/K5, AN-1/AN-2, TR-2), using the wiki section cited by each rule, `/opsx:verify` output (completeness/correctness/coherence) as input |
+| Gradle assemble/compile/test, module build-file checks (M-1…M-4), shared-destination folder check (CN-1), `openspec validate --strict --json`, `openspec status --json`, import scan vs. allowlist, forbidden-symbol grep (V-1, V-K1, V-K3, V-K4), visibility scan (VIS-1, TR-6; D-10 for data main), dependency diff (M-5), scenario coverage (TR-1), diff-shape checks (D-T4, AN-4, TR-3), Detekt delta (W) | architecture conformance (D-2…D-7, VM-2…VM-5, V-2, V-N1/N2/N4, V-K2/K5, AN-1/AN-2, TR-2), using the wiki section cited by each rule, `/opsx:verify` output (completeness/correctness/coherence) as input |
 
 The judged pass only runs if the mechanical pass has no CRITICAL findings, which saves tokens.
 
@@ -839,12 +845,12 @@ description: Implements Compose screens, Navigation3 destinations, entries, grap
 tools: Read, Grep, Glob, Write, Edit, Bash
 model: sonnet
 ---
-Implement only [view] tasks; write only under .../presentation/{view,navigation,model/destination,di}.
-Follow openwiki/core-presentation/navigation3.md (destinations: @Serializable, INavigationDestination from navigation3; entries with
+Implement only [view] tasks; write only under .../presentation/{view,navigation,di} and common/navigation/src/main/java/com/common/navigation/destination/<feature>/ (the destinations; no other folder of :common:navigation).
+Follow openwiki/core-presentation/navigation3.md (destinations: public @Serializable data object/data class `<Screen>ScreenNavDestination : INavigationDestination()` in :common:navigation with `@see openspec <change-id> task <n.m>` KDoc, importing only core navigation3 destination and kotlinx.serialization; entries import them from com.common.navigation.destination.<feature>; entries with
 @Inject constructor(override val navigator: dagger.Lazy<INavigationGraphManager>); graph + entry Set bound with the same @ClassKey in an
 @InstallIn(ActivityRetainedComponent::class) module), theme.md/theme-tokens.md (only LocalPalette/LocalDimensions/LocalTypographies), components-*.md, form-fields.md.
 Every Render: collect viewState with collectAsStateWithLifecycle, call LaunchedEffect(Unit){ viewModel.loadInitData() }, collect effect once.
-Visibility (VIS-1): destinations, entries, graph, navigation module and screens are all `internal`; `:app` only sees the `@IntoMap` bindings typed with public `INavigationGraph`/`INavigationEntry`. Mandatory workarounds: V-K1..K5 in proposal §7.2. Never import com.core.presentation.navigation.* (legacy).
+Visibility (VIS-1): entries, graph, navigation module and screens are all `internal` (the destinations are the public exception, CN-1); `:app` only sees the `@IntoMap` bindings typed with public `INavigationGraph`/`INavigationEntry`. Mandatory workarounds: V-K1..K5 in proposal §7.2. Never import com.core.presentation.navigation.* (legacy).
 ```
 
 ```markdown
@@ -1074,7 +1080,7 @@ The app SHALL show a list of orders with id, date, total and status, loading on 
 The app SHALL open the detail screen when an order is tapped.
 #### Scenario: Tap order
 - **WHEN** the user taps order "42"
-- **THEN** OrderDetailDestination("42") is pushed on the back stack
+- **THEN** OrderDetailScreenNavDestination("42") is pushed on the back stack
 ### Requirement: Status filter
 The app SHALL offer a bottom-sheet filter by status that refreshes the list.
 #### Scenario: Apply filter
@@ -1125,10 +1131,11 @@ Event: Retry, OrderClicked(id), FilterClicked, FilterApplied(status), LoadDetail
 Effect: OpenDetail(id), OpenFilter
 ## Navigation
 graph OrdersNavGraph : INavigationGraph (not launcher, not bottom-nav)
-OrdersListDestination (data object) → OrdersListEntry : INavigationEntry<OrdersListDestination, OrdersViewModel>
-OrderDetailDestination(orderId: String) → OrderDetailEntry : INavigationEntry<OrderDetailDestination, OrdersViewModel>
-OrdersFilterDestination (data object) → OrdersFilterEntry : INavigationEntryBottomSheet<OrdersFilterDestination, OrdersViewModel>
-Entry point for other features: goToDestination(OrdersListDestination)
+Destinations (shared module, common/navigation/src/main/java/com/common/navigation/destination/orders/, package com.common.navigation.destination.orders, public):
+OrdersListScreenNavDestination (data object) → OrdersListEntry : INavigationEntry<OrdersListScreenNavDestination, OrdersViewModel>
+OrderDetailScreenNavDestination(orderId: String) → OrderDetailEntry : INavigationEntry<OrderDetailScreenNavDestination, OrdersViewModel>
+OrdersFilterScreenNavDestination (data object) → OrdersFilterEntry : INavigationEntryBottomSheet<OrdersFilterScreenNavDestination, OrdersViewModel>
+Entry point for other features: goToDestination(OrdersListScreenNavDestination)  // import com.common.navigation.destination.orders.OrdersListScreenNavDestination
 ## Analytics map
 OrdersAnalytics (analytics/OrdersAnalytics.kt): trackOrdersListView(), trackOrderDetailView(), trackOrderSelected(id), trackOrdersFilterApplied(status)
 OrdersViewModel.loadInitData success → trackOrdersListView() (views/OrdersListView); OrderClicked → trackOrderSelected(id) (events/OrderSelectedEvent); FilterApplied → trackOrdersFilterApplied(status) (events/OrdersFilterAppliedEvent)
@@ -1142,8 +1149,8 @@ Integration: OrdersListFeatureTest, OrderDetailFeatureTest, OrdersFilterFeatureT
 ```markdown
 ## 0. Module
 - [ ] 0.1 [module] Create :orders:data (feature.data, namespace com.orders.data) — Req: orders-module/Feature modules
-- [ ] 0.2 [module] Create :orders:presentation (feature.presentation, namespace com.orders.presentation, depends on :orders:data) — Req: orders-module/Feature modules
-- [ ] 0.3 [module] Include both modules in settings.gradle.kts and add :orders:presentation to :app — Req: orders-module/Feature modules
+- [ ] 0.2 [module] Create :orders:presentation (feature.presentation, namespace com.orders.presentation, depends on :orders:data and :common:navigation) — Req: orders-module/Feature modules
+- [ ] 0.3 [module] Include both modules in settings.gradle.kts and add :orders:presentation to :app (and implementation(project(":common:navigation")) to :orders:presentation) — Req: orders-module/Feature modules
 ## 1. Data
 - [ ] 1.1 [data] OrdersApiService + DTOs — Req: orders-data/Fetch order list
 - [ ] 1.2 [data] IOrdersManager/OrdersManagerImpl with cache policy — Req: orders-data/Cache order list
@@ -1154,7 +1161,7 @@ Integration: OrdersListFeatureTest, OrderDetailFeatureTest, OrdersFilterFeatureT
 - [ ] 1.7 [data-test] Detail found — Req: orders-data/Fetch order detail Scn: Detail found
 ## 2. Presentation
 - [ ] 2.1 [viewmodel] OrdersContract + OrdersViewModel + OrdersListUiModel/OrderDetailUiModel/OrdersFilterUiModel + OrderUi mapper — Req: orders-presentation/Orders list screen, Order detail navigation
-- [ ] 2.3 [view] Destinations, entries (list, detail, filter sheet), OrdersNavGraph, OrdersNavigationModule — Req: orders-presentation/Order detail navigation
+- [ ] 2.3 [view] Destinations (in :common:navigation, destination/orders/), entries (list, detail, filter sheet), OrdersNavGraph, OrdersNavigationModule — Req: orders-presentation/Order detail navigation
 - [ ] 2.4 [view] OrdersListScreen, OrderDetailScreen, OrdersFilterScreen — Req: orders-presentation/Orders list screen, Status filter
 - [ ] 2.5 [analytics] Views/events + tracking calls — Req: orders-analytics/Screen views, Order events
 ## 3. Testing
