@@ -59,6 +59,11 @@ class FeaturePresentationPlugin : Plugin<Project> {
                 // Core
                 implementation(dependencyNotation = project(":core:presentation"))
 
+                // Navigation
+                if (path != ":common:navigation") {
+                    implementation(dependencyNotation = project(":common:navigation"))
+                }
+
                 // Kotlin
                 ksp(dependencyNotation = kotlinMetadataDependency)
 

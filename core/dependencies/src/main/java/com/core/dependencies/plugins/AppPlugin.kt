@@ -73,6 +73,9 @@ class AppPlugin : Plugin<Project> {
                 // Core
                 implementation(dependencyNotation = project(":core:presentation"))
 
+                // Navigation
+                implementation(dependencyNotation = project(":common:navigation"))
+
                 // Kotlin
                 ksp(dependencyNotation = kotlinMetadataDependency)
 
