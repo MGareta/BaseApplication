@@ -218,17 +218,17 @@ if (!dataVerdict || dataVerdict.verdict !== 'PASS') return await stopForHuman('G
 // Phase 2: presentation
 phase('Presentation')
 await parallel([
-  () => agent(`${ctx}\nImplement the [viewmodel] tasks. ${prereqNote}`, { label: 'viewmodel', agentType: 'feature-viewmodel', phase: 'Presentation' }),
-  () => agent(`${ctx}\nImplement the [view] tasks. ${prereqNote}`, { label: 'view', agentType: 'feature-view', phase: 'Presentation' }),
+  () => agent(`${ctx}\nImplement the [viewmodel] tasks. ${prereqNote}`, { label: 'viewmodel', agentType: 'feature-presentation-viewmodel', phase: 'Presentation' }),
+  () => agent(`${ctx}\nImplement the [view] tasks. ${prereqNote}`, { label: 'view', agentType: 'feature-presentation-view', phase: 'Presentation' }),
 ])
-await agent(`${ctx}\nImplement the [analytics] tasks (ViewModel insert-only lease is now yours). ${prereqNote}`, { label: 'analytics', agentType: 'feature-analytics' })
+await agent(`${ctx}\nImplement the [analytics] tasks (ViewModel insert-only lease is now yours). ${prereqNote}`, { label: 'analytics', agentType: 'feature-presentation-analytics' })
 let presVerdict = null
 for (let round = 1; round <= LIMITS.evalRounds; round++) {
   presVerdict = await agent(`${ctx}\nEvaluate gate G2 (iteration ${round}) with base ref ${base}. ${prereqNote}`,
     { label: `presentation-eval:G2-${round}`, agentType: 'feature-presentation-eval', schema: VERDICT })
   if (presVerdict && presVerdict.verdict === 'PASS') break
   const findings = (presVerdict && presVerdict.findings) || []
-  const routes = [['viewmodel', 'feature-viewmodel'], ['view', 'feature-view'], ['analytics', 'feature-analytics']]
+  const routes = [['viewmodel', 'feature-presentation-viewmodel'], ['view', 'feature-presentation-view'], ['analytics', 'feature-presentation-analytics']]
   await parallel(routes
     .filter(([owner]) => byOwner(findings, owner).length)
     .map(([owner, type]) => () => agent(`${ctx}\nFix these G2 findings in your owned paths:\n${fmt(byOwner(findings, owner))}`,
@@ -247,7 +247,7 @@ for (let round = 1; round <= LIMITS.defectRounds; round++) {
   if (defects && defects.allPassed) break
   const list = (defects && defects.failures) || []
   if (list.some(f => f.layer === 'spec')) return await stopForHuman('testing found a spec problem', list.filter(f => f.layer === 'spec'))
-  const routes = [['data', 'feature-data'], ['viewmodel', 'feature-viewmodel'], ['view', 'feature-view'], ['analytics', 'feature-analytics']]
+  const routes = [['data', 'feature-data'], ['viewmodel', 'feature-presentation-viewmodel'], ['view', 'feature-presentation-view'], ['analytics', 'feature-presentation-analytics']]
   await parallel(routes
     .filter(([layer]) => list.some(f => f.layer === layer))
     .map(([layer, type]) => () => agent(`${ctx}\nThe feature-integration tests found these defects in your layer. Fix production code only:\n${fmt(list.filter(f => f.layer === layer))}`,

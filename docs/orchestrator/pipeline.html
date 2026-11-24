@@ -260,17 +260,17 @@
             <span class="tag" style="font-size:11px;color:var(--text-muted)">in parallel · contract fixed in design.md</span>
             <div class="parallel">
               <div class="node" tabindex="0" style="--c: var(--series-4)" data-tip="viewmodel">
-                <span class="team">Presentation</span><span class="name">feature-viewmodel</span>
+                <span class="team">Presentation</span><span class="name">feature-presentation-viewmodel</span>
                 <span class="what">contract, ViewModel, UI models</span>
               </div>
               <div class="node" tabindex="0" style="--c: var(--series-4)" data-tip="view">
-                <span class="team">Presentation</span><span class="name">feature-view</span>
+                <span class="team">Presentation</span><span class="name">feature-presentation-view</span>
                 <span class="what">screens, Nav3, Hilt nav module</span>
               </div>
             </div>
           </div>
           <div class="node" tabindex="0" style="--c: var(--series-4)" data-tip="analytics">
-            <span class="team">Presentation</span><span class="name">feature-analytics</span>
+            <span class="team">Presentation</span><span class="name">feature-presentation-analytics</span>
             <span class="what">views/events · insert-only ViewModel lease</span>
           </div>
           <div class="node" tabindex="0" style="--c: var(--series-4)" data-tip="preseval">
@@ -359,11 +359,11 @@
       out: '<f>/data/src/test (Scn: per scenario)', gate: 'Test ↔ fix loop ≤ 8; attribution code/test/spec' },
     dataeval: { wiki: 'openwiki/core-data (rubric D-*)', phase: '1 Data', team: 'd', name: 'feature-data-eval', def: '.claude/agents/feature-data-eval.md',
       out: 'verdicts/data-eval-<n>.json, handoff/data-api-surface.json', gate: 'G1 · ≤ 3 eval rounds' },
-    viewmodel: { wiki: 'openwiki/core-presentation: base-architecture, coroutines, forms', phase: '2 Presentation', team: 'p', name: 'feature-viewmodel', def: '.claude/agents/feature-viewmodel.md',
+    viewmodel: { wiki: 'openwiki/core-presentation: base-architecture, coroutines, forms', phase: '2 Presentation', team: 'p', name: 'feature-presentation-viewmodel', def: '.claude/agents/feature-presentation-viewmodel.md',
       out: 'presentation/{viewModel,model/ui}', gate: 'Parallel with view; contract from design.md' },
-    view: { wiki: 'openwiki/core-presentation: navigation3, theme, components-*, form-fields', phase: '2 Presentation', team: 'p', name: 'feature-view', def: '.claude/agents/feature-view.md',
+    view: { wiki: 'openwiki/core-presentation: navigation3, theme, components-*, form-fields', phase: '2 Presentation', team: 'p', name: 'feature-presentation-view', def: '.claude/agents/feature-presentation-view.md',
       out: 'presentation/{view,navigation,di} + common/navigation/.../destination/<feature>/', gate: 'Parallel with ViewModel; V-K known-bug rules' },
-    analytics: { wiki: 'openwiki/core-data/analytics + core-presentation/base-architecture', phase: '2 Presentation', team: 'p', name: 'feature-analytics', def: '.claude/agents/feature-analytics.md',
+    analytics: { wiki: 'openwiki/core-data/analytics + core-presentation/base-architecture', phase: '2 Presentation', team: 'p', name: 'feature-presentation-analytics', def: '.claude/agents/feature-presentation-analytics.md',
       out: 'presentation/analytics + insert-only ViewModel calls', gate: 'AN-1…AN-4' },
     preseval: { wiki: 'openwiki/core-presentation + core-data/analytics', phase: '2 Presentation', team: 'p', name: 'feature-presentation-eval', def: '.claude/agents/feature-presentation-eval.md',
       out: 'verdicts/presentation-eval-<n>.json', gate: 'G2 · ≤ 3 eval rounds' },

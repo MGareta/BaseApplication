@@ -655,9 +655,9 @@ OpenSpec itself recommends high-reasoning models for planning and implementation
 | `feature-data.md` | sonnet | Read, Grep, Glob, Write, Edit, Bash |
 | `feature-data-test.md` | sonnet | Read, Grep, Glob, Write, Edit, Bash |
 | `feature-data-eval.md` | opus | Read, Grep, Glob, Bash |
-| `feature-viewmodel.md` | sonnet | Read, Grep, Glob, Write, Edit, Bash |
-| `feature-view.md` | sonnet | Read, Grep, Glob, Write, Edit, Bash |
-| `feature-analytics.md` | sonnet | Read, Grep, Glob, Write, Edit, Bash |
+| `feature-presentation-viewmodel.md` | sonnet | Read, Grep, Glob, Write, Edit, Bash |
+| `feature-presentation-view.md` | sonnet | Read, Grep, Glob, Write, Edit, Bash |
+| `feature-presentation-analytics.md` | sonnet | Read, Grep, Glob, Write, Edit, Bash |
 | `feature-presentation-eval.md` | opus | Read, Grep, Glob, Bash |
 | `feature-testing.md` | sonnet | Read, Grep, Glob, Write, Edit, Bash |
 
@@ -826,7 +826,7 @@ Also rule on disputed test attributions (code vs test vs spec).
 
 ```markdown
 ---
-name: feature-viewmodel
+name: feature-presentation-viewmodel
 description: Implements the feature contract, @HiltViewModel ViewModel and UI models in the feature presentation module.
 tools: Read, Grep, Glob, Write, Edit, Bash
 model: sonnet
@@ -840,7 +840,7 @@ Visibility (VIS-1): every declaration is `internal`. Leave analytics calls to th
 
 ```markdown
 ---
-name: feature-view
+name: feature-presentation-view
 description: Implements Compose screens, Navigation3 destinations, entries, graph and the Hilt navigation module for a feature.
 tools: Read, Grep, Glob, Write, Edit, Bash
 model: sonnet
@@ -855,7 +855,7 @@ Visibility (VIS-1): entries, graph, navigation module and screens are all `inter
 
 ```markdown
 ---
-name: feature-analytics
+name: feature-presentation-analytics
 description: Adds analytics views/events and tracking calls for a feature using IAnalyticsManager.
 tools: Read, Grep, Glob, Write, Edit, Bash
 model: sonnet
@@ -922,10 +922,10 @@ for (let i = 0; i < 3; i++) {
 }
 phase('Presentation')
 await parallel([
-  () => agent(`Implement [viewmodel] tasks of ${id}.`, { agentType: 'feature-viewmodel' }),
-  () => agent(`Implement [view] tasks of ${id}.`, { agentType: 'feature-view' }),
+  () => agent(`Implement [viewmodel] tasks of ${id}.`, { agentType: 'feature-presentation-viewmodel' }),
+  () => agent(`Implement [view] tasks of ${id}.`, { agentType: 'feature-presentation-view' }),
 ])
-await agent(`Implement [analytics] tasks of ${id}.`, { agentType: 'feature-analytics' })   // ViewModel lease
+await agent(`Implement [analytics] tasks of ${id}.`, { agentType: 'feature-presentation-analytics' })   // ViewModel lease
 await evalLoop('feature-presentation-eval', 'G2', 3)
 phase('Testing')
 await agent(`Implement [testing] tasks of ${id}; run all feature tests and /opsx:verify ${id}.`, { agentType: 'feature-testing' })

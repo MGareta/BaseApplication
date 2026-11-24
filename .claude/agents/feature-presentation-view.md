@@ -1,5 +1,5 @@
 ---
-name: feature-view
+name: feature-presentation-view
 description: Implements Compose screens, entries, the feature graph and the Hilt navigation module of a feature presentation module, and the feature's Navigation3 destinations in the shared :common:navigation module (tasks tagged [view]).
 tools: Read, Grep, Glob, Write, Edit, Bash, Skill
 model: sonnet

@@ -1,5 +1,5 @@
 ---
-name: feature-analytics
+name: feature-presentation-analytics
 description: Adds a feature's analytics views/events and their tracking calls in the ViewModels using IAnalyticsManager (tasks tagged [analytics]). Runs after the ViewModel and view agents.
 tools: Read, Grep, Glob, Write, Edit, Bash, Skill
 model: sonnet

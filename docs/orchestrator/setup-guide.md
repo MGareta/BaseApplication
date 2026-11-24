@@ -199,7 +199,7 @@ traceability checkable by a script: every task maps to a requirement, and every 
 | Plan | Coordinator | `feature-coordinator` (writes the OpenSpec artifacts, never code) | script gate G0a + human G0b | quickstart + all recipes |
 | 0 | Module | `feature-module` | `feature-module-eval` (G0c) | build configuration (`core-dependencies`) |
 | 1 | Data | `feature-data`, `feature-data-test` | `feature-data-eval` (G1) | core data |
-| 2 | Presentation | `feature-viewmodel` ∥ `feature-view`, then `feature-analytics` | `feature-presentation-eval` (G2) | core presentation (+ analytics) |
+| 2 | Presentation | `feature-presentation-viewmodel` ∥ `feature-presentation-view`, then `feature-presentation-analytics` | `feature-presentation-eval` (G2) | core presentation (+ analytics) |
 | 3 | Testing | `feature-testing` | script gate G3 + human G4 | testing pages of both core modules |
 
 Platform names for the presentation builders: **Android** ViewModel + Compose screen; **iOS** `ObservableObject`/`@Observable` view model + SwiftUI view;

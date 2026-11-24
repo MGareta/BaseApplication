@@ -1,5 +1,5 @@
 ---
-name: feature-viewmodel
+name: feature-presentation-viewmodel
 description: Implements the presentation contract, the single @HiltViewModel and the per-screen UI models/mappers of a feature presentation module (tasks tagged [viewmodel]).
 tools: Read, Grep, Glob, Write, Edit, Bash, Skill
 model: sonnet
